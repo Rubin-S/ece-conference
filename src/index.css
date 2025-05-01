@@ -10,19 +10,26 @@
   --font-sora: "Sora", sans-serif;
   --font-code: "Source Code Pro", monospace;
   --font-grotesk: "Space Grotesk", sans-serif;
-  color-scheme: dark;
 }
 
 * {
-  scroll-behavior: smooth
+  scroll-behavior: smooth;
 }
 
 @layer base {
   body {
-    @apply font-sans bg-n-8 text-n-1 text-base;
+    @apply font-sans bg-light-pb text-light-pt text-base;
   }
+
+  /* Optional: Dark mode support (uncomment if using dark class strategy) */
+  /* 
+  .dark body {
+    @apply bg-dark-pb text-dark-pt;
+  }
+  */
 }
 
+/* Rotation utilities — good as-is */
 .rotate-45 {
   @apply rotate-[45deg]
 }
