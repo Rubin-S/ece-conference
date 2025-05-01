@@ -32,7 +32,6 @@ const App = () => {
               <Route path="publications" element={<TBDPage />} />
               <Route path="sponsors" element={<TBDPage />} />
               <Route path="contact-us" element={<ContactUs />} />
-
               <Route path="*" element={<Nopage />} />
             </Route>
           </Routes>

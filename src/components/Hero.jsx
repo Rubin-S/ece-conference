@@ -32,7 +32,7 @@ const Hero = () => {
           >
             Download brochure
           </Button>
-          <Button href="/call-for-paper" className="mx-4 md:mx-8">
+          <Button href="/call-for-papers" className="mx-4 md:mx-8">
             Conference Schedule
           </Button>
         </div>
