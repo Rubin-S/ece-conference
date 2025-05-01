@@ -36,6 +36,7 @@ const Hero = () => {
             Conference Schedule
           </Button>
         </div>
+        
 
         <section className="relative max-w-[23rem] mx-auto md:max-w-5xl xl:mb-24">
           <div className="relative z-10 p-0.5 rounded-2xl bg-conic-gradient">
