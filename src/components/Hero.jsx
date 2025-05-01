@@ -1,10 +1,17 @@
 import Button from "./common/Button";
 import Section from "./common/Section";
+import { useNavigate } from "react-router-dom";
 import { BackgroundCircles, BottomLine } from "./design/Hero";
 import { useRef } from "react";
 
 const Hero = () => {
   const parallaxRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleNavigation = () => {
+    navigate("/call-for-papers");
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  }
 
   return (
     <Section
@@ -25,18 +32,17 @@ const Hero = () => {
             15th-16th May 2026
           </p>
           <Button
-            href="../assets/CONFERENCE.pdf"
+            href="./assets/CONFERENCE.pdf"
             download={true}
             target="_blank"
             className="mx-4 md:mx-8"
           >
             Download brochure
           </Button>
-          <Button href="/call-for-papers" className="mx-4 md:mx-8">
+          <Button onClick={handleNavigation} className="mx-4 md:mx-8">
             Conference Schedule
           </Button>
         </div>
-        
 
         <section className="relative max-w-[23rem] mx-auto md:max-w-5xl xl:mb-24">
           <div className="relative z-10 p-0.5 rounded-2xl bg-conic-gradient">
