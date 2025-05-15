@@ -1,87 +1,159 @@
-import { useLocation } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
+import { SunIcon, MoonIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { useAppContext } from "../../context/AppContext";
 
-import Button from "../common/Button";
-import MenuSvg from "../../assets/svg/MenuSvg";
-import { HamburgerMenu } from "../design/Header";
-import { useState } from "react";
-import { Link, NavLink } from "react-router-dom"; // Make sure this is imported if using <Link>
+const NAV_ITEMS = [
+  { id: "0", title: "Call for Papers", url: "/call-for-papers" },
+  { id: "1", title: "Registration", url: "/registration" },
+  { id: "2", title: "Committees", url: "/committees" },
+  { id: "3", title: "About Us", url: "/about-us" },
+  { id: "4", title: "Publications", url: "/publications" },
+  { id: "5", title: "Sponsors", url: "/sponsors" },
+  { id: "6", title: "Contact Us", url: "/contact-us" },
+];
 
-const Header = () => {
-  const { hash } = useLocation(); // extract hash for comparison
+export default function Header() {
+  const { theme, toggleTheme } = useAppContext();
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const firstLinkRef = useRef(null);
 
-  const navigation = [
-    { id: "0", title: "CALL FOR PAPERS", url: "call-for-papers" },
-    { id: "1", title: "REGISTRATION", url: "registration" },
-    { id: "2", title: "COMMITTEES", url: "committees" },
-    { id: "3", title: "ABOUT US", url: "about-us" },
-    { id: "4", title: "PUBLICATIONS", url: "publications" },
-    { id: "5", title: "SPONSORS", url: "sponsors" },
-    { id: "6", title: "CONTACT US", url: "contact-us" },
-  ];
+  // Lock scroll when menu open
+  useEffect(() => {
+    mobileOpen ? disablePageScroll() : enablePageScroll();
+    return () => enablePageScroll();
+  }, [mobileOpen]);
 
-  const [openNavigation, setOpenNavigation] = useState(false);
+  // Close on Escape key
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape" && mobileOpen) {
+        setMobileOpen(false);
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [mobileOpen]);
 
-  const toggleNavigation = () => {
-    setOpenNavigation(!openNavigation);
-    openNavigation ? enablePageScroll() : disablePageScroll();
-  };
+  // Focus first link when mobile menu opens
+  useEffect(() => {
+    if (mobileOpen && firstLinkRef.current) {
+      firstLinkRef.current.focus();
+    }
+  }, [mobileOpen]);
 
-  const handleClick = () => {
-    if (!openNavigation) return;
-    enablePageScroll();
-    setOpenNavigation(false);
-  };
+  const renderNavLinks = ({ isMobile = false }) =>
+    NAV_ITEMS.map(({ id, title, url }, idx) => {
+      const sizeClasses = isMobile
+        ? "text-[10px] sm:text-xs whitespace-nowrap w-full py-1.5"
+        : "text-[8px] md:text-[10px] lg:text-xs xl:text-sm whitespace-nowrap px-1 md:px-2 py-1";
+
+      return (
+        <NavLink
+          key={id}
+          to={url}
+          end
+          className={({ isActive }) =>
+            [
+              "rounded-md transition-all duration-200 font-code uppercase tracking-wide",
+              sizeClasses,
+              isActive
+                ? "text-light-pt dark:text-dark-pt bg-light-pa/50 dark:bg-dark-pa dark:bg-opacity-20"
+                : "text-light-pt/60 dark:text-dark-pt/60 hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20",
+            ].join(" ")
+          }
+          onClick={() => isMobile && setMobileOpen(false)}
+          ref={idx === 0 && isMobile ? firstLinkRef : undefined}
+        >
+          {title}
+        </NavLink>
+      );
+    });
 
   return (
-    <div
-      className={`fixed top-0 left-0 w-full z-50 border-b border-light-border transition-colors duration-200 ${
-        openNavigation ? "bg-light-sb" : "bg-light-sb/90 backdrop-blur-sm"
-      }`}
+    <header
+      className="
+        fixed inset-x-0 top-0 z-50 overflow-hidden
+        bg-light-sb/70 dark:bg-dark-sb/70 backdrop-blur-sm
+        border-b border-light-divider/50 dark:border-dark-divider/50
+        max-w-full
+      "
     >
-      <div className="flex items-center px-2 lg:px-5 xl:px-5 max-lg:py-4">
+      <div className="container mx-auto flex items-center justify-between px-4 py-2">
+        {/* Logo */}
         <NavLink
-          className="block w-[12rem] xl:mr-8 text-light-pt font-grotesk text-lg"
           to="/"
+          className="font-grotesk font-bold text-sm sm:text-base text-light-pt dark:text-dark-pt whitespace-nowrap"
         >
           International Conference
         </NavLink>
 
-        <nav
-          className={`${
-            openNavigation ? "flex" : "hidden"
-          } fixed top-[5rem] left-0 right-0 bottom-0 bg-light-sb lg:static lg:flex lg:mx-auto lg:bg-transparent`}
-        >
-          <div className="relative z-2 flex flex-col items-center justify-center lg:flex-row">
-            {navigation.map((item) => (
-              <Link
-                key={item.id}
-                to={item.url}
-                onClick={handleClick}
-                className={`block relative font-code text-2xl uppercase text-light-pt transition-colors hover:text-light-hl ${
-                  item.onlyMobile ? "lg:hidden" : ""
-                } px-3 py-3 md:py-4 lg:text-xs lg:font-semibold lg:leading-5 xl:px-12 ${
-                  item.url === hash ? "lg:text-light-pt" : "lg:text-light-pt/50"
-                } lg:hover:text-light-pt`}
-              >
-                {item.title}
-              </Link>
-            ))}
+        {/* Desktop Nav */}
+        <nav className="hidden lg:flex flex-1 justify-center">
+          <div className="flex space-x-2 overflow-x-auto">
+            {renderNavLinks({ isMobile: false })}
           </div>
-
-          <HamburgerMenu />
         </nav>
 
-        <Button
-          className="ml-auto lg:hidden"
-          px="px-3"
-          onClick={toggleNavigation}
-        >
-          <MenuSvg openNavigation={openNavigation} />
-        </Button>
-      </div>
-    </div>
-  );
-};
+        {/* Controls */}
+        <div className="flex items-center space-x-2">
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle Theme"
+            className="
+              p-1 rounded-full
+              bg-light-altBg/50 dark:bg-dark-altBg/50
+              backdrop-blur-sm
+              border border-light-divider/40 dark:border-dark-divider/40
+              transition-transform hover:scale-105
+            "
+          >
+            {theme === "light" ? (
+              <MoonIcon className="h-3 w-3 text-neon-blue" />
+            ) : (
+              <SunIcon className="h-3 w-3 text-neon-blue" />
+            )}
+          </button>
 
-export default Header;
+          {/* Mobile Menu Toggle */}
+          <button
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label="Toggle Menu"
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-menu"
+            className="
+              lg:hidden p-1 rounded-md
+              bg-light-altBg/50 dark:bg-dark-altBg/50
+              backdrop-blur-sm
+              border border-light-divider/40 dark:border-dark-divider/40
+              transition-transform hover:scale-105
+            "
+          >
+            {mobileOpen ? (
+              <XIcon className="h-4 w-4 text-light-pt dark:text-dark-pt" />
+            ) : (
+              <MenuIcon className="h-4 w-4 text-light-pt dark:text-dark-pt" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Nav Panel */}
+      <nav
+        id="mobile-menu"
+        className={`
+          lg:hidden fixed inset-0 z-40
+          bg-light-sb/80 dark:bg-dark-sb/80 backdrop-blur-sm
+          transform transition-transform duration-300
+          ${mobileOpen ? "translate-y-0" : "-translate-y-full invisible"}
+        `}
+      >
+        <div className="flex flex-col items-center justify-center h-full space-y-2">
+          {renderNavLinks({ isMobile: true })}
+        </div>
+      </nav>
+    </header>
+  );
+}

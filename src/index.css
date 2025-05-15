@@ -18,9 +18,29 @@
 
 @layer base {
   body {
-    @apply font-sans bg-light-pb text-light-pt text-base;
+    /* Base typography & light-mode theming */
+    @apply font-sans text-base bg-neumorphic-light text-light-pt;
+
+    /* Dark-mode overrides */
+    @apply dark:bg-neumorphic-dark dark:text-dark-pt;
+
+    /* Gradient animation */
+    background-size: 400% 400%;
+    animation: gradient-shift 10s ease-in-out alternate infinite;
   }
 
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+  
+      50% {
+        background-position: 100% 50%;
+      }
+  
+      100% {
+        background-position: 0% 50%;
+      } }
   /* Optional: Dark mode support (uncomment if using dark class strategy) */
   /* 
   .dark body {

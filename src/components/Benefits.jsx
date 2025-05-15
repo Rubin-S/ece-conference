@@ -3,97 +3,124 @@ import Section from "./common/Section";
 import { GradientLight } from "./design/Benefits";
 import ClipPath from "../assets/svg/ClipPath";
 
-const Benefits = () => {
-  const speakers = [
-
+const speakers = [
   {
     id: 1,
-    name: "TBH",
-    college: "TBH",
-    description: "TBH",
+    name: "TBD",
+    college: "TBD",
+    description: "TBD",
     image: "https://via.placeholder.com/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
     id: 2,
-    name: "TBH",
-    college: "TBH",
-    description: "TBH",
+    name: "TBD",
+    college: "TBD",
+    description: "TBD",
     image: "https://via.placeholder.com/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
     id: 3,
-    name: "TBH",
-    college: "TBH",
-    description: "TBH",
+    name: "TBD",
+    college: "TBD",
+    description: "TBD",
     image: "https://via.placeholder.com/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
     id: 4,
-    name: "TBH",
-    college: "TBH",
-    description: "TBH",
+    name: "TBD",
+    college: "TBD",
+    description: "TBD",
     image: "https://via.placeholder.com/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
     id: 5,
-    name: "TBH",
-    college: "TBH",
-    description: "TBH",
+    name: "TBD",
+    college: "TBD",
+    description: "TBD",
     image: "https://via.placeholder.com/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
     id: 6,
-    name: "TBH",
-    college: "TBH",
-    description: "TBH",
+    name: "TBD",
+    college: "TBD",
+    description: "TBD",
     image: "https://via.placeholder.com/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
 ];
 
-
-
+const Benefits = () => {
   return (
-    <Section id="features">
-      <div className="container relative z-2">
+    <Section
+      id="features"
+      role="region"
+      aria-labelledby="keynote-speakers-heading"
+      className="py-20 md:py-32"
+    >
+      <div className="container">
         <Heading
-          className="md:max-w-md lg:max-w-2xl"
+          id="keynote-speakers-heading"
+          className="text-center mb-12 md:mb-16"
           title="Keynote Speakers"
         />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-
-          {/* // flex flex-wrap gap-10 mb-10 */}
-          {speakers.map((speaker) => (
-            <div
-              key={speaker.id}
-              className="block relative border-2 border-light-border p-0.5 bg-no-repeat bg-[length:100%_100%] md:max-w-[24rem] rounded-2xl overflow-hidden"
-              style={{ backgroundImage: `url(${speaker.backgroundUrl})` }}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {speakers.map((spk) => (
+            <article
+              key={spk.id}
+              role="group"
+              aria-labelledby={`speaker-${spk.id}-name`}
+              className="
+                relative overflow-hidden rounded-2xl border-2
+                border-light-border dark:border-dark-border
+                bg-no-repeat bg-cover p-0.5
+                transition-transform hover:scale-[1.02]
+              "
+              style={{ backgroundImage: `url(${spk.backgroundUrl})` }}
             >
-              <div className="relative z-2 flex flex-col min-h-[22rem] p-[2.4rem] items-center text-center">
-                <img
-                  src={speaker.image}
-                  alt={speaker.name}
-                  className="w-28 h-28 rounded-full object-cover mb-4 border-4 border-light-pb"
-                />
-                <h5 className="h5 mb-1">{speaker.name}</h5>
-                <p className="text-sm text-light-st mb-3">{speaker.college}</p>
-                <p className="body-2 text-light-muted">{speaker.description}</p>
-              </div>
-
+              {/* Gradient overlay */}
               <GradientLight />
 
+              {/* Clip-path white card */}
               <div
-                className="absolute inset-0.5 bg-light-pb "
+                className="absolute inset-0"
                 style={{ clipPath: "url(#benefits)" }}
               />
               <ClipPath />
-            </div>
+
+              {/* Content */}
+              <div className="relative z-10 flex flex-col items-center text-center px-6 py-8 sm:px-8 sm:py-10 lg:py-12">
+                <img
+                  src={spk.image}
+                  alt={spk.name}
+                  className="
+                    w-28 h-28 rounded-full object-cover
+                    border-4 border-light-pb dark:border-dark-pb
+                    mb-4
+                  "
+                />
+
+                <h3
+                  id={`speaker-${spk.id}-name`}
+                  className="h3 mb-2 text-light-pt dark:text-dark-pt"
+                >
+                  {spk.name}
+                </h3>
+
+                <p className="body mb-4 text-light-st dark:text-dark-st">
+                  {spk.college}
+                </p>
+
+                <p className="body leading-snug text-light-muted dark:text-dark-muted">
+                  {spk.description}
+                </p>
+              </div>
+            </article>
           ))}
         </div>
       </div>

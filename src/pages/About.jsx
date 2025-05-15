@@ -1,78 +1,134 @@
 import Section from "../components/common/Section";
 import Heading from "../components/common/Heading";
+import {
+  GlobeAltIcon,
+  AcademicCapIcon,
+  UsersIcon,
+} from "@heroicons/react/outline";
 
-const About = () => {
+export default function About() {
   return (
-    <Section id="about">
-      <div className="container max-w-5xl">
-        <Heading
-          title="About Us"
-          text="A collaborative initiative by NIT Puducherry, India and Politecnico di Torino, Italy—advancing global research in dynamical systems and computational modeling."
-        />
+    <>
+      {/* Hero Callout */}
+      <section
+        className="w-full py-20 bg-gradient-blue text-light-ctaText dark:bg-gradient-shift dark:text-dark-ctaText"
+        aria-labelledby="about-hero"
+      >
+        <div className="container text-center">
+          <h2 id="about-hero" className="h1 mb-4">
+            About Our Conference
+          </h2>
+          <p className="body max-w-2xl mx-auto">
+            A unique collaboration between NIT Puducherry, India and Politecnico
+            di Torino, Italy—driving innovation in data-driven dynamical systems
+            and computational modeling.
+          </p>
+        </div>
+      </section>
 
-        <div className="body-2 space-y-8 text-light-pt">
-          {/* About the Conference */}
-          <div>
-            <p className="text-light-muted">
+      {/* Core Content */}
+      <Section id="about" className="py-20 md:py-32">
+        <div className="container grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          {/* Left: Narrative */}
+          <div className="space-y-8">
+            <Heading
+              title="Who We Are"
+              className="text-primary-600 dark:text-primary-300"
+            />
+            <p className="body text-light-st dark:text-dark-st">
               The{" "}
-              <strong>
-                International Conference on Data-Driven Approaches to Dynamical
-                Systems and Computational Modeling
+              <strong className="text-light-pt dark:text-dark-pt">
+                International Conference on Data-Driven Dynamical Systems
               </strong>{" "}
-              is a collaborative initiative organized by the{" "}
-              <strong>
-                National Institute of Technology Puducherry (NITPY)
-              </strong>
-              , India, in association with the{" "}
-              <strong>Politecnico di Torino</strong>, Italy. This event unites
-              two prestigious institutions dedicated to advancing research and
-              innovation in applied sciences and engineering.
+              is spearheaded by two pillars of engineering excellence:
             </p>
+            <ul className="space-y-4">
+              <li className="flex items-start">
+                <AcademicCapIcon className="h-6 w-6 text-primary-500 mr-3" />
+                <span className="body text-light-pt dark:text-dark-pt">
+                  <strong>NIT Puducherry:</strong> An Institute of National
+                  Importance, driving interdisciplinary research in India.
+                </span>
+              </li>
+              <li className="flex items-start">
+                <GlobeAltIcon className="h-6 w-6 text-primary-500 mr-3" />
+                <span className="body text-light-pt dark:text-dark-pt">
+                  <strong>Politecnico di Torino:</strong> Italy’s premier
+                  technical university, leading in computational modeling.
+                </span>
+              </li>
+            </ul>
+
+            <button
+              className="mt-6 inline-block bg-primary-500 dark:bg-primary-600 text-light-ctaText dark:text-dark-ctaText px-6 py-3 rounded-xl transition-transform hover:scale-105"
+              onClick={() => window.location.assign("/organizers")}
+              aria-label="Meet our organizers"
+            >
+              Meet the Organizers
+            </button>
           </div>
 
-          {/* About NITPY */}
-          <div>
-            <h3 className="h4 mb-2">
-              National Institute of Technology Puducherry (NITPY)
-            </h3>
-            <p className="text-light-muted">
-              NIT Puducherry, located in the Union Territory of Puducherry,
-              India, is an Institute of National Importance under the Ministry
-              of Education, Government of India. With a strong emphasis on
-              academic excellence, cutting-edge research, and interdisciplinary
-              collaboration, NITPY has emerged as a hub for innovation in
-              engineering and technology education.
-            </p>
-          </div>
-
-          {/* About Politecnico di Torino */}
-          <div>
-            <h3 className="h4 mb-2">Politecnico di Torino, Italy</h3>
-            <p className="text-light-muted">
-              Politecnico di Torino, one of Italy’s most renowned technical
-              universities, has a long-standing reputation for excellence in
-              engineering, architecture, and applied sciences. It is globally
-              recognized for its pioneering work in computational modeling,
-              systems theory, and data-driven research.
-            </p>
-          </div>
-
-          {/* Collaboration Summary */}
-          <div>
-            <h3 className="h4 mb-2">Global Collaboration & Vision</h3>
-            <p className="text-light-muted">
-              Together, NITPY and Politecnico di Torino bring a wealth of
-              expertise and global perspectives to this conference, aiming to
-              foster international collaboration and drive forward the frontiers
-              of dynamical systems, machine learning applications, and
-              computational modeling across diverse scientific and engineering
-              domains.
-            </p>
+          {/* Right: Feature Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {[
+              {
+                title: "Global Collaboration",
+                icon: GlobeAltIcon,
+                text: "Bringing together experts from 20+ countries.",
+              },
+              {
+                title: "Interdisciplinary Research",
+                icon: AcademicCapIcon,
+                text: "Bridging mathematics, physics, and data science.",
+              },
+              {
+                title: "Annual Gathering",
+                icon: UsersIcon,
+                text: "100+ participants sharing cutting-edge papers.",
+              },
+              {
+                title: "Innovative Methods",
+                icon: GlobeAltIcon,
+                text: "Showcasing the latest in data-driven modeling.",
+              },
+            ].map((card) => (
+              <div
+                key={card.title}
+                className="p-6 bg-light-altBg dark:bg-dark-altBg rounded-2xl border border-light-divider dark:border-dark-divider shadow-subtle hover:shadow-elevated transition-shadow"
+              >
+                <card.icon className="h-8 w-8 text-primary-500 mb-4" />
+                <h3 className="h3 mb-2 text-light-pt dark:text-dark-pt">
+                  {card.title}
+                </h3>
+                <p className="body text-light-st dark:text-dark-st">
+                  {card.text}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
-    </Section>
-  );
-};
 
-export default About;
+        {/* Stats Row */}
+        <div className="container mt-20">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+            {[
+              { label: "Institutions", value: "2", icon: UsersIcon },
+              { label: "Countries", value: "20+", icon: GlobeAltIcon },
+              { label: "Papers", value: "100+", icon: AcademicCapIcon },
+            ].map((stat) => (
+              <div key={stat.label} className="space-y-2">
+                <stat.icon className="h-10 w-10 text-neon-purple-500 mx-auto" />
+                <p className="h2 text-primary-600 dark:text-primary-300">
+                  {stat.value}
+                </p>
+                <p className="body text-light-st dark:text-dark-st">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Section>
+    </>
+  );
+}

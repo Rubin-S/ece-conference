@@ -1,99 +1,126 @@
+import React from "react";
 import Section from "../components/common/Section";
 import Heading from "../components/common/Heading";
 import Button from "../components/common/Button";
+import {
+  CalendarIcon,
+  ClipboardListIcon,
+  PresentationChartLineIcon,
+} from "@heroicons/react/outline";
 
 const CallForPapers = () => {
+  const topics = [
+    "Data-driven techniques for dynamical systems",
+    "Computational modeling in physical & biological systems",
+    "Machine learning applications in system dynamics",
+    "Modeling & simulation of engineering systems",
+    "Nonlinear dynamics & chaos theory",
+    "Big-data analytics for control & optimization",
+    "Stochastic processes in dynamical systems",
+    "Applications in robotics, climate modeling, & beyond",
+  ];
+
+  const dates = [
+    { label: "Submission Deadline", date: "15 Feb 2026" },
+    { label: "Acceptance Notice", date: "20 Mar 2026" },
+    { label: "Camera-Ready Due", date: "05 Apr 2026" },
+    { label: "Conference", date: "15–16 May 2026" },
+  ];
+
   return (
-    <Section id="call-for-papers">
-      <div className="container max-w-5xl">
+    <Section
+      id="call-for-papers"
+      role="region"
+      aria-labelledby="cfp-heading"
+      className="py-20 md:py-32 bg-light-pb dark:bg-dark-pb"
+    >
+      <div className="container max-w-4xl mx-auto space-y-16">
         <Heading
+          id="cfp-heading"
           title="Call for Papers"
-          text="We invite researchers, academicians, and industry professionals to submit original research contributions aligned with the theme of the conference."
+          text="We invite researchers, academicians, and industry professionals to submit original work aligned with our conference theme."
+          className="text-center"
         />
 
-        <div className="body-2 space-y-8 text-light-pt">
-          {/* Overview */}
-          <div>
-            <p className="text-light-muted">
-              The{" "}
-              <strong>
-                International Conference on Data-Driven Approaches to Dynamical
-                Systems and Computational Modeling
-              </strong>{" "}
-              provides a platform to present cutting-edge research, innovative
-              methodologies, and emerging applications in the fields of system
-              dynamics and computational modeling. We welcome submissions from
-              all over the world.
-            </p>
-          </div>
-
-          {/* Topics of Interest */}
-          <div>
-            <h3 className="h4 mb-2">Topics of Interest</h3>
-            <ul className="list-disc list-inside text-light-muted space-y-1">
-              <li>Data-driven techniques for dynamical systems</li>
-              <li>Computational modeling in physical and biological systems</li>
-              <li>Machine learning applications in system dynamics</li>
-              <li>Modeling and simulation of engineering systems</li>
-              <li>Nonlinear dynamics and chaos theory</li>
-              <li>Big data analytics for system control and optimization</li>
-              <li>Stochastic processes in dynamical systems</li>
-              <li>
-                Applications in robotics, climate modeling, and other domains
-              </li>
+        {/* Topics & Guidelines Cards */}
+        <div className="grid gap-8 md:grid-cols-2">
+          <article className="p-6 bg-light-altBg dark:bg-dark-altBg rounded-2xl border border-light-divider dark:border-dark-divider shadow-subtle">
+            <h3 className="h3 mb-4 text-light-pt dark:text-dark-pt flex items-center">
+              <ClipboardListIcon className="w-6 h-6 mr-2 text-primary-500" />
+              Topics of Interest
+            </h3>
+            <ul className="list-disc list-inside space-y-2 body text-light-st dark:text-dark-st">
+              {topics.map((t) => (
+                <li key={t}>{t}</li>
+              ))}
             </ul>
-          </div>
+          </article>
 
-          {/* Submission Guidelines */}
-          <div>
-            <h3 className="h4 mb-2">Submission Guidelines</h3>
-            <p className="text-light-muted">
-              Authors are invited to submit original, unpublished manuscripts
-              that are not under consideration for publication elsewhere. All
-              papers must be written in English and follow the conference
-              formatting guidelines.
-            </p>
-            <p className="text-light-muted mt-2">
-              Submissions will undergo a rigorous peer-review process. Accepted
-              papers will be presented during the conference and may be included
-              in the official conference proceedings.
-            </p>
-          </div>
-
-          {/* Important Dates */}
-          <div>
-            <h3 className="h4 mb-2">Important Dates</h3>
-            <ul className="list-disc list-inside text-light-muted space-y-1">
-              <li>
-                <strong>Paper Submission Deadline:</strong> 15th February 2026
-              </li>
-              <li>
-                <strong>Notification of Acceptance:</strong> 20th March 2026
-              </li>
-              <li>
-                <strong>Camera-Ready Submission:</strong> 5th April 2026
-              </li>
-              <li>
-                <strong>Conference Dates:</strong> 15th–16th May 2026
-              </li>
-            </ul>
-          </div>
-
-          {/* Submission Link */}
-          <div>
-            <h3 className="h4 mb-2">Submit Your Paper</h3>
-            <p className="text-light-muted">
-              Please use the submission portal linked below to upload your paper
-              and track the review process.
-            </p>
-            <Button
-              disable={true}
-              href="/submission"
-             >
-              TBD
-            </Button>
-          </div>
+          <article className="p-6 bg-light-altBg dark:bg-dark-altBg rounded-2xl border border-light-divider dark:border-dark-divider shadow-subtle">
+            <h3 className="h3 mb-4 text-light-pt dark:text-dark-pt flex items-center">
+              <PresentationChartLineIcon className="w-6 h-6 mr-2 text-primary-500" />
+              Submission Guidelines
+            </h3>
+            <div className="space-y-4 body text-light-st dark:text-dark-st">
+              <p>
+                Submit original, unpublished manuscripts (in English) not under
+                review elsewhere. Follow the official formatting template.
+              </p>
+              <p>
+                All submissions undergo peer review. Accepted papers will be
+                presented and included in the proceedings.
+              </p>
+            </div>
+          </article>
         </div>
+
+        {/* Important Dates Timeline */}
+        <section aria-labelledby="dates-heading" className="space-y-6">
+          <h3
+            id="dates-heading"
+            className="h3 text-center text-light-pt dark:text-dark-pt"
+          >
+            Important Dates
+          </h3>
+          <ul className="relative border-l-2 border-primary-500 dark:border-primary-300 ml-4 space-y-8">
+            {dates.map(({ label, date }, idx) => (
+              <li key={label} className="pl-6 flex items-center">
+                <span className="absolute -left-3 flex h-6 w-6 items-center justify-center rounded-full bg-primary-500 dark:bg-primary-300 text-light-ctaText">
+                  {idx + 1}
+                </span>
+                <div>
+                  <p className="body font-semibold text-light-pt dark:text-dark-pt">
+                    {label}
+                  </p>
+                  <p className="body-2 text-light-st dark:text-dark-st">
+                    {date}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* CTA Card */}
+        <aside
+          className="p-8 bg-gradient-neon rounded-2xl text-center"
+          aria-labelledby="submit-cta"
+        >
+          <h3 id="submit-cta" className="h2 mb-4 text-light-ctaText">
+            Ready to Submit?
+          </h3>
+          <p className="body text-light-ctaText mb-6">
+            Our submission portal will open soon—stay tuned!
+          </p>
+          <Button
+            disable
+            href="/submission"
+            className="bg-light-ctaBg text-light-ctaText hover:bg-light-ctaHover dark:bg-dark-ctaBg dark:hover:bg-dark-ctaHover"
+            aria-label="Submission portal coming soon"
+          >
+            Portal Coming Soon
+          </Button>
+        </aside>
       </div>
     </Section>
   );
