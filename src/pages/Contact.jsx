@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import Section from "../components/common/Section";
 import Heading from "../components/common/Heading";
 import { GradientLight } from "../components/design/Benefits";
@@ -9,6 +10,19 @@ import {
   LocationMarkerIcon,
 } from "@heroicons/react/outline";
 
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: i * 0.2,
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  }),
+};
+
 const ContactUs = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -16,9 +30,9 @@ const ContactUs = () => {
   const handleChange = (e) => {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // TODO: hook up your API
     setSubmitted(true);
   };
 
@@ -30,19 +44,30 @@ const ContactUs = () => {
       crosses
       className="!px-0 !py-20 bg-light-pb dark:bg-dark-pb"
     >
-      <div className="container grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <motion.div
+        className="container grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         {/* Heading */}
-        <div className="lg:col-span-2 text-center mb-8">
+        <motion.div
+          className="lg:col-span-2 text-center mb-8"
+          variants={fadeInUp}
+        >
           <Heading
             id="contact-heading"
             title="Get in Touch"
             text="Whether you have a question about the conference, want to collaborate, or just say hello—our team is here to help."
             className="max-w-2xl mx-auto"
           />
-        </div>
+        </motion.div>
 
         {/* Info Card */}
-        <article
+        <motion.article
+          variants={fadeInUp}
+          custom={1}
+          whileHover={{ scale: 1.02, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
           className="
             relative overflow-hidden rounded-2xl border-2
             border-light-border dark:border-dark-border
@@ -53,7 +78,6 @@ const ContactUs = () => {
           aria-labelledby="contact-info-heading"
         >
           <GradientLight />
-
           <div
             className="absolute inset-0 bg-light-pb dark:bg-dark-pb"
             style={{ clipPath: "url(#benefits)" }}
@@ -70,7 +94,6 @@ const ContactUs = () => {
             <p className="body mb-4 text-light-st dark:text-dark-st">
               Organizing Secretary
             </p>
-
             <ul className="space-y-4 text-left w-full">
               <li className="flex items-center">
                 <PhoneIcon className="h-5 w-5 text-primary-500 mr-3" />
@@ -95,13 +118,15 @@ const ContactUs = () => {
               </li>
             </ul>
           </div>
-        </article>
+        </motion.article>
 
         {/* Contact Form */}
-        <form
+        <motion.form
           onSubmit={handleSubmit}
           className="space-y-6 md:max-w-lg mx-auto lg:mx-0"
           aria-labelledby="contact-form-heading"
+          variants={fadeInUp}
+          custom={2}
         >
           <h3
             id="contact-form-heading"
@@ -111,9 +136,13 @@ const ContactUs = () => {
           </h3>
 
           {submitted ? (
-            <p className="body text-primary-600 dark:text-primary-300">
-              Thank you! Your message has been sent.
-            </p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="body text-primary-600 dark:text-primary-300"
+            >
+              ✅ Thank you! Your message has been sent.
+            </motion.p>
           ) : (
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -127,12 +156,7 @@ const ContactUs = () => {
                     required
                     value={form.name}
                     onChange={handleChange}
-                    className="
-                      px-4 py-2 rounded-lg border border-light-divider dark:border-dark-divider
-                      bg-light-sb dark:bg-dark-sb text-light-pt dark:text-dark-pt
-                      placeholder-light-st dark:placeholder-dark-st
-                      focus:outline-none focus:ring-2 focus:ring-primary-500
-                    "
+                    className="px-4 py-2 rounded-lg border border-light-divider dark:border-dark-divider bg-light-sb dark:bg-dark-sb text-light-pt dark:text-dark-pt placeholder-light-st dark:placeholder-dark-st focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </label>
                 <label className="flex flex-col">
@@ -145,12 +169,7 @@ const ContactUs = () => {
                     required
                     value={form.email}
                     onChange={handleChange}
-                    className="
-                      px-4 py-2 rounded-lg border border-light-divider dark:border-dark-divider
-                      bg-light-sb dark:bg-dark-sb text-light-pt dark:text-dark-pt
-                      placeholder-light-st dark:placeholder-dark-st
-                      focus:outline-none focus:ring-2 focus:ring-primary-500
-                    "
+                    className="px-4 py-2 rounded-lg border border-light-divider dark:border-dark-divider bg-light-sb dark:bg-dark-sb text-light-pt dark:text-dark-pt placeholder-light-st dark:placeholder-dark-st focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </label>
               </div>
@@ -165,29 +184,22 @@ const ContactUs = () => {
                   rows={5}
                   value={form.message}
                   onChange={handleChange}
-                  className="
-                    px-4 py-2 rounded-lg border border-light-divider dark:border-dark-divider
-                    bg-light-sb dark:bg-dark-sb text-light-pt dark:text-dark-pt
-                    placeholder-light-st dark:placeholder-dark-st
-                    focus:outline-none focus:ring-2 focus:ring-primary-500
-                  "
+                  className="px-4 py-2 rounded-lg border border-light-divider dark:border-dark-divider bg-light-sb dark:bg-dark-sb text-light-pt dark:text-dark-pt placeholder-light-st dark:placeholder-dark-st focus:outline-none focus:ring-2 focus:ring-primary-500"
                 />
               </label>
 
-              <button
+              <motion.button
                 type="submit"
-                className="
-                  inline-block bg-primary-500 dark:bg-primary-600
-                  text-light-ctaText dark:text-dark-ctaText
-                  px-6 py-3 rounded-xl transition-transform hover:scale-105
-                "
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-block bg-primary-500 dark:bg-primary-600 text-light-ctaText dark:text-dark-ctaText px-6 py-3 rounded-xl transition-transform"
               >
                 Send Message
-              </button>
+              </motion.button>
             </>
           )}
-        </form>
-      </div>
+        </motion.form>
+      </motion.div>
     </Section>
   );
 };
