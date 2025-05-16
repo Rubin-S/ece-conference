@@ -1,17 +1,21 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion, LayoutGroup } from "framer-motion";
 import Button from "./common/Button";
 import Section from "./common/Section";
-import { useNavigate } from "react-router-dom";
 import { BackgroundCircles, BottomLine } from "./design/Hero";
-import { useRef } from "react";
 
-const Hero = () => {
-  const parallaxRef = useRef(null);
+export default function Hero() {
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleNavigation = () => {
+  const handleNavigation = (e) => {
+    e.stopPropagation();
     navigate("/call-for-papers");
     window.scrollTo(0, 0);
   };
+
+  const toggleOpen = () => setIsOpen((o) => !o);
 
   return (
     <Section
@@ -23,88 +27,142 @@ const Hero = () => {
       role="region"
       aria-label="Hero section"
     >
-      <div className="container relative" ref={parallaxRef}>
+      <div className="container relative">
         {/* Heading Section */}
-        <header
-          className="relative z-10 max-w-4xl mx-auto text-center mb-20 md:mb-24"
-          aria-label="Conference introduction"
-        >
-          <h1 className="h2 mb-4 md:mb-6 text-light-pt/90 dark:text-dark-pt">
+        <header className="relative z-10 max-w-4xl mx-auto text-center mb-20 md:mb-24">
+          <h1 className="h2 mb-4 text-light-pt/90 dark:text-dark-pt">
             International Conference on
           </h1>
-
           <h2 className="h1 mb-6 text-primary-900 dark:text-primary-100">
             Data-Driven Approaches to Dynamical Systems and Computational
             Modeling
           </h2>
-
           <p className="h3 mb-8 text-light-pt/75 dark:text-dark-st">
-            15th – 16th May 2026
+            15th-16th May 2026
           </p>
-
-          {/* Action Buttons */}
-          <div
-            className="flex flex-wrap justify-center gap-4"
-            role="group"
-            aria-label="Conference actions"
-          >
+          <div className="flex flex-wrap justify-center gap-4" role="group">
             <Button
               href="./assets/CONFERENCE.pdf"
               download
               target="_blank"
-              aria-label="Download conference brochure PDF"
-              className="bg-light-ctaBg text-light-ctaText hover:bg-light-ctaHover dark:bg-dark-ctaBg dark:text-dark-ctaText dark:hover:bg-dark-ctaHover"
+              onClick={(e) => e.stopPropagation()}
             >
               Download Brochure
             </Button>
-
             <Button
-              onClick={handleNavigation}
-              aria-label="View conference schedule"
-              className="bg-primary-500 text-light-ctaText hover:bg-primary-600 dark:bg-primary-600 dark:text-dark-ctaText dark:hover:bg-primary-700"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNavigation(e);
+              }}
+              
             >
               Conference Schedule
             </Button>
           </div>
+          {/* Animated Background */}
+          {!isOpen && (
+            <div className="relative z-[-1]">
+              <BackgroundCircles />
+            </div>
+          )}
         </header>
 
-        {/* Overview Section */}
-        <section
-          className="relative max-w-xl mx-auto xl:mb-24"
-          aria-labelledby="conference-overview-heading"
-        >
-          <div className="relative z-10 p-0.5 rounded-2xl bg-conic-gradient">
-            <div className="bg-light-altBg dark:bg-dark-altBg rounded-[1rem] overflow-hidden border border-light-divider dark:border-dark-divider">
-              <div className="aspect-[33/60] md:aspect-[688/490] lg:aspect-[1024/490] relative">
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 sm:px-6 md:px-8">
-                  <h3
-                    id="conference-overview-heading"
-                    className="h2 mb-4 md:mb-8 text-light-pt dark:text-dark-pt"
-                  >
-                    Conference Overview
-                  </h3>
-                  <p className="body max-w-3xl leading-snug text-light-st dark:text-dark-st">
-                    This conference aims to bring together leading researchers,
-                    scientists, and practitioners in the fields of dynamical
-                    systems, computational modeling, and data-driven approaches.
-                    The event will provide a platform for discussing
-                    cutting-edge methodologies, trends, and innovations in
-                    modeling complex systems across various disciplines.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* Overview Card / Overlay */}
+        <LayoutGroup>
+          <motion.div
+            layoutId="overviewCard"
+            onClick={toggleOpen}
+            className={`
+              ${
+                isOpen
+                  ? "fixed inset-0 z-50 overflow-auto flex items-center justify-center p-6 md:p-12 cursor-pointer bg-slate-500"
+                  : "relative max-w-3xl mx-auto cursor-pointer z-20"
+              }
+            `}
+          >
+            <motion.div
+              layout
+              onClick={isOpen ? (e) => e.stopPropagation() : undefined}
+              className={`
+                cursor-pointer
+                ${
+                  isOpen
+                    ? "bg-light-pb dark:bg-dark-pb rounded-lg p-8 md:p-12 max-w-5xl w-full"
+                    : "rounded-2xl  p-8 md:p-12  bg-gradient-blue animate-gradient-shift"
+                }
+                bg-light-altBg dark:bg-dark-altBg
+                border border-light-divider dark:border-dark-divider
+                shadow-subtle transition-shadow
+                ${
+                  !isOpen
+                    ? "group-hover:shadow-elevated group-hover:scale-[1.02]"
+                    : ""
+                }
+              `}
+            >
+              {isOpen && (
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleOpen();
+                  }}
+                  aria-label="Close overview"
+                  className="absolute top-4 right-4 text-light-st dark:text-dark-st text-2xl focus:outline-none z-10"
+                >
+                  &times;
+                </button>
+              )}
 
-          {/* Animated Background */}
-          <BackgroundCircles />
-        </section>
+              <h3
+                id="conference-overview-heading"
+                className="h2 mb-4 text-light-pt dark:text-dark-pt"
+              >
+                Conference Overview
+              </h3>
+
+              <p className="body text-light-st dark:text-dark-st leading-relaxed mb-4">
+                The International Conference on Data-Driven Approaches to
+                Dynamical Systems and Computational Modeling brings together
+                leading researchers, scientists, and practitioners from around
+                the globe—both in-person at NIT Puducherry and virtually—to
+                explore the latest breakthroughs in modeling complex systems.
+                Over two days (15–16 May 2026), attendees will dive deep into
+                data-driven methodologies, from high-resolution simulations of
+                physical and biological processes to machine learning–augmented
+                control strategies for dynamical systems.
+              </p>
+
+              {isOpen && (<p className="body text-light-st dark:text-dark-st leading-relaxed mb-4">
+                Through a blend of keynote lectures, technical sessions, and
+                hands-on workshops, the conference fosters interdisciplinary
+                collaboration across mathematics, engineering, and computer
+                science. Participants will examine emerging trends—such as
+                stochastic modeling for uncertainty quantification, big-data
+                analytics for system optimization, and real-time simulation
+                frameworks—and discuss how these innovations can be applied to
+                real-world challenges in robotics, climate modeling, biomedical
+                engineering, and beyond.
+              </p>)}
+
+              {isOpen && (
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleOpen();
+                    handleNavigation(e);
+                  }}
+                  className= "dark:text-ctaText"
+                >
+                  Go to Call for Papers
+                </Button>
+              )}
+            </motion.div>
+          </motion.div>
+        </LayoutGroup>
       </div>
 
       {/* Decorative Bottom Line */}
       <BottomLine />
     </Section>
   );
-};
-
-export default Hero;
+}
