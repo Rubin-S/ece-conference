@@ -117,7 +117,7 @@ export default function About() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="mt-6 inline-block bg-primary-500 dark:bg-primary-600 text-light-ctaText dark:text-dark-ctaText px-6 py-3 rounded-xl transition-transform"
-              onClick={() => window.location.assign("/organizers")}
+              onClick={() => window.location.assign("/committees")}
               aria-label="Meet our organizers"
             >
               Meet the Organizers
