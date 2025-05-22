@@ -42,7 +42,11 @@ const ContactUs = () => {
       role="region"
       aria-labelledby="contact-heading"
       crosses
-      className="!px-0 !py-20 bg-light-pb dark:bg-dark-pb"
+      className="        
+        bg-gradient-to-tr from-white via-gray-50 to-blue-50
+        dark:from-gray-900 dark:via-gray-800 dark:to-blue-900
+        text-gray-900 dark:text-gray-100      
+ "
     >
       <motion.div
         className="container grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"

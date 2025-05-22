@@ -26,10 +26,10 @@ export const BottomLine = () => {
 const Rings = () => {
   return (
     <>
-      <div className="absolute top-1/2 left-1/2 w-[65.875rem] aspect-square border border-light-border rounded-full -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute top-1/2 left-1/2 w-[51.375rem] aspect-square border border-light-border rounded-full -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute top-1/2 left-1/2 w-[36.125rem] aspect-square border border-light-border rounded-full -translate-x-1/2 -translate-y-1/2" />
-      <div className="absolute top-1/2 left-1/2 w-[23.125rem] aspect-square border border-light-border rounded-full -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-1/2 left-1/2 w-[65.875rem] aspect-square border rounded-full -translate-x-1/2 -translate-y-1/2 border-light-border dark:border-[rgba(255,255,255,0.05)]" />
+      <div className="absolute top-1/2 left-1/2 w-[51.375rem] aspect-square border rounded-full -translate-x-1/2 -translate-y-1/2 border-light-border dark:border-[rgba(255,255,255,0.04)]" />
+      <div className="absolute top-1/2 left-1/2 w-[36.125rem] aspect-square border rounded-full -translate-x-1/2 -translate-y-1/2 border-light-border dark:border-[rgba(255,255,255,0.03)]" />
+      <div className="absolute top-1/2 left-1/2 w-[23.125rem] aspect-square border rounded-full -translate-x-1/2 -translate-y-1/2 border-light-border dark:border-[rgba(255,255,255,0.025)]" />
     </>
   );
 };
@@ -42,7 +42,7 @@ export const BackgroundCircles = ({ parallaxRef }) => {
   }, []);
 
   return (
-    <div className="absolute -top-[42.375rem] left-1/2 w-[78rem] aspect-square border border-light-border/50 rounded-full -translate-x-1/2 md:-top-[38.5rem] xl:-top-[32rem]">
+    <div className="absolute -top-[42.375rem] left-1/2 w-[78rem] aspect-square border border-light-border/50 dark:border-[rgba(255,255,255,0.07)] rounded-full -translate-x-1/2 md:-top-[38.5rem] xl:-top-[32rem]">
       <Rings />
 
       <MouseParallax strength={0.07} parallaxContainerRef={parallaxRef}>

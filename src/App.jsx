@@ -9,6 +9,7 @@ import CallForPapers from "./pages/CallForPaper";
 import About from "./pages/About";
 import TBDPage from "./pages/TBD";
 import ContactUs from "./pages/Contact";
+import CommitteesPage from "./pages/Committees";
 
 const Layout = () => (
   <>
@@ -27,7 +28,7 @@ const App = () => {
               <Route index element={<Home />} />
               <Route path="call-for-papers" element={<CallForPapers />} />
               <Route path="about-us" element={<About />} />
-              <Route path="committees" element={<TBDPage />} />
+              <Route path="committees" element={<CommitteesPage />} />
               <Route path="registration" element={<TBDPage />} />
               <Route path="publications" element={<TBDPage />} />
               <Route path="sponsors" element={<TBDPage />} />

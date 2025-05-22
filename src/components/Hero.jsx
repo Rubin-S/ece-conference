@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, LayoutGroup } from "framer-motion";
-import Button from "./common/Button";
+import { MdLocationPin } from "react-icons/md";
 import Section from "./common/Section";
 import { BackgroundCircles, BottomLine } from "./design/Hero";
 import nitpy from "../assets/logo/NITPY.png";
@@ -10,6 +10,18 @@ import PDT from "../assets/logo/PolitecnicoDiTorino.svg";
 export default function Hero() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const stop = useCallback((e) => e.stopPropagation(), []);
+
+  const fadeUp = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
+  const buttonVariants = {
+    initial: { scale: 1 },
+    hover: { scale: 1.05 },
+    tap: { scale: 0.98 },
+  };
 
   const handleNavigation = (e) => {
     e.stopPropagation();
@@ -22,7 +34,7 @@ export default function Hero() {
   return (
     <Section
       id="hero"
-      className="pt-48 -mt-[7.25rem]"
+      className="pt-24 -mt-[7.25rem]"
       crosses
       crossesOffset="lg:translate-y-[5.25rem]"
       customPaddings
@@ -54,33 +66,135 @@ export default function Hero() {
               transition={{ type: "spring", stiffness: 300 }}
             />
           </motion.div>
-          <h1 className="h2 mb-4 text-light-pt/90 dark:text-dark-pt">
-            International Conference on
-          </h1>
-          <h2 className="h1 mb-6 text-primary-900 dark:text-primary-100">
-            Data-Driven Approaches to Dynamical Systems and Computational
-            Modeling
-          </h2>
-          <p className="h3 mb-8 text-light-pt/75 dark:text-dark-st">
-            15th-16th May 2026
-          </p>
+          <motion.div
+            initial="initial"
+            animate="animate"
+            className="text-center px-4 sm:px-6 md:px-10 lg:px-20 xl:px-32 max-w-5xl "
+          >
+            <motion.h1
+              variants={fadeUp}
+              className=" text-primary-900 dark:text-primary-100 text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal leading-snug mb-4"
+            >
+              International Conference on
+            </motion.h1>
+
+            <motion.h2
+              variants={fadeUp}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-grotesk font-semibold text-light-pt/90 dark:text-dark-pt mb-6 "
+            >
+              Data-Driven Approaches to Dynamical Systems and Computational
+              Modeling
+            </motion.h2>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className=" bg-white dark:bg-gray-800
+              border border-gray-200 dark:border-gray-700
+              rounded-2xl shadow-xl
+              p-8
+              flex flex-col mx-auto"
+              role="region"
+              aria-labelledby="venue-heading"
+            >
+              <address
+                className="not-italic text-sm sm:text-base leading-relaxed text-light-st dark:text-dark-st"
+                role="contentinfo"
+                aria-label="Conference Venue Address"
+              >
+                <h3
+                  id="venue-heading"
+                  className="flex justify-center text-primary-700 dark:text-primary-300 font-semibold text-base sm:text-lg mb-1"
+                >
+                  <MdLocationPin
+                    className="w-6 h-6 text-primary-600 dark:text-primary-400 mt-0.5 shrink-0"
+                    aria-hidden="true"
+                  />
+                  Conference Venue
+                </h3>
+                <p className="font-medium text-light-pt dark:text-dark-pt">
+                  National Institute of Technology Puducherry (NITPY)
+                </p>
+                <p className="text-light-st dark:text-dark-st">
+                  Karaikal, Puducherry, India
+                </p>
+                <p className="italic text-light-muted dark:text-dark-muted">
+                  (Virtual participation option is available)
+                </p>
+              </address>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="my-6 flex items-center justify-center gap-3 text-xl sm:text-3xl font-semibold text-primary-700 dark:text-primary-300 tracking-wide"
+              role="contentinfo"
+              aria-label="Conference Dates"
+            >
+              {/* Calendar SVG */}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6 text-primary-600 dark:text-primary-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                role="img"
+                aria-hidden="true"
+              >
+                <title>Calendar Icon</title>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+
+              {/* Conference Dates */}
+              <span>
+                <time dateTime="2026-05-15">
+                  15<sup>th</sup>
+                </time>{" "}
+                –{" "}
+                <time dateTime="2026-05-16">
+                  16<sup>th</sup>
+                </time>{" "}
+                May 2026
+              </span>
+            </motion.p>
+          </motion.div>
           <div className="flex flex-wrap justify-center gap-4" role="group">
-            <Button
+            <motion.a
               href="./assets/CONFERENCE.pdf"
               download
               target="_blank"
-              onClick={(e) => e.stopPropagation()}
+              onClick={stop}
+              className="px-5 py-2 rounded-lg bg-black text-white font-normal shadow-md hover:shadow-lg dark:bg-white dark:text-black dark:hover:bg-gray-200"
+              variants={buttonVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
             >
               Download Brochure
-            </Button>
-            <Button
+            </motion.a>
+
+            <motion.button
               onClick={(e) => {
-                e.stopPropagation();
+                stop(e);
                 handleNavigation(e);
               }}
+              className="px-5 py-2 rounded-lg bg-black text-white font-normal shadow-md hover:shadow-lg dark:bg-white dark:text-black dark:hover:bg-gray-200 "
+              variants={buttonVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
             >
               Conference Schedule
-            </Button>
+            </motion.button>
           </div>
           {/* Animated Background */}
           {!isOpen && (
@@ -170,16 +284,20 @@ export default function Hero() {
               )}
 
               {isOpen && (
-                <Button
+                <motion.button
                   onClick={(e) => {
-                    e.stopPropagation();
+                    stop(e);
                     toggleOpen();
                     handleNavigation(e);
                   }}
-                  className="dark:text-ctaText"
+                  className="px-5 py-2 rounded-lg bg-black text-white font-normal shadow-md hover:shadow-lg dark:bg-white dark:text-black dark:hover:bg-gray-200 "
+                  variants={buttonVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  whileTap="tap"
                 >
-                  Go to Call for Papers
-                </Button>
+                  Conference Schedule
+                </motion.button>
               )}
             </motion.div>
           </motion.div>

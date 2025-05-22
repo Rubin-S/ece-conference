@@ -47,7 +47,13 @@ const fadeIn = {
 
 export default function About() {
   return (
-    <>
+    <div
+      className="min-h-screen
+        bg-gradient-to-tr from-white via-gray-50 to-blue-50
+        dark:from-gray-900 dark:via-gray-800 dark:to-blue-900
+        text-gray-900 dark:text-gray-100 py-16
+        "
+    >
       {/* Hero Callout */}
       <motion.section
         initial={{ opacity: 0 }}
@@ -174,6 +180,6 @@ export default function About() {
           </motion.div>
         </motion.div>
       </Section>
-    </>
+    </div>
   );
 }
