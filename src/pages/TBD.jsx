@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import Section from "../components/common/Section";
 import { MailIcon } from "@heroicons/react/outline";
 
@@ -24,7 +24,7 @@ const TBDPage = () => {
       <div className="container h-full flex flex-col justify-center items-center text-center px-4">
         {/* Illustration */}
         <img
-          src="/assets/illustrations/under-construction.svg"
+          src="https://placehold.co/500x500"
           alt=""
           aria-hidden="true"
           className="w-48 h-48 mb-8"

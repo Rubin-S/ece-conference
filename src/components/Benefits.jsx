@@ -10,7 +10,7 @@ const speakers = [
     name: "TBD",
     college: "TBD",
     description: "TBD",
-    image: "https://via.placeholder.com/150",
+    image: "https://placehold.co/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
@@ -18,7 +18,7 @@ const speakers = [
     name: "TBD",
     college: "TBD",
     description: "TBD",
-    image: "https://via.placeholder.com/150",
+    image: "https://placehold.co/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
@@ -26,7 +26,7 @@ const speakers = [
     name: "TBD",
     college: "TBD",
     description: "TBD",
-    image: "https://via.placeholder.com/150",
+    image: "https://placehold.co/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
@@ -34,7 +34,7 @@ const speakers = [
     name: "TBD",
     college: "TBD",
     description: "TBD",
-    image: "https://via.placeholder.com/150",
+    image: "https://placehold.co/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
@@ -42,7 +42,7 @@ const speakers = [
     name: "TBD",
     college: "TBD",
     description: "TBD",
-    image: "https://via.placeholder.com/150",
+    image: "https://placehold.co/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
@@ -50,7 +50,7 @@ const speakers = [
     name: "TBD",
     college: "TBD",
     description: "TBD",
-    image: "https://via.placeholder.com/150",
+    image: "https://placehold.co/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
 ];
