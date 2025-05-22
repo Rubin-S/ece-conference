@@ -4,6 +4,8 @@ import { motion, LayoutGroup } from "framer-motion";
 import Button from "./common/Button";
 import Section from "./common/Section";
 import { BackgroundCircles, BottomLine } from "./design/Hero";
+import nitpy from "../assets/logo/NITPY.png";
+import PDT from "../assets/logo/PolitecnicoDiTorino.svg";
 
 export default function Hero() {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,6 +32,28 @@ export default function Hero() {
       <div className="container relative">
         {/* Heading Section */}
         <header className="relative z-10 max-w-4xl mx-auto text-center mb-20 md:mb-24">
+          <motion.div
+            className="flex flex-row items-center justify-center gap-4 p-4"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.img
+              src={nitpy}
+              alt="NIT Puducherry Logo"
+              className="h-16 sm:h-20 object-contain"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            />
+            <motion.img
+              src={PDT}
+              alt="Department Logo"
+              className="h-16 sm:h-20 object-contain"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            />
+          </motion.div>
           <h1 className="h2 mb-4 text-light-pt/90 dark:text-dark-pt">
             International Conference on
           </h1>
@@ -54,7 +78,6 @@ export default function Hero() {
                 e.stopPropagation();
                 handleNavigation(e);
               }}
-              
             >
               Conference Schedule
             </Button>
@@ -132,17 +155,19 @@ export default function Hero() {
                 control strategies for dynamical systems.
               </p>
 
-              {isOpen && (<p className="body text-light-st dark:text-dark-st leading-relaxed mb-4">
-                Through a blend of keynote lectures, technical sessions, and
-                hands-on workshops, the conference fosters interdisciplinary
-                collaboration across mathematics, engineering, and computer
-                science. Participants will examine emerging trends—such as
-                stochastic modeling for uncertainty quantification, big-data
-                analytics for system optimization, and real-time simulation
-                frameworks—and discuss how these innovations can be applied to
-                real-world challenges in robotics, climate modeling, biomedical
-                engineering, and beyond.
-              </p>)}
+              {isOpen && (
+                <p className="body text-light-st dark:text-dark-st leading-relaxed mb-4">
+                  Through a blend of keynote lectures, technical sessions, and
+                  hands-on workshops, the conference fosters interdisciplinary
+                  collaboration across mathematics, engineering, and computer
+                  science. Participants will examine emerging trends—such as
+                  stochastic modeling for uncertainty quantification, big-data
+                  analytics for system optimization, and real-time simulation
+                  frameworks—and discuss how these innovations can be applied to
+                  real-world challenges in robotics, climate modeling,
+                  biomedical engineering, and beyond.
+                </p>
+              )}
 
               {isOpen && (
                 <Button
@@ -151,7 +176,7 @@ export default function Hero() {
                     toggleOpen();
                     handleNavigation(e);
                   }}
-                  className= "dark:text-ctaText"
+                  className="dark:text-ctaText"
                 >
                   Go to Call for Papers
                 </Button>
