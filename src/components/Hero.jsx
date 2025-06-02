@@ -157,7 +157,7 @@ export default function Hero() {
               {/* Conference Dates */}
               <span>
                 <time dateTime="2026-05-15">
-                  15<sup>th</sup>
+                  14<sup>th</sup>
                 </time>{" "}
                 –{" "}
                 <time dateTime="2026-05-16">

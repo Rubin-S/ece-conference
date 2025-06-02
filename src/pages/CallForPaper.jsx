@@ -57,7 +57,7 @@ const DATES = [
   { label: "Submission Deadline", date: "15 Feb 2026" },
   { label: "Acceptance Notice", date: "20 Mar 2026" },
   { label: "Camera-Ready Due", date: "05 Apr 2026" },
-  { label: "Conference", date: "15–16 May 2026" },
+  { label: "Conference", date: "14–16 May 2026" },
 ];
 
 // ———— ACCORDION ITEM ——————————————————————————————————————

@@ -10,6 +10,8 @@ import About from "./pages/About";
 import TBDPage from "./pages/TBD";
 import ContactUs from "./pages/Contact";
 import CommitteesPage from "./pages/Committees";
+import Registration from "./pages/Registration";
+import ImportantDates from "./pages/ImportantDates";
 
 const Layout = () => (
   <>
@@ -27,9 +29,10 @@ const App = () => {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="call-for-papers" element={<CallForPapers />} />
+              <Route path="important-dates" element={<ImportantDates />} />
               <Route path="about-us" element={<About />} />
               <Route path="committees" element={<CommitteesPage />} />
-              <Route path="registration" element={<TBDPage />} />
+              <Route path="registration" element={<Registration />} />
               <Route path="publications" element={<TBDPage />} />
               <Route path="sponsors" element={<TBDPage />} />
               <Route path="contact-us" element={<ContactUs />} />
