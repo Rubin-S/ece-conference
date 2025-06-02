@@ -3,6 +3,7 @@ import React, { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Section from "../components/common/Section";
 import Heading from "../components/common/Heading";
+import { ClockIcon } from "@heroicons/react/outline";
 import Button from "../components/common/Button";
 import {
   ClipboardCopyIcon,
@@ -15,35 +16,31 @@ import {
 const FEES = [
   {
     category: "Indian Student",
-    physical: "TBD",
-    virtual: "TBD",
-    virtualOnly: "TBD",
+    physical: "₹8,000",
+    virtual: "₹6,000",
   },
   {
     category: "Indian Faculty / Researcher",
-    physical: "TBD",
-    virtual: "TBD",
-    virtualOnly: "TBD",
+    physical: "₹10,000",
+    virtual: "₹8,000",
   },
   {
     category: "Foreign Student",
-    physical: "TBD",
-    virtual: "TBD",
-    virtualOnly: "TBD",
+    physical: "₹12,500",
+    virtual: "₹10,000",
   },
   {
     category: "Foreign Delegate",
-    physical: "TBD",
-    virtual: "TBD",
-    virtualOnly: "TBD",
+    physical: "₹20,000",
+    virtual: "₹16,000",
   },
   {
     category: "Industry Professional",
-    physical: "TBD",
-    virtual: "TBD",
-    virtualOnly: "TBD",
+    physical: "₹24,000",
+    virtual: "₹20,000",
   },
 ];
+
 
 const INCLUDES = [
   {
@@ -161,7 +158,6 @@ const FeeTable = React.memo(function FeeTable() {
             <th className="p-4 text-left rounded-tl-lg">Category</th>
             <th className="p-4 text-center">Physical Fee</th>
             <th className="p-4 text-center">Virtual Fee</th>
-            <th className="p-4 text-center">Virtual‑Only Fee</th>
             <th className="p-4 rounded-tr-lg" />
           </tr>
         </thead>
@@ -181,9 +177,6 @@ const FeeTable = React.memo(function FeeTable() {
               </td>
               <td className="p-4 text-center text-light-st dark:text-dark-st">
                 {row.virtual}
-              </td>
-              <td className="p-4 text-center text-light-st dark:text-dark-st">
-                {row.virtualOnly}
               </td>
               <td className="p-4 text-center">
                 <button
@@ -233,14 +226,6 @@ const FeeTable = React.memo(function FeeTable() {
                 </span>
                 <span className="text-light-pt dark:text-dark-pt">
                   {row.virtual}
-                </span>
-              </div>
-              <div className="flex flex-col col-span-2">
-                <span className="font-medium text-light-st dark:text-dark-st">
-                  Virtual‑Only:
-                </span>
-                <span className="text-light-pt dark:text-dark-pt">
-                  {row.virtualOnly}
                 </span>
               </div>
             </div>
@@ -512,6 +497,28 @@ export default function RegistrationPage() {
           </motion.h2>
 
           <FeeTable />
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative px-6 py-4 mb-8 rounded-xl border border-yellow-400 bg-yellow-50 dark:bg-yellow-900 dark:border-yellow-600 text-yellow-800 dark:text-yellow-100 shadow-md"
+            role="note"
+            aria-label="Early bird registration discount"
+          >
+            <div className="flex items-start gap-3">
+              <ClockIcon className="h-6 w-6 shrink-0 text-yellow-600 dark:text-yellow-200 mt-0.5" />
+              <div>
+                <p className="font-semibold text-sm sm:text-base">
+                  Early Bird Discount Available!
+                </p>
+                <p className="text-sm sm:text-base">
+                  <strong>20% off</strong> physical registration and{" "}
+                  <strong>10% off</strong> virtual registration if you register
+                  before <strong>January 15, 2026</strong>.
+                </p>
+              </div>
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* ——— “Includes” ACCORDION ————————————— */}

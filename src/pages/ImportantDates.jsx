@@ -11,31 +11,47 @@ import { DownloadIcon } from "@heroicons/react/outline";
 
 const IMPORTANT_DATES = [
   {
+    title: "Call for Papers Released",
+    date: "01 June 2025",
+    desc: "Conference call for papers officially opens.",
+  },
+  {
+    title: "Abstract Submission Deadline",
+    date: "30 September 2025",
+    desc: "Deadline to submit abstracts for review.",
+  },
+  {
     title: "Paper Submission Deadline",
-    date: "15 February 2026",
-    desc: "Last date to submit full papers in IEEE format. No extensions will be granted.",
+    date: "15 December 2025",
+    desc: "Final date to submit full papers in IEEE format. No extensions allowed.",
   },
   {
     title: "Notification of Acceptance",
-    date: "20 March 2026",
-    desc: "Authors will receive acceptance or rejection notifications via email.",
+    date: "31 January 2026",
+    desc: "Authors will be informed of acceptance or rejection decisions.",
   },
   {
-    title: "Camera‑Ready Submission",
-    date: "05 April 2026",
-    desc: "Final versions of accepted papers (IEEE template) due for proceedings.",
+    title: "Camera‑Ready Paper Due",
+    date: "28 February 2026",
+    desc: "Final versions of accepted papers due for proceedings.",
   },
   {
-    title: "Author Registration Closes",
-    date: "10 April 2026",
-    desc: "All authors must register by this date; otherwise, papers will be withdrawn.",
+    title: "Early Bird Registration Deadline",
+    date: "15 March 2026",
+    desc: "Discounted registration deadline for early participants.",
+  },
+  {
+    title: "Regular Registration Deadline",
+    date: "15 April 2026",
+    desc: "Final date for regular author and participant registration.",
   },
   {
     title: "Conference Dates",
-    date: "15–16 May 2026",
-    desc: "In-person event at NIT Puducherry (hybrid streaming available).",
+    date: "14–16 May 2026",
+    desc: "Main conference held at NIT Puducherry with hybrid options.",
   },
 ];
+
 
 // ——— ANIMATION VARIANTS —————————————————————————————————————————————
 

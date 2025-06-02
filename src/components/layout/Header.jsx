@@ -45,126 +45,130 @@ export default function Header() {
   }, [mobileOpen]);
 
   return (
-      <>
-        <header
-            className="
-          fixed inset-x-0 top-0 z-50 overflow-hidden
-          bg-light-sb/70 dark:bg-dark-sb/70 backdrop-blur-sm
-          border-b border-light-divider/50 dark:border-dark-divider/50
-          max-w-full
-        "
-        >
-          <div className="container mx-auto flex items-center justify-between px-4 py-2">
-            {/* Logo */}
-            <NavLink
-                to="/"
-                className="font-grotesk font-bold text-sm sm:text-base text-light-pt dark:text-dark-pt whitespace-nowrap"
-            >
-              International Conference
-            </NavLink>
+    <>
+      <header
+        className="
+    fixed inset-x-0 top-0 z-50
+    bg-light-sb/70 dark:bg-dark-sb/70 backdrop-blur-sm
+    border-b border-light-divider/50 dark:border-dark-divider/50
+    w-full
+  "
+      >
+        <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-2">
+          {/* Logo */}
+          <NavLink
+            to="/"
+            className="font-grotesk font-bold text-[10px] sm:text-sm md:text-base text-light-pt dark:text-dark-pt whitespace-nowrap"
+          >
+            International Conference
+          </NavLink>
 
-            {/* Desktop Nav */}
-            <nav className="hidden lg:flex flex-1 justify-center">
-              <div className="flex space-x-2 overflow-x-auto">
-                {NAV_ITEMS.map(({ id, title, url }) => (
-                    <NavLink
-                        key={id}
-                        to={url}
-                        end
-                        className={({ isActive }) =>
-                            [
-                              "rounded-md transition-all duration-200 font-code uppercase tracking-wide",
-                              "text-[8px] md:text-[10px] lg:text-xs xl:text-sm whitespace-nowrap px-1 md:px-2 py-1",
-                              isActive
-                                  ? "text-light-pt dark:text-dark-pt bg-light-pa/50 dark:bg-dark-pa dark:bg-opacity-20"
-                                  : "text-light-pt/60 dark:text-dark-pt/60 hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20",
-                            ].join(" ")
-                        }
-                    >
-                      {title}
-                    </NavLink>
-                ))}
-              </div>
-            </nav>
-
-            {/* Controls */}
-            <div className="flex items-center space-x-2">
-              {/* Theme Toggle */}
-              <button
-                  onClick={toggleTheme}
-                  aria-label="Toggle Theme"
-                  className="
-                p-1 rounded-full
-                bg-light-altBg/50 dark:bg-dark-altBg/50
-                backdrop-blur-sm
-                border border-light-divider/40 dark:border-dark-divider/40
-                transition-transform hover:scale-105
-              "
-              >
-                {theme === "light" ? (
-                    <MoonIcon className="h-3 w-3 text-neon-blue" />
-                ) : (
-                    <SunIcon className="h-3 w-3 text-neon-blue" />
-                )}
-              </button>
-
-              {/* Mobile Menu Toggle */}
-              <button
-                  onClick={() => setMobileOpen((o) => !o)}
-                  aria-label="Toggle Menu"
-                  aria-expanded={mobileOpen}
-                  aria-controls="mobile-menu"
-                  className="
-                lg:hidden p-1 rounded-md
-                bg-light-altBg/50 dark:bg-dark-altBg/50
-                backdrop-blur-sm
-                border border-light-divider/40 dark:border-dark-divider/40
-                transition-transform hover:scale-105
-              "
-              >
-                {mobileOpen ? (
-                    <XIcon className="h-4 w-4 text-light-pt dark:text-dark-pt" />
-                ) : (
-                    <MenuIcon className="h-4 w-4 text-light-pt dark:text-dark-pt" />
-                )}
-              </button>
-            </div>
-          </div>
-        </header>
-
-        {/* Mobile Nav Panel — moved outside header */}
-        <nav
-            id="mobile-menu"
-            className={`
-          lg:hidden fixed inset-0 z-40
-          bg-light-sb/80 dark:bg-dark-sb/80 backdrop-blur-sm
-          transform transition-transform duration-300
-          ${mobileOpen ? "translate-y-0" : "-translate-y-full invisible"}
-        `}
-        >
-          <div className="flex flex-col items-center justify-center h-full space-y-2 px-4">
-            {NAV_ITEMS.map(({ id, title, url }, idx) => (
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex flex-1 justify-center overflow-x-auto no-scrollbar">
+            <div className="flex space-x-1 sm:space-x-2">
+              {NAV_ITEMS.map(({ id, title, url }) => (
                 <NavLink
-                    key={id}
-                    to={url}
-                    end
-                    className={({ isActive }) =>
-                        [
-                          "rounded-md transition-all duration-200 font-code uppercase tracking-wide",
-                          "block text-[10px] sm:text-xs whitespace-nowrap w-full py-1.5 text-center",
-                          isActive
-                              ? "text-light-pt dark:text-dark-pt bg-light-pa/50 dark:bg-dark-pa dark:bg-opacity-20"
-                              : "text-light-pt/60 dark:text-dark-pt/60 hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20",
-                        ].join(" ")
-                    }
-                    onClick={() => setMobileOpen(false)}
-                    ref={idx === 0 ? firstLinkRef : undefined}
+                  key={id}
+                  to={url}
+                  end
+                  className={({ isActive }) =>
+                    [
+                      "rounded-md transition-all duration-200 font-code uppercase tracking-wider",
+                      "text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm px-2 py-1 whitespace-nowrap",
+                      isActive
+                        ? "text-light-pt dark:text-dark-pt bg-light-pa/50 dark:bg-dark-pa dark:bg-opacity-20"
+                        : "text-light-pt/60 dark:text-dark-pt/60 hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20",
+                    ].join(" ")
+                  }
                 >
                   {title}
                 </NavLink>
-            ))}
+              ))}
+            </div>
+          </nav>
+
+          {/* Controls */}
+          <div className="flex items-center space-x-1 sm:space-x-2">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+              className="
+          p-1.5 rounded-full
+          bg-light-altBg/50 dark:bg-dark-altBg/50
+          backdrop-blur-sm
+          border border-light-divider/40 dark:border-dark-divider/40
+          transition hover:scale-105
+        "
+            >
+              {theme === "light" ? (
+                <MoonIcon className="h-3 w-3 text-neon-blue" />
+              ) : (
+                <SunIcon className="h-3 w-3 text-neon-blue" />
+              )}
+            </button>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setMobileOpen((o) => !o)}
+              aria-label="Toggle Menu"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              className="
+          lg:hidden p-1.5 rounded-md
+          bg-light-altBg/50 dark:bg-dark-altBg/50
+          backdrop-blur-sm
+          border border-light-divider/40 dark:border-dark-divider/40
+          transition hover:scale-105
+        "
+            >
+              {mobileOpen ? (
+                <XIcon className="h-4 w-4 text-light-pt dark:text-dark-pt" />
+              ) : (
+                <MenuIcon className="h-4 w-4 text-light-pt dark:text-dark-pt" />
+              )}
+            </button>
           </div>
-        </nav>
-      </>
+        </div>
+      </header>
+
+      {/* Mobile Nav Panel */}
+      <nav
+        id="mobile-menu"
+        className={`
+    lg:hidden fixed inset-0 z-40
+    bg-light-sb/90 dark:bg-dark-sb/90 backdrop-blur-sm
+    transform transition-transform duration-300 ease-in-out
+    ${
+      mobileOpen
+        ? "translate-y-0 opacity-100"
+        : "-translate-y-full opacity-0 pointer-events-none"
+    }
+  `}
+      >
+        <div className="flex flex-col items-center justify-center h-full space-y-3 px-4">
+          {NAV_ITEMS.map(({ id, title, url }, idx) => (
+            <NavLink
+              key={id}
+              to={url}
+              end
+              className={({ isActive }) =>
+                [
+                  "rounded-md transition-all duration-200 font-code uppercase tracking-wide",
+                  "text-sm sm:text-base w-full text-center py-2",
+                  isActive
+                    ? "text-light-pt dark:text-dark-pt bg-light-pa/50 dark:bg-dark-pa dark:bg-opacity-20"
+                    : "text-light-pt/60 dark:text-dark-pt/60 hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20",
+                ].join(" ")
+              }
+              onClick={() => setMobileOpen(false)}
+              ref={idx === 0 ? firstLinkRef : undefined}
+            >
+              {title}
+            </NavLink>
+          ))}
+        </div>
+      </nav>
+    </>
   );
 }

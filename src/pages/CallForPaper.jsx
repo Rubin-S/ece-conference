@@ -7,6 +7,7 @@ import {
   ClipboardListIcon,
   PresentationChartLineIcon,
 } from "@heroicons/react/outline";
+import { title } from "framer-motion/client";
 
 // ———— DATA CONSTANTS —————————————————————————————————————————
 
@@ -54,10 +55,38 @@ const TOPICS = [
 ];
 
 const DATES = [
-  { label: "Submission Deadline", date: "15 Feb 2026" },
-  { label: "Acceptance Notice", date: "20 Mar 2026" },
-  { label: "Camera-Ready Due", date: "05 Apr 2026" },
-  { label: "Conference", date: "14–16 May 2026" },
+  {
+    title: "Call for Papers Released",
+    date: "01 June 2025",
+  },
+  {
+    title: "Abstract Submission Deadline",
+    date: "30 September 2025",
+  },
+  {
+    title: "Paper Submission Deadline",
+    date: "15 December 2025",
+  },
+  {
+    title: "Notification of Acceptance",
+    date: "31 January 2026",
+  },
+  {
+    title: "Camera‑Ready Paper Due",
+    date: "28 February 2026",
+  },
+  {
+    title: "Early Bird Registration Deadline",
+    date: "15 March 2026",
+  },
+  {
+    title: "Regular Registration Deadline",
+    date: "15 April 2026",
+  },
+  {
+    title: "Conference Dates",
+    date: "14–16 May 2026",
+  },
 ];
 
 // ———— ACCORDION ITEM ——————————————————————————————————————
@@ -154,29 +183,31 @@ const Timeline = memo(function Timeline() {
   return (
     <>
       {/* Desktop */}
-      <motion.ul
-        className="hidden md:flex justify-between gap-6 relative border-t-2 border-primary-500 dark:border-primary-300 pt-10"
-        initial="hidden"
-        whileInView="show"
+      <motion.div
+        className="hidden md:grid grid-cols-2 gap-y-16 gap-x-6 relative pt-10"
         viewport={{ once: true }}
         variants={timelineContainer}
       >
-        {DATES.map(({ label, date }, idx) => (
-          <motion.li
-            key={label}
+        {DATES.map(({ title, date }, idx) => (
+          <motion.div
+            key={title}
             variants={timelineItem}
-            className="text-center relative"
+            className="relative text-center"
           >
-            <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-primary-500 dark:bg-primary-300 text-light-ctaText h-7 w-7 rounded-full flex items-center justify-center font-bold text-sm">
+            <div className="absolute -top-7 left-1/2 transform -translate-x-1/2 bg-primary-500 dark:bg-primary-300 text-light-ctaText h-7 w-7 rounded-full flex items-center justify-center font-bold text-sm z-10">
               {idx + 1}
             </div>
-            <p className="body font-semibold text-light-pt dark:text-dark-pt">
-              {label}
-            </p>
-            <p className="body-2 text-light-st dark:text-dark-st">{date}</p>
-          </motion.li>
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md border border-light-divider dark:border-dark-divider">
+              <p className="body font-semibold text-light-pt dark:text-dark-pt">
+                {title}
+              </p>
+              <p className="body-2 text-light-st dark:text-dark-st mt-1">
+                {date}
+              </p>
+            </div>
+          </motion.div>
         ))}
-      </motion.ul>
+      </motion.div>
 
       {/* Mobile */}
       <motion.ul
@@ -186,9 +217,9 @@ const Timeline = memo(function Timeline() {
         viewport={{ once: true }}
         variants={timelineContainer}
       >
-        {DATES.map(({ label, date }, idx) => (
+        {DATES.map(({ title, date }, idx) => (
           <motion.li
-            key={label}
+            key={title}
             variants={timelineItem}
             className="pl-6 flex items-start relative"
           >
@@ -196,8 +227,8 @@ const Timeline = memo(function Timeline() {
               {idx + 1}
             </span>
             <div>
-              <p className="body font-semibold text-light-pt dark:text-dark-pt">
-                {label}
+              <p className="body font-light text-light-pt dark:text-dark-pt">
+                {title}
               </p>
               <p className="body-2 text-light-st dark:text-dark-st">{date}</p>
             </div>
@@ -323,11 +354,14 @@ export default function CallForPapers() {
             <div className="space-y-4 body text-light-st dark:text-dark-st">
               <p>
                 Submit original, unpublished manuscripts (in English) not under
-                review elsewhere. Follow the official formatting template.
+                review elsewhere. All papers must adhere to the official
+                formatting guidelines.
               </p>
+              <p>Paper submission in LaTeX format</p>
               <p>
-                All submissions undergo peer review. Accepted papers will be
-                presented and included in the proceedings.
+                All submissions will undergo peer review. Accepted papers will
+                be presented at the conference and included in the official
+                proceedings.
               </p>
             </div>
           </motion.article>
