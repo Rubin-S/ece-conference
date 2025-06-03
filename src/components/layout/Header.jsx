@@ -60,7 +60,7 @@ export default function Header() {
             to="/"
             className="font-grotesk font-bold text-[10px] sm:text-sm md:text-base text-light-pt dark:text-dark-pt whitespace-nowrap"
           >
-            International Conference
+            IC3DCM
           </NavLink>
 
           {/* Desktop Nav */}
@@ -73,7 +73,7 @@ export default function Header() {
                   end
                   className={({ isActive }) =>
                     [
-                      "rounded-md transition-all duration-200 font-code uppercase tracking-wider",
+                      "rounded-md border-x-0.5 shadow-sm shadow-gray transition-all duration-200 font-code uppercase tracking-wider",
                       "text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm px-2 py-1 whitespace-nowrap",
                       isActive
                         ? "text-light-pt dark:text-dark-pt bg-light-pa/50 dark:bg-dark-pa dark:bg-opacity-20"

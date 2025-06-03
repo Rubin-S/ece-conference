@@ -32,12 +32,73 @@ const committees = [
       { name: "Dr. Shahis Hasim", affiliation: "Sweden" },
       { name: "Prof. Manosh Paul", affiliation: "Glasgow, UK" },
       {
+        name: "Dr. Suryanarayana Prasad",
+        affiliation: "Ashok Leyland, Chennai",
+      },
+      {
+        name: "Dr. B. Rushi Kumar",
+        affiliation: "Vellore Institute of Technology, India",
+      },
+      { name: "Dr. Britto Gowri", affiliation: "" },
+      {
+        name: "Dr. Gyanendra Tripathi",
+        affiliation: "Kyushu Institute of Technology, Japan",
+      },
+      {
+        name: "Dr. Hayder Natiq Kadhim",
+        affiliation: "Imam Ja'afar Al-Sadiq University, Iraq",
+      },
+      {
+        name: "Dr. Hoang Manh Thang",
+        affiliation: "Hanoi University of Science and Technology, Vietnam",
+      },
+      {
         name: "Pawan Kumar",
         affiliation: "National Academy of Sciences of Belarus (NASB), Minsk",
       },
       {
-        name: "Dr. Suryanarayana Prasad",
-        affiliation: "Ashok Leyland, Chennai",
+        name: "Dr. Jun Mou",
+        affiliation: "Dalian Polytechnic University, China",
+      },
+      {
+        name: "Dr. Kajal Kumar Mondal",
+        affiliation: "Coochbehar Panchanan Barma University, India",
+      },
+      {
+        name: "Dr. Kamrul Hassan",
+        affiliation: "University of Dhaka, Bangladesh",
+      },
+      {
+        name: "Dr. Lamberto Rondoni",
+        affiliation: "Politecnico di Torino, Italy",
+      },
+      {
+        name: "Dr. Laxmikanta Mandi",
+        affiliation: "University of Gour Banga, India",
+      },
+      { name: "Dr. Mai The Anh", affiliation: "Vinh University, Vietnam" },
+      {
+        name: "Dr. Nur Aisyah Abdul Fataf",
+        affiliation:
+          "Cyber Security Centre, National Defence University of Malaysia, Malaysia",
+      },
+      {
+        name: "Dr. Rakkiyappan Rajan",
+        affiliation: "Bharathiar University, India",
+      },
+      {
+        name: "Dr. R. Sivaraj",
+        affiliation: "Vellore Institute of Technology, Vellore, India",
+      },
+      {
+        name: "Dr. R. Uthayakumar",
+        affiliation: "The Gandhigram Rural Institute, India",
+      },
+      { name: "Dr. Shaobo He", affiliation: "Central South University, China" },
+      { name: "Dr. Son Dang Thai", affiliation: "Vinh University, Vietnam" },
+      {
+        name: "Prof. Stavros Stavrinides",
+        affiliation: "Aristotle University, Greece",
       },
     ],
   },
@@ -48,7 +109,7 @@ const fadeIn = {
   visible: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.6, ease: "easeOut" },
+    transition: { delay: i * 0.05, duration: 0.3, ease: "easeOut" },
   }),
 };
 
@@ -91,7 +152,7 @@ export default function Committees() {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.3 }}
                   variants={fadeIn}
-                  className="rounded-2xl bg-white/60 dark:bg-white/10 backdrop-blur-md border border-gray-200 dark:border-gray-700 shadow-xl transition hover:scale-105 hover:shadow-2xl duration-300 ease-in-out p-6 text-center"
+                  className="rounded-2xl max-w-lg bg-white/60 dark:bg-white/10 backdrop-blur-md border border-gray-200 dark:border-gray-700 shadow-xl transition hover:scale-105 hover:shadow-2xl duration-300 ease-in-out p-6 text-center"
                 >
                   <div className="text-xl font-semibold text-gray-900 dark:text-white mb-1">
                     {member.name}

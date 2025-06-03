@@ -1,8 +1,9 @@
+// ConferencePage.jsx
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { MdLocationPin } from "react-icons/md";
-import Section from "../components/common/Section"; 
+import Section from "../components/common/Section";
 import Heading from "../components/common/Heading";
 import { BackgroundCircles, BottomLine } from "../components/design/Hero";
 import { GradientLight } from "../components/design/Benefits";
@@ -10,8 +11,7 @@ import ClipPath from "../assets/svg/ClipPath";
 import nitpy from "../assets/logo/NITPY.png";
 import PDT from "../assets/logo/PolitecnicoDiTorino.svg";
 
-
-
+// Flip animation for countdown
 const flipVariants = {
   initial: { rotateX: 0 },
   flip: { transition: { duration: 0.6, ease: "easeInOut" } },
@@ -30,7 +30,7 @@ export function Countdown({ targetDate }) {
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [flipKey, setFlipKey] = useState(0); // to trigger animation on change
+  const [flipKey, setFlipKey] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -49,15 +49,15 @@ export function Countdown({ targetDate }) {
   ];
 
   return (
-    <main className=" flex items-center justify-center mb-20 z-1">
+    <main className="flex items-center justify-center z-1 mb-16 sm:mb-24 px-4">
       <section
         aria-label="Countdown Timer"
-        className="grid grid-flow-col gap-6 auto-cols-max mx-auto"
+        className="grid grid-cols-2 xs:grid-cols-4 gap-4 sm:gap-6 w-full max-w-4xl"
       >
         {timeUnits.map(({ label, value }) => (
           <div
             key={label}
-            className="flex flex-col items-center p-4 bg-white dark:bg-gray-800 rounded-3xl shadow-lg dark:shadow-black/50 cursor-default select-none"
+            className="flex flex-col items-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-md dark:shadow-black/50 select-none w-full"
           >
             <AnimatePresence mode="popLayout">
               <motion.div
@@ -66,14 +66,14 @@ export function Countdown({ targetDate }) {
                 initial="initial"
                 animate="flip"
                 exit="initial"
-                className="font-mono text-7xl sm:text-8xl md:text-9xl font-extrabold text-indigo-600 dark:text-indigo-400 drop-shadow-md"
+                className="font-mono text-4xl sm:text-6xl font-extrabold text-indigo-600 dark:text-indigo-400"
                 aria-live="polite"
                 aria-label={`${value} ${label}`}
               >
                 {value.toString().padStart(2, "0")}
               </motion.div>
             </AnimatePresence>
-            <span className="mt-2 text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
+            <span className="mt-1 text-sm sm:text-lg font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
               {label}
             </span>
           </div>
@@ -83,60 +83,17 @@ export function Countdown({ targetDate }) {
   );
 }
 
-
 // Dummy speaker data
-const speakers = [
-  {
-    id: 1,
-    name: "TBD",
-    college: "TBD",
-    description: "TBD",
-    image: "https://placehold.co/150",
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 2,
-    name: "TBD",
-    college: "TBD",
-    description: "TBD",
-    image: "https://placehold.co/150",
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 3,
-    name: "TBD",
-    college: "TBD",
-    description: "TBD",
-    image: "https://placehold.co/150",
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 4,
-    name: "TBD",
-    college: "TBD",
-    description: "TBD",
-    image: "https://placehold.co/150",
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 5,
-    name: "TBD",
-    college: "TBD",
-    description: "TBD",
-    image: "https://placehold.co/150",
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 6,
-    name: "TBD",
-    college: "TBD",
-    description: "TBD",
-    image: "https://placehold.co/150",
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-];
+const speakers = new Array(6).fill(null).map((_, i) => ({
+  id: i + 1,
+  name: "TBD",
+  college: "TBD",
+  description: "TBD",
+  image: "https://placehold.co/150",
+  backgroundUrl: "https://via.placeholder.com/600x400",
+}));
 
-// Animation variants
+// Motion variants
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -145,7 +102,7 @@ const fadeUp = {
 const buttonVariants = {
   initial: { scale: 1 },
   hover: { scale: 1.05 },
-  tap: { scale: 0.98 },
+  tap: { scale: 0.97 },
 };
 
 const cardVariants = {
@@ -153,7 +110,7 @@ const cardVariants = {
   show: (i) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" },
+    transition: { duration: 0.6, delay: i * 0.1 },
   }),
 };
 
@@ -161,18 +118,14 @@ export default function ConferencePage() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const stop = useCallback((e) => e.stopPropagation(), []);
-
   const handleNavigation = (e) => {
     e.stopPropagation();
     navigate("/call-for-papers");
     window.scrollTo(0, 0);
   };
 
-  const toggleOpen = () => setIsOpen((o) => !o);
-
   return (
     <main>
-      {/* Hero Section */}
       <Section
         id="hero"
         className="pt-24 -mt-[7.25rem]"
@@ -182,32 +135,31 @@ export default function ConferencePage() {
         role="region"
         aria-label="Hero section"
       >
-        <div className="container relative">
-          <header className="relative z-10 max-w-4xl mx-auto text-center mb-20 md:mb-24">
+        <div className="container relative px-4">
+          <header className="text-center mb-20 md:mb-24">
             <motion.div
-              className="flex justify-center gap-4 p-4"
+              className="flex justify-center gap-4 mb-6"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{ duration: 0.6 }}
             >
               <motion.img
                 src={nitpy}
                 alt="NIT Puducherry"
-                className="h-16 sm:h-20"
+                className="h-14 sm:h-20"
                 whileHover={{ scale: 1.05 }}
               />
               <motion.img
                 src={PDT}
-                alt="Department"
-                className="h-16 sm:h-20"
+                alt="Politecnico di Torino"
+                className="h-14 sm:h-20"
                 whileHover={{ scale: 1.05 }}
               />
             </motion.div>
 
             <motion.h1
               variants={fadeUp}
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-4"
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2"
             >
               International Conference on
             </motion.h1>
@@ -221,21 +173,17 @@ export default function ConferencePage() {
             </motion.h2>
 
             <motion.p
-              className="my-6 flex text-primary-600 dark:text-primary-400 justify-center items-center gap-2 text-xl sm:text-3xl font-semibold"
+              className="my-6 flex justify-center items-center gap-2 text-primary-600 dark:text-primary-400 text-xl sm:text-2xl font-semibold"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="w-6 h-6"
-                fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
-                strokeWidth={2}
               >
-                <title>Calendar Icon</title>
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -255,19 +203,13 @@ export default function ConferencePage() {
             </motion.p>
 
             <motion.div
-              className="bg-white dark:bg-gray-800 border rounded-2xl shadow-xl p-8 max-w-lg mx-auto mb-8"
+              className="bg-white dark:bg-gray-800 border rounded-2xl shadow-xl p-6 sm:p-8 max-w-lg mx-auto mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              role="region"
-              aria-labelledby="venue-heading"
             >
               <address className="not-italic text-sm sm:text-base">
-                <h3
-                  id="venue-heading"
-                  className="flex justify-center items-center gap-1 text-lg mb-1"
-                >
+                <h3 className="flex justify-center items-center gap-1 text-lg mb-1">
                   <MdLocationPin className="text-primary-600 dark:text-primary-400" />{" "}
                   Conference Venue
                 </h3>
@@ -281,12 +223,11 @@ export default function ConferencePage() {
               </address>
             </motion.div>
 
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
               <motion.a
                 href="./assets/CONFERENCE.pdf"
                 download
                 target="_blank"
-                onClick={stop}
                 className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
                 variants={buttonVariants}
                 initial="initial"
@@ -310,38 +251,35 @@ export default function ConferencePage() {
                 Conference Schedule
               </motion.button>
             </div>
-          </header>
-          <Countdown targetDate="2026-05-14T00:00:00" />
 
-          {/* <FlipCountdown /> */}
+            {!isOpen && <BackgroundCircles />}
+          </header>
+
+          <Countdown targetDate="2026-05-14T00:00:00" />
 
           <LayoutGroup>
             <motion.div
               layoutId="overviewCard"
-              onClick={toggleOpen}
+              onClick={() => setIsOpen(!isOpen)}
               className={
                 isOpen
-                  ? "fixed inset-0 z-50 flex items-center justify-center p-6 md:p-12 bg-slate-500"
+                  ? "fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-700/80"
                   : "relative max-w-3xl mx-auto z-20"
               }
             >
               <motion.div
                 layout
-                onClick={isOpen ? (e) => e.stopPropagation() : undefined}
                 className={`relative ${
                   isOpen
-                    ? "bg-light-pb dark:bg-dark-pb p-8 md:p-12"
-                    : "bg-gradient-blue animate-gradient-shift p-8 md:p-12"
+                    ? "bg-light-pb dark:bg-dark-pb p-8"
+                    : "bg-gradient-blue animate-gradient-shift p-8"
                 } border rounded-2xl`}
               >
                 {isOpen && (
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      toggleOpen();
-                    }}
-                    aria-label="Close overview"
+                    onClick={() => setIsOpen(false)}
                     className="absolute top-4 right-4 text-2xl"
+                    aria-label="Close overview"
                   >
                     &times;
                   </button>
@@ -366,7 +304,7 @@ export default function ConferencePage() {
                     <motion.button
                       onClick={(e) => {
                         stop(e);
-                        toggleOpen();
+                        setIsOpen(false);
                         handleNavigation(e);
                       }}
                       className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
@@ -386,23 +324,15 @@ export default function ConferencePage() {
         <BottomLine />
       </Section>
 
-      {!isOpen && <BackgroundCircles />}
-
-      {/* Keynote Speakers Section */}
-      <Section
-        id="features"
-        role="region"
-        aria-labelledby="keynote-speakers-heading"
-        className="py-20 md:py-32"
-      >
-        <div className="container">
+      {/* Keynote Section */}
+      <Section id="speakers" className="py-20 md:py-32">
+        <div className="container px-4">
           <Heading
-            id="keynote-speakers-heading"
-            className="text-center mb-12 md:mb-16"
             title="Keynote Speakers"
+            className="text-center mb-12 md:mb-16"
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {speakers.map((spk, index) => (
+            {speakers.map((spk, i) => (
               <motion.article
                 key={spk.id}
                 role="group"
@@ -413,7 +343,7 @@ export default function ConferencePage() {
                 whileInView="show"
                 viewport={{ once: true, amount: 0.15 }}
                 variants={cardVariants}
-                custom={index}
+                custom={i}
                 whileHover={{ scale: 1.015 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
               >
@@ -423,7 +353,7 @@ export default function ConferencePage() {
                   style={{ clipPath: "url(#benefits)" }}
                 />
                 <ClipPath />
-                <div className="relative z-10 flex flex-col items-center text-center px-6 py-8">
+                <div className="relative z-10 flex flex-col items-center text-center px-6 py-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl">
                   <motion.img
                     src={spk.image}
                     alt={spk.name}
@@ -436,7 +366,7 @@ export default function ConferencePage() {
                   >
                     {spk.name}
                   </h3>
-                  <p className="mb-2">{spk.college}</p>
+                  <p className="mb-1">{spk.college}</p>
                   <p className="text-sm text-gray-500">{spk.description}</p>
                 </div>
               </motion.article>

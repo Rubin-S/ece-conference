@@ -42,7 +42,7 @@ export const BackgroundCircles = ({ parallaxRef }) => {
   }, []);
 
   return (
-    <div className="absolute -top-[1rem] left-1/2 w-[78rem] aspect-square border border-light-border/50 dark:border-[rgba(255,255,255,0.07)] rounded-full -translate-x-1/2 md:-top-[0.7rem] xl:-top-[1rem]">
+    <div className="absolute -z-60 -top-[1rem] left-1/2 w-[78rem] aspect-square border border-light-border/50 dark:border-[rgba(255,255,255,0.07)] rounded-full -translate-x-1/2 md:-top-[0.7rem] xl:-top-[1rem]">
       <Rings />
 
       <MouseParallax strength={0.07} parallaxContainerRef={parallaxRef}>
