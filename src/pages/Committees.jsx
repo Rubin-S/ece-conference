@@ -4,19 +4,35 @@ import { useTheme } from "next-themes";
 const committees = [
   {
     role: "Chief Patron",
-    members: [{ name: "Dr. Makarand Madhao Ghangrekar" }],
+    members: [
+      { name: "Dr. Makarand Madhao Ghangrekar", affiliation: "NIT puducherry" },
+    ],
   },
   {
     role: "Patron",
-    members: [{ name: "Dr. S. Sundaravarathan" }],
+    members: [
+      { name: "Dr. S. Sundaravarathan", affiliation: "NIT puducherry" },
+    ],
   },
   {
     role: "Organizing Secretaries",
-    members: [{ name: "Dr. Naveen Raj R" }, { name: "Dr. Santo Banerjee" }],
+    members: [
+      { name: "Dr. Naveen Raj R", affiliation: "NIT puducherry" },
+      {
+        name: "Dr. Santo Banerjee",
+        affiliation: "Managing Editor, The European Physical Journal Plus",
+      },
+    ],
   },
   {
     role: "Co-Organizing Secretaries",
-    members: [{ name: "Dr. Satishkumar P" }, { name: "Dr. Lamberto Rondoni" }],
+    members: [
+      { name: "Dr. Satishkumar P", affiliation: "NIT puducherry" },
+      {
+        name: "Dr. Lamberto Rondoni",
+        affiliation: "Politecnico di Torino, Italy",
+      },
+    ],
   },
   {
     role: "International and National Advisory Board",
@@ -99,6 +115,26 @@ const committees = [
       {
         name: "Prof. Stavros Stavrinides",
         affiliation: "Aristotle University, Greece",
+      },
+      {
+        name: "Dr. Devanjan Bhattacharya",
+        affiliation: "University of Edinburgh, UK",
+      },
+      {
+        name: "Dr. Indu Bala",
+        affiliation: "The University of Adelaide, Australia",
+      },
+      {
+        name: "Matteo Colangeli",
+        affiliation: "Universita degli studi dell'Aquila, Italy",
+      },
+      {
+        name: "Muhammad Firdaus Abdul Rahim",
+        affiliation: "Mahsa University, Malaysia",
+      },
+      {
+        name: "Priyanka Mohan",
+        affiliation: "Guizhou University, China",
       },
     ],
   },
