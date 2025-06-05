@@ -97,9 +97,9 @@ const speakers = [
     name: "Dr. Shaobo He",
     college:
       "Professor, School of Automation and Electronic Information, Xiangtan University",
-    title: "TBD",
+    title: "Discrete memristive spiking neural network.",
     description:
-      "Dr. Shaobo He is an associate professor at the School of Automation and Electronic Information, Xiangtan University. He earned his Ph.D. from Central South University in 2016. His research focuses on the complex dynamical behavior of nonlinear chaotic systems and their applications in artificial intelligence. Dr. He has published over 180 SCI-indexed journal papers and co-authored three academic monographs. He actively collaborates with domestic and international scholars, serves as a guest editor and reviewer for multiple international journals, and is recognized as a Top 2% Global Scientist.",
+      "",
     image: shaobo,
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
