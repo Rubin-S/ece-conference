@@ -11,6 +11,11 @@ import ClipPath from "../assets/svg/ClipPath";
 import nitpy from "../assets/logo/NITPY.png";
 import PDT from "../assets/logo/PolitecnicoDiTorino.svg";
 
+import shaobo from "../assets/speakers/shaobo.png";
+import palani from "../assets/speakers/Palani.jpeg";
+import lamberto from "../assets/speakers/Lamberto-Rondoni.png";
+import edwin from "../assets/speakers/Edwin.jpg";
+
 // Flip animation for countdown
 const flipVariants = {
   initial: { rotateX: 0 },
@@ -31,6 +36,7 @@ export function Countdown({ targetDate }) {
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [flipKey, setFlipKey] = useState(0);
+
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -84,14 +90,64 @@ export function Countdown({ targetDate }) {
 }
 
 // Dummy speaker data
-const speakers = new Array(6).fill(null).map((_, i) => ({
-  id: i + 1,
-  name: "TBD",
-  college: "TBD",
-  description: "TBD",
-  image: "https://placehold.co/150",
-  backgroundUrl: "https://via.placeholder.com/600x400",
-}));
+const speakers = [
+  {
+    id: 1,
+    name: "Dr. Shaobo He",
+    college:
+      "School of Automation and Electronic Information, Xiangtan University",
+    description:
+      "Dr. Shaobo He is an associate professor at the School of Automation and Electronic Information, Xiangtan University. He earned his Ph.D. from Central South University in 2016. His research focuses on the complex dynamical behavior of nonlinear chaotic systems and their applications in artificial intelligence. Dr. He has published over 180 SCI-indexed journal papers and co-authored three academic monographs. He actively collaborates with domestic and international scholars, serves as a guest editor and reviewer for multiple international journals, and is recognized as a Top 2% Global Scientist.",
+    image: shaobo,
+    backgroundUrl: "https://via.placeholder.com/600x400",
+  },
+  {
+    id: 2,
+    name: "Dr. Palaniappan Ramu",
+    college:
+      "Department of Engineering Design, Indian Institute of Technology Madras",
+    description:
+      "Dr. Palaniappan Ramu is a Professor at the Department of Engineering Design, IIT Madras. He earned his Ph.D. in Aerospace Engineering from the University of Florida and has held positions at the University of Notre Dame and Caterpillar before joining IIT Madras in 2009. He leads the ADOPT lab, with research interests in optimization, uncertainty quantification, reliability-based design, surrogate modeling, visualization (e.g., self-organizing maps), and probabilistic techniques. He has authored over 90 publications, several books and patents, and serves as review editor for the Journal of Structural and Multidisciplinary Optimization.",
+    image: palani,
+    backgroundUrl: "https://via.placeholder.com/600x400",
+  },
+  {
+    id: 3,
+    name: "Dr. Lamberto Rondoni",
+    college:
+      "Department of Mathematical Sciences (DISMA), Politecnico di Torino",
+    description:
+      "Dr. Lamberto Rondoni is a Full Professor at the Department of Mathematical Sciences (DISMA) at Politecnico di Torino. He specializes in mathematical physics, focusing on nonequilibrium statistical mechanics, stochastic processes, and kinetic theory. His research encompasses the foundations of statistical physics and their applications to bio- and nanotechnology. Dr. Rondoni has held visiting positions at institutions worldwide, including Princeton University and the University of New South Wales. He has authored over 160 publications and serves on editorial boards of several scientific journals.",
+    image: lamberto,
+    backgroundUrl: "https://via.placeholder.com/600x400",
+  },
+  {
+    id: 4,
+    name: "Dr. Edwin Geo Varuvel",
+    college:
+      "Department of Mechanical Engineering, Istinye University, Istanbul, Turkey",
+    description:
+      "Dr. Edwin Geo Varuvel is a Professor in the Department of Mechanical Engineering at Istinye University, Istanbul. With over 18 years of teaching and 8 years of research experience, his expertise lies in renewable energy systems, alternative fuels, hydrogen energy, and engine emission control. He has published extensively, with over 70 international journal articles and numerous conference papers. Dr. Varuvel has also served as an associate editor for reputed journals and has led multiple research projects in the field of sustainable energy.",
+    image: edwin,
+    backgroundUrl: "https://via.placeholder.com/600x400",
+  },
+  {
+    id: 5,
+    name: "TBD",
+    college: "TBD",
+    description: "To be announced",
+    image: "https://via.placeholder.com/150",
+    backgroundUrl: "https://via.placeholder.com/600x400",
+  },
+  {
+    id: 6,
+    name: "TBD",
+    college: "TBD",
+    description: "To be announced",
+    image: "https://via.placeholder.com/150",
+    backgroundUrl: "https://via.placeholder.com/600x400",
+  },
+];
 
 // Motion variants
 const fadeUp = {
@@ -114,9 +170,16 @@ const cardVariants = {
   }),
 };
 
+
+
+
 export default function ConferencePage() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const [selectedSpeaker, setSelectedSpeaker] = useState(false);
+  const handleSpeakerClick = (speaker) => {
+    setSelectedSpeaker(speaker);
+  };
   const stop = useCallback((e) => e.stopPropagation(), []);
   const handleNavigation = (e) => {
     e.stopPropagation();
@@ -337,7 +400,7 @@ export default function ConferencePage() {
                 key={spk.id}
                 role="group"
                 aria-labelledby={`speaker-${spk.id}-name`}
-                className="relative overflow-hidden rounded-2xl border bg-no-repeat bg-cover p-0.5 group"
+                className="relative overflow-hidden rounded-2xl border bg-no-repeat bg-cover p-0.5 group cursor-pointer"
                 style={{ backgroundImage: `url(${spk.backgroundUrl})` }}
                 initial="hidden"
                 whileInView="show"
@@ -346,6 +409,7 @@ export default function ConferencePage() {
                 custom={i}
                 whileHover={{ scale: 1.015 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                onClick={() => setSelectedSpeaker(spk)}
               >
                 <GradientLight />
                 <div
@@ -353,7 +417,7 @@ export default function ConferencePage() {
                   style={{ clipPath: "url(#benefits)" }}
                 />
                 <ClipPath />
-                <div className="relative z-10 flex flex-col items-center text-center px-6 py-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl">
+                <div className="relative z-10 flex flex-col h-full items-center text-center px-6 py-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl">
                   <motion.img
                     src={spk.image}
                     alt={spk.name}
@@ -367,12 +431,59 @@ export default function ConferencePage() {
                     {spk.name}
                   </h3>
                   <p className="mb-1">{spk.college}</p>
-                  <p className="text-sm text-gray-500">{spk.description}</p>
+                  <p className="text-sm text-gray-500 line-clamp-3">
+                    {spk.description}
+                  </p>
                 </div>
               </motion.article>
             ))}
           </div>
         </div>
+
+        {/* Modal view for selected speaker */}
+        <AnimatePresence>
+          {selectedSpeaker && (
+            <motion.div
+              className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedSpeaker(false)}
+            >
+              <motion.div
+                className="bg-white dark:bg-gray-900 max-w-xl w-full p-6 rounded-2xl shadow-xl relative"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setSelectedSpeaker(false)}
+                  className="absolute top-4 right-4 text-xl font-bold"
+                  aria-label="Close speaker details"
+                >
+                  &times;
+                </button>
+                <div className="text-center">
+                  <img
+                    src={selectedSpeaker.image}
+                    alt={selectedSpeaker.name}
+                    className="w-28 h-28 mx-auto rounded-full object-cover border-4 mb-4"
+                  />
+                  <h3 className="text-xl font-semibold mb-2">
+                    {selectedSpeaker.name}
+                  </h3>
+                  <p className="text-sm font-medium mb-2">
+                    {selectedSpeaker.college}
+                  </p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm whitespace-pre-line max-h-[300px] overflow-y-auto">
+                    {selectedSpeaker.description}
+                  </p>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </Section>
     </main>
   );
