@@ -69,7 +69,7 @@ const committees = [
         affiliation: "Hanoi University of Science and Technology, Vietnam",
       },
       {
-        name: "Pawan Kumar",
+        name: "Dr. Pawan Kumar",
         affiliation: "National Academy of Sciences of Belarus (NASB), Minsk",
       },
       {
@@ -113,7 +113,7 @@ const committees = [
       { name: "Dr. Shaobo He", affiliation: "Central South University, China" },
       { name: "Dr. Son Dang Thai", affiliation: "Vinh University, Vietnam" },
       {
-        name: "Prof. Stavros Stavrinides",
+        name: "Dr. Stavros Stavrinides",
         affiliation: "Aristotle University, Greece",
       },
       {
@@ -125,15 +125,15 @@ const committees = [
         affiliation: "The University of Adelaide, Australia",
       },
       {
-        name: "Matteo Colangeli",
+        name: "Dr. Matteo Colangeli",
         affiliation: "Universita degli studi dell'Aquila, Italy",
       },
       {
-        name: "Muhammad Firdaus Abdul Rahim",
+        name: "Dr. Muhammad Firdaus Abdul Rahim",
         affiliation: "Mahsa University, Malaysia",
       },
       {
-        name: "Priyanka Mohan",
+        name: "Dr. Priyanka Mohan",
         affiliation: "Guizhou University, China",
       },
     ],
