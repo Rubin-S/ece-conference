@@ -306,6 +306,16 @@ export default function ConferencePage() {
               >
                 Download Brochure
               </motion.a>
+              <motion.a
+                href="#speakers"
+                className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+                variants={buttonVariants}
+                initial="initial"
+                whileHover="hover"
+                whileTap="tap"
+              >
+                Keynote Speakers
+              </motion.a>
 
               <motion.button
                 onClick={(e) => {
