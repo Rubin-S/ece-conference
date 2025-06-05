@@ -13,8 +13,9 @@ import PDT from "../assets/logo/PolitecnicoDiTorino.svg";
 
 import shaobo from "../assets/speakers/shaobo.png";
 import palani from "../assets/speakers/Palani.jpeg";
-import lamberto from "../assets/speakers/Lamberto-Rondoni.png";
+import lamberto from "../assets/speakers/Lamberto-Rondoni.jpg";
 import edwin from "../assets/speakers/Edwin.jpg";
+import { title } from "framer-motion/client";
 
 // Flip animation for countdown
 const flipVariants = {
@@ -95,7 +96,8 @@ const speakers = [
     id: 1,
     name: "Dr. Shaobo He",
     college:
-      "School of Automation and Electronic Information, Xiangtan University",
+      "Professor, School of Automation and Electronic Information, Xiangtan University",
+    title: "TBD",
     description:
       "Dr. Shaobo He is an associate professor at the School of Automation and Electronic Information, Xiangtan University. He earned his Ph.D. from Central South University in 2016. His research focuses on the complex dynamical behavior of nonlinear chaotic systems and their applications in artificial intelligence. Dr. He has published over 180 SCI-indexed journal papers and co-authored three academic monographs. He actively collaborates with domestic and international scholars, serves as a guest editor and reviewer for multiple international journals, and is recognized as a Top 2% Global Scientist.",
     image: shaobo,
@@ -105,7 +107,8 @@ const speakers = [
     id: 2,
     name: "Dr. Palaniappan Ramu",
     college:
-      "Department of Engineering Design, Indian Institute of Technology Madras",
+      "Professor, Department of Engineering Design, Indian Institute of Technology Madras",
+    title: "Data Visualization for multi criteria decision making",
     description:
       "Dr. Palaniappan Ramu is a Professor at the Department of Engineering Design, IIT Madras. He earned his Ph.D. in Aerospace Engineering from the University of Florida and has held positions at the University of Notre Dame and Caterpillar before joining IIT Madras in 2009. He leads the ADOPT lab, with research interests in optimization, uncertainty quantification, reliability-based design, surrogate modeling, visualization (e.g., self-organizing maps), and probabilistic techniques. He has authored over 90 publications, several books and patents, and serves as review editor for the Journal of Structural and Multidisciplinary Optimization.",
     image: palani,
@@ -115,7 +118,8 @@ const speakers = [
     id: 3,
     name: "Dr. Lamberto Rondoni",
     college:
-      "Department of Mathematical Sciences (DISMA), Politecnico di Torino",
+      "Professor, Department of Mathematical Sciences (DISMA), Politecnico di Torino",
+    title: "Data Driven Approaches meet Dynamical Systems Response Theory",
     description:
       "Dr. Lamberto Rondoni is a Full Professor at the Department of Mathematical Sciences (DISMA) at Politecnico di Torino. He specializes in mathematical physics, focusing on nonequilibrium statistical mechanics, stochastic processes, and kinetic theory. His research encompasses the foundations of statistical physics and their applications to bio- and nanotechnology. Dr. Rondoni has held visiting positions at institutions worldwide, including Princeton University and the University of New South Wales. He has authored over 160 publications and serves on editorial boards of several scientific journals.",
     image: lamberto,
@@ -125,7 +129,8 @@ const speakers = [
     id: 4,
     name: "Dr. Edwin Geo Varuvel",
     college:
-      "Department of Mechanical Engineering, Istinye University, Istanbul, Turkey",
+      "Professor, Department of Mechanical Engineering, Istinye University, Istanbul, Turkey",
+    title: "TBD",
     description:
       "Dr. Edwin Geo Varuvel is a Professor in the Department of Mechanical Engineering at Istinye University, Istanbul. With over 18 years of teaching and 8 years of research experience, his expertise lies in renewable energy systems, alternative fuels, hydrogen energy, and engine emission control. He has published extensively, with over 70 international journal articles and numerous conference papers. Dr. Varuvel has also served as an associate editor for reputed journals and has led multiple research projects in the field of sustainable energy.",
     image: edwin,
@@ -135,6 +140,7 @@ const speakers = [
     id: 5,
     name: "TBD",
     college: "TBD",
+    title: "TBD",
     description: "To be announced",
     image: "https://via.placeholder.com/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
@@ -143,6 +149,7 @@ const speakers = [
     id: 6,
     name: "TBD",
     college: "TBD",
+    title: "TBD",
     description: "To be announced",
     image: "https://via.placeholder.com/150",
     backgroundUrl: "https://via.placeholder.com/600x400",
@@ -431,6 +438,11 @@ export default function ConferencePage() {
                     {spk.name}
                   </h3>
                   <p className="mb-1">{spk.college}</p>
+                  <p className="text-sm p-0.5 m-1 w-full rounded-full font-semibold italic bg-gradient-neon">
+                    <strong className=" p-3 bg-white min-h-18 rounded-full flex justify-center items-center dark:bg-gray-900">
+                      Title:{spk.title}
+                    </strong>
+                  </p>
                   <p className="text-sm text-gray-500 line-clamp-3">
                     {spk.description}
                   </p>
@@ -475,6 +487,11 @@ export default function ConferencePage() {
                   </h3>
                   <p className="text-sm font-medium mb-2">
                     {selectedSpeaker.college}
+                  </p>
+                  <p className="text-sm p-0.5 m-3 w-full rounded-full font-semibold italic bg-gradient-neon">
+                    <strong className=" p-3 bg-white min-h-18 flex rounded-full justify-center items-center dark:bg-gray-900">
+                      Title:{selectedSpeaker.title}
+                    </strong>
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 text-sm whitespace-pre-line max-h-[300px] overflow-y-auto">
                     {selectedSpeaker.description}
