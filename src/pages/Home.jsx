@@ -438,7 +438,7 @@ export default function ConferencePage() {
                     {spk.name}
                   </h3>
                   <p className="mb-1">{spk.college}</p>
-                  <p className="text-sm p-0.5 m-1 w-full rounded-full font-semibold italic bg-gradient-neon">
+                  <p className="text-sm p-0.5 m-1 w-full rounded-full font-semibold bg-gradient-neon">
                     <strong className=" p-3 bg-white min-h-18 rounded-full flex justify-center items-center dark:bg-gray-900">
                       Title:{spk.title}
                     </strong>
@@ -488,7 +488,7 @@ export default function ConferencePage() {
                   <p className="text-sm font-medium mb-2">
                     {selectedSpeaker.college}
                   </p>
-                  <p className="text-sm p-0.5 m-3 w-full rounded-full font-semibold italic bg-gradient-neon">
+                  <p className="text-sm p-0.5 m-3 w-full rounded-full font-semibold bg-gradient-neon">
                     <strong className=" p-3 bg-white min-h-18 flex rounded-full justify-center items-center dark:bg-gray-900">
                       Title:{selectedSpeaker.title}
                     </strong>
