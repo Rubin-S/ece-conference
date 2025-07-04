@@ -15,9 +15,7 @@ import shaobo from "../assets/speakers/shaobo.png";
 import palani from "../assets/speakers/Palani.jpeg";
 import lamberto from "../assets/speakers/Lamberto-Rondoni.jpg";
 import edwin from "../assets/speakers/Edwin.jpg";
-import { title } from "framer-motion/client";
 
-// Flip animation for countdown
 const flipVariants = {
   initial: { rotateX: 0 },
   flip: { transition: { duration: 0.6, ease: "easeInOut" } },
@@ -34,29 +32,23 @@ export function Countdown({ targetDate }) {
       seconds: Math.floor((diff / 1000) % 60),
     };
   };
-
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [flipKey, setFlipKey] = useState(0);
-
-
   useEffect(() => {
     const timer = setInterval(() => {
-      const newTimeLeft = calculateTimeLeft();
-      setTimeLeft(newTimeLeft);
+      setTimeLeft(calculateTimeLeft());
       setFlipKey((k) => k + 1);
     }, 1000);
     return () => clearInterval(timer);
   }, [targetDate]);
-
   const timeUnits = [
     { label: "days", value: timeLeft.days },
     { label: "hours", value: timeLeft.hours },
     { label: "min", value: timeLeft.minutes },
     { label: "sec", value: timeLeft.seconds },
   ];
-
   return (
-    <main className="flex items-center justify-center z-1 mb-16 sm:mb-24 px-4">
+    <div className="flex items-center justify-center px-4">
       <section
         aria-label="Countdown Timer"
         className="grid grid-cols-2 xs:grid-cols-4 gap-4 sm:gap-6 w-full max-w-4xl"
@@ -86,11 +78,10 @@ export function Countdown({ targetDate }) {
           </div>
         ))}
       </section>
-    </main>
+    </div>
   );
 }
 
-// Dummy speaker data
 const speakers = [
   {
     id: 1,
@@ -98,41 +89,34 @@ const speakers = [
     college:
       "Professor, School of Automation and Electronic Information, Xiangtan University",
     title: "Discrete memristive spiking neural network.",
-    description:
-      "",
+    description: "",
     image: shaobo,
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
     id: 2,
     name: "Dr. Palaniappan Ramu",
-    college:
-      "Professor, Department of Engineering Design, Indian Institute of Technology Madras",
-    title: "Data Visualization for multi criteria decision making",
-    description:
-      "Dr. Palaniappan Ramu is a Professor at the Department of Engineering Design, IIT Madras. He earned his Ph.D. in Aerospace Engineering from the University of Florida and has held positions at the University of Notre Dame and Caterpillar before joining IIT Madras in 2009. He leads the ADOPT lab, with research interests in optimization, uncertainty quantification, reliability-based design, surrogate modeling, visualization (e.g., self-organizing maps), and probabilistic techniques. He has authored over 90 publications, several books and patents, and serves as review editor for the Journal of Structural and Multidisciplinary Optimization.",
+    college: "Professor, Department of Engineering Design, IIT Madras",
+    title: "Data Visualization for multi criteria decision making",
+    description: "Dr. Palaniappan Ramu ...",
     image: palani,
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
     id: 3,
     name: "Dr. Lamberto Rondoni",
-    college:
-      "Professor, Department of Mathematical Sciences (DISMA), Politecnico di Torino",
-    title: "Data Driven Approaches meet Dynamical Systems Response Theory",
-    description:
-      "Dr. Lamberto Rondoni is a Full Professor at the Department of Mathematical Sciences (DISMA) at Politecnico di Torino. He specializes in mathematical physics, focusing on nonequilibrium statistical mechanics, stochastic processes, and kinetic theory. His research encompasses the foundations of statistical physics and their applications to bio- and nanotechnology. Dr. Rondoni has held visiting positions at institutions worldwide, including Princeton University and the University of New South Wales. He has authored over 160 publications and serves on editorial boards of several scientific journals.",
+    college: "Professor, DISMA, Politecnico di Torino",
+    title: "Data Driven Approaches...",
+    description: "Dr. Lamberto Rondoni ...",
     image: lamberto,
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
     id: 4,
     name: "Dr. Edwin Geo Varuvel",
-    college:
-      "Professor, Department of Mechanical Engineering, Istinye University, Istanbul, Turkey",
+    college: "Professor, Dept. Mechanical Engineering, Istinye University",
     title: "TBD",
-    description:
-      "Dr. Edwin Geo Varuvel is a Professor in the Department of Mechanical Engineering at Istinye University, Istanbul. With over 18 years of teaching and 8 years of research experience, his expertise lies in renewable energy systems, alternative fuels, hydrogen energy, and engine emission control. He has published extensively, with over 70 international journal articles and numerous conference papers. Dr. Varuvel has also served as an associate editor for reputed journals and has led multiple research projects in the field of sustainable energy.",
+    description: "Dr. Edwin Geo Varuvel ...",
     image: edwin,
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
@@ -156,18 +140,15 @@ const speakers = [
   },
 ];
 
-// Motion variants
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
-
 const buttonVariants = {
   initial: { scale: 1 },
   hover: { scale: 1.05 },
   tap: { scale: 0.97 },
 };
-
 const cardVariants = {
   hidden: { opacity: 0, y: 30 },
   show: (i) => ({
@@ -176,236 +157,257 @@ const cardVariants = {
     transition: { duration: 0.6, delay: i * 0.1 },
   }),
 };
-
-
-
+const detailFade = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 export default function ConferencePage() {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedSpeaker, setSelectedSpeaker] = useState(null);
   const navigate = useNavigate();
-  const [selectedSpeaker, setSelectedSpeaker] = useState(false);
-  const handleSpeakerClick = (speaker) => {
-    setSelectedSpeaker(speaker);
-  };
   const stop = useCallback((e) => e.stopPropagation(), []);
   const handleNavigation = (e) => {
-    e.stopPropagation();
+    stop(e);
     navigate("/call-for-papers");
     window.scrollTo(0, 0);
   };
 
   return (
     <main>
+      {/* Hero */}
       <Section
         id="hero"
-        className="pt-24 -mt-[7.25rem]"
+        className="pt-24 pb-16"
         crosses
         crossesOffset="lg:translate-y-[5.25rem]"
         customPaddings
         role="region"
         aria-label="Hero section"
       >
-        <div className="container relative px-4">
-          <header className="text-center mb-20 md:mb-24">
-            <motion.div
-              className="flex justify-center gap-4 mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+        <BackgroundCircles />
+        <div className="container relative px-4 text-center">
+          <motion.div
+            className="flex justify-center gap-4 mb-6"
+            variants={fadeUp}
+            initial="initial"
+            animate="animate"
+          >
+            <motion.img
+              src={nitpy}
+              alt="NIT Puducherry"
+              className="h-14 sm:h-20"
+              whileHover={{ scale: 1.05 }}
+            />
+            <motion.img
+              src={PDT}
+              alt="Politecnico di Torino"
+              className="h-14 sm:h-20"
+              whileHover={{ scale: 1.05 }}
+            />
+          </motion.div>
+          <motion.h1
+            variants={fadeUp}
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2"
+          >
+            International Conference on
+          </motion.h1>
+          <motion.h2
+            variants={fadeUp}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-6"
+          >
+            Data-Driven Approaches to Dynamical Systems and Computational
+            Modeling
+          </motion.h2>
+          <motion.p
+            variants={fadeUp}
+            className="my-6 flex justify-center items-center gap-2 text-primary-600 dark:text-primary-400 text-xl sm:text-2xl font-semibold"
+          >
+            <MdLocationPin className="w-6 h-6" />
+            <span>
+              <time dateTime="2026-05-14">
+                14<sup>th</sup>
+              </time>{" "}
+              –{" "}
+              <time dateTime="2026-05-16">
+                16<sup>th</sup>
+              </time>{" "}
+              May 2026
+            </span>
+          </motion.p>
+          <motion.div
+            variants={fadeUp}
+            className="bg-white dark:bg-gray-800 border rounded-2xl shadow-xl p-6 sm:p-8 max-w-lg mx-auto mb-6"
+          >
+            <address className="not-italic text-sm sm:text-base">
+              <h3 className="flex justify-center items-center gap-1 text-lg mb-1">
+                <MdLocationPin className="text-primary-600 dark:text-primary-400" />{" "}
+                Conference Venue
+              </h3>
+              <p className="font-medium">
+                National Institute of Technology Puducherry (NITPY)
+              </p>
+              <p>Karaikal, Puducherry, India</p>
+              <p className="italic">
+                (Virtual participation option is available)
+              </p>
+            </address>
+          </motion.div>
+          <div className="flex flex-wrap justify-center gap-4">
+            <motion.a
+              href="./assets/CONFERENCE.pdf"
+              download
+              target="_blank"
+              className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+              variants={buttonVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
             >
-              <motion.img
-                src={nitpy}
-                alt="NIT Puducherry"
-                className="h-14 sm:h-20"
-                whileHover={{ scale: 1.05 }}
-              />
-              <motion.img
-                src={PDT}
-                alt="Politecnico di Torino"
-                className="h-14 sm:h-20"
-                whileHover={{ scale: 1.05 }}
-              />
-            </motion.div>
-
-            <motion.h1
-              variants={fadeUp}
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2"
+              Download Brochure
+            </motion.a>
+            <motion.a
+              href="#speakers"
+              className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+              variants={buttonVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
             >
-              International Conference on
-            </motion.h1>
-
-            <motion.h2
-              variants={fadeUp}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-6"
+              Keynote Speakers
+            </motion.a>
+            <motion.button
+              onClick={handleNavigation}
+              className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+              variants={buttonVariants}
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
             >
-              Data-Driven Approaches to Dynamical Systems and Computational
-              Modeling
-            </motion.h2>
-
-            <motion.p
-              className="my-6 flex justify-center items-center gap-2 text-primary-600 dark:text-primary-400 text-xl sm:text-2xl font-semibold"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
-              <span>
-                <time dateTime="2026-05-15">
-                  14<sup>th</sup>
-                </time>{" "}
-                –{" "}
-                <time dateTime="2026-05-16">
-                  16<sup>th</sup>
-                </time>{" "}
-                May 2026
-              </span>
-            </motion.p>
-
-            <motion.div
-              className="bg-white dark:bg-gray-800 border rounded-2xl shadow-xl p-6 sm:p-8 max-w-lg mx-auto mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <address className="not-italic text-sm sm:text-base">
-                <h3 className="flex justify-center items-center gap-1 text-lg mb-1">
-                  <MdLocationPin className="text-primary-600 dark:text-primary-400" />{" "}
-                  Conference Venue
-                </h3>
-                <p className="font-medium">
-                  National Institute of Technology Puducherry (NITPY)
-                </p>
-                <p>Karaikal, Puducherry, India</p>
-                <p className="italic">
-                  (Virtual participation option is available)
-                </p>
-              </address>
-            </motion.div>
-
-            <div className="flex flex-wrap justify-center gap-4">
-              <motion.a
-                href="./assets/CONFERENCE.pdf"
-                download
-                target="_blank"
-                className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-                variants={buttonVariants}
-                initial="initial"
-                whileHover="hover"
-                whileTap="tap"
-              >
-                Download Brochure
-              </motion.a>
-              <motion.a
-                href="#speakers"
-                className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-                variants={buttonVariants}
-                initial="initial"
-                whileHover="hover"
-                whileTap="tap"
-              >
-                Keynote Speakers
-              </motion.a>
-
-              <motion.button
-                onClick={(e) => {
-                  stop(e);
-                  handleNavigation(e);
-                }}
-                className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-                variants={buttonVariants}
-                initial="initial"
-                whileHover="hover"
-                whileTap="tap"
-              >
-                Conference Schedule
-              </motion.button>
-            </div>
-
-            {!isOpen && <BackgroundCircles />}
-          </header>
-
-          <Countdown targetDate="2026-05-14T00:00:00" />
-
-          <LayoutGroup>
-            <motion.div
-              layoutId="overviewCard"
-              onClick={() => setIsOpen(!isOpen)}
-              className={
-                isOpen
-                  ? "fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-700/80"
-                  : "relative max-w-3xl mx-auto z-20"
-              }
-            >
-              <motion.div
-                layout
-                className={`relative ${
-                  isOpen
-                    ? "bg-light-pb dark:bg-dark-pb p-8"
-                    : "bg-gradient-blue animate-gradient-shift p-8"
-                } border rounded-2xl`}
-              >
-                {isOpen && (
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="absolute top-4 right-4 text-2xl"
-                    aria-label="Close overview"
-                  >
-                    &times;
-                  </button>
-                )}
-                <h3 className="text-xl font-bold mb-4">Conference Overview</h3>
-                <p className="mb-4">
-                  The International Conference on Data-Driven Approaches to
-                  Dynamical Systems and Computational Modeling brings together
-                  researchers from across the globe—both in-person at NIT
-                  Puducherry and virtually—to explore cutting-edge topics in
-                  modeling complex systems.
-                </p>
-                {isOpen && (
-                  <>
-                    <p className="mb-4">
-                      From high-resolution simulations and machine
-                      learning–augmented strategies to uncertainty
-                      quantification and real-time systems, the conference spans
-                      applications across robotics, climate, healthcare, and
-                      more.
-                    </p>
-                    <motion.button
-                      onClick={(e) => {
-                        stop(e);
-                        setIsOpen(false);
-                        handleNavigation(e);
-                      }}
-                      className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-                      variants={buttonVariants}
-                      initial="initial"
-                      whileHover="hover"
-                      whileTap="tap"
-                    >
-                      Conference Schedule
-                    </motion.button>
-                  </>
-                )}
-              </motion.div>
-            </motion.div>
-          </LayoutGroup>
+              Conference Schedule
+            </motion.button>
+          </div>
         </div>
-        <BottomLine />
       </Section>
-
-      {/* Keynote Section */}
-      <Section id="speakers" className="py-20 md:py-32">
+      {/* Countdown */}
+      <Section id="countdown" className="pt-12 pb-16">
+        <Countdown targetDate="2026-05-14T00:00:00" />
+      </Section>
+      {/* Organizers */}
+      <Section id="organizers" className="pt-8 pb-20">
+        <motion.div
+          className="container px-4 text-center"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{ hidden: {}, show: {} }}
+        >
+          <motion.div variants={detailFade} className="mb-12">
+            <Heading
+              title="Organizing Committee"
+              text="Meet the key organizers driving this conference forward."
+            />
+          </motion.div>
+          <div className="grid gap-10 sm:grid-cols-2 max-w-4xl mx-auto">
+            <motion.div
+              variants={detailFade}
+              custom={1}
+              className="bg-white dark:bg-gray-900 rounded-2xl shadow-md dark:shadow-xl p-6"
+            >
+              <h3 className="text-lg font-semibold text-primary-600 dark:text-primary-400 mb-3">
+                Organizing Secretaries
+              </h3>
+              <ul className="space-y-2 text-left text-sm">
+                <li>
+                  <strong>Dr. Naveen Raj R</strong> – NIT Puducherry
+                </li>
+                <li>
+                  <strong>Dr. Santo Banerjee</strong> – Managing Editor, EPJ
+                  Plus & Politecnico di Torino
+                </li>
+              </ul>
+            </motion.div>
+            <motion.div
+              variants={detailFade}
+              custom={2}
+              className="bg-white dark:bg-gray-900 rounded-2xl shadow-md dark:shadow-xl p-6"
+            >
+              <h3 className="text-lg font-semibold text-primary-600 dark:text-primary-400 mb-3">
+                Co-Organizing Secretaries
+              </h3>
+              <ul className="space-y-2 text-left text-sm">
+                <li>
+                  <strong>Dr. Satishkumar P</strong> – NIT Puducherry
+                </li>
+                <li>
+                  <strong>Dr. Lamberto Rondoni</strong> – Politecnico di Torino,
+                  Italy
+                </li>
+              </ul>
+            </motion.div>
+          </div>
+        </motion.div>
+      </Section>
+      {/* Overview */}
+      <Section id="overview" className="py-24">
+        <LayoutGroup>
+          <motion.div
+            layoutId="overviewCard"
+            onClick={() => setIsOpen(!isOpen)}
+            className={
+              isOpen
+                ? "fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-700/80"
+                : "relative max-w-3xl mx-auto z-20"
+            }
+          >
+            <motion.div
+              layout
+              className={`relative ${
+                isOpen
+                  ? "bg-light-pb dark:bg-dark-pb p-8"
+                  : "bg-gradient-blue animate-gradient-shift p-8"
+              } border rounded-2xl`}
+            >
+              {isOpen && (
+                <button
+                  onClick={() => setIsOpen(false)}
+                  className="absolute top-4 right-4 text-2xl"
+                  aria-label="Close overview"
+                >
+                  &times;
+                </button>
+              )}
+              <h3 className="text-xl font-bold mb-4">Conference Overview</h3>
+              <p className="mb-4">
+                The International Conference on Data-Driven Approaches to
+                Dynamical Systems and Computational Modeling brings together
+                researchers from across the globe to explore cutting-edge
+                topics.
+              </p>
+              {isOpen && (
+                <>
+                  <p className="mb-4">
+                    From high-resolution simulations and machine
+                    learning–augmented strategies to uncertainty quantification
+                    and real-time systems, the conference spans robotics,
+                    climate, healthcare, and more.
+                  </p>
+                  <motion.button
+                    onClick={handleNavigation}
+                    className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    Conference Schedule
+                  </motion.button>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        </LayoutGroup>
+      </Section>
+      {/* Speakers */}
+      <Section id="speakers" className="py-32">
         <div className="container px-4">
           <Heading
             title="Keynote Speakers"
@@ -449,8 +451,8 @@ export default function ConferencePage() {
                   </h3>
                   <p className="mb-1">{spk.college}</p>
                   <p className="text-sm p-0.5 m-1 w-full rounded-full font-semibold bg-gradient-neon">
-                    <strong className=" p-3 bg-white min-h-18 rounded-full flex justify-center items-center dark:bg-gray-900">
-                      Title:{spk.title}
+                    <strong className="p-3 bg-white min-h-18 flex rounded-full justify-center items-center dark:bg-gray-900">
+                      Title: {spk.title}
                     </strong>
                   </p>
                   <p className="text-sm text-gray-500 line-clamp-3">
@@ -461,8 +463,6 @@ export default function ConferencePage() {
             ))}
           </div>
         </div>
-
-        {/* Modal view for selected speaker */}
         <AnimatePresence>
           {selectedSpeaker && (
             <motion.div
@@ -470,7 +470,7 @@ export default function ConferencePage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setSelectedSpeaker(false)}
+              onClick={() => setSelectedSpeaker(null)}
             >
               <motion.div
                 className="bg-white dark:bg-gray-900 max-w-xl w-full p-6 rounded-2xl shadow-xl relative"
@@ -480,7 +480,7 @@ export default function ConferencePage() {
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
-                  onClick={() => setSelectedSpeaker(false)}
+                  onClick={() => setSelectedSpeaker(null)}
                   className="absolute top-4 right-4 text-xl font-bold"
                   aria-label="Close speaker details"
                 >
@@ -499,8 +499,8 @@ export default function ConferencePage() {
                     {selectedSpeaker.college}
                   </p>
                   <p className="text-sm p-0.5 m-3 w-full rounded-full font-semibold bg-gradient-neon">
-                    <strong className=" p-3 bg-white min-h-18 flex rounded-full justify-center items-center dark:bg-gray-900">
-                      Title:{selectedSpeaker.title}
+                    <strong className="p-3 bg-white min-h-18 flex rounded-full justify-center items-center dark:bg-gray-900">
+                      Title: {selectedSpeaker.title}
                     </strong>
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 text-sm whitespace-pre-line max-h-[300px] overflow-y-auto">
@@ -512,6 +512,7 @@ export default function ConferencePage() {
           )}
         </AnimatePresence>
       </Section>
+      <BottomLine />
     </main>
   );
 }

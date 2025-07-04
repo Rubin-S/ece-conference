@@ -12,6 +12,7 @@ import ContactUs from "./pages/Contact";
 import CommitteesPage from "./pages/Committees";
 import Registration from "./pages/Registration";
 import ImportantDates from "./pages/ImportantDates";
+import RegistrationForm from "./pages/Submission";
 
 const Layout = () => (
   <>
@@ -33,6 +34,7 @@ const App = () => {
               <Route path="about-us" element={<About />} />
               <Route path="committees" element={<CommitteesPage />} />
               <Route path="registration" element={<Registration />} />
+              <Route path="submission" element={<RegistrationForm />} />
               <Route path="publications" element={<TBDPage />} />
               <Route path="sponsors" element={<TBDPage />} />
               <Route path="contact-us" element={<ContactUs />} />

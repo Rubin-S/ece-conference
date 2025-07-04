@@ -20,7 +20,8 @@ const committees = [
       { name: "Dr. Naveen Raj R", affiliation: "NIT puducherry" },
       {
         name: "Dr. Santo Banerjee",
-        affiliation: "Managing Editor, The European Physical Journal Plus",
+        affiliation:
+          "Managing Editor, The European Physical Journal Plus & Politecnico di Torino",
       },
     ],
   },
