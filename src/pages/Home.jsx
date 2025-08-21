@@ -15,6 +15,9 @@ import shaobo from "../assets/speakers/shaobo.png";
 import palani from "../assets/speakers/Palani.jpeg";
 import lamberto from "../assets/speakers/Lamberto-Rondoni.jpg";
 import edwin from "../assets/speakers/Edwin.jpg";
+import mertono from "../assets/speakers/mertono.png";
+import Aninda from "../assets/speakers/aninda.jpg";
+
 
 const flipVariants = {
   initial: { rotateX: 0 },
@@ -98,7 +101,7 @@ const speakers = [
     name: "Dr. Palaniappan Ramu",
     college: "Professor, Department of Engineering Design, IIT Madras",
     title: "Data Visualization for multi criteria decision making",
-    description: "Dr. Palaniappan Ramu ...",
+    description: "",
     image: palani,
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
@@ -107,7 +110,7 @@ const speakers = [
     name: "Dr. Lamberto Rondoni",
     college: "Professor, DISMA, Politecnico di Torino",
     title: "Data Driven Approaches...",
-    description: "Dr. Lamberto Rondoni ...",
+    description: "",
     image: lamberto,
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
@@ -116,26 +119,26 @@ const speakers = [
     name: "Dr. Edwin Geo Varuvel",
     college: "Professor, Dept. Mechanical Engineering, Istinye University",
     title: "TBD",
-    description: "Dr. Edwin Geo Varuvel ...",
+    description: "",
     image: edwin,
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
     id: 5,
-    name: "TBD",
-    college: "TBD",
+    name: "Dr. R. Merino Martinez",
+    college: "Professor, Dept. Aeroacoustics and aircraft noise, Technische Universiteit Delft",
     title: "TBD",
-    description: "To be announced",
-    image: "https://via.placeholder.com/150",
+    description: "",
+    image: mertono,
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
   {
     id: 6,
-    name: "TBD",
-    college: "TBD",
+    name: "Aninda Bhattacharya",
+    college: "Product Director - Data Science at ABB",
     title: "TBD",
-    description: "To be announced",
-    image: "https://via.placeholder.com/150",
+    description: "",
+    image: Aninda,
     backgroundUrl: "https://via.placeholder.com/600x400",
   },
 ];
