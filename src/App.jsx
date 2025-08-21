@@ -34,7 +34,7 @@ const App = () => {
               <Route path="about-us" element={<About />} />
               <Route path="committees" element={<CommitteesPage />} />
               <Route path="registration" element={<Registration />} />
-              <Route path="submission" element={<RegistrationForm />} />
+              <Route path="registration/form" element={<RegistrationForm />} />
               <Route path="publications" element={<TBDPage />} />
               <Route path="sponsors" element={<TBDPage />} />
               <Route path="contact-us" element={<ContactUs />} />
