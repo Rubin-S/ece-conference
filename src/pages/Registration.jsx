@@ -101,7 +101,6 @@ export default function RegistrationPage() {
           </motion.div>
 
           {/* SINGLE PAYMENT INSTRUCTION CARD */}
-          <div className="grid md:grid-cols-2 gap-6">
             <div className="bg-white dark:bg-gray-800 border border-light-divider dark:border-dark-divider rounded-2xl p-6 shadow-md">
               <h3 className="text-lg font-semibold text-primary-600 mb-2">Pay & Upload Screenshot</h3>
               <p className="text-sm text-light-st dark:text-dark-st mb-4">Please make the payment using the bank/UPI details provided by the organizers (you will update these on the site). After payment, come back to the registration form and upload the payment screenshot or PDF.</p>
@@ -111,14 +110,6 @@ export default function RegistrationPage() {
                 <li>On the form page, attach the payment screenshot and your paper link.</li>
               </ul>
             </div>
-
-            <div className="bg-light-altBg dark:bg-dark-altBg border border-light-divider dark:border-dark-divider rounded-2xl p-6 shadow-md flex items-center justify-center">
-              <div className="text-center">
-                <p className="font-medium text-light-st dark:text-dark-st mb-2">You will be redirected to the form after selecting Register.</p>
-                <p className="text-sm text-light-st dark:text-dark-st">(QR / Bank details placeholders removed — you will update them yourself where needed.)</p>
-              </div>
-            </div>
-          </div>
         </motion.div>
 
         <div className="text-center mt-12">
