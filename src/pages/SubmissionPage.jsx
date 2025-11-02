@@ -185,7 +185,7 @@ export default function SubmissionPage() {
             description="Begin by submitting your abstract using the online form. The abstract will be reviewed for academic quality and relevance."
             cta={{
               text: "Submit Abstract",
-              href: "INSERT_ABSTRACT_GOOGLE_FORM_LINK_HERE",
+              href: "https://forms.office.com/r/cE6ev20JbG",
             }}
             Icon={DocumentAddIcon}
             custom={4}
@@ -210,7 +210,7 @@ export default function SubmissionPage() {
             description="Use your Paper ID to upload your full paper via the submission form. File names must match your Paper ID (e.g., 337.pdf)."
             cta={{
               text: "Submit Full Paper",
-              href: "INSERT_FULL_PAPER_GOOGLE_FORM_LINK_HERE",
+              href: "https://docs.google.com/forms/d/e/1FAIpQLSc70LhbRBcy9zqlrk7GKILYTTNMivPkkp08vVPzxNFsErUaUg/viewform?usp=sharing&ouid=108126571489622999115",
             }}
             Icon={DocumentTextIcon}
             custom={6}
