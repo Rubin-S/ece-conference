@@ -34,7 +34,7 @@ export default function Hero() {
   return (
     <Section
       id="hero"
-      className="pt-24 -mt-[7.25rem]"
+      className="pt-12 -mt-[7.25rem]"
       crosses
       crossesOffset="lg:translate-y-[5.25rem]"
       customPaddings

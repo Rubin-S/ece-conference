@@ -186,7 +186,7 @@ export default function ConferencePage() {
         id="hero"
         className="pb-16"
         crosses
-        crossesOffset="lg:translate-y-[5.25rem]"
+        crossesOffset="lg:translate-y-[1rem]"
         customPaddings
         role="region"
         aria-label="Hero section"
@@ -243,70 +243,98 @@ export default function ConferencePage() {
           </motion.p>
 <motion.div className="flex flex-col gap-6 mx-auto w-full max-w-7xl px-4">
   {/* Row: Springer (1.5x) | Venue (1x) */}
-  <div className="flex w-full items-stretch gap-6">
+  <div className="flex flex-col lg:flex-row w-full items-stretch gap-6">
     {/* Springer (3 parts) */}
     <motion.div
       variants={fadeUp}
-      className="flex-[3] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl p-5 sm:p-6 flex flex-col justify-between h-full min-h-[220px]"
+      /*
+        CHANGE 1:
+        - 'justify-center' is kept to vertically center the inner content
+          block within the card.
+      */
+      className="flex-[3] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl p-5 sm:p-6 flex flex-col justify-center h-full min-h-[220px]"
     >
-      <div className="flex items-center gap-4 sm:gap-6">
+      {/*
+        CHANGE 2:
+        - Changed 'sm:items-start' to 'sm:items-center'.
+        - This will now vertically center the logos and the text block
+          relative to each other on desktop (sm) views.
+        - 'items-center' (for mobile) remains, to horizontally center
+          the content when it's stacked.
+      */}
+      <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6">
         {/* small logos column */}
         <div className="flex flex-col items-center gap-2 flex-shrink-0">
           <motion.img
             src={springer}
             alt="Springer Logo"
-            className="w-16 sm:w-20 h-auto"
+            className="w-11/12 sm:w-20 h-auto"
             whileHover={{ scale: 1.02 }}
           />
           <motion.img
             src={springerBottom}
             alt="Springer Proceedings"
-            className="w-16 sm:w-20 h-auto"
+            className="w-11/12 sm:w-20 h-auto"
             whileHover={{ scale: 1.02 }}
           />
         </div>
 
         {/* description fills remaining space */}
-        <div className="flex-1 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+        {/*
+          CHANGE 3:
+          - Changed 'text-center' back to 'text-center sm:text-left'.
+          - This centers the text on mobile (when stacked) but
+            left-aligns it on desktop (when side-by-side),
+            matching your image.
+        */}
+        <div className="flex-1 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed text-center sm:text-left">
           <p>
-            Accepted papers will be published in <p className="text-blue-700 font-semibold">Springer Proceedings in Physics <span className="text-red-700">(Scopus Indexed)</span></p>. At least one author must register and present the paper (virtual or in-person). There is no publication fee; revised papers must use the official template provided by Springer.
+            Accepted papers will be published in{" "}
+            <strong className="text-blue-700 font-semibold">
+              Springer Proceedings in Physics{" "}
+              <span className="text-red-700">(Scopus Indexed)</span>
+            </strong>
+            . At least one author must register and present the paper
+            (virtual or in-person). There is no publication fee; revised
+            papers must use the official template provided by Springer.
           </p>
         </div>
       </div>
     </motion.div>
 
     {/* Venue (2 parts) */}
-   <motion.div
-  variants={fadeUp}
-  className="flex-[2] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 
-             rounded-2xl shadow-xl p-5 sm:p-8 flex flex-col justify-center items-center 
-             h-full min-h-[220px] text-center"
->
-  <address className="not-italic space-y-2">
-    <h3 className="flex justify-center items-center gap-2 text-lg font-semibold text-gray-800 dark:text-gray-100">
-      <MdLocationPin className="text-primary-600 dark:text-primary-400 text-xl" />
-      Conference Venue
-    </h3>
-    <p className="font-medium text-gray-700 dark:text-gray-200">
-      National Institute of Technology Puducherry (NITPY)
-    </p>
-    <p className="text-gray-600 dark:text-gray-400">Karaikal, Puducherry, India</p>
-    <p className="italic text-sm text-gray-500 dark:text-gray-400">
-      (Virtual participation option is available)
-    </p>
-  </address>
-</motion.div>
-
+    <motion.div
+      variants={fadeUp}
+      className="flex-[2] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 
+      rounded-2xl shadow-xl p-5 sm:p-8 flex flex-col justify-center items-center 
+      h-full min-h-[220px] text-center"
+    >
+      <address className="not-italic space-y-2">
+        <h3 className="flex justify-center items-center gap-2 text-lg font-semibold text-gray-800 dark:text-gray-100">
+          <MdLocationPin className="text-primary-600 dark:text-primary-400 text-xl" />
+          Conference Venue
+        </h3>
+        <p className="font-medium text-gray-700 dark:text-gray-200">
+          National Institute of Technology Puducherry (NITPY)
+        </p>
+        <p className="text-gray-600 dark:text-gray-400">
+          Karaikal, Puducherry, India
+        </p>
+        <p className="italic text-sm text-gray-500 dark:text-gray-400">
+          (Virtual participation option is available)
+        </p>
+      </address>
+    </motion.div>
   </div>
 
   {/* Buttons - horizontal and centered */}
-  <div className="w-full flex justify-center gap-4 mt-1">
+  <div className="w-full flex flex-col sm:flex-row justify-center gap-4 mt-1">
     <motion.a
       href="./assets/CONFERENCE.pdf"
       download
       target="_blank"
       rel="noreferrer"
-      className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+      className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
       variants={buttonVariants}
       initial="initial"
       whileHover="hover"
@@ -317,7 +345,7 @@ export default function ConferencePage() {
 
     <motion.a
       href="#speakers"
-      className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+      className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
       variants={buttonVariants}
       initial="initial"
       whileHover="hover"
@@ -328,7 +356,7 @@ export default function ConferencePage() {
 
     <motion.button
       onClick={handleNavigation}
-      className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+      className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
       variants={buttonVariants}
       initial="initial"
       whileHover="hover"
@@ -338,7 +366,6 @@ export default function ConferencePage() {
     </motion.button>
   </div>
 </motion.div>
-
         </div>
       </Section>
       {/* Countdown */}
