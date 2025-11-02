@@ -5,14 +5,15 @@ import { SunIcon, MoonIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useAppContext } from "../../context/AppContext";
 
 const NAV_ITEMS = [
-  { id: "0", title: "Call for Papers", url: "/call-for-papers" },
-  { id: "1", title: "Registration", url: "/registration" },
-  { id: "2", title: "Committees", url: "/committees" },
-  { id: "3", title: "About Us", url: "/about-us" },
-  { id: "3.5", title: "Important Dates", url: "/important-dates" },
-  { id: "4", title: "Publications", url: "/publications" },
-  { id: "5", title: "Sponsors", url: "/sponsors" },
-  { id: "6", title: "Contact Us", url: "/contact-us" },
+  { id: "0", title: "About Us", url: "/about-us" },
+  { id: "1", title: "Call for Papers", url: "/call-for-papers" },
+  { id: "2", title: "Publications", url: "/publications" },
+  { id: "3", title: "Registration", url: "/registration" },
+  { id: "4", title: "Submission", url: "/submission" },
+  { id: "5", title: "Committees", url: "/committees" },
+  { id: "6", title: "Important Dates", url: "/important-dates" },
+  { id: "7", title: "Sponsors", url: "/sponsors" },
+  { id: "8", title: "Contact Us", url: "/contact-us" },
 ];
 
 export default function Header() {

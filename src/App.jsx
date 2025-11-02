@@ -13,6 +13,8 @@ import CommitteesPage from "./pages/Committees";
 import Registration from "./pages/Registration";
 import ImportantDates from "./pages/ImportantDates";
 import RegistrationForm from "./pages/Submission";
+import SubmissionPage from "./pages/SubmissionPage";
+import Publication from "./pages/Publication";
 
 const Layout = () => (
   <>
@@ -35,7 +37,8 @@ const App = () => {
               <Route path="committees" element={<CommitteesPage />} />
               <Route path="registration" element={<Registration />} />
               <Route path="registration/form" element={<RegistrationForm />} />
-              <Route path="publications" element={<TBDPage />} />
+              <Route path="submission" element={<SubmissionPage />} />
+              <Route path="publications" element={<Publication />} />
               <Route path="sponsors" element={<TBDPage />} />
               <Route path="contact-us" element={<ContactUs />} />
               <Route path="*" element={<Nopage />} />
