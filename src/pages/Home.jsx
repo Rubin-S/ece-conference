@@ -8,8 +8,11 @@ import Heading from "../components/common/Heading";
 import { BackgroundCircles, BottomLine } from "../components/design/Hero";
 import { GradientLight } from "../components/design/Benefits";
 import ClipPath from "../assets/svg/ClipPath";
+
 import nitpy from "../assets/logo/NITPY.png";
 import PDT from "../assets/logo/PolitecnicoDiTorino.svg";
+import springer from "../assets/images/springer.jpg";
+import springerBottom from "../assets/images/springer_bottom.jpg";
 
 import shaobo from "../assets/speakers/shaobo.png";
 import palani from "../assets/speakers/Palani.jpeg";
@@ -181,7 +184,7 @@ export default function ConferencePage() {
       {/* Hero */}
       <Section
         id="hero"
-        className="pt-24 pb-16"
+        className="pb-16"
         crosses
         crossesOffset="lg:translate-y-[5.25rem]"
         customPaddings
@@ -191,7 +194,7 @@ export default function ConferencePage() {
         <BackgroundCircles />
         <div className="container relative px-4 text-center">
           <motion.div
-            className="flex justify-center gap-4 mb-6"
+            className="flex justify-center gap-4 mb-2"
             variants={fadeUp}
             initial="initial"
             animate="animate"
@@ -217,14 +220,14 @@ export default function ConferencePage() {
           </motion.h1>
           <motion.h2
             variants={fadeUp}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-6"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-2"
           >
             Data-Driven Approaches to Dynamical Systems and Computational
             Modeling
           </motion.h2>
           <motion.p
             variants={fadeUp}
-            className="my-6 flex justify-center items-center gap-2 text-primary-600 dark:text-primary-400 text-xl sm:text-2xl font-semibold"
+            className="my-2 flex justify-center items-center gap-2 text-primary-600 dark:text-primary-400 text-xl sm:text-2xl font-semibold"
           >
             <MdLocationPin className="w-6 h-6" />
             <span>
@@ -238,58 +241,104 @@ export default function ConferencePage() {
               May 2026
             </span>
           </motion.p>
-          <motion.div
-            variants={fadeUp}
-            className="bg-white dark:bg-gray-800 border rounded-2xl shadow-xl p-6 sm:p-8 max-w-lg mx-auto mb-6"
-          >
-            <address className="not-italic text-sm sm:text-base">
-              <h3 className="flex justify-center items-center gap-1 text-lg mb-1">
-                <MdLocationPin className="text-primary-600 dark:text-primary-400" />{" "}
-                Conference Venue
-              </h3>
-              <p className="font-medium">
-                National Institute of Technology Puducherry (NITPY)
-              </p>
-              <p>Karaikal, Puducherry, India</p>
-              <p className="italic">
-                (Virtual participation option is available)
-              </p>
-            </address>
-          </motion.div>
-          <div className="flex flex-wrap justify-center gap-4">
-            <motion.a
-              href="./assets/CONFERENCE.pdf"
-              download
-              target="_blank"
-              className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-              variants={buttonVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-            >
-              Download Brochure
-            </motion.a>
-            <motion.a
-              href="#speakers"
-              className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-              variants={buttonVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-            >
-              Keynote Speakers
-            </motion.a>
-            <motion.button
-              onClick={handleNavigation}
-              className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-              variants={buttonVariants}
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-            >
-              Conference Schedule
-            </motion.button>
-          </div>
+<motion.div className="flex flex-col gap-6 mx-auto w-full max-w-7xl px-4">
+  {/* Row: Springer (1.5x) | Venue (1x) */}
+  <div className="flex w-full items-stretch gap-6">
+    {/* Springer (3 parts) */}
+    <motion.div
+      variants={fadeUp}
+      className="flex-[3] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl p-5 sm:p-6 flex flex-col justify-between h-full min-h-[220px]"
+    >
+      <div className="flex items-center gap-4 sm:gap-6">
+        {/* small logos column */}
+        <div className="flex flex-col items-center gap-2 flex-shrink-0">
+          <motion.img
+            src={springer}
+            alt="Springer Logo"
+            className="w-16 sm:w-20 h-auto"
+            whileHover={{ scale: 1.02 }}
+          />
+          <motion.img
+            src={springerBottom}
+            alt="Springer Proceedings"
+            className="w-16 sm:w-20 h-auto"
+            whileHover={{ scale: 1.02 }}
+          />
+        </div>
+
+        {/* description fills remaining space */}
+        <div className="flex-1 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
+          <p>
+            Accepted papers will be published in <p className="text-blue-700 font-semibold">Springer Proceedings in Physics <span className="text-red-700">(Scopus Indexed)</span></p>. At least one author must register and present the paper (virtual or in-person). There is no publication fee; revised papers must use the official template provided by Springer.
+          </p>
+        </div>
+      </div>
+    </motion.div>
+
+    {/* Venue (2 parts) */}
+   <motion.div
+  variants={fadeUp}
+  className="flex-[2] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 
+             rounded-2xl shadow-xl p-5 sm:p-8 flex flex-col justify-center items-center 
+             h-full min-h-[220px] text-center"
+>
+  <address className="not-italic space-y-2">
+    <h3 className="flex justify-center items-center gap-2 text-lg font-semibold text-gray-800 dark:text-gray-100">
+      <MdLocationPin className="text-primary-600 dark:text-primary-400 text-xl" />
+      Conference Venue
+    </h3>
+    <p className="font-medium text-gray-700 dark:text-gray-200">
+      National Institute of Technology Puducherry (NITPY)
+    </p>
+    <p className="text-gray-600 dark:text-gray-400">Karaikal, Puducherry, India</p>
+    <p className="italic text-sm text-gray-500 dark:text-gray-400">
+      (Virtual participation option is available)
+    </p>
+  </address>
+</motion.div>
+
+  </div>
+
+  {/* Buttons - horizontal and centered */}
+  <div className="w-full flex justify-center gap-4 mt-1">
+    <motion.a
+      href="./assets/CONFERENCE.pdf"
+      download
+      target="_blank"
+      rel="noreferrer"
+      className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+      variants={buttonVariants}
+      initial="initial"
+      whileHover="hover"
+      whileTap="tap"
+    >
+      Download Brochure
+    </motion.a>
+
+    <motion.a
+      href="#speakers"
+      className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+      variants={buttonVariants}
+      initial="initial"
+      whileHover="hover"
+      whileTap="tap"
+    >
+      Keynote Speakers
+    </motion.a>
+
+    <motion.button
+      onClick={handleNavigation}
+      className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+      variants={buttonVariants}
+      initial="initial"
+      whileHover="hover"
+      whileTap="tap"
+    >
+      Conference Schedule
+    </motion.button>
+  </div>
+</motion.div>
+
         </div>
       </Section>
       {/* Countdown */}
@@ -365,11 +414,10 @@ export default function ConferencePage() {
           >
             <motion.div
               layout
-              className={`relative ${
-                isOpen
-                  ? "bg-light-pb dark:bg-dark-pb p-8"
-                  : "bg-gradient-blue animate-gradient-shift p-8"
-              } border rounded-2xl`}
+              className={`relative ${isOpen
+                ? "bg-light-pb dark:bg-dark-pb p-8"
+                : "bg-gradient-blue animate-gradient-shift p-8"
+                } border rounded-2xl`}
             >
               {isOpen && (
                 <button
