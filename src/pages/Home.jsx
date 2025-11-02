@@ -3,17 +3,17 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
 import { MdLocationPin } from "react-icons/md";
+
+// --- Component Imports (Update paths as needed) ---
 import Section from "../components/common/Section";
 import Heading from "../components/common/Heading";
 import { BackgroundCircles, BottomLine } from "../components/design/Hero";
-import { GradientLight } from "../components/design/Benefits";
-import ClipPath from "../assets/svg/ClipPath";
 
+// --- Asset Imports (Update paths as needed) ---
 import nitpy from "../assets/logo/NITPY.png";
 import PDT from "../assets/logo/PolitecnicoDiTorino.svg";
 import springer from "../assets/images/springer.jpg";
 import springerBottom from "../assets/images/springer_bottom.jpg";
-
 import shaobo from "../assets/speakers/shaobo.png";
 import palani from "../assets/speakers/Palani.jpeg";
 import lamberto from "../assets/speakers/Lamberto-Rondoni.jpg";
@@ -21,14 +21,101 @@ import edwin from "../assets/speakers/Edwin.jpg";
 import mertono from "../assets/speakers/mertono.png";
 import Aninda from "../assets/speakers/aninda.jpg";
 
+// --- Animation Variants ---
+// Stagger container for the Hero
+const staggerContainer = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: 0.1, // Controls the delay between each child animating in
+    },
+  },
+};
 
+const fadeUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" } },
+};
+const buttonVariants = {
+  initial: { scale: 1 },
+  hover: { scale: 1.05 },
+  tap: { scale: 0.97 },
+};
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: (i) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.1 },
+  }),
+};
+const detailFade = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+// --- Speaker Data ---
+const speakers = [
+  {
+    id: 1,
+    name: "Dr. Shaobo He",
+    college:
+      "Professor, School of Automation and Electronic Information, Xiangtan University",
+    title: "Discrete memristive spiking neural network.",
+    description: "Full bio and abstract for Dr. Shaobo He coming soon.",
+    image: shaobo,
+  },
+  {
+    id: 2,
+    name: "Dr. Palaniappan Ramu",
+    college: "Professor, Department of Engineering Design, IIT Madras",
+    title: "Data Visualization for multi criteria decision making",
+    description: "Full bio and abstract for Dr. Palaniappan Ramu coming soon.",
+    image: palani,
+  },
+  {
+    id: 3,
+    name: "Dr. Lamberto Rondoni",
+    college: "Professor, DISMA, Politecnico di Torino",
+    title: "Data Driven Approaches...",
+    description: "Full bio and abstract for Dr. Lamberto Rondoni coming soon.",
+    image: lamberto,
+  },
+  {
+    id: 4,
+    name: "Dr. Edwin Geo Varuvel",
+    college: "Professor, Dept. Mechanical Engineering, Istinye University",
+    title: "TBD",
+    description: "Full bio and abstract for Dr. Edwin Geo Varuvel coming soon.",
+    image: edwin,
+  },
+  {
+    id: 5,
+    name: "Dr. R. Merino Martinez",
+    college:
+      "Professor, Dept. Aeroacoustics and aircraft noise, Technische Universiteit Delft",
+    title: "TBD",
+    description: "Full bio and abstract for Dr. R. Merino Martinez coming soon.",
+    image: mertono,
+  },
+  {
+    id: 6,
+    name: "Aninda Bhattacharya",
+    college: "Product Director - Data Science at ABB",
+    title: "TBD",
+    description: "Full bio and abstract for Aninda Bhattacharya coming soon.",
+    image: Aninda,
+  },
+];
+
+// --- Co-located Countdown Component ---
 const flipVariants = {
   initial: { rotateX: 0 },
   flip: { transition: { duration: 0.6, ease: "easeInOut" } },
 };
 
-export function Countdown({ targetDate }) {
-  const calculateTimeLeft = () => {
+function Countdown({ targetDate }) {
+  const calculateTimeLeft = useCallback(() => {
     const diff = +new Date(targetDate) - +new Date();
     if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
     return {
@@ -37,22 +124,26 @@ export function Countdown({ targetDate }) {
       minutes: Math.floor((diff / (1000 * 60)) % 60),
       seconds: Math.floor((diff / 1000) % 60),
     };
-  };
+  }, [targetDate]);
+
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
   const [flipKey, setFlipKey] = useState(0);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
       setFlipKey((k) => k + 1);
     }, 1000);
     return () => clearInterval(timer);
-  }, [targetDate]);
+  }, [calculateTimeLeft]);
+
   const timeUnits = [
     { label: "days", value: timeLeft.days },
     { label: "hours", value: timeLeft.hours },
     { label: "min", value: timeLeft.minutes },
     { label: "sec", value: timeLeft.seconds },
   ];
+
   return (
     <div className="flex items-center justify-center px-4">
       <section
@@ -88,103 +179,233 @@ export function Countdown({ targetDate }) {
   );
 }
 
-const speakers = [
-  {
-    id: 1,
-    name: "Dr. Shaobo He",
-    college:
-      "Professor, School of Automation and Electronic Information, Xiangtan University",
-    title: "Discrete memristive spiking neural network.",
-    description: "",
-    image: shaobo,
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 2,
-    name: "Dr. Palaniappan Ramu",
-    college: "Professor, Department of Engineering Design, IIT Madras",
-    title: "Data Visualization for multi criteria decision making",
-    description: "",
-    image: palani,
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 3,
-    name: "Dr. Lamberto Rondoni",
-    college: "Professor, DISMA, Politecnico di Torino",
-    title: "Data Driven Approaches...",
-    description: "",
-    image: lamberto,
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 4,
-    name: "Dr. Edwin Geo Varuvel",
-    college: "Professor, Dept. Mechanical Engineering, Istinye University",
-    title: "TBD",
-    description: "",
-    image: edwin,
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 5,
-    name: "Dr. R. Merino Martinez",
-    college: "Professor, Dept. Aeroacoustics and aircraft noise, Technische Universiteit Delft",
-    title: "TBD",
-    description: "",
-    image: mertono,
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-  {
-    id: 6,
-    name: "Aninda Bhattacharya",
-    college: "Product Director - Data Science at ABB",
-    title: "TBD",
-    description: "",
-    image: Aninda,
-    backgroundUrl: "https://via.placeholder.com/600x400",
-  },
-];
+// --- Co-located InfoSection Component ---
+function InfoSection({
+  fadeUp,
+  buttonVariants,
+  handleNavigation,
+  className = "",
+}) {
+  return (
+    <motion.div
+      className={`flex flex-col gap-6 mx-auto w-full max-w-7xl px-4 ${className}`}
+      variants={fadeUp} // This whole block will fade up as part of the stagger
+    >
+      {/* Row: Springer (1.5x) | Venue (1x) */}
+      <div className="flex flex-col lg:flex-row w-full items-stretch gap-6">
+        {/* Springer (3 parts) */}
+        <div className="flex-[3] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl p-5 sm:p-6 flex flex-col justify-center h-full min-h-[220px]">
+          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6">
+            {/* small logos column */}
+            <div className="flex flex-col items-center gap-2 flex-shrink-0">
+              <motion.img
+                src={springer}
+                alt="Springer Logo"
+                className="w-11/12 sm:w-20 h-auto"
+                whileHover={{ scale: 1.02 }}
+              />
+              <motion.img
+                src={springerBottom}
+                alt="Springer Proceedings"
+                className="w-11/12 sm:w-20 h-auto"
+                whileHover={{ scale: 1.02 }}
+              />
+            </div>
+            {/* description */}
+            <div className="flex-1 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed text-center sm:text-left">
+              <p>
+                Accepted papers will be published in{" "}
+                <strong className="text-blue-700 font-semibold">
+                  Springer Proceedings in Physics{" "}
+                  <span className="text-red-700">(Scopus Indexed)</span>
+                </strong>
+                . At least one author must register and present the paper
+                (virtual or in-person). There is no publication fee; revised
+                papers must use the official template provided by Springer.
+              </p>
+            </div>
+          </div>
+        </div>
 
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-};
-const buttonVariants = {
-  initial: { scale: 1 },
-  hover: { scale: 1.05 },
-  tap: { scale: 0.97 },
-};
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  show: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.1 },
-  }),
-};
-const detailFade = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+        {/* Venue (2 parts) */}
+        <div
+          className="flex-[2] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 
+          rounded-2xl shadow-xl p-5 sm:p-8 flex flex-col justify-center items-center 
+          h-full min-h-[220px] text-center"
+        >
+          <address className="not-italic space-y-2">
+            <h3 className="flex justify-center items-center gap-2 text-lg font-semibold text-gray-800 dark:text-gray-100">
+              <MdLocationPin className="text-primary-600 dark:text-primary-400 text-xl" />
+              Conference Venue
+            </h3>
+            <p className="font-medium text-gray-700 dark:text-gray-200">
+              National Institute of Technology Puducherry (NITPY)
+            </p>
+            <p className="text-gray-600 dark:text-gray-400">
+              Karaikal, Puducherry, India
+            </p>
+            <p className="italic text-sm text-gray-500 dark:text-gray-400">
+              (Virtual participation option is available)
+            </p>
+          </address>
+        </div>
+      </div>
 
+      {/* Buttons - horizontal and centered */}
+      <div className="w-full flex flex-col sm:flex-row justify-center gap-4 mt-1">
+        <motion.a
+          href="./assets/CONFERENCE.pdf" // Update this path
+          download
+          target="_blank"
+          rel="noreferrer"
+          className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+          variants={buttonVariants}
+          initial="initial"
+          whileHover="hover"
+          whileTap="tap"
+        >
+          Download Brochure
+        </motion.a>
+        <motion.a
+          href="#speakers"
+          className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+          variants={buttonVariants}
+          initial="initial"
+          whileHover="hover"
+          whileTap="tap"
+        >
+          Keynote Speakers
+        </motion.a>
+        <motion.button
+          onClick={handleNavigation}
+          className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
+          variants={buttonVariants}
+          initial="initial"
+          whileHover="hover"
+          whileTap="tap"
+        >
+          Conference Schedule
+        </motion.button>
+      </div>
+    </motion.div>
+  );
+}
+
+// --- Co-located SpeakerCard Component (Simplified Design) ---
+function SpeakerCard({ speaker, onClick, variants, custom }) {
+  return (
+    <motion.article
+      role="group"
+      aria-labelledby={`speaker-${speaker.id}-name`}
+      className="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg group cursor-pointer"
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.15 }}
+      variants={variants}
+      custom={custom}
+      whileHover={{ scale: 1.02, y: -5 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      onClick={onClick}
+    >
+      <div className="relative z-10 flex flex-col h-full items-center text-center px-6 py-8">
+        <motion.img
+          src={speaker.image}
+          alt={speaker.name}
+          className="w-28 h-28 rounded-full object-cover border-4 border-gray-100 dark:border-gray-800 mb-4 shadow-md group-hover:shadow-xl transition-shadow"
+          whileHover={{ scale: 1.05 }}
+        />
+        <h3
+          id={`speaker-${speaker.id}-name`}
+          className="text-lg font-semibold mb-2"
+        >
+          {speaker.name}
+        </h3>
+        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+          {speaker.college}
+        </p>
+        <div className="text-sm p-3 w-full rounded-lg font-semibold bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+          <strong className="text-gray-700 dark:text-gray-300">
+            Title: {speaker.title}
+          </strong>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+// --- Co-located SpeakerModal Component ---
+function SpeakerModal({ speaker, onClose }) {
+  return (
+    <AnimatePresence>
+      {speaker && (
+        <motion.div
+          className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          <motion.div
+            className="bg-white dark:bg-gray-900 max-w-xl w-full p-6 rounded-2xl shadow-xl relative"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={onClose}
+              className="absolute top-4 right-4 text-2xl font-bold"
+              aria-label="Close speaker details"
+            >
+              &times;
+            </button>
+            <div className="text-center">
+              <img
+                src={speaker.image}
+                alt={speaker.name}
+                className="w-28 h-28 mx-auto rounded-full object-cover border-4 border-gray-100 dark:border-gray-800 mb-4"
+              />
+              <h3 className="text-xl font-semibold mb-2">{speaker.name}</h3>
+              <p className="text-sm font-medium mb-4 text-gray-600 dark:text-gray-400">
+                {speaker.college}
+              </p>
+              <div className="text-sm p-3 m-3 w-full rounded-lg font-semibold bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+                <strong className="text-gray-700 dark:text-gray-300">
+                  Title: {speaker.title}
+                </strong>
+              </div>
+              <p className="text-gray-600 dark:text-gray-300 text-sm whitespace-pre-line max-h-[300px] overflow-y-auto text-left px-2">
+                {speaker.description ||
+                  "Full abstract and biography coming soon."}
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+// --- Main Page Component ---
 export default function ConferencePage() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSpeaker, setSelectedSpeaker] = useState(null);
   const navigate = useNavigate();
-  const stop = useCallback((e) => e.stopPropagation(), []);
-  const handleNavigation = (e) => {
-    stop(e);
-    navigate("/call-for-papers");
+
+  const handleNavigation = useCallback(() => {
+    navigate("/call-for-papers"); // Update this path as needed
     window.scrollTo(0, 0);
-  };
+  }, [navigate]);
 
   return (
     <main>
-      {/* Hero */}
+      {/*
+        SECTION 1: CONSOLIDATED HERO
+        Whitespace: Generous top padding, standard bottom padding.
+        Animation: Staggered children for a guided visual flow.
+      */}
       <Section
-        id="hero"
-        className="pb-16"
+        id="hero"// Tightened bottom padding
         crosses
         crossesOffset="lg:translate-y-[1rem]"
         customPaddings
@@ -192,12 +413,16 @@ export default function ConferencePage() {
         aria-label="Hero section"
       >
         <BackgroundCircles />
-        <div className="container relative px-4 text-center">
+        <motion.div
+          className="container relative px-4 text-center"
+          variants={staggerContainer} // Apply stagger parent
+          initial="initial"
+          animate="animate" // Animate on load
+        >
+          {/* --- Title Block --- */}
           <motion.div
-            className="flex justify-center gap-4 mb-2"
-            variants={fadeUp}
-            initial="initial"
-            animate="animate"
+            className="mb-2 flex justify-center gap-4"
+            variants={fadeUp} // Stagger child 1
           >
             <motion.img
               src={nitpy}
@@ -213,21 +438,21 @@ export default function ConferencePage() {
             />
           </motion.div>
           <motion.h1
-            variants={fadeUp}
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-2"
+            variants={fadeUp} // Stagger child 2
+            className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-3"
           >
             International Conference on
           </motion.h1>
           <motion.h2
-            variants={fadeUp}
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-2"
+            variants={fadeUp} // Stagger child 3
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-4"
           >
             Data-Driven Approaches to Dynamical Systems and Computational
             Modeling
           </motion.h2>
           <motion.p
-            variants={fadeUp}
-            className="my-2 flex justify-center items-center gap-2 text-primary-600 dark:text-primary-400 text-xl sm:text-2xl font-semibold"
+            variants={fadeUp} // Stagger child 4
+            className="flex justify-center items-center gap-2 text-primary-600 dark:text-primary-400 text-xl sm:text-2xl font-semibold"
           >
             <MdLocationPin className="w-6 h-6" />
             <span>
@@ -241,139 +466,32 @@ export default function ConferencePage() {
               May 2026
             </span>
           </motion.p>
-<motion.div className="flex flex-col gap-6 mx-auto w-full max-w-7xl px-4">
-  {/* Row: Springer (1.5x) | Venue (1x) */}
-  <div className="flex flex-col lg:flex-row w-full items-stretch gap-6">
-    {/* Springer (3 parts) */}
-    <motion.div
-      variants={fadeUp}
-      /*
-        CHANGE 1:
-        - 'justify-center' is kept to vertically center the inner content
-          block within the card.
-      */
-      className="flex-[3] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl p-5 sm:p-6 flex flex-col justify-center h-full min-h-[220px]"
-    >
-      {/*
-        CHANGE 2:
-        - Changed 'sm:items-start' to 'sm:items-center'.
-        - This will now vertically center the logos and the text block
-          relative to each other on desktop (sm) views.
-        - 'items-center' (for mobile) remains, to horizontally center
-          the content when it's stacked.
-      */}
-      <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6">
-        {/* small logos column */}
-        <div className="flex flex-col items-center gap-2 flex-shrink-0">
-          <motion.img
-            src={springer}
-            alt="Springer Logo"
-            className="w-11/12 sm:w-20 h-auto"
-            whileHover={{ scale: 1.02 }}
+
+          {/*
+            --- Info/CTA Block ---
+            This is now INSIDE the hero section, separated by a deliberate margin.
+            It will animate in as the last staggered child.
+          */}
+          <InfoSection
+            className="mt-4" // Deliberate margin to prevent clustering
+            fadeUp={fadeUp} // Pass variant to be used as Stagger child 5
+            buttonVariants={buttonVariants}
+            handleNavigation={handleNavigation}
           />
-          <motion.img
-            src={springerBottom}
-            alt="Springer Proceedings"
-            className="w-11/12 sm:w-20 h-auto"
-            whileHover={{ scale: 1.02 }}
-          />
-        </div>
-
-        {/* description fills remaining space */}
-        {/*
-          CHANGE 3:
-          - Changed 'text-center' back to 'text-center sm:text-left'.
-          - This centers the text on mobile (when stacked) but
-            left-aligns it on desktop (when side-by-side),
-            matching your image.
-        */}
-        <div className="flex-1 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed text-center sm:text-left">
-          <p>
-            Accepted papers will be published in{" "}
-            <strong className="text-blue-700 font-semibold">
-              Springer Proceedings in Physics{" "}
-              <span className="text-red-700">(Scopus Indexed)</span>
-            </strong>
-            . At least one author must register and present the paper
-            (virtual or in-person). There is no publication fee; revised
-            papers must use the official template provided by Springer.
-          </p>
-        </div>
-      </div>
-    </motion.div>
-
-    {/* Venue (2 parts) */}
-    <motion.div
-      variants={fadeUp}
-      className="flex-[2] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 
-      rounded-2xl shadow-xl p-5 sm:p-8 flex flex-col justify-center items-center 
-      h-full min-h-[220px] text-center"
-    >
-      <address className="not-italic space-y-2">
-        <h3 className="flex justify-center items-center gap-2 text-lg font-semibold text-gray-800 dark:text-gray-100">
-          <MdLocationPin className="text-primary-600 dark:text-primary-400 text-xl" />
-          Conference Venue
-        </h3>
-        <p className="font-medium text-gray-700 dark:text-gray-200">
-          National Institute of Technology Puducherry (NITPY)
-        </p>
-        <p className="text-gray-600 dark:text-gray-400">
-          Karaikal, Puducherry, India
-        </p>
-        <p className="italic text-sm text-gray-500 dark:text-gray-400">
-          (Virtual participation option is available)
-        </p>
-      </address>
-    </motion.div>
-  </div>
-
-  {/* Buttons - horizontal and centered */}
-  <div className="w-full flex flex-col sm:flex-row justify-center gap-4 mt-1">
-    <motion.a
-      href="./assets/CONFERENCE.pdf"
-      download
-      target="_blank"
-      rel="noreferrer"
-      className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-      variants={buttonVariants}
-      initial="initial"
-      whileHover="hover"
-      whileTap="tap"
-    >
-      Download Brochure
-    </motion.a>
-
-    <motion.a
-      href="#speakers"
-      className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-      variants={buttonVariants}
-      initial="initial"
-      whileHover="hover"
-      whileTap="tap"
-    >
-      Keynote Speakers
-    </motion.a>
-
-    <motion.button
-      onClick={handleNavigation}
-      className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-      variants={buttonVariants}
-      initial="initial"
-      whileHover="hover"
-      whileTap="tap"
-    >
-      Conference Schedule
-    </motion.button>
-  </div>
-</motion.div>
-        </div>
+        </motion.div>
       </Section>
-      {/* Countdown */}
-      <Section id="countdown" className="pt-12 pb-16">
+
+      {/* SECTION 2: COUNTDOWN
+          Whitespace: Harmonized to py-16
+      */}
+      <Section id="countdown" className="py-16">
         <Countdown targetDate="2026-05-14T00:00:00" />
       </Section>
-      {/* Organizers */}
-      <Section id="organizers" className="pt-8 pb-20">
+
+      {/* SECTION 3: ORGANIZERS
+          Whitespace: Harmonized to py-16
+      */}
+      <Section id="organizers" className="py-16">
         <motion.div
           className="container px-4 text-center"
           initial="hidden"
@@ -390,7 +508,6 @@ export default function ConferencePage() {
           <div className="grid gap-10 sm:grid-cols-2 max-w-4xl mx-auto">
             <motion.div
               variants={detailFade}
-              custom={1}
               className="bg-white dark:bg-gray-900 rounded-2xl shadow-md dark:shadow-xl p-6"
             >
               <h3 className="text-lg font-semibold text-primary-600 dark:text-primary-400 mb-3">
@@ -408,7 +525,6 @@ export default function ConferencePage() {
             </motion.div>
             <motion.div
               variants={detailFade}
-              custom={2}
               className="bg-white dark:bg-gray-900 rounded-2xl shadow-md dark:shadow-xl p-6"
             >
               <h3 className="text-lg font-semibold text-primary-600 dark:text-primary-400 mb-3">
@@ -427,43 +543,61 @@ export default function ConferencePage() {
           </div>
         </motion.div>
       </Section>
-      {/* Overview */}
-      <Section id="overview" className="py-24">
+
+      {/* SECTION 4: OVERVIEW
+          Whitespace: Harmonized to py-16
+      */}
+      <Section id="overview" className="py-16">
         <LayoutGroup>
           <motion.div
             layoutId="overviewCard"
             onClick={() => setIsOpen(!isOpen)}
-            className={
-              isOpen
-                ? "fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-700/80"
-                : "relative max-w-3xl mx-auto z-20"
-            }
+            className="relative max-w-3xl mx-auto z-20 cursor-pointer"
           >
             <motion.div
               layout
-              className={`relative ${isOpen
-                ? "bg-light-pb dark:bg-dark-pb p-8"
-                : "bg-gradient-blue animate-gradient-shift p-8"
-                } border rounded-2xl`}
+              className="bg-gradient-blue animate-gradient-shift p-8 border rounded-2xl"
             >
-              {isOpen && (
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="absolute top-4 right-4 text-2xl"
-                  aria-label="Close overview"
-                >
-                  &times;
-                </button>
-              )}
               <h3 className="text-xl font-bold mb-4">Conference Overview</h3>
               <p className="mb-4">
                 The International Conference on Data-Driven Approaches to
                 Dynamical Systems and Computational Modeling brings together
-                researchers from across the globe to explore cutting-edge
-                topics.
+                researchers from across the globe...
               </p>
-              {isOpen && (
-                <>
+              <p className="font-semibold text-primary-300">Click to read more</p>
+            </motion.div>
+          </motion.div>
+
+          <AnimatePresence>
+            {isOpen && (
+              <motion.div
+                className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-700/80"
+                onClick={() => setIsOpen(false)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <motion.div
+                  layoutId="overviewCard"
+                  className="relative bg-white dark:bg-gray-900 p-8 rounded-2xl max-w-3xl w-full"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="absolute top-4 right-4 text-2xl"
+                    aria-label="Close overview"
+                  >
+                    &times;
+                  </button>
+                  <h3 className="text-xl font-bold mb-4">
+                    Conference Overview
+                  </h3>
+                  <p className="mb-4">
+                    The International Conference on Data-Driven Approaches to
+                    Dynamical Systems and Computational Modeling brings
+                    together researchers from across the globe to explore
+                    cutting-edge topics.
+                  </p>
                   <p className="mb-4">
                     From high-resolution simulations and machine
                     learning–augmented strategies to uncertainty quantification
@@ -478,14 +612,17 @@ export default function ConferencePage() {
                   >
                     Conference Schedule
                   </motion.button>
-                </>
-              )}
-            </motion.div>
-          </motion.div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </LayoutGroup>
       </Section>
-      {/* Speakers */}
-      <Section id="speakers" className="py-32">
+
+      {/* SECTION 5: SPEAKERS
+          Whitespace: Harmonized to py-16
+      */}
+      <Section id="speakers" className="py-16">
         <div className="container px-4">
           <Heading
             title="Keynote Speakers"
@@ -493,103 +630,24 @@ export default function ConferencePage() {
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {speakers.map((spk, i) => (
-              <motion.article
+              <SpeakerCard
                 key={spk.id}
-                role="group"
-                aria-labelledby={`speaker-${spk.id}-name`}
-                className="relative overflow-hidden rounded-2xl border bg-no-repeat bg-cover p-0.5 group cursor-pointer"
-                style={{ backgroundImage: `url(${spk.backgroundUrl})` }}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.15 }}
+                speaker={spk}
+                onClick={() => setSelectedSpeaker(spk)}
                 variants={cardVariants}
                 custom={i}
-                whileHover={{ scale: 1.015 }}
-                transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                onClick={() => setSelectedSpeaker(spk)}
-              >
-                <GradientLight />
-                <div
-                  className="absolute inset-0"
-                  style={{ clipPath: "url(#benefits)" }}
-                />
-                <ClipPath />
-                <div className="relative z-10 flex flex-col h-full items-center text-center px-6 py-8 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm rounded-2xl">
-                  <motion.img
-                    src={spk.image}
-                    alt={spk.name}
-                    className="w-28 h-28 rounded-full object-cover border-4 mb-4 shadow-md group-hover:shadow-xl"
-                    whileHover={{ scale: 1.05 }}
-                  />
-                  <h3
-                    id={`speaker-${spk.id}-name`}
-                    className="text-lg font-semibold mb-2"
-                  >
-                    {spk.name}
-                  </h3>
-                  <p className="mb-1">{spk.college}</p>
-                  <p className="text-sm p-0.5 m-1 w-full rounded-full font-semibold bg-gradient-neon">
-                    <strong className="p-3 bg-white min-h-18 flex rounded-full justify-center items-center dark:bg-gray-900">
-                      Title: {spk.title}
-                    </strong>
-                  </p>
-                  <p className="text-sm text-gray-500 line-clamp-3">
-                    {spk.description}
-                  </p>
-                </div>
-              </motion.article>
+              />
             ))}
           </div>
         </div>
-        <AnimatePresence>
-          {selectedSpeaker && (
-            <motion.div
-              className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedSpeaker(null)}
-            >
-              <motion.div
-                className="bg-white dark:bg-gray-900 max-w-xl w-full p-6 rounded-2xl shadow-xl relative"
-                initial={{ scale: 0.8, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  onClick={() => setSelectedSpeaker(null)}
-                  className="absolute top-4 right-4 text-xl font-bold"
-                  aria-label="Close speaker details"
-                >
-                  &times;
-                </button>
-                <div className="text-center">
-                  <img
-                    src={selectedSpeaker.image}
-                    alt={selectedSpeaker.name}
-                    className="w-28 h-28 mx-auto rounded-full object-cover border-4 mb-4"
-                  />
-                  <h3 className="text-xl font-semibold mb-2">
-                    {selectedSpeaker.name}
-                  </h3>
-                  <p className="text-sm font-medium mb-2">
-                    {selectedSpeaker.college}
-                  </p>
-                  <p className="text-sm p-0.5 m-3 w-full rounded-full font-semibold bg-gradient-neon">
-                    <strong className="p-3 bg-white min-h-18 flex rounded-full justify-center items-center dark:bg-gray-900">
-                      Title: {selectedSpeaker.title}
-                    </strong>
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm whitespace-pre-line max-h-[300px] overflow-y-auto">
-                    {selectedSpeaker.description}
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </Section>
+
+      {/* Modal is now a separate component call */}
+      <SpeakerModal
+        speaker={selectedSpeaker}
+        onClose={() => setSelectedSpeaker(null)}
+      />
+
       <BottomLine />
     </main>
   );
