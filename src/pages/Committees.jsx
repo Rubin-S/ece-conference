@@ -35,6 +35,16 @@ const committees = [
       },
     ],
   },
+    {
+    role: "Publishing Secretaries",
+    members: [
+      { name: "Dr. Praveen R", affiliation: "NIT puducherry" },
+      {
+        name: "Dr. Vani V",
+        affiliation: "NIT puducherry",
+      },
+    ],
+  },
   {
     role: "International and National Advisory Board",
     members: [

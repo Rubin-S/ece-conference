@@ -493,7 +493,7 @@ export default function ConferencePage() {
       */}
       <Section id="organizers" className="py-16">
         <motion.div
-          className="container px-4 text-center"
+          className="container px-4 text-center "
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
@@ -518,8 +518,7 @@ export default function ConferencePage() {
                   <strong>Dr. Naveen Raj R</strong> – NIT Puducherry
                 </li>
                 <li>
-                  <strong>Dr. Santo Banerjee</strong> – Managing Editor, EPJ
-                  Plus & Politecnico di Torino
+                  <strong>Dr. Santo Banerjee</strong> – Politecnico di Torino, Italy
                 </li>
               </ul>
             </motion.div>
@@ -537,6 +536,22 @@ export default function ConferencePage() {
                 <li>
                   <strong>Dr. Lamberto Rondoni</strong> – Politecnico di Torino,
                   Italy
+                </li>
+              </ul>
+            </motion.div>
+                        <motion.div
+              variants={detailFade}
+              className="bg-white dark:bg-gray-900 rounded-2xl shadow-md dark:shadow-xl p-6"
+            >
+              <h3 className="text-lg font-semibold text-primary-600 dark:text-primary-400 mb-3">
+                Publishing Secretaries
+              </h3>
+              <ul className="space-y-2 text-left text-sm">
+                <li>
+                  <strong>Dr. Praveen R</strong> – NIT Puducherry
+                </li>
+                <li>
+                  <strong>Dr. Vani V</strong> – NIT Puducherry
                 </li>
               </ul>
             </motion.div>
