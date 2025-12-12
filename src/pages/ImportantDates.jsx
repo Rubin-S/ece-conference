@@ -9,22 +9,22 @@ const IMPORTANT_DATES = [
   },
   {
     title: "Abstract Submission Deadline",
-    date: "15 January 2026",
+    date: "30 January 2026",
     desc: "Deadline to submit abstracts for review.",
   },
   {
     title: "Paper Submission Deadline",
-    date: "31 January 2026",
+    date: "15 February 2026",
     desc: "Final date to submit full papers in IEEE format. No extensions allowed.",
   },
   {
     title: "Notification of Acceptance",
-    date: "15 February 2026",
+    date: "30 March 2026",
     desc: "Authors will be informed of acceptance or rejection decisions.",
   },
   {
     title: "Camera-Ready Paper Due",
-    date: "31 March 2026",
+    date: "15 April 2026",
     desc: "Final versions of accepted papers due for proceedings.",
   },
   {
@@ -81,17 +81,15 @@ export default function ImportantDates() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeSlide}
-            className={`relative flex flex-col sm:flex-row items-center sm:justify-between mb-16 ${
-              i % 2 === 0 ? "sm:flex-row-reverse" : ""
-            }`}
+            className={`relative flex flex-col sm:flex-row items-center sm:justify-between mb-16 ${i % 2 === 0 ? "sm:flex-row-reverse" : ""
+              }`}
           >
             {/* Content Box */}
             <div
-              className={`w-full sm:w-[46%] bg-white/70 dark:bg-gray-800/60 backdrop-blur-md border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.02] hover:shadow-xl duration-300 ${
-                i % 2 === 0
+              className={`w-full sm:w-[46%] bg-white/70 dark:bg-gray-800/60 backdrop-blur-md border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.02] hover:shadow-xl duration-300 ${i % 2 === 0
                   ? "sm:text-left text-center"
                   : "sm:text-right text-center"
-              }`}
+                }`}
             >
               <h3 className="text-2xl font-semibold text-indigo-700 dark:text-indigo-300">
                 {event.title}
