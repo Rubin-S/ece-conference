@@ -61,19 +61,19 @@ const DATES = [
   },
   {
     title: "Abstract Submission Deadline",
-    date: "30 September 2025",
+    date: "15 February 2026",
   },
   {
     title: "Paper Submission Deadline",
-    date: "15 December 2025",
+    date: "28 February 2026",
   },
   {
     title: "Notification of Acceptance",
-    date: "31 January 2026",
+    date: "30 March 2026",
   },
   {
     title: "Camera‑Ready Paper Due",
-    date: "28 February 2026",
+    date: "15 April 2026",
   },
   {
     title: "Early Bird Registration Deadline",

@@ -9,12 +9,12 @@ const IMPORTANT_DATES = [
   },
   {
     title: "Abstract Submission Deadline",
-    date: "30 January 2026",
+    date: "15 February 2026",
     desc: "Deadline to submit abstracts for review.",
   },
   {
     title: "Paper Submission Deadline",
-    date: "15 February 2026",
+    date: "28 February 2026",
     desc: "Final date to submit full papers in IEEE format. No extensions allowed.",
   },
   {
