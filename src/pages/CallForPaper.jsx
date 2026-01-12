@@ -368,7 +368,7 @@ export default function CallForPapers() {
         </div>
 
         {/* Important Dates */}
-        <section aria-labelledby="dates-heading" className="space-y-6">
+        {/*<section aria-labelledby="dates-heading" className="space-y-6">
           <h3
             id="dates-heading"
             className="h3 text-center text-light-pt dark:text-dark-pt"
@@ -376,7 +376,7 @@ export default function CallForPapers() {
             Important Dates
           </h3>
           <Timeline />
-        </section>
+        </section>*/}
 
         {/* Call To Action */}
         <CTA />
