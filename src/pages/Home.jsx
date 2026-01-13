@@ -386,6 +386,46 @@ function SpeakerModal({ speaker, onClose }) {
   );
 }
 
+// --- Co-located AnnouncementBar Component ---
+function AnnouncementBar() {
+  // Update your dates here
+  const announcements = [
+    "📅 Abstract Submission Deadline: March 15, 2026",
+    "📝 Notification of Acceptance: April 10, 2026",
+    "📄 Full Paper Submission: April 25, 2026",
+    "📢 Registration Opens: February 20, 2026"
+  ];
+
+  return (
+    <div className="relative overflow-hidden bg-yellow-50 dark:bg-yellow-900 border-b border-yellow-400 dark:border-yellow-600 backdrop-blur-sm z-30">
+      <div className="flex max-w-[100vw]">
+        <motion.div
+          className="flex gap-16 py-3 whitespace-nowrap pr-16"
+          // We animate x from 0% to -50% to create a seamless loop
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            repeat: Infinity,
+            ease: "linear",
+            duration: 30, // Adjust speed here (higher = slower)
+          }}
+        >
+          {/* Render the items twice to ensure seamless looping */}
+          {[...announcements, ...announcements].map((item, index) => (
+            <span
+              key={index}
+              className="text-sm font-semibold tracking-wide text-yellow-800 dark:text-yellow-100 flex items-center gap-2"
+            >
+              {item}
+              {/* Separator dot */}
+              <span className="w-1.5 h-1.5 rounded-full bg-yellow-600 dark:bg-yellow-400 ml-16" />
+            </span>
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
 // --- Main Page Component ---
 export default function ConferencePage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -398,7 +438,10 @@ export default function ConferencePage() {
   }, [navigate]);
 
   return (
-    <main>
+    <main className="relative">
+
+      <AnnouncementBar />
+
       {/*
         SECTION 1: CONSOLIDATED HERO
         Whitespace: Generous top padding, standard bottom padding.
