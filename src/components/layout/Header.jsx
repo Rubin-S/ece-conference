@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { SunIcon, MoonIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import { useAppContext } from "../../context/AppContext";
+import { motion } from "framer-motion";
 
 const NAV_ITEMS = [
   { id: "0", title: "About Us", url: "/about-us" },
@@ -16,18 +17,54 @@ const NAV_ITEMS = [
   { id: "8", title: "Contact Us", url: "/contact-us" },
 ];
 
+function AnnouncementBar() {
+  const announcements = [
+    "📅 Abstract Submission Deadline: February 15, 2026",
+    "📝 Notification of Acceptance: March 30, 2026",
+    "📄 Full Paper Submission: February 28, 2026",
+  ];
+
+  return (
+    <div className="relative overflow-hidden bg-yellow-50 dark:bg-yellow-900 border-b border-yellow-400 dark:border-yellow-600 backdrop-blur-sm z-30">
+      <div className="flex max-w-[100vw]">
+        <motion.div
+          className="flex gap-16 py-1 whitespace-nowrap pr-16"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{
+            repeat: Infinity,
+            ease: "linear",
+            duration: 30,
+          }}
+        >
+          {[...announcements, ...announcements].map((item, index) => (
+            <span
+              key={index}
+              className="text-sm font-semibold tracking-wide text-yellow-800 dark:text-yellow-100 flex items-center gap-2"
+            >
+              {item}
+              <span className="w-1.5 h-1.5 rounded-full bg-yellow-600 dark:bg-yellow-400 ml-16" />
+            </span>
+          ))}
+        </motion.div>
+      </div>
+    </div>
+  );
+}
+
 export default function Header() {
   const { theme, toggleTheme } = useAppContext();
   const [mobileOpen, setMobileOpen] = useState(false);
   const firstLinkRef = useRef(null);
 
-  // Lock scroll when mobile menu is open
   useEffect(() => {
-    mobileOpen ? disablePageScroll() : enablePageScroll();
+    if (mobileOpen) {
+      disablePageScroll();
+    } else {
+      enablePageScroll();
+    }
     return () => enablePageScroll();
   }, [mobileOpen]);
 
-  // Close on Escape key
   useEffect(() => {
     const onKey = (e) => {
       if (e.key === "Escape" && mobileOpen) {
@@ -38,7 +75,6 @@ export default function Header() {
     return () => document.removeEventListener("keydown", onKey);
   }, [mobileOpen]);
 
-  // Focus first link when menu opens
   useEffect(() => {
     if (mobileOpen && firstLinkRef.current) {
       firstLinkRef.current.focus();
@@ -47,16 +83,8 @@ export default function Header() {
 
   return (
     <>
-      <header
-        className="
-    fixed inset-x-0 top-0 z-50
-    bg-light-sb/70 dark:bg-dark-sb/70 backdrop-blur-sm
-    border-b border-light-divider/50 dark:border-dark-divider/50
-    w-full
-  "
-      >
+      <header className="fixed inset-x-0 top-0 z-50 bg-light-sb/70 dark:bg-dark-sb/70 backdrop-blur-sm border-b border-light-divider/50 dark:border-dark-divider/50 w-full">
         <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-2">
-          {/* Logo */}
           <NavLink
             to="/"
             className="font-grotesk font-bold text-[10px] sm:text-sm md:text-base text-light-pt dark:text-dark-pt whitespace-nowrap"
@@ -64,7 +92,6 @@ export default function Header() {
             IC3DCM
           </NavLink>
 
-          {/* Desktop Nav */}
           <nav className="hidden lg:flex flex-1 justify-center overflow-x-auto no-scrollbar">
             <div className="flex space-x-1 sm:space-x-2">
               {NAV_ITEMS.map(({ id, title, url }) => (
@@ -88,19 +115,11 @@ export default function Header() {
             </div>
           </nav>
 
-          {/* Controls */}
           <div className="flex items-center space-x-1 sm:space-x-2">
-            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
               aria-label="Toggle Theme"
-              className="
-          p-1.5 rounded-full
-          bg-light-altBg/50 dark:bg-dark-altBg/50
-          backdrop-blur-sm
-          border border-light-divider/40 dark:border-dark-divider/40
-          transition hover:scale-105
-        "
+              className="p-1.5 rounded-full bg-light-altBg/50 dark:bg-dark-altBg/50 backdrop-blur-sm border border-light-divider/40 dark:border-dark-divider/40 transition hover:scale-105"
             >
               {theme === "light" ? (
                 <MoonIcon className="h-3 w-3 text-neon-blue" />
@@ -109,19 +128,12 @@ export default function Header() {
               )}
             </button>
 
-            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileOpen((o) => !o)}
               aria-label="Toggle Menu"
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
-              className="
-          lg:hidden p-1.5 rounded-md
-          bg-light-altBg/50 dark:bg-dark-altBg/50
-          backdrop-blur-sm
-          border border-light-divider/40 dark:border-dark-divider/40
-          transition hover:scale-105
-        "
+              className="lg:hidden p-1.5 rounded-md bg-light-altBg/50 dark:bg-dark-altBg/50 backdrop-blur-sm border border-light-divider/40 dark:border-dark-divider/40 transition hover:scale-105"
             >
               {mobileOpen ? (
                 <XIcon className="h-4 w-4 text-light-pt dark:text-dark-pt" />
@@ -131,21 +143,17 @@ export default function Header() {
             </button>
           </div>
         </div>
+        <AnnouncementBar />
       </header>
 
-      {/* Mobile Nav Panel */}
+
       <nav
         id="mobile-menu"
-        className={`
-    lg:hidden fixed inset-0 z-40
-    bg-light-sb/90 dark:bg-dark-sb/90 backdrop-blur-sm
-    transform transition-transform duration-300 ease-in-out
-    ${
-      mobileOpen
-        ? "translate-y-0 opacity-100"
-        : "-translate-y-full opacity-0 pointer-events-none"
-    }
-  `}
+        className={`lg:hidden fixed inset-0 z-40 bg-light-sb/90 dark:bg-dark-sb/90 backdrop-blur-sm transform transition-transform duration-300 ease-in-out ${
+          mobileOpen
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-full opacity-0 pointer-events-none"
+        }`}
       >
         <div className="flex flex-col items-center justify-center h-full space-y-3 px-4">
           {NAV_ITEMS.map(({ id, title, url }, idx) => (
@@ -170,6 +178,7 @@ export default function Header() {
           ))}
         </div>
       </nav>
+
     </>
   );
 }
