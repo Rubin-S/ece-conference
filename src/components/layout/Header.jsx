@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
-import { SunIcon, MoonIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { SunIcon, MoonIcon, MenuIcon, XIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { useAppContext } from "../../context/AppContext";
 import { motion } from "framer-motion";
 
@@ -47,6 +47,98 @@ function AnnouncementBar() {
           ))}
         </motion.div>
       </div>
+    </div>
+  );
+}
+
+function TemplatesDropdown() {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  return (
+    <div className="relative inline-block text-left" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={[
+          "flex items-center gap-1 rounded-md border-x-0.5 shadow-sm shadow-gray transition-all duration-200 font-code uppercase tracking-wider",
+          "text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm px-2 py-1 whitespace-nowrap",
+          isOpen
+            ? "text-light-pt dark:text-dark-pt bg-light-pa/50 dark:bg-dark-pa dark:bg-opacity-20"
+            : "text-light-pt/60 dark:text-dark-pt/60 hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20"
+        ].join(" ")}
+      >
+        Templates
+        <ChevronDownIcon className={`h-3 w-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-light-sb/95 dark:bg-dark-sb/95 backdrop-blur-md shadow-elevated border border-light-divider/50 dark:border-dark-divider/50 focus:outline-none z-50 overflow-hidden">
+          <div className="py-1">
+            <a
+              href="/assets/LaTeX_Template.zip"
+              download="LaTeX_Template.zip"
+              className="block px-4 py-2 text-sm text-light-st dark:text-dark-st hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20 hover:text-light-pt dark:hover:text-dark-pt transition-colors font-sans"
+            >
+              LaTeX Template
+            </a>
+            <a
+              href="/assets/Microsoft_Word_Proceedings_Templates.zip"
+              download="Microsoft_Word_Proceedings_Templates.zip"
+              className="block px-4 py-2 text-sm text-light-st dark:text-dark-st hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20 hover:text-light-pt dark:hover:text-dark-pt transition-colors font-sans"
+            >
+              MS Word Template
+            </a>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MobileTemplates() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div className="flex flex-col items-center w-full">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={[
+          "rounded-md transition-all duration-200 font-code uppercase tracking-wide",
+          "text-sm sm:text-base w-full py-2",
+          "text-light-pt/60 dark:text-dark-pt/60 hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20 flex items-center justify-center gap-2",
+        ].join(" ")}
+      >
+        Templates
+        <ChevronDownIcon className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+      </button>
+      {isOpen && (
+        <div className="flex flex-col w-full bg-light-altBg/30 dark:bg-dark-altBg/30 rounded-md mt-1 mb-2 py-1">
+          <a
+            href="/assets/LaTeX_Template.zip"
+            download="LaTeX_Template.zip"
+            className="text-sm text-center py-2 text-light-st dark:text-dark-st hover:text-light-pt dark:hover:text-dark-pt transition-colors font-sans"
+          >
+            LaTeX Template
+          </a>
+          <a
+            href="/assets/Microsoft_Word_Proceedings_Templates.zip"
+            download="Microsoft_Word_Proceedings_Templates.zip"
+            className="text-sm text-center py-2 text-light-st dark:text-dark-st hover:text-light-pt dark:hover:text-dark-pt transition-colors font-sans"
+          >
+            MS Word Template
+          </a>
+        </div>
+      )}
     </div>
   );
 }
@@ -116,6 +208,10 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center space-x-1 sm:space-x-2">
+            <div className="hidden lg:block">
+              <TemplatesDropdown />
+            </div>
+
             <button
               onClick={toggleTheme}
               aria-label="Toggle Theme"
@@ -149,11 +245,10 @@ export default function Header() {
 
       <nav
         id="mobile-menu"
-        className={`lg:hidden fixed inset-0 z-40 bg-light-sb/90 dark:bg-dark-sb/90 backdrop-blur-sm transform transition-transform duration-300 ease-in-out ${
-          mobileOpen
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-full opacity-0 pointer-events-none"
-        }`}
+        className={`lg:hidden fixed inset-0 z-40 bg-light-sb/90 dark:bg-dark-sb/90 backdrop-blur-sm transform transition-transform duration-300 ease-in-out ${mobileOpen
+          ? "translate-y-0 opacity-100"
+          : "-translate-y-full opacity-0 pointer-events-none"
+          }`}
       >
         <div className="flex flex-col items-center justify-center h-full space-y-3 px-4">
           {NAV_ITEMS.map(({ id, title, url }, idx) => (
@@ -176,6 +271,7 @@ export default function Header() {
               {title}
             </NavLink>
           ))}
+          <MobileTemplates />
         </div>
       </nav>
 

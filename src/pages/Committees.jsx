@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
 
 const committees = [
   {
@@ -161,8 +160,6 @@ const fadeIn = {
 };
 
 export default function Committees() {
-  const { theme } = useTheme();
-
   return (
     <main
       className="min-h-screen bg-gradient-to-tr from-sky-50 via-white to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-100 px-4 sm:px-8 py-20"
@@ -185,7 +182,7 @@ export default function Committees() {
       </motion.header>
 
       <div className="flex flex-col items-center gap-12 max-w-7xl mx-auto">
-        {committees.map((group, groupIndex) => (
+        {committees.map((group) => (
           <div key={group.role} className="w-full">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-primary-700 dark:text-primary-300">
               {group.role}
