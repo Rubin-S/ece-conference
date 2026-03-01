@@ -61,11 +61,11 @@ const DATES = [
   },
   {
     title: "Abstract Submission Deadline",
-    date: "06 March 2026",
+    date: "15 March 2026",
   },
   {
     title: "Paper Submission Deadline",
-    date: "15 March 2026",
+    date: "20 March 2026",
   },
   {
     title: "Notification of Acceptance",

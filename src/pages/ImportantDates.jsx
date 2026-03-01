@@ -9,12 +9,12 @@ const IMPORTANT_DATES = [
   },
   {
     title: "Abstract Submission Deadline",
-    date: "06 March 2026",
+    date: "15 March 2026",
     desc: "Deadline to submit abstracts for review.",
   },
   {
     title: "Paper Submission Deadline",
-    date: "15 March 2026",
+    date: "20 March 2026",
     desc: "Final date to submit full papers in IEEE format. No extensions allowed.",
   },
   {
@@ -87,8 +87,8 @@ export default function ImportantDates() {
             {/* Content Box */}
             <div
               className={`w-full sm:w-[46%] bg-white/70 dark:bg-gray-800/60 backdrop-blur-md border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-md transition-transform hover:scale-[1.02] hover:shadow-xl duration-300 ${i % 2 === 0
-                  ? "sm:text-left text-center"
-                  : "sm:text-right text-center"
+                ? "sm:text-left text-center"
+                : "sm:text-right text-center"
                 }`}
             >
               <h3 className="text-2xl font-semibold text-indigo-700 dark:text-indigo-300">

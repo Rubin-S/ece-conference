@@ -19,9 +19,9 @@ const NAV_ITEMS = [
 
 function AnnouncementBar() {
   const announcements = [
-    "📅 Abstract Submission Deadline: March 6, 2026",
+    "📅 Abstract Submission Deadline: March 15, 2026",
     "📝 Notification of Acceptance: March 30, 2026",
-    "📄 Full Paper Submission: March 15, 2026",
+    "📄 Full Paper Submission: March 20, 2026",
   ];
 
   return (
