@@ -29,6 +29,12 @@ export default function Hero() {
     window.scrollTo(0, 0);
   };
 
+  const handleSubmissionNavigation = (e) => {
+    e.stopPropagation();
+    navigate("/submission");
+    window.scrollTo(0, 0);
+  };
+
   const toggleOpen = () => setIsOpen((o) => !o);
 
   return (
@@ -166,6 +172,44 @@ export default function Hero() {
                 May 2026
               </span>
             </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="mx-auto mt-4 max-w-3xl rounded-2xl border border-amber-300 bg-gradient-to-r from-amber-50 via-white to-amber-100 p-5 text-left shadow-xl dark:border-amber-700 dark:from-amber-900/30 dark:via-dark-sb dark:to-amber-900/20"
+              role="note"
+              aria-label="Full paper submission announcement"
+            >
+              <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-300">
+                    Author Notice
+                  </p>
+                  <h3 className="mt-1 text-lg font-semibold text-light-pt dark:text-dark-pt sm:text-xl">
+                    Full paper submission is now open.
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-light-st dark:text-dark-st sm:text-base">
+                    Authors are requested to proceed with full paper submission
+                    through the official conference submission page.
+                  </p>
+                </div>
+                <motion.button
+                  onClick={(e) => {
+                    stop(e);
+                    handleSubmissionNavigation(e);
+                  }}
+                  className="inline-flex items-center justify-center rounded-lg bg-amber-500 px-5 py-3 text-sm font-semibold text-white shadow-md transition-colors hover:bg-amber-600 dark:bg-amber-400 dark:text-gray-900 dark:hover:bg-amber-300"
+                  variants={buttonVariants}
+                  initial="initial"
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  Submit Full Paper
+                </motion.button>
+              </div>
+            </motion.div>
           </motion.div>
           <div className="flex flex-wrap justify-center gap-4" role="group">
             <motion.a

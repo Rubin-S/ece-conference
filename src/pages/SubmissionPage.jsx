@@ -59,7 +59,7 @@ export default function SubmissionPage() {
           <Heading
             id="submission-heading"
             title="Paper Submission"
-            text="Submit your manuscript directly through the official Springer submission system for IC3DCM."
+            text="Authors can submit full papers directly through the official Springer submission system for IC3DCM."
             className="text-center"
           />
         </motion.div>
@@ -131,6 +131,14 @@ export default function SubmissionPage() {
                 For assistance regarding conference-related queries, authors may
                 contact the organizing team through the official contact page.
               </p>
+              <a
+                href="/assets/HelpGuide.pdf"
+                download
+                className="inline-flex items-center gap-2 rounded-md bg-primary-500 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-500"
+              >
+                Download Submission Help Guide
+                <DocumentTextIcon className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </motion.div>

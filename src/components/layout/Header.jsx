@@ -1,9 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
-import { SunIcon, MoonIcon, MenuIcon, XIcon, ChevronDownIcon } from "@heroicons/react/outline";
+import {
+  SunIcon,
+  MoonIcon,
+  MenuIcon,
+  XIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/outline";
 import { useAppContext } from "../../context/AppContext";
-import { motion } from "framer-motion";
 
 const NAV_ITEMS = [
   { id: "0", title: "About Us", url: "/about-us" },
@@ -16,40 +21,6 @@ const NAV_ITEMS = [
   { id: "7", title: "Sponsors", url: "/sponsors" },
   { id: "8", title: "Contact Us", url: "/contact-us" },
 ];
-
-function AnnouncementBar() {
-  const announcements = [
-    "📅 Abstract Submission Deadline: March 15, 2026",
-    "📝 Notification of Acceptance: March 30, 2026",
-    "📄 Full Paper Submission: March 20, 2026",
-  ];
-
-  return (
-    <div className="relative overflow-hidden bg-yellow-50 dark:bg-yellow-900 border-b border-yellow-400 dark:border-yellow-600 backdrop-blur-sm z-30">
-      <div className="flex max-w-[100vw]">
-        <motion.div
-          className="flex gap-16 py-1 whitespace-nowrap pr-16"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{
-            repeat: Infinity,
-            ease: "linear",
-            duration: 30,
-          }}
-        >
-          {[...announcements, ...announcements].map((item, index) => (
-            <span
-              key={index}
-              className="text-sm font-semibold tracking-wide text-yellow-800 dark:text-yellow-100 flex items-center gap-2"
-            >
-              {item}
-              <span className="w-1.5 h-1.5 rounded-full bg-yellow-600 dark:bg-yellow-400 ml-16" />
-            </span>
-          ))}
-        </motion.div>
-      </div>
-    </div>
-  );
-}
 
 function TemplatesDropdown() {
   const [isOpen, setIsOpen] = useState(false);
@@ -75,27 +46,31 @@ function TemplatesDropdown() {
           "text-[8px] sm:text-[9px] md:text-[10px] lg:text-xs xl:text-sm px-2 py-1 whitespace-nowrap",
           isOpen
             ? "text-light-pt dark:text-dark-pt bg-light-pa/50 dark:bg-dark-pa dark:bg-opacity-20"
-            : "text-light-pt/60 dark:text-dark-pt/60 hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20"
+            : "text-light-pt/60 dark:text-dark-pt/60 hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20",
         ].join(" ")}
       >
         Templates
-        <ChevronDownIcon className={`h-3 w-3 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+        <ChevronDownIcon
+          className={`h-3 w-3 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-light-sb/95 dark:bg-dark-sb/95 backdrop-blur-md shadow-elevated border border-light-divider/50 dark:border-dark-divider/50 focus:outline-none z-50 overflow-hidden">
+        <div className="absolute right-0 mt-2 w-48 origin-top-right overflow-hidden rounded-md border border-light-divider/50 bg-light-sb/95 shadow-elevated backdrop-blur-md focus:outline-none dark:border-dark-divider/50 dark:bg-dark-sb/95 z-50">
           <div className="py-1">
             <a
               href="/assets/LaTeX_Template.zip"
               download="LaTeX_Template.zip"
-              className="block px-4 py-2 text-sm text-light-st dark:text-dark-st hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20 hover:text-light-pt dark:hover:text-dark-pt transition-colors font-sans"
+              className="block px-4 py-2 text-sm text-light-st transition-colors font-sans hover:bg-neon-blue/10 hover:text-light-pt dark:text-dark-st dark:hover:bg-neon-blue/20 dark:hover:text-dark-pt"
             >
               LaTeX Template
             </a>
             <a
               href="/assets/Microsoft_Word_Proceedings_Templates.zip"
               download="Microsoft_Word_Proceedings_Templates.zip"
-              className="block px-4 py-2 text-sm text-light-st dark:text-dark-st hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20 hover:text-light-pt dark:hover:text-dark-pt transition-colors font-sans"
+              className="block px-4 py-2 text-sm text-light-st transition-colors font-sans hover:bg-neon-blue/10 hover:text-light-pt dark:text-dark-st dark:hover:bg-neon-blue/20 dark:hover:text-dark-pt"
             >
               MS Word Template
             </a>
@@ -108,32 +83,37 @@ function TemplatesDropdown() {
 
 function MobileTemplates() {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex w-full flex-col items-center">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={[
           "rounded-md transition-all duration-200 font-code uppercase tracking-wide",
           "text-sm sm:text-base w-full py-2",
-          "text-light-pt/60 dark:text-dark-pt/60 hover:bg-neon-blue/10 dark:hover:bg-neon-blue/20 flex items-center justify-center gap-2",
+          "flex items-center justify-center gap-2 text-light-pt/60 hover:bg-neon-blue/10 dark:text-dark-pt/60 dark:hover:bg-neon-blue/20",
         ].join(" ")}
       >
         Templates
-        <ChevronDownIcon className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
+        <ChevronDownIcon
+          className={`h-4 w-4 transition-transform duration-200 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
       </button>
       {isOpen && (
-        <div className="flex flex-col w-full bg-light-altBg/30 dark:bg-dark-altBg/30 rounded-md mt-1 mb-2 py-1">
+        <div className="mt-1 mb-2 flex w-full flex-col rounded-md bg-light-altBg/30 py-1 dark:bg-dark-altBg/30">
           <a
             href="/assets/LaTeX_Template.zip"
             download="LaTeX_Template.zip"
-            className="text-sm text-center py-2 text-light-st dark:text-dark-st hover:text-light-pt dark:hover:text-dark-pt transition-colors font-sans"
+            className="py-2 text-center text-sm text-light-st transition-colors font-sans hover:text-light-pt dark:text-dark-st dark:hover:text-dark-pt"
           >
             LaTeX Template
           </a>
           <a
             href="/assets/Microsoft_Word_Proceedings_Templates.zip"
             download="Microsoft_Word_Proceedings_Templates.zip"
-            className="text-sm text-center py-2 text-light-st dark:text-dark-st hover:text-light-pt dark:hover:text-dark-pt transition-colors font-sans"
+            className="py-2 text-center text-sm text-light-st transition-colors font-sans hover:text-light-pt dark:text-dark-st dark:hover:text-dark-pt"
           >
             MS Word Template
           </a>
@@ -175,16 +155,16 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 bg-light-sb/70 dark:bg-dark-sb/70 backdrop-blur-sm border-b border-light-divider/50 dark:border-dark-divider/50 w-full">
-        <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 py-2">
+      <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-light-divider/50 bg-light-sb/70 backdrop-blur-sm dark:border-dark-divider/50 dark:bg-dark-sb/70">
+        <div className="mx-auto flex max-w-screen-2xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
           <NavLink
             to="/"
-            className="font-grotesk font-bold text-[10px] sm:text-sm md:text-base text-light-pt dark:text-dark-pt whitespace-nowrap"
+            className="font-grotesk text-[10px] font-bold whitespace-nowrap text-light-pt dark:text-dark-pt sm:text-sm md:text-base"
           >
             IC3DCM
           </NavLink>
 
-          <nav className="hidden lg:flex flex-1 justify-center overflow-x-auto no-scrollbar">
+          <nav className="hidden flex-1 justify-center overflow-x-auto no-scrollbar lg:flex">
             <div className="flex space-x-1 sm:space-x-2">
               {NAV_ITEMS.map(({ id, title, url }) => (
                 <NavLink
@@ -215,7 +195,7 @@ export default function Header() {
             <button
               onClick={toggleTheme}
               aria-label="Toggle Theme"
-              className="p-1.5 rounded-full bg-light-altBg/50 dark:bg-dark-altBg/50 backdrop-blur-sm border border-light-divider/40 dark:border-dark-divider/40 transition hover:scale-105"
+              className="rounded-full border border-light-divider/40 bg-light-altBg/50 p-1.5 transition backdrop-blur-sm hover:scale-105 dark:border-dark-divider/40 dark:bg-dark-altBg/50"
             >
               {theme === "light" ? (
                 <MoonIcon className="h-3 w-3 text-neon-blue" />
@@ -225,11 +205,11 @@ export default function Header() {
             </button>
 
             <button
-              onClick={() => setMobileOpen((o) => !o)}
+              onClick={() => setMobileOpen((open) => !open)}
               aria-label="Toggle Menu"
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
-              className="lg:hidden p-1.5 rounded-md bg-light-altBg/50 dark:bg-dark-altBg/50 backdrop-blur-sm border border-light-divider/40 dark:border-dark-divider/40 transition hover:scale-105"
+              className="rounded-md border border-light-divider/40 bg-light-altBg/50 p-1.5 transition backdrop-blur-sm hover:scale-105 dark:border-dark-divider/40 dark:bg-dark-altBg/50 lg:hidden"
             >
               {mobileOpen ? (
                 <XIcon className="h-4 w-4 text-light-pt dark:text-dark-pt" />
@@ -239,18 +219,17 @@ export default function Header() {
             </button>
           </div>
         </div>
-        <AnnouncementBar />
       </header>
-
 
       <nav
         id="mobile-menu"
-        className={`lg:hidden fixed inset-0 z-40 bg-light-sb/90 dark:bg-dark-sb/90 backdrop-blur-sm transform transition-transform duration-300 ease-in-out ${mobileOpen
-          ? "translate-y-0 opacity-100"
-          : "-translate-y-full opacity-0 pointer-events-none"
-          }`}
+        className={`fixed inset-0 z-40 bg-light-sb/90 backdrop-blur-sm transform transition-transform duration-300 ease-in-out dark:bg-dark-sb/90 lg:hidden ${
+          mobileOpen
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-full pointer-events-none opacity-0"
+        }`}
       >
-        <div className="flex flex-col items-center justify-center h-full space-y-3 px-4">
+        <div className="flex h-full flex-col items-center justify-center space-y-3 px-4">
           {NAV_ITEMS.map(({ id, title, url }, idx) => (
             <NavLink
               key={id}
@@ -274,7 +253,6 @@ export default function Header() {
           <MobileTemplates />
         </div>
       </nav>
-
     </>
   );
 }
