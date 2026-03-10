@@ -25,7 +25,7 @@ const NAV_ITEMS = [
 
 function AnnouncementBar() {
   const announcements = [
-    "Notification of Acceptance: March 30, 2026",
+    "Notification of Acceptance: April 15, 2026",
     "Full Paper Submission: March 20, 2026",
   ];
 
