@@ -492,8 +492,8 @@ export default function ConferencePage() {
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-light-st dark:text-dark-st sm:text-base">
                   Authors are requested to proceed with full paper submission
-                  through the official conference directly. No separate abstract or form submission
-                  is required on this page.
+                  through the official conference directly. No separate abstract submission
+                  is required.
                 </p>
               </div>
               <motion.button
