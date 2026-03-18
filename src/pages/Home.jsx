@@ -1,711 +1,210 @@
-// ConferencePage.jsx
-import { useState, useEffect, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import { motion, LayoutGroup, AnimatePresence } from "framer-motion";
-import { MdLocationPin } from "react-icons/md";
-
-// --- Component Imports (Update paths as needed) ---
+import { memo, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
-import Heading from "../components/common/Heading";
-import { BackgroundCircles, BottomLine } from "../components/design/Hero";
+import { siteContent } from "../content/siteContent";
 
-// --- Asset Imports (Update paths as needed) ---
-import nitpy from "../assets/logo/NITPY.png";
-import PDT from "../assets/logo/PolitecnicoDiTorino.svg";
-import springer from "../assets/images/springer.jpg";
-import springerBottom from "../assets/images/springer_bottom.jpg";
-import shaobo from "../assets/speakers/shaobo.png";
-import palani from "../assets/speakers/Palani.jpeg";
-import lamberto from "../assets/speakers/Lamberto-Rondoni.jpg";
-import edwin from "../assets/speakers/Edwin.jpg";
-import mertono from "../assets/speakers/mertono.png";
-import Aninda from "../assets/speakers/aninda.jpg";
+const CONFERENCE_START = "2026-12-17T00:00:00+05:30";
 
-// --- Animation Variants ---
-// Stagger container for the Hero
-const staggerContainer = {
-  initial: {},
-  animate: {
-    transition: {
-      staggerChildren: 0.1, // Controls the delay between each child animating in
-    },
-  },
-};
+function getCountdownParts(targetDate) {
+  const target = new Date(targetDate).getTime();
+  if (Number.isNaN(target)) {
+    return { days: "--", hours: "--", minutes: "--", seconds: "--" };
+  }
 
-const fadeUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" } },
-};
-const buttonVariants = {
-  initial: { scale: 1 },
-  hover: { scale: 1.05 },
-  tap: { scale: 0.97 },
-};
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  show: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, delay: i * 0.1 },
-  }),
-};
-const detailFade = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+  const diff = Math.max(target - Date.now(), 0);
 
-// --- Speaker Data ---
-const speakers = [
-  {
-    id: 1,
-    name: "Dr. Shaobo He",
-    college:
-      "Professor, School of Automation and Electronic Information, Xiangtan University",
-    title: "Discrete memristive spiking neural network.",
-    description: "Full bio and abstract for Dr. Shaobo He coming soon.",
-    image: shaobo,
-  },
-  {
-    id: 2,
-    name: "Dr. Palaniappan Ramu",
-    college: "Professor, Department of Engineering Design, IIT Madras",
-    title: "Data Visualization for multi criteria decision making",
-    description: "Full bio and abstract for Dr. Palaniappan Ramu coming soon.",
-    image: palani,
-  },
-  {
-    id: 3,
-    name: "Dr. Lamberto Rondoni",
-    college: "Professor, DISMA, Politecnico di Torino",
-    title: "Data Driven Approaches...",
-    description: "Full bio and abstract for Dr. Lamberto Rondoni coming soon.",
-    image: lamberto,
-  },
-  {
-    id: 4,
-    name: "Dr. Edwin Geo Varuvel",
-    college: "Professor, Dept. Mechanical Engineering, Istinye University",
-    title: "TBD",
-    description: "Full bio and abstract for Dr. Edwin Geo Varuvel coming soon.",
-    image: edwin,
-  },
-  {
-    id: 5,
-    name: "Dr. R. Merino Martinez",
-    college:
-      "Professor, Dept. Aeroacoustics and aircraft noise, Technische Universiteit Delft",
-    title: "TBD",
-    description: "Full bio and abstract for Dr. R. Merino Martinez coming soon.",
-    image: mertono,
-  },
-  {
-    id: 6,
-    name: "Aninda Bhattacharya",
-    college: "Product Director - Data Science at ABB",
-    title: "TBD",
-    description: "Full bio and abstract for Aninda Bhattacharya coming soon.",
-    image: Aninda,
-  },
-];
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
 
-// --- Co-located Countdown Component ---
-const flipVariants = {
-  initial: { rotateX: 0 },
-  flip: { transition: { duration: 0.6, ease: "easeInOut" } },
-};
+  return {
+    days: String(days).padStart(2, "0"),
+    hours: String(hours).padStart(2, "0"),
+    minutes: String(minutes).padStart(2, "0"),
+    seconds: String(seconds).padStart(2, "0"),
+  };
+}
 
-function Countdown({ targetDate }) {
-  const calculateTimeLeft = useCallback(() => {
-    const diff = +new Date(targetDate) - +new Date();
-    if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    return {
-      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-      minutes: Math.floor((diff / (1000 * 60)) % 60),
-      seconds: Math.floor((diff / 1000) % 60),
-    };
-  }, [targetDate]);
-
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [flipKey, setFlipKey] = useState(0);
+function useCountdown(targetDate) {
+  const [parts, setParts] = useState(() => getCountdownParts(targetDate));
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft());
-      setFlipKey((k) => k + 1);
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [calculateTimeLeft]);
+    setParts(getCountdownParts(targetDate));
 
-  const timeUnits = [
-    { label: "days", value: timeLeft.days },
-    { label: "hours", value: timeLeft.hours },
-    { label: "min", value: timeLeft.minutes },
-    { label: "sec", value: timeLeft.seconds },
+    const id = window.setInterval(() => {
+      setParts(getCountdownParts(targetDate));
+    }, 1000);
+
+    return () => window.clearInterval(id);
+  }, [targetDate]);
+
+  return parts;
+}
+
+const FactCard = ({ label, detail, delay = 0 }) => (
+  <MotionReveal
+    as="article"
+    delay={delay}
+    className="rounded-[1.6rem] border border-light-divider/60 bg-white/24 px-4 py-4 text-left backdrop-blur-[10px] dark:border-dark-divider/60 dark:bg-dark-sb/22"
+  >
+    <p className="text-[0.64rem] font-code uppercase tracking-[0.22em] text-light-muted dark:text-dark-muted">
+      {label}
+    </p>
+    <p className="mt-3 text-sm font-semibold leading-6 text-light-pt dark:text-dark-pt">{detail}</p>
+  </MotionReveal>
+);
+
+const CountdownGrid = memo(function CountdownGrid() {
+  const countdown = useCountdown(CONFERENCE_START);
+  const countdownItems = [
+    { label: "Days", value: countdown.days },
+    { label: "Hours", value: countdown.hours },
+    { label: "Minutes", value: countdown.minutes },
+    { label: "Seconds", value: countdown.seconds },
   ];
 
   return (
-    <div className="flex items-center justify-center px-4">
-      <section
-        aria-label="Countdown Timer"
-        className="grid grid-cols-2 xs:grid-cols-4 gap-4 sm:gap-6 w-full max-w-4xl"
-      >
-        {timeUnits.map(({ label, value }) => (
+    <div className="mx-auto mt-10 max-w-[62rem]">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {countdownItems.map((item) => (
           <div
-            key={label}
-            className="flex flex-col items-center p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-md dark:shadow-black/50 select-none w-full"
+            key={item.label}
+            className="rounded-[1.4rem] border border-light-divider/60 bg-white/22 px-4 py-4 text-center backdrop-blur-[10px] dark:border-dark-divider/60 dark:bg-dark-sb/20"
           >
-            <AnimatePresence mode="popLayout">
-              <motion.div
-                key={`${label}-${flipKey}`}
-                variants={flipVariants}
-                initial="initial"
-                animate="flip"
-                exit="initial"
-                className="font-mono text-4xl sm:text-6xl font-extrabold text-indigo-600 dark:text-indigo-400"
-                aria-live="polite"
-                aria-label={`${value} ${label}`}
-              >
-                {value.toString().padStart(2, "0")}
-              </motion.div>
-            </AnimatePresence>
-            <span className="mt-1 text-sm sm:text-lg font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide">
-              {label}
-            </span>
+            <p className="tabular-nums text-[clamp(1.8rem,4vw,2.6rem)] font-semibold leading-none tracking-tight text-light-pt dark:text-dark-pt">
+              {item.value}
+            </p>
+            <p className="mt-3 text-[0.66rem] font-code uppercase tracking-[0.24em] text-light-muted dark:text-dark-muted">
+              {item.label}
+            </p>
           </div>
         ))}
-      </section>
+      </div>
     </div>
   );
-}
+});
 
-// --- Co-located InfoSection Component ---
-function InfoSection({
-  fadeUp,
-  buttonVariants,
-  handleNavigation,
-  className = "",
-}) {
-  return (
-    <motion.div
-      className={`flex flex-col gap-6 mx-auto w-full max-w-7xl px-4 ${className}`}
-      variants={fadeUp} // This whole block will fade up as part of the stagger
-    >
-      {/* Row: Springer (1.5x) | Venue (1x) */}
-      <div className="flex flex-col lg:flex-row w-full items-stretch gap-6">
-        {/* Springer (3 parts) */}
-        <div className="flex-[3] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-xl p-5 sm:p-6 flex flex-col justify-center h-full min-h-[220px]">
-          <div className="flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-6">
-            {/* small logos column */}
-            <div className="flex flex-col items-center gap-2 flex-shrink-0">
-              <motion.img
-                src={springer}
-                alt="Springer Logo"
-                className="w-11/12 sm:w-20 h-auto"
-                whileHover={{ scale: 1.02 }}
-              />
-              <motion.img
-                src={springerBottom}
-                alt="Springer Proceedings"
-                className="w-11/12 sm:w-20 h-auto"
-                whileHover={{ scale: 1.02 }}
-              />
-            </div>
-            {/* description */}
-            <div className="flex-1 text-sm sm:text-base text-gray-700 dark:text-gray-300 leading-relaxed text-center sm:text-left">
-              <p>
-                Accepted papers will be published in{" "}
-                <strong className="text-blue-700 font-semibold">
-                  Springer Proceedings in Physics{" "}
-                  <span className="text-red-700">(Scopus Indexed)</span>
-                </strong>
-                . At least one author must register and present the paper
-                (virtual or in-person). There is no publication fee; revised
-                papers must use the official template provided by Springer.
-              </p>
-            </div>
-          </div>
-        </div>
+export default function Home() {
+  const heroRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
 
-        {/* Venue (2 parts) */}
-        <div
-          className="flex-[2] bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 
-          rounded-2xl shadow-xl p-5 sm:p-8 flex flex-col justify-center items-center 
-          h-full min-h-[220px] text-center"
-        >
-          <address className="not-italic space-y-2">
-            <h3 className="flex justify-center items-center gap-2 text-lg font-semibold text-gray-800 dark:text-gray-100">
-              <MdLocationPin className="text-primary-600 dark:text-primary-400 text-xl" />
-              Conference Venue
-            </h3>
-            <p className="font-medium text-gray-700 dark:text-gray-200">
-              National Institute of Technology Puducherry (NITPY)
-            </p>
-            <p className="text-gray-600 dark:text-gray-400">
-              Karaikal, Puducherry, India
-            </p>
-            <p className="italic text-sm text-gray-500 dark:text-gray-400">
-              (Virtual participation option is available)
-            </p>
-          </address>
-        </div>
-      </div>
-
-      {/* Buttons - horizontal and centered */}
-      <div className="w-full flex flex-col sm:flex-row justify-center gap-4 mt-1">
-        <motion.a
-          href="./assets/CONFERENCE.pdf" // Update this path
-          download
-          target="_blank"
-          rel="noreferrer"
-          className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-          variants={buttonVariants}
-          initial="initial"
-          whileHover="hover"
-          whileTap="tap"
-        >
-          Download Brochure
-        </motion.a>
-        <motion.a
-          href="#speakers"
-          className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-          variants={buttonVariants}
-          initial="initial"
-          whileHover="hover"
-          whileTap="tap"
-        >
-          Keynote Speakers
-        </motion.a>
-        <motion.button
-          onClick={handleNavigation}
-          className="w-full sm:w-auto text-center px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-          variants={buttonVariants}
-          initial="initial"
-          whileHover="hover"
-          whileTap="tap"
-        >
-          Conference Schedule
-        </motion.button>
-      </div>
-    </motion.div>
-  );
-}
-
-// --- Co-located SpeakerCard Component (Simplified Design) ---
-function SpeakerCard({ speaker, onClick, variants, custom }) {
-  return (
-    <motion.article
-      role="group"
-      aria-labelledby={`speaker-${speaker.id}-name`}
-      className="relative overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-lg group cursor-pointer"
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.15 }}
-      variants={variants}
-      custom={custom}
-      whileHover={{ scale: 1.02, y: -5 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      onClick={onClick}
-    >
-      <div className="relative z-10 flex flex-col h-full items-center text-center px-6 py-8">
-        <motion.img
-          src={speaker.image}
-          alt={speaker.name}
-          className="w-28 h-28 rounded-full object-cover border-4 border-gray-100 dark:border-gray-800 mb-4 shadow-md group-hover:shadow-xl transition-shadow"
-          whileHover={{ scale: 1.05 }}
-        />
-        <h3
-          id={`speaker-${speaker.id}-name`}
-          className="text-lg font-semibold mb-2"
-        >
-          {speaker.name}
-        </h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-          {speaker.college}
-        </p>
-        <div className="text-sm p-3 w-full rounded-lg font-semibold bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-          <strong className="text-gray-700 dark:text-gray-300">
-            Title: {speaker.title}
-          </strong>
-        </div>
-      </div>
-    </motion.article>
-  );
-}
-
-// --- Co-located SpeakerModal Component ---
-function SpeakerModal({ speaker, onClose }) {
-  return (
-    <AnimatePresence>
-      {speaker && (
-        <motion.div
-          className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center px-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={onClose}
-        >
-          <motion.div
-            className="bg-white dark:bg-gray-900 max-w-xl w-full p-6 rounded-2xl shadow-xl relative"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.8, opacity: 0 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 text-2xl font-bold"
-              aria-label="Close speaker details"
-            >
-              &times;
-            </button>
-            <div className="text-center">
-              <img
-                src={speaker.image}
-                alt={speaker.name}
-                className="w-28 h-28 mx-auto rounded-full object-cover border-4 border-gray-100 dark:border-gray-800 mb-4"
-              />
-              <h3 className="text-xl font-semibold mb-2">{speaker.name}</h3>
-              <p className="text-sm font-medium mb-4 text-gray-600 dark:text-gray-400">
-                {speaker.college}
-              </p>
-              <div className="text-sm p-3 m-3 w-full rounded-lg font-semibold bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-                <strong className="text-gray-700 dark:text-gray-300">
-                  Title: {speaker.title}
-                </strong>
-              </div>
-              <p className="text-gray-600 dark:text-gray-300 text-sm whitespace-pre-line max-h-[300px] overflow-y-auto text-left px-2">
-                {speaker.description ||
-                  "Full abstract and biography coming soon."}
-              </p>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-// --- Co-located AnnouncementBar Component ---
-
-// --- Main Page Component ---
-export default function ConferencePage() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedSpeaker, setSelectedSpeaker] = useState(null);
-  const navigate = useNavigate();
-
-  const handleNavigation = useCallback(() => {
-    navigate("/call-for-papers"); // Update this path as needed
-    window.scrollTo(0, 0);
-  }, [navigate]);
-
-  const handleSubmissionNavigation = useCallback(() => {
-    navigate("/submission");
-    window.scrollTo(0, 0);
-  }, [navigate]);
+  const heroY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 28]);
+  const titleY = useTransform(scrollYProgress, [0, 1], [0, reduceMotion ? 0 : 44]);
+  const titleScale = useTransform(scrollYProgress, [0, 1], [1, reduceMotion ? 1 : 1.03]);
 
   return (
-    <main className="relative">
-
-
-      {/*
-        SECTION 1: CONSOLIDATED HERO
-        Whitespace: Generous top padding, standard bottom padding.
-        Animation: Staggered children for a guided visual flow.
-      */}
+    <main>
       <Section
-        id="hero"// Tightened bottom padding
-        crosses
-        crossesOffset="lg:translate-y-[1rem]"
-        customPaddings
-        role="region"
-        aria-label="Hero section"
+        id="home-hero"
+        className="overflow-hidden !pt-6 md:!pt-8"
+        aria-labelledby="home-hero-heading"
+        reveal={false}
       >
-        <BackgroundCircles />
-        <motion.div
-          className="container relative px-4 text-center"
-          variants={staggerContainer} // Apply stagger parent
-          initial="initial"
-          animate="animate" // Animate on load
-        >
-          {/* --- Title Block --- */}
-          <motion.div
-            className="mb-2 flex justify-center gap-4"
-            variants={fadeUp} // Stagger child 1
-          >
-            <motion.img
-              src={nitpy}
-              alt="NIT Puducherry"
-              className="h-14 sm:h-20"
-              whileHover={{ scale: 1.05 }}
-            />
-            <motion.img
-              src={PDT}
-              alt="Politecnico di Torino"
-              className="h-14 sm:h-20"
-              whileHover={{ scale: 1.05 }}
-            />
-          </motion.div>
-          <motion.h1
-            variants={fadeUp} // Stagger child 2
-            className="text-lg sm:text-xl md:text-2xl lg:text-3xl mb-3"
-          >
-            International Conference on
-          </motion.h1>
-          <motion.h2
-            variants={fadeUp} // Stagger child 3
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-4"
-          >
-            Data-Driven Approaches to Dynamical Systems and Computational
-            Modeling
-          </motion.h2>
-          <motion.p
-            variants={fadeUp} // Stagger child 4
-            className="flex justify-center items-center gap-2 text-primary-600 dark:text-primary-400 text-xl sm:text-2xl font-semibold"
-          >
-            <MdLocationPin className="w-6 h-6" />
-            <span>
-              <time dateTime="2026-05-14">
-                14<sup>th</sup>
-              </time>{" "}
-              –{" "}
-              <time dateTime="2026-05-16">
-                16<sup>th</sup>
-              </time>{" "}
-              May 2026
-            </span>
-          </motion.p>
-
-          <motion.div
-            variants={fadeUp}
-            className="mx-auto mt-6 max-w-3xl rounded-2xl border border-amber-300 bg-gradient-to-r from-amber-50 via-white to-amber-100 p-5 text-left shadow-xl dark:border-amber-700 dark:from-amber-900/30 dark:via-dark-sb dark:to-amber-900/20"
-            role="note"
-            aria-label="Full paper submission announcement"
-          >
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-amber-700 dark:text-amber-300">
-                  Author Notice
-                </p>
-                <h3 className="mt-1 text-lg font-semibold text-light-pt dark:text-dark-pt sm:text-xl">
-                  Full paper submission is now open.
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-light-st dark:text-dark-st sm:text-base">
-                  Authors are requested to proceed with full paper submission
-                  through the official conference directly. No separate abstract submission
-                  is required.
-                </p>
+        <div className="container">
+          <section ref={heroRef} className="relative py-8">
+            <motion.div className="relative z-10" style={{ y: heroY }}>
+              <div className="flex flex-wrap justify-center gap-3">
+                {siteContent.brand.heroFacts.map((fact, index) => (
+                  <MotionReveal
+                    key={fact.label}
+                    as="span"
+                    delay={index * 0.05}
+                    className="rounded-full border border-light-divider/60 bg-white/18 px-4 py-2 text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted backdrop-blur-[10px] dark:border-dark-divider/60 dark:bg-dark-sb/18 dark:text-dark-muted"
+                  >
+                    {fact.detail}
+                  </MotionReveal>
+                ))}
               </div>
-              <motion.button
-                onClick={handleSubmissionNavigation}
-                className="inline-flex items-center justify-center rounded-lg bg-amber-500 px-5 py-3 text-sm font-semibold text-white shadow-md transition-colors hover:bg-amber-600 dark:bg-amber-400 dark:text-gray-900 dark:hover:bg-amber-300"
-                variants={buttonVariants}
-                initial="initial"
-                whileHover="hover"
-                whileTap="tap"
-              >
-                Submit Full Paper
-              </motion.button>
-            </div>
-          </motion.div>
 
-          {/*
-            --- Info/CTA Block ---
-            This is now INSIDE the hero section, separated by a deliberate margin.
-            It will animate in as the last staggered child.
-          */}
-          <InfoSection
-            className="mt-4" // Deliberate margin to prevent clustering
-            fadeUp={fadeUp} // Pass variant to be used as Stagger child 5
-            buttonVariants={buttonVariants}
-            handleNavigation={handleNavigation}
-          />
-        </motion.div>
-      </Section>
-
-      {/* SECTION 2: COUNTDOWN
-          Whitespace: Harmonized to py-16
-      */}
-      <Section id="countdown" className="py-16">
-        <Countdown targetDate="2026-05-14T00:00:00" />
-      </Section>
-
-      {/* SECTION 3: ORGANIZERS
-          Whitespace: Harmonized to py-16
-      */}
-      <Section id="organizers" className="py-16">
-        <motion.div
-          className="container px-4 text-center "
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={{ hidden: {}, show: {} }}
-        >
-          <motion.div variants={detailFade} className="mb-12">
-            <Heading
-              title="Organizing Committee"
-              text="Meet the key organizers driving this conference forward."
-            />
-          </motion.div>
-          <div className="grid gap-10 sm:grid-cols-2 max-w-4xl mx-auto">
-            <motion.div
-              variants={detailFade}
-              className="bg-white dark:bg-gray-900 rounded-2xl shadow-md dark:shadow-xl p-6"
-            >
-              <h3 className="text-lg font-semibold text-primary-600 dark:text-primary-400 mb-3">
-                Organizing Secretaries
-              </h3>
-              <ul className="space-y-2 text-left text-sm">
-                <li>
-                  <strong>Dr. Naveen Raj R</strong> – NIT Puducherry
-                </li>
-                <li>
-                  <strong>Dr. Santo Banerjee</strong> – Politecnico di Torino, Italy
-                </li>
-              </ul>
-            </motion.div>
-            <motion.div
-              variants={detailFade}
-              className="bg-white dark:bg-gray-900 rounded-2xl shadow-md dark:shadow-xl p-6"
-            >
-              <h3 className="text-lg font-semibold text-primary-600 dark:text-primary-400 mb-3">
-                Co-Organizing Secretaries
-              </h3>
-              <ul className="space-y-2 text-left text-sm">
-                <li>
-                  <strong>Dr. Satishkumar P</strong> – NIT Puducherry
-                </li>
-                <li>
-                  <strong>Dr. Lamberto Rondoni</strong> – Politecnico di Torino,
-                  Italy
-                </li>
-              </ul>
-            </motion.div>
-                        <motion.div
-              variants={detailFade}
-              className="bg-white dark:bg-gray-900 rounded-2xl shadow-md dark:shadow-xl p-6"
-            >
-              <h3 className="text-lg font-semibold text-primary-600 dark:text-primary-400 mb-3">
-                Publishing Secretaries
-              </h3>
-              <ul className="space-y-2 text-left text-sm">
-                <li>
-                  <strong>Dr. Praveen R</strong> – NIT Puducherry
-                </li>
-                <li>
-                  <strong>Dr. Vani V</strong> – NIT Puducherry
-                </li>
-              </ul>
-            </motion.div>
-          </div>
-        </motion.div>
-      </Section>
-
-      {/* SECTION 4: OVERVIEW
-          Whitespace: Harmonized to py-16
-      */}
-      <Section id="overview" className="py-16">
-        <LayoutGroup>
-          <motion.div
-            layoutId="overviewCard"
-            onClick={() => setIsOpen(!isOpen)}
-            className="relative max-w-3xl mx-auto z-20 cursor-pointer"
-          >
-            <motion.div
-              layout
-              className="bg-gradient-blue animate-gradient-shift p-8 border rounded-2xl"
-            >
-              <h3 className="text-xl font-bold mb-4">Conference Overview</h3>
-              <p className="mb-4">
-                The International Conference on Data-Driven Approaches to
-                Dynamical Systems and Computational Modeling brings together
-                researchers from across the globe...
-              </p>
-              <p className="font-semibold text-primary-300">Click to read more</p>
-            </motion.div>
-          </motion.div>
-
-          <AnimatePresence>
-            {isOpen && (
               <motion.div
-                className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-slate-700/80"
-                onClick={() => setIsOpen(false)}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                className="mx-auto mt-10 max-w-[72rem] text-center"
+                style={{ y: titleY, scale: titleScale }}
               >
-                <motion.div
-                  layoutId="overviewCard"
-                  className="relative bg-white dark:bg-gray-900 p-8 rounded-2xl max-w-3xl w-full"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="absolute top-4 right-4 text-2xl"
-                    aria-label="Close overview"
-                  >
-                    &times;
-                  </button>
-                  <h3 className="text-xl font-bold mb-4">
-                    Conference Overview
-                  </h3>
-                  <p className="mb-4">
-                    The International Conference on Data-Driven Approaches to
-                    Dynamical Systems and Computational Modeling brings
-                    together researchers from across the globe to explore
-                    cutting-edge topics.
+                <MotionReveal delay={0.04}>
+                  <p className="text-[0.74rem] font-code uppercase tracking-[0.34em] text-light-muted dark:text-dark-muted">
+                    2026 International Conference on
                   </p>
-                  <p className="mb-4">
-                    From high-resolution simulations and machine
-                    learning–augmented strategies to uncertainty quantification
-                    and real-time systems, the conference spans robotics,
-                    climate, healthcare, and more.
-                  </p>
-                  <motion.button
-                    onClick={handleNavigation}
-                    className="px-5 py-2 rounded-lg bg-black text-white dark:bg-white dark:text-black"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Conference Schedule
-                  </motion.button>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </LayoutGroup>
-      </Section>
+                </MotionReveal>
 
-      {/* SECTION 5: SPEAKERS
-          Whitespace: Harmonized to py-16
-      */}
-      <Section id="speakers" className="py-16">
-        <div className="container px-4">
-          <Heading
-            title="Keynote Speakers"
-            className="text-center mb-12 md:mb-16"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {speakers.map((spk, i) => (
-              <SpeakerCard
-                key={spk.id}
-                speaker={spk}
-                onClick={() => setSelectedSpeaker(spk)}
-                variants={cardVariants}
-                custom={i}
-              />
-            ))}
-          </div>
+                <MotionReveal delay={0.08}>
+                  <h1 id="home-hero-heading" className="mt-6 h1 text-light-pt dark:text-dark-pt">
+                    <span className="block text-[clamp(2.6rem,6vw,5rem)] leading-[1.02]">
+                      Signal Processing, Computation, Electronics,
+                    </span>
+                    <span className="mt-3 block text-[clamp(3.3rem,7vw,6.4rem)] leading-[0.95]">
+                      Power and Telecommunication
+                    </span>
+                  </h1>
+                </MotionReveal>
+
+                <MotionReveal delay={0.12}>
+                  <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+                    <span className="rounded-full border border-light-divider/60 bg-white/18 px-4 py-2 text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted backdrop-blur-[10px] dark:border-dark-divider/60 dark:bg-dark-sb/18 dark:text-dark-muted">
+                      December 17-18, 2026
+                    </span>
+                    <span className="rounded-full border border-light-divider/60 bg-white/18 px-4 py-2 text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted backdrop-blur-[10px] dark:border-dark-divider/60 dark:bg-dark-sb/18 dark:text-dark-muted">
+                      Countdown to opening day
+                    </span>
+                  </div>
+                </MotionReveal>
+              </motion.div>
+
+              <CountdownGrid />
+
+              <div className="mt-12 grid gap-8 lg:grid-cols-[1.15fr,0.85fr]">
+                <MotionReveal
+                  delay={0.16}
+                  className="space-y-6 text-justify text-[1rem] leading-8 text-light-st dark:text-dark-st"
+                >
+                  {siteContent.aboutParagraphs.map((paragraph) => (
+                    <p key={paragraph}>{paragraph}</p>
+                  ))}
+                </MotionReveal>
+
+                <aside className="space-y-4">
+                  {siteContent.brand.profile.map((item, index) => (
+                    <FactCard
+                      key={item.label}
+                      label={item.label}
+                      detail={item.detail}
+                      delay={0.1 + index * 0.06}
+                    />
+                  ))}
+
+                  <MotionReveal
+                    as="article"
+                    delay={0.34}
+                    className="rounded-[1.8rem] border border-light-divider/60 bg-white/22 px-5 py-5 backdrop-blur-[10px] dark:border-dark-divider/60 dark:bg-dark-altBg/20"
+                  >
+                    <p className="text-[0.64rem] font-code uppercase tracking-[0.24em] text-light-muted dark:text-dark-muted">
+                      2026 brochure
+                    </p>
+                    <p className="mt-3 text-sm leading-6 text-light-st dark:text-dark-st">
+                      The official 2026 brochure will be published on this website.
+                    </p>
+                  </MotionReveal>
+                </aside>
+              </div>
+
+              <MotionReveal className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start" delay={0.2}>
+                <Link to="/call-for-papers" className="button-primary">
+                  View Call for Papers
+                </Link>
+                <Link to="/important-dates" className="button-secondary">
+                  Important Dates
+                </Link>
+              </MotionReveal>
+            </motion.div>
+          </section>
         </div>
       </Section>
-
-      {/* Modal is now a separate component call */}
-      <SpeakerModal
-        speaker={selectedSpeaker}
-        onClose={() => setSelectedSpeaker(null)}
-      />
-
-      <BottomLine />
     </main>
   );
 }

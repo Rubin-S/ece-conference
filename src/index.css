@@ -1,115 +1,74 @@
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-sora: "Sora", sans-serif;
-  --font-code: "Source Code Pro", monospace;
-  --font-grotesk: "Space Grotesk", sans-serif;
+  --font-sans: "Manrope", sans-serif;
+  --font-code: "IBM Plex Mono", monospace;
+  --font-display: "Cormorant Garamond", serif;
 }
 
-* {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 @layer base {
+  html {
+    @apply bg-light-pb text-light-pt dark:bg-dark-pb dark:text-dark-pt;
+  }
+
   body {
-    /* Base typography & light-mode theming */
-    @apply font-sans text-base bg-neumorphic-light text-light-pt;
-
-    /* Dark-mode overrides */
-    @apply dark:bg-neumorphic-dark dark:text-dark-pt;
-
-    /* Gradient animation */
-    background-size: 400% 400%;
-    animation: gradient-shift 10s ease-in-out alternate infinite;
+    @apply min-h-screen font-sans text-base text-light-pt antialiased dark:text-dark-pt;
+    position: relative;
+    overflow-x: hidden;
+    background:
+      radial-gradient(circle at top center, rgba(169, 121, 63, 0.12), transparent 32%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(247, 244, 238, 0.98));
+    background-color: #f7f4ee;
   }
 
-    @keyframes gradientShift {
-      0% {
-        background-position: 0% 50%;
-      }
-  
-      50% {
-        background-position: 100% 50%;
-      }
-  
-      100% {
-        background-position: 0% 50%;
-      } }
-  /* Optional: Dark mode support (uncomment if using dark class strategy) */
-  /* 
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.28;
+    background-image:
+      linear-gradient(rgba(169, 121, 63, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(169, 121, 63, 0.05) 1px, transparent 1px);
+    background-size: 6rem 6rem;
+    mask-image: radial-gradient(circle at top, black, transparent 82%);
+  }
+
   .dark body {
-    @apply bg-dark-pb text-dark-pt;
+    background:
+      radial-gradient(circle at top center, rgba(208, 180, 137, 0.12), transparent 28%),
+      linear-gradient(180deg, rgba(17, 17, 20, 0.92), rgba(9, 9, 11, 1));
+    background-color: #09090b;
   }
-  */
-}
 
-/* Rotation utilities — good as-is */
-.rotate-45 {
-  @apply rotate-[45deg]
-}
+  .dark body::before {
+    opacity: 0.14;
+    background-image:
+      linear-gradient(rgba(208, 180, 137, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(208, 180, 137, 0.08) 1px, transparent 1px);
+  }
 
-.rotate-90 {
-  @apply rotate-[90deg]
-}
+  ::selection {
+    background: rgba(169, 121, 63, 0.22);
+    color: inherit;
+  }
 
-.rotate-135 {
-  @apply rotate-[135deg]
-}
-
-.rotate-180 {
-  @apply rotate-[180deg]
-}
-
-.rotate-225 {
-  @apply rotate-[225deg]
-}
-
-.rotate-270 {
-  @apply rotate-[270deg]
-}
-
-.rotate-315 {
-  @apply rotate-[315deg]
-}
-
-.rotate-360 {
-  @apply rotate-[360deg]
-}
-
-.-rotate-45 {
-  @apply rotate-[-45deg]
-}
-
-.-rotate-90 {
-  @apply rotate-[-90deg]
-}
-
-.-rotate-135 {
-  @apply rotate-[-135deg]
-}
-
-.-rotate-180 {
-  @apply rotate-[-180deg]
-}
-
-.-rotate-225 {
-  @apply rotate-[-225deg]
-}
-
-.-rotate-270 {
-  @apply rotate-[-270deg]
-}
-
-.-rotate-315 {
-  @apply rotate-[-315deg]
-}
-
-.-rotate-360 {
-  @apply rotate-[-360deg]
+  a {
+    @apply transition-colors duration-200 ease-smooth;
+  }
 }

@@ -1,39 +1,33 @@
-import SectionSvg from "../../assets/svg/SectionSvg";
+import { motion, useReducedMotion } from "framer-motion";
 
 const Section = ({
-  className,
+  className = "",
   id,
-  crosses,
-  crossesOffset,
   customPaddings,
   children,
+  reveal = true,
+  ...props
 }) => {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
-    <div
+    <motion.section
       id={id}
-      className={`relative 
-        ${
-          customPaddings ||
-          `py-5 lg:py-8 xl:py-10 ${crosses ? "lg:py-16 xl:py-20" : ""}`
-        } 
-        ${className || ""}`}
+      {...props}
+      className={["relative", customPaddings || "py-18 md:py-22 lg:py-26", className]
+        .filter(Boolean)
+        .join(" ")}
+      initial={prefersReducedMotion || !reveal ? false : { opacity: 0, y: 14 }}
+      whileInView={prefersReducedMotion || !reveal ? undefined : { opacity: 1, y: 0 }}
+      viewport={prefersReducedMotion || !reveal ? undefined : { once: true, amount: 0.14 }}
+      transition={
+        prefersReducedMotion || !reveal
+          ? undefined
+          : { duration: 0.55, ease: [0.22, 1, 0.36, 1] }
+      }
     >
       {children}
-
-      <div className="hidden absolute top-0 left-5 w-0.25 h-full bg-light-divider pointer-events-none md:block lg:left-7.5 xl:left-10" />
-      <div className="hidden absolute top-0 right-5 w-0.25 h-full bg-light-divider pointer-events-none md:block lg:right-7.5 xl:right-10" />
-
-      {crosses && (
-        <>
-          <div
-            className={`hidden absolute top-0 left-7.5 right-7.5 h-0.25 bg-light-divider ${
-              crossesOffset || ""
-            } pointer-events-none lg:block xl:left-10 right-10`}
-          />
-          <SectionSvg crossesOffset={crossesOffset} />
-        </>
-      )}
-    </div>
+    </motion.section>
   );
 };
 

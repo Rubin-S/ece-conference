@@ -3,278 +3,108 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
 
 module.exports = {
-  darkMode: 'class',
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  darkMode: "class",
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      // --------------------
-      // COLOR PALETTE
-      // --------------------
       colors: {
-        // -------------- REFINED BLUE PALETTE --------------
         primary: {
-          50: "#F0F8FF",
-          100: "#DCEFFC",
-          200: "#B0DEFF",
-          300: "#82CDFF",
-          400: "#54BCFF",
-          500: "#28ABFF",
-          600: "#1F8FCC",
-          700: "#196999",
-          800: "#124466",
-          900: "#0B2D33",
+          50: "#faf7f2",
+          100: "#f3ece0",
+          200: "#e5d6bb",
+          300: "#d0b489",
+          400: "#bc9560",
+          500: "#a9793f",
+          600: "#8b6133",
+          700: "#6e4d2c",
+          800: "#533b23",
+          900: "#362516",
         },
-
-        // -------------- NEUTRALS SUITED TO BLUE --------------
-        neutral: {
-          50: "#FAFAFB",
-          100: "#F5F5F7",
-          200: "#EBEBEF",
-          300: "#DCDCE1",
-          400: "#BDBDC4",
-          500: "#9E9EA7",
-          600: "#7E7E85",
-          700: "#5F5F63",
-          800: "#40404B",
-          900: "#212129",
-        },
-
-        // ------------------ LIGHT MODE TOKENS ------------------
         light: {
-          pb: "#FFFFFF",
-          sb: "#F5F5F7",
-          altBg: "#FAFAFB",
-          pt: "#212129",
-          st: "#40404B",
-          muted: "#7E7E85",
-          pa: "#28ABFF",
-          sa: "#E53E3E",
-          hl: "#F6E05E",
-          ctaBg: "#28ABFF",
-          ctaText: "#FFFFFF",
-          ctaHover: "#1F8FCC",
-          link: "#28ABFF",
-          linkHover: "#54BCFF",
-          border: "#EBEBEF",
-          divider: "#EBEBEF",
+          pb: "#f7f4ee",
+          sb: "#fbf8f2",
+          altBg: "#efe8dc",
+          pt: "#161410",
+          st: "#554d44",
+          muted: "#7f766a",
+          pa: "#a9793f",
+          divider: "#ded5c8",
+          border: "#ded5c8",
         },
-
-        // ------------------ DARK MODE TOKENS ------------------
         dark: {
-          pb: "#121217",
-          sb: "#1E1E28",
-          altBg: "#2C2C36",
-          pt: "#FFFFFF",
-          st: "#E0E0E8",
-          muted: "#A0A0B0",
-          pa: "#54BCFF",
-          sa: "#F56565",
-          hl: "#F6E05E",
-          ctaBg: "#54BCFF",
-          ctaText: "#121217",
-          ctaHover: "#28ABFF",
-          link: "#28ABFF",
-          linkHover: "#82CDFF",
-          border: "#40404B",
-          divider: "#2C2C36",
-        },
-
-        // preserve neon & glass if still needed
-        neon: {
-          blue: { 300: "#6EF4FF", 500: "#3DE8FF", 700: "#1ACFFF" },
-          green: { 300: "#6EFF4D", 500: "#39FF14", 700: "#1AFF00" },
-          pink: { 300: "#FF6EFF", 500: "#FF2DFE", 700: "#E61AE5" },
-          purple: { 300: "#D66FFF", 500: "#C13FFF", 700: "#A81AFF" },
-        },
-        glass: {
-          light: { 100: "rgba(255,255,255,0.3)", 200: "rgba(255,255,255,0.15)", 300: "rgba(255,255,255,0.05)" },
-          dark: { 100: "rgba(0,0,0,0.4)", 200: "rgba(0,0,0,0.25)", 300: "rgba(0,0,0,0.1)" },
+          pb: "#09090b",
+          sb: "#111114",
+          altBg: "#1a1a1f",
+          pt: "#f5eee3",
+          st: "#c7beb2",
+          muted: "#968d81",
+          pa: "#d0b489",
+          divider: "#2a2a31",
+          border: "#2a2a31",
         },
       },
-
-      // --------------------
-      // BACKGROUND GRADIENTS
-      // --------------------
-      backgroundImage: {
-        "gradient-blue": "linear-gradient(90deg, #64B5F6, #2196F3, #1E88E5)",
-        "gradient-neon": "linear-gradient(90deg, #3DE8FF, #FF2DFE, #39FF14, #C13FFF)",
-        "gradient-sunset": "linear-gradient(90deg, #FBBF24, #F87171, #A855F7)",
-        "glass-light": "linear-gradient(to right bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.05))",
-        "glass-dark": "linear-gradient(to right bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1))",
-        "radial-blue": "radial-gradient(circle at center, #64B5F6, #2196F3)",
-        "conic-blue": "conic-gradient(from 180deg, #2196F3, #42A5F5, #64B5F6, #90CAF9)",
-        "radial-neon": "radial-gradient(circle at center, #3DE8FF, transparent)",
-        "neumorphic-light": "linear-gradient(145deg, #FFFFFF, #E2E8F0)",
-        "neumorphic-dark": "linear-gradient(145deg, #334155, #1E293B)",
-      },
-
-      // --------------------
-      // TYPOGRAPHY & SPACING
-      // --------------------
       fontFamily: {
-        sans: ["var(--font-sora)", ...fontFamily.sans],
+        sans: ["var(--font-sans)", ...fontFamily.sans],
         code: ["var(--font-code)", "Consolas", "Monaco", "monospace"],
-        grotesk: ["var(--font-grotesk)", "Helvetica", "Arial", "sans-serif"],
+        grotesk: ["var(--font-display)", ...fontFamily.serif],
       },
       letterSpacing: {
-        tagline: ".15em",
-        tight: "-0.025em",
-        wide: ".075em",
+        tagline: ".28em",
       },
       spacing: {
-        '0.5': '0.125rem',
-        '7.5': '1.875rem',
-        '15': '3.75rem',
-        '18': '4.5rem',
-        '22': '5.5rem',
+        18: "4.5rem",
+        22: "5.5rem",
+        26: "6.5rem",
       },
-
-      // --------------------
-      // BORDER & BLUR
-      // --------------------
-      borderWidth: {
-        DEFAULT: "0.0625rem",
-        0.5: "0.5px",
-        3: "3px",
-      },
-      backdropBlur: {
-        xs: "2px",
-        sm: "4px",
-        md: "8px",
-        lg: "12px",
-        xl: "16px",
-      },
-
-      // --------------------
-      // SHADOWS
-      // --------------------
       boxShadow: {
-        glass: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
-        neon: "0 0 8px rgba(62,232,255,0.6), 0 0 16px #3DE8FF",
-        neumorphic: "5px 5px 15px rgba(0,0,0,0.1), -5px -5px 15px rgba(255,255,255,0.5)",
-        subtle: "0 2px 4px rgba(0,0,0,0.05)",
-        elevated: "0 4px 12px rgba(0,0,0,0.1)",
-      },
-
-      // --------------------
-      // ANIMATIONS
-      // --------------------
-      keyframes: {
-        fadeIn: { "0%": { opacity: "0" }, "100%": { opacity: "1" } },
-        neonPulse: { "0%,100%": { opacity: "0.7", transform: "scale(1)" }, "50%": { opacity: "1", transform: "scale(1.05)" } },
-        float: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-5%)" } },
-        shimmer: { "0%": { backgroundPosition: "-200% 0" }, "100%": { backgroundPosition: "200% 0" } },
-        gradientShift: { "0%": { backgroundPosition: "0% 50%" }, "50%": { backgroundPosition: "100% 50%" }, "100%": { backgroundPosition: "0% 50%" } },
-        bounce: { "0%,100%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-10%)" } },
-        rotate: { "0%": { transform: "rotate(0deg)" }, "100%": { transform: "rotate(360deg)" } },
-      },
-      animation: {
-        "fade-in": "fadeIn 0.5s ease-out forwards",
-        "neon-pulse": "neonPulse 1.5s ease-in-out infinite",
-        "float": "float 6s ease-in-out infinite",
-        "shimmer": "shimmer 2s linear infinite",
-        "gradient-shift": "gradientShift 8s ease alternate infinite",
-        "bounce": "bounce 2s ease-in-out infinite",
-        "spin-slow": "rotate 8s linear infinite",
-      },
-
-      // --------------------
-      // Z-INDEX & TRANSITIONS
-      // --------------------
-      zIndex: {
-        1: "1", 2: "2", 3: "3", 4: "4", 5: "5",
-        60: "60", 70: "70", 80: "80", 90: "90",
-      },
-      transitionDuration: {
-        DEFAULT: "200ms",
-        150: "150ms",
-        250: "250ms",
-        350: "350ms",
+        soft: "0 24px 60px rgba(20, 17, 12, 0.06)",
+        panel: "0 36px 120px rgba(20, 17, 12, 0.08)",
       },
       transitionTimingFunction: {
-        DEFAULT: "ease-in-out",
-        "ease-smooth": "cubic-bezier(0.4,0,0.2,1)",
+        smooth: "cubic-bezier(0.2, 0.8, 0.2, 1)",
       },
     },
   },
   plugins: [
-    plugin(function ({ addBase, addComponents, addUtilities, theme }) {
-      // BASE STYLES
+    plugin(function ({ addBase, addComponents }) {
       addBase({
-        ':root': {
-          '--font-sora': '"Sora", sans-serif',
-          '--font-code': '"Fira Code", monospace',
-          '--font-grotesk': '"Inter", sans-serif',
+        ":root": {
+          "--font-sans": '"Manrope", sans-serif',
+          "--font-code": '"IBM Plex Mono", monospace',
+          "--font-display": '"Cormorant Garamond", serif',
         },
       });
 
-      // COMPONENTS
       addComponents({
         ".container": {
-          "@apply max-w-[77.5rem] mx-auto px-5 md:px-10 lg:px-15 xl:max-w-[87.5rem]": {},
+          "@apply mx-auto w-full max-w-[82rem] px-5 md:px-8 xl:px-10": {},
         },
         ".h1": {
-          "@apply font-semibold text-[2.5rem] leading-[3.25rem] md:text-[2.75rem] md:leading-[3.75rem] lg:text-[3.25rem] lg:leading-[4.0625rem] xl:text-[3.75rem] xl:leading-[4.5rem]": {},
+          "@apply font-grotesk text-[clamp(3.2rem,8vw,6.6rem)] leading-[0.92] tracking-[-0.045em]": {},
         },
         ".h2": {
-          "@apply font-semibold text-[2rem] leading-[2.75rem] md:text-[2.25rem] md:leading-[3rem] lg:text-[2.5rem] lg:leading-[3.5rem]": {},
+          "@apply font-grotesk text-[2.5rem] leading-[0.96] tracking-[-0.03em] md:text-[3.35rem]": {},
         },
         ".h3": {
-          "@apply font-medium text-[1.75rem] leading-[2.25rem] md:text-[2rem] md:leading-[2.75rem]": {},
+          "@apply font-grotesk text-[1.95rem] leading-[1] tracking-[-0.02em] md:text-[2.35rem]": {},
         },
         ".body": {
-          "@apply text-[1rem] leading-[1.5rem] md:text-[1.125rem] md:leading-[1.75rem]": {},
+          "@apply text-[1rem] leading-[1.95rem] md:text-[1.05rem]": {},
         },
-        ".caption": {
-          "@apply text-[0.875rem] leading-[1.25rem] text-neutral-500": {},
+        ".site-eyebrow": {
+          "@apply inline-flex items-center text-[0.7rem] font-code uppercase tracking-tagline text-primary-600 dark:text-primary-300": {},
         },
-      });
-
-      // UTILITIES
-      addUtilities({
-        ".btn-neon": {
-          "@apply px-6 py-3 rounded-lg font-bold tracking-wider relative overflow-hidden transition-transform": {},
-          backgroundColor: theme('colors.neon.blue.500'),
-          color: theme('colors.light.ctaText'),
-          boxShadow: `0 0 8px ${theme('colors.neon.blue.500')}, 0 0 16px ${theme('colors.neon.blue.500')}`,
+        ".surface-card": {
+          "@apply rounded-[2rem] border border-light-divider/70 bg-white/90 p-7 shadow-soft backdrop-blur-sm dark:border-dark-divider/70 dark:bg-dark-sb/90": {},
         },
-        ".btn-neon:hover": {
-          transform: "scale(1.05)",
-          boxShadow: `0 0 12px ${theme('colors.neon.blue.300')}, 0 0 24px ${theme('colors.neon.blue.300')}`,
+        ".surface-panel": {
+          "@apply rounded-[2.3rem] border border-light-divider/70 bg-light-sb/95 p-7 shadow-panel backdrop-blur-sm dark:border-dark-divider/70 dark:bg-dark-sb/95": {},
         },
-        ".glass-card": {
-          background: theme('colors.glass.light.200'),
-          backdropFilter: "blur(8px)",
-          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-          border: `1px solid ${theme('colors.glass.light.100')}`,
-          borderRadius: "0.75rem",
-          padding: "1.5rem",
+        ".button-primary": {
+          "@apply inline-flex items-center justify-center rounded-full border border-light-pt bg-light-pt px-6 py-3.5 text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-light-pb transition-all duration-200 ease-smooth hover:border-primary-600 hover:bg-primary-600 dark:border-dark-pt dark:bg-dark-pt dark:text-dark-pb dark:hover:border-primary-300 dark:hover:bg-primary-300": {},
         },
-        ".glass-card-dark": {
-          background: theme('colors.glass.dark.200'),
-          backdropFilter: "blur(8px)",
-          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.3)",
-          border: `1px solid ${theme('colors.glass.dark.100')}`,
-          borderRadius: "0.75rem",
-          padding: "1.5rem",
-        },
-        ".neumorphic-card": {
-          background: theme('backgroundImage.neumorphic-light'),
-          boxShadow: theme('boxShadow.neumorphic'),
-          borderRadius: "1rem",
-          padding: "1.5rem",
-        },
-        ".neumorphic-card-dark": {
-          background: theme('backgroundImage.neumorphic-dark'),
-          boxShadow: theme('boxShadow.neumorphic'),
-          borderRadius: "1rem",
-          padding: "1.5rem",
-        },
-        ".tap-highlight-none": {
-          "-webkit-tap-highlight-color": "transparent",
+        ".button-secondary": {
+          "@apply inline-flex items-center justify-center rounded-full border border-light-divider bg-transparent px-6 py-3.5 text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-light-pt transition-all duration-200 ease-smooth hover:border-light-pt hover:bg-white dark:border-dark-divider dark:text-dark-pt dark:hover:border-dark-pt dark:hover:bg-dark-altBg": {},
         },
       });
     }),
