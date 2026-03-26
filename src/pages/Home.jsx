@@ -226,65 +226,77 @@ export default function Home() {
           />
 
           <div className="container relative z-10">
-            <div className="flex min-h-[31rem] flex-col justify-start pb-12 pt-20 md:min-h-[35rem] md:pb-14 md:pt-24 lg:min-h-[39rem] lg:pb-16 lg:pt-[7.15rem]">
-              <div className="mx-auto w-full max-w-[64rem]">
-                <div className="grid gap-7 md:grid-cols-[9.5rem,minmax(0,1fr)] md:items-center lg:grid-cols-[10.25rem,minmax(0,1fr)] lg:gap-9">
-                  <MotionReveal
-                    as="div"
-                    delay={0.08}
-                    className="w-full max-w-[9.5rem] self-center rounded-[1.2rem] border border-white/12 bg-[rgba(7,11,17,0.34)] px-4 py-4 text-white md:max-w-[10.25rem] md:rounded-none md:border-y-0 md:border-l-0 md:border-r md:border-r-[#8fc6d8]/45 md:bg-transparent md:px-0 md:py-0 md:pr-5"
-                  >
-                    <p className="flex flex-wrap items-start gap-2 text-[1.25rem] font-semibold tracking-[-0.04em] text-[#f2fbff] md:text-[1.55rem]">
-                      <DateOrdinal day={HERO_DATE_CARD.startDay} suffix={HERO_DATE_CARD.startSuffix} />
-                      <span className="text-white/56">-</span>
-                      <DateOrdinal day={HERO_DATE_CARD.endDay} suffix={HERO_DATE_CARD.endSuffix} />
-                    </p>
-                    <p className="mt-3 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[#8fc6d8] md:text-[0.86rem]">
-                      {HERO_DATE_CARD.month}
-                    </p>
-                    <p className="mt-2 text-[1.5rem] font-semibold leading-none tracking-[-0.04em] text-[#f6fcff] md:text-[1.9rem]">
-                      {HERO_DATE_CARD.year}
-                    </p>
-                  </MotionReveal>
-
-                  <div className="max-w-[35rem]">
-                    <MotionReveal delay={0.16} className="max-w-[23rem]">
-                      <p className="text-[clamp(1.08rem,1.8vw,1.55rem)] font-semibold leading-[1.02] tracking-[-0.025em] text-[#a7def0]">
-                        <DateOrdinal day="4" suffix={HERO_DATE_CARD.startSuffix} /> <br/>International Conference on
+            <div className="flex min-h-[31rem] flex-col pb-4 pt-20 md:min-h-[35rem] md:pb-8 md:pt-24 lg:min-h-[39rem] lg:pb-10 lg:pt-[7.15rem]">
+              <div className="mx-auto flex w-full max-w-[64rem] flex-1 flex-col">
+                <div className="flex flex-1 items-center">
+                  <div className="grid w-full gap-7 md:grid-cols-[9.5rem,minmax(0,1fr)] md:items-center lg:grid-cols-[10.25rem,minmax(0,1fr)] lg:gap-9">
+                    <MotionReveal
+                      as="div"
+                      delay={0.08}
+                      className="w-full max-w-[9.5rem] self-center rounded-[1.3rem] border border-white/10 bg-[rgba(8,12,18,0.46)] px-4 py-4 text-white backdrop-blur-sm md:max-w-[10.25rem] md:px-5 md:py-5"
+                    >
+                      <p className="flex flex-wrap items-start gap-2 text-[1.25rem] font-semibold tracking-[-0.04em] text-[#f2fbff] md:text-[1.55rem]">
+                        <DateOrdinal day={HERO_DATE_CARD.startDay} suffix={HERO_DATE_CARD.startSuffix} />
+                        <span className="text-white/56">-</span>
+                        <DateOrdinal day={HERO_DATE_CARD.endDay} suffix={HERO_DATE_CARD.endSuffix} />
+                      </p>
+                      <div className="mt-4 h-px w-full bg-white/10" />
+                      <p className="mt-4 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-[#8fc6d8] md:text-[0.86rem]">
+                        {HERO_DATE_CARD.month}
+                      </p>
+                      <p className="mt-2 text-[1.5rem] font-semibold leading-none tracking-[-0.04em] text-[#f6fcff] md:text-[1.9rem]">
+                        {HERO_DATE_CARD.year}
                       </p>
                     </MotionReveal>
 
-                    <MotionReveal delay={0.2}>
-                      <h1
-                        id="home-hero-heading"
-                        className="mt-3 max-w-[13ch] font-sans text-[clamp(1.45rem,3vw,3.15rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-white"
-                      >
-                        <span className="block">Signal Processing, Computation, Electronics, Power and Telecommunication</span>
-                      </h1>
-                    </MotionReveal>
+                    <div className="max-w-[35rem]">
+                      <MotionReveal delay={0.16} className="max-w-[23rem]">
+                        <p className="text-[clamp(1.08rem,1.8vw,1.55rem)] font-semibold leading-[1.02] tracking-[-0.025em] text-[#a7def0]">
+                          <DateOrdinal day="4" suffix={HERO_DATE_CARD.startSuffix} /> <br/>International Conference on
+                        </p>
+                      </MotionReveal>
+
+                      <MotionReveal delay={0.2}>
+                        <h1
+                          id="home-hero-heading"
+                          className="mt-3 max-w-[24ch] font-sans text-[clamp(1.45rem,3vw,3.15rem)] font-semibold leading-[0.95] tracking-[-0.045em] text-white"
+                        >
+                          <span className="block md:whitespace-nowrap">Signal Processing, Computation,</span>
+                          <span className="block md:whitespace-nowrap">Electronics, Power and Telecommunication</span>
+                        </h1>
+                      </MotionReveal>
+                    </div>
                   </div>
                 </div>
 
-                <div className="mt-9 grid gap-4 md:grid-cols-3 md:gap-5 lg:mt-10 lg:gap-6">
+                <div className="grid gap-4 pt-6 md:grid-cols-3 md:gap-5 md:pt-8 lg:gap-6 lg:pt-10">
                   <MotionReveal
                     as="article"
                     delay={0.24}
-                    className={HERO_SUPPORT_PANEL}
+                    className={`${HERO_SUPPORT_PANEL} h-auto w-fit justify-self-start`}
                   >
                     <p className={HERO_SUPPORT_HEADING}>
                       Organized by
                     </p>
-                    <div className="mt-4 flex items-center gap-4">
-                      <img
-                        src={siteContent.brand.logo}
-                        alt={siteContent.brand.hostInstitute}
-                        className="h-14 w-fit shrink-0 rounded-full border border-white/10 bg-white/90 p-1.5 object-contain"
-                      />
-                      <div className={`space-y-1.5 ${HERO_SUPPORT_TEXT}`}>
+                    <div className="mt-4 inline-grid grid-cols-[3.5rem_auto] items-center gap-x-4 gap-y-3">
+                      <div className="flex w-14 justify-center">
+                        <img
+                          src={siteContent.brand.logo}
+                          alt={siteContent.brand.hostInstitute}
+                          className="h-14 w-fit shrink-0 rounded-full border border-white/10 bg-white/90 p-1.5 object-contain"
+                        />
+                      </div>
+                      <div className="space-y-0.5 text-[0.9rem] font-medium leading-5 text-[#d7e4eb]">
                         {HERO_ORGANIZER_UNITS.map((unit) => (
                           <p key={unit}>{unit}</p>
                         ))}
                       </div>
+                      <p className="text-center text-[0.95rem] font-semibold leading-none tracking-[-0.01em] text-[#eef7fb]">
+                        NIT
+                      </p>
+                      <p className="text-[0.95rem] font-semibold leading-none tracking-[-0.01em] text-[#eef7fb]">
+                        Puducherry
+                      </p>
                     </div>
                   </MotionReveal>
 
@@ -309,12 +321,12 @@ export default function Home() {
                     <p className={HERO_SUPPORT_HEADING}>
                       Technical sponsor
                     </p>
-                    <div className="mt-4 flex items-center gap-4">
-                      <div className="flex h-12 w-16 shrink-0 items-center justify-center rounded-[0.9rem] border border-white/10 bg-[rgba(255,255,255,0.06)] p-2">
+                    <div className="mt-4 flex items-center gap-5">
+                      <div className="flex h-16 w-24 shrink-0 items-center justify-center self-center rounded-[1rem] border border-white/10 bg-[rgba(255,255,255,0.06)] p-3">
                         <img
                           src={ieeeLogoIcon}
                           alt="IEEE logo"
-                          className="max-h-full w-full object-contain"
+                          className="mx-auto max-h-full max-w-full object-contain"
                         />
                       </div>
                       <div className="min-w-0">
