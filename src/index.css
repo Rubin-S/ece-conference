@@ -94,9 +94,3 @@ html {
     animation-play-state: paused;
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .announcement-marquee-track {
-    animation: none;
-  }
-}
