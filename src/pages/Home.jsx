@@ -43,6 +43,21 @@ const HOME_QUICK_INFO = [
   { icon: CalendarIcon, text: "December 17-18, 2026" },
 ];
 
+const HOME_IMPORTANT_DATES = [
+  { label: "Paper submission last date", value: "21.07.2026" },
+  { label: "Notification of acceptance", value: "06.10.2026" },
+  { label: "Final(Camera-ready) paper submission date", value: "03.11.2026" },
+];
+
+const HOME_CONFERENCE_TRACKS = [
+  { id: "Track-1", title: "Communication" },
+  { id: "Track-2", title: "Microelectronics and VLSI" },
+  { id: "Track-3", title: "Energy Conservation Systems" },
+  { id: "Track-4", title: "Power Systems, Automation and Control" },
+  { id: "Track-5", title: "Data Learning (AI/ML/DL)" },
+  { id: "Track-6", title: "Data Computing" },
+];
+
 function getOrdinalSuffix(day) {
   const remainder = day % 100;
 
@@ -203,7 +218,7 @@ export default function Home() {
 
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-[linear-gradient(98deg,rgba(5,8,14,0.985)_0%,rgba(5,8,14,0.92)_34%,rgba(5,8,14,0.72)_62%,rgba(5,8,14,0.78)_100%),linear-gradient(180deg,rgba(5,8,14,0.78)_0%,rgba(5,8,14,0.34)_28%,rgba(5,8,14,0.88)_100%)]"
+            className="absolute inset-0 bg-[linear-gradient(98deg,rgba(5,8,14,0.76)_0%,rgba(5,8,14,0.58)_34%,rgba(5,8,14,0.34)_62%,rgba(5,8,14,0.42)_100%),linear-gradient(180deg,rgba(5,8,14,0.28)_0%,rgba(5,8,14,0.1)_28%,rgba(5,8,14,0.5)_100%)]"
           />
           <div
             aria-hidden="true"
@@ -346,16 +361,26 @@ export default function Home() {
             <span>Announcements</span>
           </div>
 
-          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-6 gap-y-2">
-            {HOME_ANNOUNCEMENTS.map((announcement) => (
-              <span
-                key={announcement}
-                className="flex items-center gap-3 text-[0.88rem] font-medium text-light-pt"
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
-                <span>{announcement}</span>
-              </span>
-            ))}
+          <div className="announcement-marquee min-w-0 flex-1 overflow-hidden">
+            <div className="announcement-marquee-track">
+              {[0, 1].map((copyIndex) => (
+                <div
+                  key={copyIndex}
+                  className="announcement-marquee-group"
+                  aria-hidden={copyIndex === 1 ? "true" : undefined}
+                >
+                  {HOME_ANNOUNCEMENTS.map((announcement) => (
+                    <span
+                      key={`${copyIndex}-${announcement}`}
+                      className="flex shrink-0 items-center gap-3 whitespace-nowrap text-[0.88rem] font-medium text-light-pt"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
+                      <span>{announcement}</span>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -364,13 +389,38 @@ export default function Home() {
         <div className="container">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:gap-10">
             <MotionReveal className="border-t border-light-divider/80 pt-6 md:pt-7">
-              <div className="flex min-h-[11rem] items-start justify-center md:min-h-[13rem]">
-                <Link
-                  to="/submission"
-                  className="inline-flex items-center justify-center rounded-full border border-primary-500 bg-primary-500 px-7 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-200 hover:border-primary-600 hover:bg-primary-600"
-                >
-                  Submit your manuscript
-                </Link>
+              <div className="space-y-5">
+                <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                  <div>
+                    <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-primary-600">
+                      Conference Tracks
+                    </p>
+                    <h2 className="mt-3 max-w-[18ch] text-[1.55rem] font-semibold tracking-[-0.03em] text-light-pt md:text-[1.9rem]">
+                      Areas open for paper submission
+                    </h2>
+                  </div>
+                  <Link
+                    to="/submission"
+                    className="inline-flex items-center justify-center self-start rounded-full border border-primary-500 bg-primary-500 px-7 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-200 hover:border-primary-600 hover:bg-primary-600 md:self-auto"
+                  >
+                    Submit your manuscript
+                  </Link>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {HOME_CONFERENCE_TRACKS.map(({ id, title }) => (
+                    <div
+                      key={id}
+                      className="rounded-[1.1rem] border border-light-divider/80 bg-light-sb/70 px-4 py-4"
+                    >
+                      <p className="text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-primary-600">
+                        {id}
+                      </p>
+                      <p className="mt-2 text-[1rem] font-semibold leading-6 tracking-[-0.02em] text-light-pt">
+                        {title}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </MotionReveal>
 
@@ -385,6 +435,22 @@ export default function Home() {
                     <span className="text-[0.95rem] font-medium leading-6">{text}</span>
                   </div>
                 ))}
+              </div>
+              <div className="mt-6 border-t border-light-divider/80 pt-5">
+                <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-primary-600">
+                  Important Dates
+                </p>
+                <div className="mt-4 space-y-3">
+                  {HOME_IMPORTANT_DATES.map(({ label, value }) => (
+                    <div
+                      key={label}
+                      className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 px-4 py-3"
+                    >
+                      <p className="text-[0.82rem] font-medium leading-5 text-light-st">{label}</p>
+                      <p className="mt-1 text-[1rem] font-semibold tracking-[-0.02em] text-light-pt">{value}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </MotionReveal>
           </div>

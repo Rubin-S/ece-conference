@@ -21,6 +21,16 @@ html {
   overflow-x: hidden;
 }
 
+@keyframes announcement-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @layer base {
   html {
     @apply bg-light-pb text-light-pt;
@@ -57,5 +67,36 @@ html {
 
   a {
     @apply transition-colors duration-200 ease-smooth;
+  }
+}
+
+@layer components {
+  .announcement-marquee {
+    mask-image: linear-gradient(90deg, transparent, black 4%, black 96%, transparent);
+  }
+
+  .announcement-marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: announcement-marquee 18s linear infinite;
+  }
+
+  .announcement-marquee-group {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .announcement-marquee:hover .announcement-marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .announcement-marquee-track {
+    animation: none;
   }
 }
