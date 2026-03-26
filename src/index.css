@@ -1,13 +1,13 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --font-sans: "Manrope", sans-serif;
+  --font-sans: Arial, sans-serif;
   --font-code: "IBM Plex Mono", monospace;
-  --font-display: "Cormorant Garamond", serif;
+  --font-display: Arial, sans-serif;
 }
 
 *,
@@ -23,17 +23,18 @@ html {
 
 @layer base {
   html {
-    @apply bg-light-pb text-light-pt dark:bg-dark-pb dark:text-dark-pt;
+    @apply bg-light-pb text-light-pt;
   }
 
   body {
-    @apply min-h-screen font-sans text-base text-light-pt antialiased dark:text-dark-pt;
+    @apply min-h-screen font-sans text-base text-light-pt antialiased;
     position: relative;
     overflow-x: hidden;
     background:
-      radial-gradient(circle at top center, rgba(169, 121, 63, 0.12), transparent 32%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(247, 244, 238, 0.98));
-    background-color: #f7f4ee;
+      radial-gradient(circle at top center, rgba(169, 121, 63, 0.1), transparent 30%),
+      radial-gradient(circle at 82% 18%, rgba(232, 215, 189, 0.65), transparent 24%),
+      linear-gradient(180deg, #ffffff, #f7f4ee 36%, #ffffff);
+    background-color: #ffffff;
   }
 
   body::before {
@@ -49,22 +50,8 @@ html {
     mask-image: radial-gradient(circle at top, black, transparent 82%);
   }
 
-  .dark body {
-    background:
-      radial-gradient(circle at top center, rgba(208, 180, 137, 0.12), transparent 28%),
-      linear-gradient(180deg, rgba(17, 17, 20, 0.92), rgba(9, 9, 11, 1));
-    background-color: #09090b;
-  }
-
-  .dark body::before {
-    opacity: 0.14;
-    background-image:
-      linear-gradient(rgba(208, 180, 137, 0.08) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(208, 180, 137, 0.08) 1px, transparent 1px);
-  }
-
   ::selection {
-    background: rgba(169, 121, 63, 0.22);
+    background: #e8d7bd;
     color: inherit;
   }
 

@@ -22,12 +22,12 @@ export default function Contact() {
                 {contact.href ? (
                   <a
                     href={contact.href}
-                    className="mt-5 block text-sm leading-7 text-light-pt hover:text-primary-600 dark:text-dark-pt dark:hover:text-primary-300"
+                    className="mt-5 block text-sm leading-7 text-light-pt hover:text-primary-600"
                   >
                     {contact.value}
                   </a>
                 ) : (
-                  <p className="mt-5 text-sm leading-7 text-light-st dark:text-dark-st">{contact.value}</p>
+                  <p className="mt-5 text-sm leading-7 text-light-st">{contact.value}</p>
                 )}
               </MotionReveal>
             ))}
@@ -36,12 +36,12 @@ export default function Contact() {
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr,1fr]">
             <MotionReveal as="article" className="surface-panel">
               <p className="site-eyebrow">Venue</p>
-              <p className="mt-5 text-sm leading-7 text-light-st dark:text-dark-st">{siteContent.brand.venue}</p>
+              <p className="mt-5 text-sm leading-7 text-light-st">{siteContent.brand.venue}</p>
             </MotionReveal>
 
             <MotionReveal as="article" className="surface-card" delay={0.08}>
               <p className="site-eyebrow">Correspondence</p>
-              <p className="mt-5 text-sm leading-7 text-light-st dark:text-dark-st">
+              <p className="mt-5 text-sm leading-7 text-light-st">
                 Updates regarding submission, registration, committees, and brochure release will be published on the
                 official website and communicated through the conference email channels.
               </p>

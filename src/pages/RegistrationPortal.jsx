@@ -24,14 +24,14 @@ export default function RegistrationPortal() {
           <div className="grid gap-6 md:grid-cols-2">
             <MotionReveal as="article" className="surface-panel">
               <p className="site-eyebrow">Payment Instructions</p>
-              <p className="mt-5 text-sm leading-7 text-light-st dark:text-dark-st">
+              <p className="mt-5 text-sm leading-7 text-light-st">
                 Payment instructions will be published together with the official registration portal.
               </p>
             </MotionReveal>
 
             <MotionReveal as="article" className="surface-card" delay={0.08}>
               <p className="site-eyebrow">Participant Guidance</p>
-              <p className="mt-5 text-sm leading-7 text-light-st dark:text-dark-st">
+              <p className="mt-5 text-sm leading-7 text-light-st">
                 Participants may consult the registration page for the tentative fee schedule and official contact channels.
               </p>
             </MotionReveal>

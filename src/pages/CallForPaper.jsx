@@ -19,7 +19,7 @@ export default function CallForPaper() {
           <div className="grid gap-6 lg:grid-cols-2">
             <MotionReveal as="article" className="surface-panel">
               <p className="site-eyebrow">Paper Preparation</p>
-              <ul className="mt-5 space-y-3 text-sm leading-6 text-light-st dark:text-dark-st">
+              <ul className="mt-5 space-y-3 text-sm leading-6 text-light-st">
                 <li>{siteContent.submission.paperFormat}</li>
                 <li>{siteContent.submission.paperLength}</li>
                 {siteContent.submission.checklist.map((item) => (
@@ -30,7 +30,7 @@ export default function CallForPaper() {
 
             <MotionReveal as="article" className="surface-card" delay={0.06}>
               <p className="site-eyebrow">Author Information</p>
-              <p className="mt-5 text-sm leading-7 text-light-st dark:text-dark-st">
+              <p className="mt-5 text-sm leading-7 text-light-st">
                 The official submission portal and the 2026 brochure will be announced on this website.
               </p>
             </MotionReveal>

@@ -18,7 +18,7 @@ export default function About() {
 
           <div className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
             <MotionReveal as="article" className="surface-panel">
-              <div className="space-y-6 text-justify text-[1rem] leading-8 text-light-st dark:text-dark-st">
+              <div className="space-y-6 text-justify text-[1rem] leading-8 text-light-st">
                 {siteContent.aboutParagraphs.map((paragraph) => (
                   <p key={paragraph}>{paragraph}</p>
                 ))}
@@ -30,34 +30,34 @@ export default function About() {
                 <p className="site-eyebrow">Conference Profile</p>
                 <dl className="mt-5 space-y-5">
                   <div>
-                    <dt className="text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted dark:text-dark-muted">
+                    <dt className="text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted">
                       Dates
                     </dt>
-                    <dd className="mt-2 text-sm leading-6 text-light-pt dark:text-dark-pt">
+                    <dd className="mt-2 text-sm leading-6 text-light-pt">
                       {siteContent.brand.dates}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted dark:text-dark-muted">
+                    <dt className="text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted">
                       Venue
                     </dt>
-                    <dd className="mt-2 text-sm leading-6 text-light-pt dark:text-dark-pt">
+                    <dd className="mt-2 text-sm leading-6 text-light-pt">
                       {siteContent.brand.venue}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted dark:text-dark-muted">
+                    <dt className="text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted">
                       Organized by
                     </dt>
-                    <dd className="mt-2 text-sm leading-6 text-light-pt dark:text-dark-pt">
+                    <dd className="mt-2 text-sm leading-6 text-light-pt">
                       {siteContent.brand.organizers}
                     </dd>
                   </div>
                   <div>
-                    <dt className="text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted dark:text-dark-muted">
+                    <dt className="text-[0.68rem] font-code uppercase tracking-[0.22em] text-light-muted">
                       Technical sponsor
                     </dt>
-                    <dd className="mt-2 text-sm leading-6 text-light-pt dark:text-dark-pt">
+                    <dd className="mt-2 text-sm leading-6 text-light-pt">
                       {siteContent.brand.technicalSponsor}
                     </dd>
                   </div>
@@ -66,7 +66,7 @@ export default function About() {
 
               <MotionReveal as="article" className="surface-card" delay={0.12}>
                 <p className="site-eyebrow">Publication</p>
-                <p className="mt-5 text-sm leading-7 text-light-st dark:text-dark-st">
+                <p className="mt-5 text-sm leading-7 text-light-st">
                   {siteContent.brand.publicationTarget}
                 </p>
               </MotionReveal>

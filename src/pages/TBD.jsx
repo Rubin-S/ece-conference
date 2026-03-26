@@ -18,7 +18,7 @@ export default function TBDPage() {
           <div className="grid gap-6 md:grid-cols-2">
             {siteContent.sponsorNotes.map((note, index) => (
               <MotionReveal key={note} as="article" className="surface-panel" delay={index * 0.08}>
-                <p className="text-sm leading-7 text-light-st dark:text-dark-st">{note}</p>
+                <p className="text-sm leading-7 text-light-st">{note}</p>
               </MotionReveal>
             ))}
           </div>

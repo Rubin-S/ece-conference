@@ -6,8 +6,8 @@ import { siteContent } from "../content/siteContent";
 function StatusBadge({ status }) {
   const classes =
     status === "Confirmed"
-      ? "border-emerald-200 bg-emerald-50 text-emerald-700 dark:border-emerald-900/80 dark:bg-emerald-900/20 dark:text-emerald-200"
-      : "border-amber-200 bg-amber-50 text-amber-700 dark:border-amber-900/80 dark:bg-amber-900/20 dark:text-amber-200";
+      ? "border-primary-400/40 bg-primary-400/12 text-primary-300"
+      : "border-highlight-500/40 bg-highlight-500/12 text-highlight-300";
 
   return (
     <span className={`rounded-full border px-3 py-1 text-[0.64rem] font-code uppercase tracking-[0.2em] ${classes}`}>
@@ -32,12 +32,12 @@ export default function ImportantDates() {
             {siteContent.importantDates2026.map((item, index) => (
               <MotionReveal key={item.label} as="article" className="surface-card" delay={index * 0.05}>
                 <div className="flex items-start justify-between gap-4">
-                  <h2 className="text-base font-semibold leading-6 text-light-pt dark:text-dark-pt">
+                  <h2 className="text-base font-semibold leading-6 text-light-pt">
                     {item.label}
                   </h2>
                   <StatusBadge status={item.status} />
                 </div>
-                <p className="mt-6 text-lg font-semibold text-primary-600 dark:text-primary-300">{item.value}</p>
+                <p className="mt-6 text-lg font-semibold text-primary-600">{item.value}</p>
               </MotionReveal>
             ))}
           </div>

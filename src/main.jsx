@@ -1,11 +1,6 @@
 import ReactDOM from "react-dom/client";
-import { AppProvider } from "./context/AppContext";
 import App from "./App.jsx";
 import "./index.css";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <AppProvider>
-    <App />
-  </AppProvider>
-);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
 
