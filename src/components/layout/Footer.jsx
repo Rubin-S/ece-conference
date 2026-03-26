@@ -20,19 +20,24 @@ const Footer = () => {
     >
       <div className="container">
         <MotionReveal className="py-2">
-          <div className="grid gap-10 md:grid-cols-[1.2fr,0.8fr,0.9fr]">
-            <div>
+          <div className="grid items-start gap-10 md:grid-cols-2 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.8fr)_minmax(0,0.9fr)] lg:gap-12">
+            <div className="max-w-lg">
+              <h2 id="footer-heading" className="sr-only">Footer</h2>
               <p className="site-eyebrow">IConSCEPT 2026</p>
-              <h2 id="footer-heading" className="mt-4 font-grotesk text-[2.35rem] leading-none text-light-pt">
-                {siteContent.brand.fullName}
-              </h2>
-              <p className="mt-5 max-w-xl text-sm leading-7 text-light-st">
-                Hosted by {siteContent.brand.hostInstitute}, {siteContent.brand.hostCampus}. Organized by the{" "}
-                {siteContent.brand.organizers} with {siteContent.brand.technicalSponsor} as technical sponsor.
-              </p>
+              <div className="mt-5 space-y-2.5 text-sm leading-7 text-light-st">
+                <p>
+                  Hosted by {siteContent.brand.hostInstitute}, {siteContent.brand.hostCampus}.
+                </p>
+                <p>
+                  Organized by the {siteContent.brand.organizers}.
+                </p>
+                <p>
+                  Technical sponsor: {siteContent.brand.technicalSponsor}.
+                </p>
+              </div>
             </div>
 
-            <nav className="flex flex-col gap-3" aria-label="Footer navigation">
+            <nav className="flex flex-col gap-3 self-start" aria-label="Footer navigation">
               <p className="site-eyebrow">Navigation</p>
               {quickLinks.map((link) => (
                 <NavLink
@@ -50,7 +55,7 @@ const Footer = () => {
               ))}
             </nav>
 
-            <div className="flex flex-col gap-3">
+            <div className="flex max-w-sm flex-col gap-3 self-start">
               <p className="site-eyebrow">Contact</p>
               {siteContent.contacts.slice(0, 3).map((contact) => (
                 <a
@@ -68,7 +73,7 @@ const Footer = () => {
           </div>
 
           <div className="mt-8 border-t border-light-divider/80 pt-5 text-sm text-light-st">
-            Copyright {new Date().getFullYear()} {siteContent.brand.shortName}. All rights reserved.
+            &copy; {siteContent.brand.shortName}. All rights reserved.
           </div>
         </MotionReveal>
       </div>
