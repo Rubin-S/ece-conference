@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import iconsceptLogo from "../../assets/logo/IConSECPT.png";
 import { navLinks, siteContent } from "../../content/siteContent";
 
 const desktopNavLink =
@@ -46,28 +47,10 @@ export default function Header() {
             onClick={() => setMobileOpen(false)}
           >
             <img
-              src={siteContent.brand.logo}
-              alt="NIT Puducherry"
-              className="h-10 w-10 shrink-0 object-contain"
+              src={iconsceptLogo}
+              alt="IConSCEPT 2026 logo"
+              className="h-12 w-auto shrink-0 object-contain md:h-[3.15rem]"
             />
-            <div className="min-w-0">
-              <p
-                className={[
-                  "truncate font-grotesk text-[1.08rem] leading-none md:text-[1.2rem] 2xl:text-[1.28rem]",
-                  isHome ? "text-white" : "text-light-pt",
-                ].join(" ")}
-              >
-                {siteContent.brand.shortName}
-              </p>
-              <p
-                className={[
-                  "mt-1 hidden text-[0.6rem] font-code uppercase tracking-[0.22em] md:block",
-                  isHome ? "text-white/80" : "text-light-muted",
-                ].join(" ")}
-              >
-                NIT Puducherry
-              </p>
-            </div>
           </NavLink>
 
           <nav className="hidden min-w-0 items-center justify-center gap-3 xl:flex 2xl:gap-5">

@@ -43,11 +43,13 @@ const HOME_QUICK_INFO = [
   { icon: CalendarIcon, text: "December 17-18, 2026" },
 ];
 
-const HOME_IMPORTANT_DATES = [
-  { label: "Last date for paper submission", value: "21.07.2026" },
-  { label: "Notification of acceptance", value: "06.10.2026" },
-  { label: "Final (Camera-ready) paper submission", value: "03.11.2026" },
-];
+const HOME_IMPORTANT_DATES = siteContent.importantDates2026.filter(({ label }) =>
+  [
+    "Last date for paper submission",
+    "Notification of acceptance",
+    "Final (Camera-ready) paper submission",
+  ].includes(label),
+);
 
 const HOME_CONFERENCE_TRACKS = [
   { id: "Track-1", title: "Communication" },

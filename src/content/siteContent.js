@@ -33,6 +33,78 @@ const createCommitteeMember = ({
   isPlaceholder,
 });
 
+const normalizeCommitteeName = (name) => {
+  const cleanedName = String(name ?? "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  if (!cleanedName) {
+    return cleanedName;
+  }
+
+  const withoutHonorific = cleanedName.replace(/^dr\.?\s*/i, "");
+  return `Dr. ${withoutHonorific}`;
+};
+
+const parseCommitteeMeta = (meta) => {
+  const metaLines = String(meta ?? "")
+    .replace(/\r/g, "")
+    .replace(/\s*Designation\s*:/gi, "\nDesignation: ")
+    .replace(/\s*Department\s*:/gi, "\nDepartment: ")
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  return metaLines.reduce(
+    (result, line) => {
+      if (/^Designation:/i.test(line)) {
+        return {
+          ...result,
+          designation: line.replace(/^Designation:/i, "").trim(),
+        };
+      }
+
+      if (/^Department:/i.test(line)) {
+        return {
+          ...result,
+          affiliation: line.replace(/^Department:/i, "").trim(),
+        };
+      }
+
+      if (!result.designation) {
+        return {
+          ...result,
+          designation: line,
+        };
+      }
+
+      return {
+        ...result,
+        affiliation: result.affiliation ? `${result.affiliation}, ${line}` : line,
+      };
+    },
+    { designation: "", affiliation: "" }
+  );
+};
+
+const createCommitteeMemberFromCsv = (role, name, meta, image) => {
+  const { designation, affiliation } = parseCommitteeMeta(meta);
+
+  return createCommitteeMember({
+    role,
+    name: normalizeCommitteeName(name),
+    designation,
+    affiliation,
+    image,
+  });
+};
+
+const createCommitteeSection = (title, role, rows, layout = "gallery") => ({
+  title,
+  layout,
+  members: rows.map(([name, meta, image]) => createCommitteeMemberFromCsv(role, name, meta, image)),
+});
+
 export const siteContent = {
   brand: {
     acronym: "IConSCEPT 2026",
@@ -167,9 +239,9 @@ export const siteContent = {
   importantDates2026: [
     { label: "Conference dates", value: "December 17-18, 2026", status: "Confirmed" },
     { label: "Call for papers release", value: "To be announced", status: "Awaited" },
-    { label: "Paper submission deadline", value: "To be announced", status: "Awaited" },
-    { label: "Notification of acceptance", value: "To be announced", status: "Awaited" },
-    { label: "Camera-ready submission", value: "To be announced", status: "Awaited" },
+    { label: "Last date for paper submission", value: "21.07.2026", status: "Confirmed" },
+    { label: "Notification of acceptance", value: "06.10.2026", status: "Confirmed" },
+    { label: "Final (Camera-ready) paper submission", value: "03.11.2026", status: "Confirmed" },
     { label: "Early bird registration deadline", value: "To be announced", status: "Awaited" },
     { label: "Author registration deadline", value: "To be announced", status: "Awaited" },
     { label: "Non-author registration deadline", value: "To be announced", status: "Awaited" },
@@ -273,135 +345,255 @@ export const siteContent = {
       tag: "Committees",
       title: "Leadership and committee structure for IConSCEPT 2026",
       text:
-        "The conference committee brings together institutional leadership and organizing teams responsible for the academic direction, publication workflow, publicity, registration, and advisory support for IConSCEPT 2026.",
+        "The conference committee brings together institutional leadership and organizing teams from ECE, EEE, and CSE responsible for the academic direction, publication workflow, publicity, sponsorship, registration, and hospitality for IConSCEPT 2026.",
     },
     featuredMembers: [
-      createCommitteeMember({
-        role: "Chief Patron",
-        name: "Dr. Makarand Madhao Ghangrekar",
-        designation: "Director",
-        affiliation: "NIT Puducherry",
-        alt: "Placeholder portrait for Dr. Makarand Madhao Ghangrekar",
-      }),
-      createCommitteeMember({
-        role: "Patron",
-        name: "Dr. S Sundaravarathan",
-        designation: "Registrar",
-        affiliation: "NIT Puducherry",
-        alt: "Placeholder portrait for Dr. S Sundaravarathan",
-      }),
+      createCommitteeMemberFromCsv(
+        "Chief Patron",
+        "Dr. Makarand Madhao Ghangrekar",
+        `Director
+
+NIT Puducherry`,
+        "https://www.nitpy.ac.in/assets/images/faculties/admin/Director.jpg"
+      ),
+      createCommitteeMemberFromCsv(
+        "Patron",
+        "Dr. Sundaravarathan S",
+        `Designation : Registrar
+
+Department : NIT Puducherry`,
+        "https://nitpy.ac.in/assets/images/faculties/admin/Sundaravarathan.jpg"
+      ),
     ],
     sections: [
-      {
-        title: "General Chairs",
-        layout: "spotlight",
-        members: [
-          createCommitteeMember({
-            role: "Conference Chair",
-            name: "Dr. Suresh Balakrishnan",
-            designation: "",
-            affiliation: "",
-            alt: "Placeholder portrait for Dr. Suresh Balakrishnan",
-          }),
-          createCommitteeMember({
-            role: "Conference Chair",
-            name: "Dr. Aniruddha Kanhe",
-            designation: "",
-            affiliation: "",
-            alt: "Placeholder portrait for Dr. Aniruddha Kanhe",
-          }),
+      createCommitteeSection("Conference Chairs", "Conference Chair", [
+        [
+          "Dr. SURESH BALANETHIRAM",
+          `Designation: Assistant Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/97/",
         ],
-      },
-      {
-        title: "Technical Program Chairs",
-        layout: "spotlight",
-        members: [
-          createCommitteeMember({
-            role: "Technical Program Chair",
-            name: "Dr. G. Lakshmeesha",
-            designation: "",
-            affiliation: "",
-            alt: "Placeholder portrait for Dr. G. Lakshmeesha",
-          }),
+        [
+          "Dr. ANIRUDDHA KANHE",
+          `Designation: Associate Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/21/",
         ],
-      },
-      {
-        title: "Publication Chairs",
-        layout: "spotlight",
-        members: [
-          createCommitteeMember({
-            role: "Publication Chair",
-            name: "Dr. Yedukondala Rao Veranki",
-            designation: "",
-            affiliation: "",
-            alt: "Placeholder portrait for Dr. Yedukondala Rao Veranki",
-          }),
+      ], "spotlight"),
+      createCommitteeSection("Technical Program Chairs", "Technical Program Chair", [
+        [
+          "Dr. Lakshmi Sutha G",
+          `Designation: Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/30/",
         ],
-      },
-      {
-        title: "Publicity Chairs",
-        layout: "gallery",
-        members: [],
-      },
-      {
-        title: "Registration Chairs",
-        layout: "gallery",
-        members: [],
-      },
-      {
-        title: "Advisory Committee",
-        layout: "gallery",
-        members: [],
-      },
-      {
-        title: "Finance Treasurer",
-        layout: "spotlight",
-        members: [
-          createCommitteeMember({
-            role: "Finance Treasurer",
-            name: "Dr. N. Surendar",
-            designation: "",
-            affiliation: "",
-            alt: "Placeholder portrait for Dr. N. Surendar",
-          }),
+        [
+          "Dr. Vinopraba. T",
+          `Designation: Professor
+
+Department: Electrical & Electronics Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/1002/",
         ],
-      },
+        [
+          "Dr. Venkatesan M",
+          `Designation: Associate Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/105/",
+        ],
+      ]),
+      createCommitteeSection("Publication Chairs", "Publication Chair", [
+        [
+          "Dr. YEDUKONDALA RAO VEERANKI",
+          `Designation: Assistant Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/155/",
+        ],
+        [
+          "Hemachander Allamsetty",
+          `Designation: Assistant Professor
+
+Department: Electrical & Electronics Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/86/",
+        ],
+        [
+          "Dr. Kumaran P",
+          `Designation: Assistant Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/94/",
+        ],
+      ]),
+      createCommitteeSection("Financial Chair", "Financial Chair", [
+        [
+          "Dr. SURENDAR M",
+          `Designation: Associate Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/55/",
+        ],
+      ]),
+      createCommitteeSection("Keynote / Tutorial / Session Chairs", "Keynote/Tutorial/Session Chair", [
+        [
+          "Dr. HARIGOVINDAN V P",
+          `Designation: Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/7/",
+        ],
+        [
+          "Dr. BOOPATHI RANI R",
+          `Designation: Associate Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/10/",
+        ],
+        [
+          "Dr. R MURUGAN",
+          `Designation: Associate Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/25596602/",
+        ],
+        [
+          "Dr. Surendiran B",
+          `Designation: Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/27/",
+        ],
+        [
+          "Dr. Narendran Rajagopalan",
+          `Designation: Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/16/",
+        ],
+        [
+          "Dr. Sanjay Bankapur",
+          `Designation: Assistant Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/90/",
+        ],
+        [
+          "G Koperundevi",
+          `Designation: Professor
+
+Department: Electrical & Electronics Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/14/",
+        ],
+        [
+          "Thangavel Subbaiyan",
+          `Designation: Professor
+
+Department: Electrical & Electronics Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/50/",
+        ],
+        [
+          "Venkadesan Arunachalam",
+          `Designation: Professor
+
+Department: Electrical & Electronics Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/26/",
+        ],
+      ]),
+      createCommitteeSection("Publicity Chairs", "Publicity Chair", [
+        [
+          "Dr. THOMAS JOSEPH",
+          `Designation: Assistant Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/93/",
+        ],
+        [
+          "Dr. Praveen R",
+          `Designation: Assistant Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/1000015/",
+        ],
+        [
+          "Ram Jethmalani Chinnasamy Hemparuva",
+          `Designation: Assistant Professor
+
+Department: Electrical & Electronics Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/84/",
+        ],
+      ]),
+      createCommitteeSection("Sponsorship Chairs", "Sponsorship Chair", [
+        [
+          "Dr. MALAYA KUMAR NATH",
+          `Designation: Assistant Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/15/",
+        ],
+        [
+          "Dr. Vani V",
+          `Designation: Assistant Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/112/",
+        ],
+        [
+          "Navin Sam K",
+          `Designation: Associate Professor
+
+Department: Electrical & Electronics Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/48/",
+        ],
+      ]),
+      createCommitteeSection("Registration Chairs", "Registration Chair", [
+        [
+          "Dr. KULEEN KUMAR",
+          `Designation: Assistant Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/165/",
+        ],
+        [
+          "Dr. Karthik N",
+          `Designation: Assistant Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/119/",
+        ],
+        [
+          "Gowrishankar S",
+          `Designation: Assistant Professor
+
+Department: Electrical & Electronics Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/126/",
+        ],
+      ]),
+      createCommitteeSection("Hospitality Chairs", "Hospitality Chair", [
+        [
+          "Dr. SUNANDA AMBULKER",
+          `Designation: Assistant Professor
+
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/92/",
+        ],
+        [
+          "Saravana Prakash P",
+          "Designation: Assistant Professor Department: Electrical & Electronics Engineering",
+          "https://research.nitpy.ac.in/profile/photo/166/",
+        ],
+        [
+          "Dr. Ansuman Mahapatra",
+          `Designation: Associate Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/49/",
+        ],
+      ]),
     ],
-    technicalProgramCommittee: {
-      title: "Technical Program Committee",
-      headers: {
-        track: "Track Name",
-        chairs: "Track Chairs/Co-Chair",
-        members: "Committee Members",
-      },
-      tracks: [
-        {
-          title: "Track details TBD",
-          chairs: [
-            createCommitteeMember({
-              role: "Track Chair",
-              name: "TBD",
-              designation: "Track chair to be announced",
-              affiliation: "IConSCEPT 2026",
-              alt: "Track chair placeholder portrait",
-              isPlaceholder: true,
-            }),
-            createCommitteeMember({
-              role: "Track Co-Chair",
-              name: "TBD",
-              designation: "Track co-chair to be announced",
-              affiliation: "IConSCEPT 2026",
-              alt: "Track co-chair placeholder portrait",
-              isPlaceholder: true,
-            }),
-          ],
-          members: [
-            "Committee members will be announced.",
-            "Additional reviewers and coordinators will be listed here.",
-          ],
-        },
-      ],
-    },
+    technicalProgramCommittee: null,
   },
   sponsorsPage: {
     intro: {
