@@ -46,7 +46,7 @@ const HOME_QUICK_INFO = [
 const HOME_IMPORTANT_DATES = [
   { label: "Last date for paper submission", value: "21.07.2026" },
   { label: "Notification of acceptance", value: "06.10.2026" },
-  { label: "Final(Camera-ready) paper submission date", value: "03.11.2026" },
+  { label: "Final (Camera-ready) paper submission", value: "03.11.2026" },
 ];
 
 const HOME_CONFERENCE_TRACKS = [

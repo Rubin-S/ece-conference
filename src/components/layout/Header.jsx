@@ -4,10 +4,10 @@ import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { navLinks, siteContent } from "../../content/siteContent";
 
 const desktopNavLink =
-  "whitespace-nowrap border-b border-transparent px-1 py-1.5 text-[0.67rem] font-medium uppercase tracking-[0.14em] transition-colors 2xl:text-[0.71rem]";
+  "whitespace-nowrap rounded-full border px-3 py-2 text-[0.67rem] font-medium uppercase tracking-[0.14em] transition-all duration-200 ease-smooth 2xl:text-[0.71rem]";
 
 const mobileNavLink =
-  "border-b py-3 text-[0.76rem] font-medium uppercase tracking-[0.18em] transition-colors";
+  "rounded-[1rem] border px-4 py-3 text-[0.76rem] font-medium uppercase tracking-[0.18em] transition-all duration-200 ease-smooth";
 
 export default function Header() {
   const location = useLocation();
@@ -81,15 +81,15 @@ export default function Header() {
                     desktopNavLink,
                     isActive
                       ? isHome
-                        ? "border-[#9fe3ff] text-[#f4fbff]"
-                        : "border-primary-500 text-light-pt"
+                        ? "border-[#9fe3ff]/45 bg-[rgba(159,227,255,0.14)] text-[#f4fbff] shadow-[0_12px_30px_rgba(6,18,28,0.18)]"
+                        : "border-primary-400/60 bg-light-altBg text-primary-700 shadow-[0_12px_30px_rgba(15,23,42,0.06)]"
                       : isHome
-                        ? "text-white hover:border-[#9fe3ff]/65 hover:text-[#9fe3ff]"
-                        : "text-light-muted hover:border-light-pt hover:text-light-pt",
+                        ? "border-transparent text-white hover:border-white/12 hover:bg-white/8 hover:text-[#9fe3ff]"
+                        : "border-transparent text-light-muted hover:border-light-divider/80 hover:bg-light-sb hover:text-light-pt",
                   ].join(" ")
                 }
               >
-                {title}
+                {id === "contact" ? "CONTACT US" : title}
               </NavLink>
             ))}
           </nav>
@@ -121,7 +121,7 @@ export default function Header() {
               isHome ? "border-t border-white/10 bg-[rgba(8,12,18,0.96)] backdrop-blur-sm" : "bg-light-pb",
             ].join(" ")}
           >
-            <nav className="flex flex-col">
+            <nav className="flex flex-col gap-2">
               {navLinks.map(({ id, title, url }) => (
                 <NavLink
                   key={id}
@@ -131,18 +131,17 @@ export default function Header() {
                   className={({ isActive }) =>
                     [
                       mobileNavLink,
-                      isHome ? "border-white/10" : "border-light-divider/70",
                       isActive
                         ? isHome
-                          ? "text-[#9fe3ff]"
-                          : "text-primary-600"
+                          ? "border-[#9fe3ff]/35 bg-[rgba(159,227,255,0.12)] text-[#9fe3ff]"
+                          : "border-primary-400/45 bg-light-altBg text-primary-700"
                         : isHome
-                          ? "text-white hover:text-[#9fe3ff]"
-                          : "text-light-pt hover:text-primary-600",
+                          ? "border-white/10 text-white hover:border-white/16 hover:bg-white/6 hover:text-[#9fe3ff]"
+                          : "border-light-divider/70 text-light-pt hover:border-primary-300/50 hover:bg-light-sb hover:text-primary-600",
                     ].join(" ")
                   }
                 >
-                  {title}
+                  {id === "contact" ? "CONTACT US" : title}
                 </NavLink>
               ))}
             </nav>

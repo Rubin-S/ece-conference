@@ -5,9 +5,15 @@ import { navLinks, siteContent } from "../../content/siteContent";
 
 const quickLinks = [
   { id: "home", label: "Home", to: "/" },
-  ...navLinks.filter((link) =>
-    ["/about-us", "/call-for-papers", "/important-dates", "/registration", "/contact-us"].includes(link.url)
-  ),
+  ...navLinks
+    .filter((link) =>
+      ["/about-us", "/call-for-papers", "/important-dates", "/registration", "/contact-us"].includes(link.url)
+    )
+    .map((link) => ({
+      id: link.id,
+      label: link.title,
+      to: link.url,
+    })),
 ];
 
 const Footer = () => {
@@ -43,6 +49,7 @@ const Footer = () => {
                 <NavLink
                   key={link.id}
                   to={link.to}
+                  end
                   className={({ isActive }) =>
                     [
                       "text-sm transition-colors",
@@ -50,14 +57,14 @@ const Footer = () => {
                     ].join(" ")
                   }
                 >
-                  {link.label || link.title}
+                  {link.label}
                 </NavLink>
               ))}
             </nav>
 
             <div className="flex max-w-sm flex-col gap-3 self-start">
               <p className="site-eyebrow">Contact</p>
-              {siteContent.contacts.slice(0, 3).map((contact) => (
+              {siteContent.contacts.slice(0, 1).map((contact) => (
                 <a
                   key={contact.label}
                   href={contact.href}
@@ -66,14 +73,11 @@ const Footer = () => {
                   {contact.value}
                 </a>
               ))}
-              <p className="pt-3 text-xs font-code uppercase tracking-[0.22em] text-light-muted">
-                2026 brochure will be published on this website.
-              </p>
             </div>
           </div>
 
           <div className="mt-8 border-t border-light-divider/80 pt-5 text-sm text-light-st">
-            &copy; {siteContent.brand.shortName}. All rights reserved.
+            Copyright &copy; {siteContent.brand.shortName}. All rights reserved.
           </div>
         </MotionReveal>
       </div>
