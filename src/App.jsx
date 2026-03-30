@@ -8,7 +8,6 @@ const Home = lazy(() => import("./pages/Home"));
 const Nopage = lazy(() => import("./components/Nopage"));
 const CallForPapers = lazy(() => import("./pages/CallForPaper"));
 const About = lazy(() => import("./pages/About"));
-const TBDPage = lazy(() => import("./pages/TBD"));
 const ContactUs = lazy(() => import("./pages/Contact"));
 const CommitteesPage = lazy(() => import("./pages/Committees"));
 const Registration = lazy(() => import("./pages/Registration"));
@@ -16,6 +15,7 @@ const ImportantDates = lazy(() => import("./pages/ImportantDates"));
 const RegistrationPortal = lazy(() => import("./pages/RegistrationPortal"));
 const SubmissionPage = lazy(() => import("./pages/SubmissionPage"));
 const Publication = lazy(() => import("./pages/Publication"));
+const SponsorsPage = lazy(() => import("./pages/Sponsors"));
 
 const Layout = () => {
   const location = useLocation();
@@ -61,7 +61,7 @@ const App = () => {
                 <Route path="registration/form" element={<RegistrationPortal />} />
                 <Route path="submission" element={<SubmissionPage />} />
                 <Route path="publications" element={<Publication />} />
-                <Route path="sponsors" element={<TBDPage />} />
+                <Route path="sponsors" element={<SponsorsPage />} />
                 <Route path="contact-us" element={<ContactUs />} />
                 <Route path="*" element={<Nopage />} />
               </Route>

@@ -1,4 +1,6 @@
 import nitpyLogo from "../assets/logo/NITPY.png";
+import committeePlaceholder from "../assets/images/committee-placeholder.svg";
+import ieeeLogoIcon from "../assets/images/ieee_logo_icon.webp";
 import priceSheet from "../../docs/price.jpeg";
 
 export const navLinks = [
@@ -12,6 +14,24 @@ export const navLinks = [
   { id: "sponsors", title: "Sponsors", url: "/sponsors" },
   { id: "contact", title: "Contact", url: "/contact-us" },
 ];
+
+const createCommitteeMember = ({
+  role,
+  name,
+  designation,
+  affiliation,
+  image = committeePlaceholder,
+  alt,
+  isPlaceholder = false,
+}) => ({
+  role,
+  name,
+  designation,
+  affiliation,
+  image,
+  alt: alt || `${name} portrait`,
+  isPlaceholder,
+});
 
 export const siteContent = {
   brand: {
@@ -247,16 +267,208 @@ export const siteContent = {
       value: "To be announced",
     },
   ],
-  committeeGroups: [
-    { title: "Chief Patron", members: ["Details will be announced"] },
-    { title: "Patrons", members: ["Details will be announced"] },
-    { title: "General Chairs", members: ["Details will be announced"] },
-    { title: "Technical Program Chairs", members: ["Details will be announced"] },
-    { title: "Publication Chairs", members: ["Details will be announced"] },
-    { title: "Publicity Chairs", members: ["Details will be announced"] },
-    { title: "Registration Chairs", members: ["Details will be announced"] },
-    { title: "Advisory Committee", members: ["Details will be announced"] },
-  ],
+  committeePage: {
+    placeholderImage: committeePlaceholder,
+    intro: {
+      tag: "Committees",
+      title: "Leadership and committee structure for IConSCEPT 2026",
+      text:
+        "The conference committee brings together institutional leadership and organizing teams responsible for the academic direction, publication workflow, publicity, registration, and advisory support for IConSCEPT 2026.",
+    },
+    featuredMembers: [
+      createCommitteeMember({
+        role: "Chief Patron",
+        name: "Dr. Makarand Madhao Ghangrekar",
+        designation: "Director",
+        affiliation: "NIT Puducherry",
+        alt: "Placeholder portrait for Dr. Makarand Madhao Ghangrekar",
+      }),
+      createCommitteeMember({
+        role: "Patron",
+        name: "Dr. S Sundaravarathan",
+        designation: "Registrar",
+        affiliation: "NIT Puducherry",
+        alt: "Placeholder portrait for Dr. S Sundaravarathan",
+      }),
+    ],
+    sections: [
+      {
+        title: "General Chairs",
+        layout: "spotlight",
+        members: [
+          createCommitteeMember({
+            role: "Conference Chair",
+            name: "Dr. Suresh Balakrishnan",
+            designation: "",
+            affiliation: "",
+            alt: "Placeholder portrait for Dr. Suresh Balakrishnan",
+          }),
+          createCommitteeMember({
+            role: "Conference Chair",
+            name: "Dr. Aniruddha Kanhe",
+            designation: "",
+            affiliation: "",
+            alt: "Placeholder portrait for Dr. Aniruddha Kanhe",
+          }),
+        ],
+      },
+      {
+        title: "Technical Program Chairs",
+        layout: "spotlight",
+        members: [
+          createCommitteeMember({
+            role: "Technical Program Chair",
+            name: "Dr. G. Lakshmeesha",
+            designation: "",
+            affiliation: "",
+            alt: "Placeholder portrait for Dr. G. Lakshmeesha",
+          }),
+        ],
+      },
+      {
+        title: "Publication Chairs",
+        layout: "spotlight",
+        members: [
+          createCommitteeMember({
+            role: "Publication Chair",
+            name: "Dr. Yedukondala Rao Veranki",
+            designation: "",
+            affiliation: "",
+            alt: "Placeholder portrait for Dr. Yedukondala Rao Veranki",
+          }),
+        ],
+      },
+      {
+        title: "Publicity Chairs",
+        layout: "gallery",
+        members: [],
+      },
+      {
+        title: "Registration Chairs",
+        layout: "gallery",
+        members: [],
+      },
+      {
+        title: "Advisory Committee",
+        layout: "gallery",
+        members: [],
+      },
+      {
+        title: "Finance Treasurer",
+        layout: "spotlight",
+        members: [
+          createCommitteeMember({
+            role: "Finance Treasurer",
+            name: "Dr. N. Surendar",
+            designation: "",
+            affiliation: "",
+            alt: "Placeholder portrait for Dr. N. Surendar",
+          }),
+        ],
+      },
+    ],
+    technicalProgramCommittee: {
+      title: "Technical Program Committee",
+      headers: {
+        track: "Track Name",
+        chairs: "Track Chairs/Co-Chair",
+        members: "Committee Members",
+      },
+      tracks: [
+        {
+          title: "Track details TBD",
+          chairs: [
+            createCommitteeMember({
+              role: "Track Chair",
+              name: "TBD",
+              designation: "Track chair to be announced",
+              affiliation: "IConSCEPT 2026",
+              alt: "Track chair placeholder portrait",
+              isPlaceholder: true,
+            }),
+            createCommitteeMember({
+              role: "Track Co-Chair",
+              name: "TBD",
+              designation: "Track co-chair to be announced",
+              affiliation: "IConSCEPT 2026",
+              alt: "Track co-chair placeholder portrait",
+              isPlaceholder: true,
+            }),
+          ],
+          members: [
+            "Committee members will be announced.",
+            "Additional reviewers and coordinators will be listed here.",
+          ],
+        },
+      ],
+    },
+  },
+  sponsorsPage: {
+    intro: {
+      tag: "Sponsors and Partners",
+      title: "Technical sponsorship and collaboration opportunities",
+      text:
+        "IConSCEPT 2026 is supported by institutional leadership at NIT Puducherry and welcomes collaboration from technical sponsors, academic partners, industry organizations, and exhibitors.",
+    },
+    technicalSponsor: {
+      name: "IEEE Madras Section",
+      role: "Technical Sponsor",
+      status: "Confirmed",
+      logo: ieeeLogoIcon,
+      alt: "IEEE Madras Section logo",
+      description:
+        "IEEE Madras Section is the confirmed technical sponsor for IConSCEPT 2026 and supports the conference’s academic and publication framework.",
+    },
+    institutionalSupport: [
+      {
+        title: "Host Institute",
+        value: "National Institute of Technology Puducherry",
+      },
+      {
+        title: "Organizing Departments",
+        value: "Departments of EEE, ECE, and CSE",
+      },
+      {
+        title: "Conference Venue",
+        value: "Karaikal, India",
+      },
+    ],
+    opportunityTracks: [
+      {
+        title: "Academic Partners",
+        status: "Open",
+        text: "Universities, research groups, and professional communities can collaborate through knowledge partnerships and outreach support.",
+      },
+      {
+        title: "Industry Sponsors",
+        status: "Open",
+        text: "Organizations can support the conference through branding, technical engagement, student outreach, and session participation.",
+      },
+      {
+        title: "Exhibition Partners",
+        status: "Open",
+        text: "Technology exhibitors and innovation-focused organizations can connect with attendees through showcase and engagement opportunities.",
+      },
+      {
+        title: "Institutional Collaborators",
+        status: "Open",
+        text: "Professional bodies, incubators, and innovation cells can partner on visibility, participation, and conference ecosystem activities.",
+      },
+    ],
+    featuredBenefits: [
+      "Visibility on the official conference website and communication materials",
+      "Association with a national conference hosted at NIT Puducherry",
+      "Access to academic, research, and industry participants",
+      "Opportunities for technical engagement and institutional branding",
+    ],
+    contact: {
+      label: "Sponsorship and partnerships",
+      value: "nitpy.iconscept@gmail.com",
+      href: "mailto:nitpy.iconscept@gmail.com",
+      note:
+        "Write to the sponsorship desk for partnership discussions, support categories, branding opportunities, and collaboration details.",
+    },
+  },
   sponsorNotes: [
     "IEEE Madras Section is the technical sponsor for IConSCEPT 2026.",
     "Additional sponsors, exhibitors, and institutional partners will be announced in due course.",
