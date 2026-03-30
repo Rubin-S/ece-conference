@@ -7,8 +7,13 @@ export default function About() {
     <main>
       <Section id="about-page" className="!pt-6 md:!pt-8" aria-labelledby="about-page-heading" reveal={false}>
         <div className="container">
-          <header className="sr-only">
-            <h1 id="about-page-heading">{siteContent.brand.fullName}</h1>
+          <header>
+            <h1
+              id="about-page-heading"
+              className="mb-8 text-[clamp(2rem,4vw,3.1rem)] font-semibold leading-none tracking-[-0.04em] text-light-pt"
+            >
+              IConSCEPT 2026
+            </h1>
           </header>
 
           <div className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
