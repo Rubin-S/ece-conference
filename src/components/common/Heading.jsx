@@ -1,10 +1,8 @@
-import TagLine from "./Tagline";
-
 const Heading = ({
   className = "",
   title,
   text,
-  tag,
+  tag: _tag,
   centered = true,
   ...props
 }) => {
@@ -13,10 +11,6 @@ const Heading = ({
     centered ? "md:text-center" : "",
     className,
   ]
-    .filter(Boolean)
-    .join(" ");
-
-  const tagClasses = ["mb-4", centered ? "md:justify-center" : ""]
     .filter(Boolean)
     .join(" ");
 
@@ -29,11 +23,6 @@ const Heading = ({
 
   return (
     <div {...props} className={rootClasses}>
-      {tag ? (
-        <div>
-          <TagLine className={tagClasses}>{tag}</TagLine>
-        </div>
-      ) : null}
       {title ? (
         <h2 className="h2 text-light-pt">
           {title}

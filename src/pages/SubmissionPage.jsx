@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
 import Heading from "../components/common/Heading";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
 import { siteContent } from "../content/siteContent";
+
+const submissionPortalHref = "https://cmt3.research.microsoft.com/IConSCEPT2023/Submission/Index";
 
 export default function SubmissionPage() {
   return (
@@ -14,6 +17,16 @@ export default function SubmissionPage() {
             title="Submission instructions for IConSCEPT 2026"
             text={siteContent.submission.portalStatus}
           />
+          <div className="-mt-6 mb-10 flex justify-center md:-mt-8 md:mb-12">
+            <a
+              href={submissionPortalHref}
+              target="_blank"
+              rel="noreferrer"
+              className="button-primary min-w-[18rem]"
+            >
+              Submit your manuscript
+            </a>
+          </div>
 
           <div className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
             <MotionReveal as="article" className="surface-panel">
@@ -27,11 +40,11 @@ export default function SubmissionPage() {
                 </ul>
             </MotionReveal>
 
-            <aside className="space-y-6">
-              <MotionReveal as="article" className="surface-card" delay={0.06}>
+            <aside className="space-y-4">
+              <MotionReveal as="article" className="surface-card pb-1" delay={0.06}>
                 <p className="site-eyebrow">Submission Queries</p>
                 <div className="mt-5 space-y-4 text-sm text-light-st">
-                  {siteContent.contacts.slice(0, 2).map((contact) => (
+                  {siteContent.contacts.slice(0, 1).map((contact) => (
                     <a
                       key={contact.label}
                       href={contact.href}
@@ -43,13 +56,21 @@ export default function SubmissionPage() {
                     </a>
                   ))}
                 </div>
+                <div className="mt-4 border-t border-light-divider/80" />
               </MotionReveal>
 
-              <MotionReveal as="article" className="surface-card" delay={0.12}>
-                <p className="site-eyebrow">2026 Brochure</p>
-                <p className="mt-5 text-sm leading-7 text-light-st">
-                  The official brochure and author kit for the 2026 edition will be released on this website.
-                </p>
+              <MotionReveal as="article" delay={0.12}>
+                <Link
+                  to="/call-for-papers"
+                  className="group block w-full max-w-[28rem] rounded-[2rem] border border-light-divider/80 bg-white/80 px-6 py-7 shadow-soft backdrop-blur-sm transition-all duration-200 hover:border-primary-400/70 hover:bg-light-sb/90 md:px-8"
+                >
+                  <p className="text-[1.2rem] font-semibold leading-8 tracking-[-0.03em] text-light-pt transition-colors duration-200 group-hover:text-primary-600">
+                    Guidline, Templates and download
+                  </p>
+                  <p className="mt-3 text-sm leading-7 text-light-st">
+                    Open the call-for-paper page for author guidance, templates, and download resources.
+                  </p>
+                </Link>
               </MotionReveal>
             </aside>
           </div>

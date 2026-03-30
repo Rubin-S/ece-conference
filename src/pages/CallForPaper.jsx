@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Heading from "../components/common/Heading";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
 
@@ -8,7 +7,6 @@ export default function CallForPaper() {
     "Submission Guidelines",
     "Copyright Transfer",
     "Oral Presentation Guidelines",
-    "Poster Presentation Guidelines",
   ];
 
   const submissionGuidelineDetails = [
@@ -19,11 +17,10 @@ export default function CallForPaper() {
   ];
 
   const templateItems = [
-    { label: "Call For Paper", href: "/YusufResumeNITPY.pdf", showDownload: false },
     { label: "Paper Template (MS Word)", href: "/EDTM-2026_Final_conference-template-A4.docx" },
     { label: "Paper Template (LaTeX)", href: "/IEEE-LaTex-EDTM-2026.zip" },
     {
-      label: "Submission Portal",
+      label: "Overleaf template",
       href: "https://cmt3.research.microsoft.com/IConSCEPT2023/Submission/Index",
       showDownload: false,
     },
@@ -34,16 +31,11 @@ export default function CallForPaper() {
       <Section
         id="call-for-papers"
         className="!pt-6 md:!pt-8"
-        aria-labelledby="call-for-papers-heading"
+        aria-label="Call for papers"
         reveal={false}
       >
         <div className="container">
-          <Heading
-            id="call-for-papers-heading"
-            tag="Call for Papers"
-          />
-
-          <MotionReveal className="-mt-4 mb-8 grid gap-4 lg:grid-cols-2" delay={0.08}>
+          <MotionReveal className="mb-8 grid gap-4 lg:grid-cols-2" delay={0.08}>
             <div className="flex justify-center">
               <a
                 href="/YusufResumeNITPY.pdf"
@@ -51,7 +43,7 @@ export default function CallForPaper() {
                 rel="noreferrer"
                 className="button-primary min-w-[15rem]"
               >
-                Call for paper
+                Call for papers
               </a>
             </div>
             <div className="flex justify-center">

@@ -12,22 +12,27 @@ export default function Contact() {
             id="contact-heading"
             tag="Contact"
             title="Official communication channels"
-            text="For all conference communication, please use the official email contacts listed below."
+            text="For all conference communication, please use the official email contact listed below."
           />
 
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {siteContent.contacts.map((contact, index) => (
-              <MotionReveal key={contact.label} as="article" className="surface-card" delay={index * 0.05}>
+          <div className="flex justify-center">
+            {siteContent.contacts.slice(0, 1).map((contact, index) => (
+              <MotionReveal
+                key={contact.label}
+                as="article"
+                className="surface-card flex w-full max-w-[28rem] flex-col items-center text-center"
+                delay={index * 0.05}
+              >
                 <p className="site-eyebrow">{contact.label}</p>
                 {contact.href ? (
                   <a
                     href={contact.href}
-                    className="mt-5 block text-sm leading-7 text-light-pt hover:text-primary-600"
+                    className="mt-5 block text-[1.05rem] leading-7 text-light-pt hover:text-primary-600"
                   >
                     {contact.value}
                   </a>
                 ) : (
-                  <p className="mt-5 text-sm leading-7 text-light-st">{contact.value}</p>
+                  <p className="mt-5 text-[1.05rem] leading-7 text-light-st">{contact.value}</p>
                 )}
               </MotionReveal>
             ))}
@@ -36,7 +41,17 @@ export default function Contact() {
           <div className="mt-8 grid gap-6 lg:grid-cols-[1fr,1fr]">
             <MotionReveal as="article" className="surface-panel">
               <p className="site-eyebrow">Venue</p>
-              <p className="mt-5 text-sm leading-7 text-light-st">{siteContent.brand.venue}</p>
+              <div className="mt-5 overflow-hidden rounded-[1.4rem] border border-light-divider/80 shadow-soft">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.6676737725215!2d79.84310747509168!3d10.988437389173518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a55112cc3dc97d9%3A0x6b8a0f3ccb72149e!2sNational%20Institute%20of%20Technology%2C%20Puducherry%20Science%20Block!5e0!3m2!1sen!2sin!4v1774534443298!5m2!1sen!2sin"
+                  className="h-[20rem] w-full"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="National Institute of Technology Puducherry map"
+                />
+              </div>
             </MotionReveal>
 
             <MotionReveal as="article" className="surface-card" delay={0.08}>
