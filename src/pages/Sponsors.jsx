@@ -1,4 +1,3 @@
-import Heading from "../components/common/Heading";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
 import { siteContent } from "../content/siteContent";
@@ -18,12 +17,9 @@ export default function Sponsors() {
     <main>
       <Section id="sponsors" className="!pt-6 md:!pt-8" aria-labelledby="sponsors-heading" reveal={false}>
         <div className="container">
-          <Heading
-            id="sponsors-heading"
-            tag={sponsorsPage.intro.tag}
-            title={sponsorsPage.intro.title}
-            text={sponsorsPage.intro.text}
-          />
+          <header className="sr-only">
+            <h1 id="sponsors-heading">{sponsorsPage.intro.title}</h1>
+          </header>
 
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
             <MotionReveal
@@ -71,57 +67,6 @@ export default function Sponsors() {
                 ))}
               </dl>
             </MotionReveal>
-          </div>
-
-          <div className="mt-12 grid gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-            <MotionReveal as="section" className="surface-panel">
-              <p className="site-eyebrow">Opportunities</p>
-              <h2 className="mt-4 text-[1.55rem] font-semibold tracking-[-0.03em] text-light-pt md:text-[1.9rem]">
-                Partnership categories open for collaboration
-              </h2>
-              <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                {sponsorsPage.opportunityTracks.map((item, index) => (
-                  <div
-                    key={item.title}
-                    className={[
-                      "rounded-[1.2rem] border border-light-divider/80 bg-light-sb/85 p-5",
-                      index === 0 ? "sm:col-span-2" : "",
-                    ].join(" ")}
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <h3 className="text-[1.05rem] font-semibold text-light-pt">{item.title}</h3>
-                      <SponsorStatus>{item.status}</SponsorStatus>
-                    </div>
-                    <p className="mt-4 text-sm leading-7 text-light-st">{item.text}</p>
-                  </div>
-                ))}
-              </div>
-            </MotionReveal>
-
-            <aside className="space-y-6">
-              <MotionReveal as="article" className="surface-card" delay={0.08}>
-                <p className="site-eyebrow">Why Partner</p>
-                <ul className="mt-5 space-y-3 text-sm leading-7 text-light-st">
-                  {sponsorsPage.featuredBenefits.map((benefit) => (
-                    <li key={benefit} className="flex gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-500" />
-                      <span>{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-              </MotionReveal>
-
-              <MotionReveal as="article" className="surface-card" delay={0.12}>
-                <p className="site-eyebrow">{sponsorsPage.contact.label}</p>
-                <a
-                  href={sponsorsPage.contact.href}
-                  className="mt-5 inline-block text-[1rem] font-semibold text-light-pt hover:text-primary-600"
-                >
-                  {sponsorsPage.contact.value}
-                </a>
-                <p className="mt-3 text-sm leading-7 text-light-st">{sponsorsPage.contact.note}</p>
-              </MotionReveal>
-            </aside>
           </div>
         </div>
       </Section>

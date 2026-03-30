@@ -43,7 +43,7 @@ export default function Registration() {
           <Heading
             id="registration-heading"
             tag="Registration"
-            title="Tentative registration fees for IConSCEPT 2026"
+            title="Registration fees for IConSCEPT 2026"
             text={siteContent.registration.notice}
           />
 

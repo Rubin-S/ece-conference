@@ -1,4 +1,3 @@
-import Heading from "../components/common/Heading";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
 import { siteContent } from "../content/siteContent";
@@ -8,13 +7,9 @@ export default function About() {
     <main>
       <Section id="about-page" className="!pt-6 md:!pt-8" aria-labelledby="about-page-heading" reveal={false}>
         <div className="container">
-          <Heading
-            id="about-page-heading"
-            tag="About IConSCEPT 2026"
-            title={siteContent.brand.fullName}
-            text="IConSCEPT 2026 is the fourth edition of the conference series hosted at NIT Puducherry and organized around contemporary advances in signal, computation, electronics, power, and telecommunication."
-            centered={false}
-          />
+          <header className="sr-only">
+            <h1 id="about-page-heading">{siteContent.brand.fullName}</h1>
+          </header>
 
           <div className="grid gap-8 lg:grid-cols-[1.1fr,0.9fr]">
             <MotionReveal as="article" className="surface-panel">

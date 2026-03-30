@@ -248,7 +248,7 @@ export const siteContent = {
   ],
   registration: {
     notice:
-      "The registration fee schedule below is tentative and reflects the fee structure shared for the 2026 edition.",
+      "The registration fee schedule below reflects the fee structure for the 2026 edition.",
     portalText:
       "The online registration portal and payment instructions will be announced on this website once released by the organizing committee.",
     indian: [
