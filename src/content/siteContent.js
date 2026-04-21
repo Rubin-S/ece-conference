@@ -4,14 +4,14 @@ import ieeeLogoIcon from "../assets/images/ieee_logo_icon.webp";
 import priceSheet from "../../docs/price.jpeg";
 
 export const navLinks = [
-  { id: "about", title: "About", url: "/about-us" },
+  
   { id: "cfp", title: "Call for Papers", url: "/call-for-papers" },
   { id: "dates", title: "Important Dates", url: "/important-dates" },
-  { id: "publication", title: "Publication", url: "/publications" },
+  { id: "guidelines", title: "Guidelines", url: "/guidelines" },
   { id: "registration", title: "Registration", url: "/registration" },
-  { id: "submission", title: "Submission", url: "/submission" },
   { id: "committees", title: "Committees", url: "/committees" },
   { id: "sponsors", title: "Sponsors", url: "/sponsors" },
+  { id: "about", title: "About", url: "/about-us" },
   { id: "contact", title: "Contact", url: "/contact-us" },
 ];
 
@@ -42,8 +42,29 @@ const normalizeCommitteeName = (name) => {
     return cleanedName;
   }
 
+  const toTitleCaseName = (value) =>
+    value
+      .split(" ")
+      .map((word) =>
+        word
+          .split(/([.'-])/)
+          .map((segment) => {
+            if (!/^[A-Za-z]+$/.test(segment)) {
+              return segment;
+            }
+
+            if (segment.length === 1) {
+              return segment.toUpperCase();
+            }
+
+            return `${segment.charAt(0).toUpperCase()}${segment.slice(1).toLowerCase()}`;
+          })
+          .join("")
+      )
+      .join(" ");
+
   const withoutHonorific = cleanedName.replace(/^dr\.?\s*/i, "");
-  return `Dr. ${withoutHonorific}`;
+  return `Dr. ${toTitleCaseName(withoutHonorific)}`;
 };
 
 const parseCommitteeMeta = (meta) => {
@@ -160,32 +181,32 @@ export const siteContent = {
   ],
   tracks: [
     {
-      title: "Communication, Signal Processing, and Antenna Systems",
+      title: "Communication",
       description:
         "Wireless communication, signal processing, antenna and microwave systems, optical communication, satellite links, and computation-driven RF methods.",
     },
     {
-      title: "VLSI, Embedded Systems, and IoT",
+      title: "Microelectronics and VLSI",
       description:
         "VLSI design, embedded platforms, real-time systems, sensor networks, IoT architectures, hardware for AI, and secure edge devices.",
     },
     {
-      title: "Power Electronics, Renewable Energy, and Smart Grids",
+      title: "Energy Conservation Systems",
       description:
         "Power converters, renewable generation, storage systems, electric mobility, grid intelligence, power quality, and adaptive energy management.",
     },
     {
-      title: "Automation, Control, and Robotics",
+      title: "Power Systems, Automation & Control",
       description:
         "Industrial automation, robotics, control systems, instrumentation, cyber-physical integration, and intelligent actuation for modern infrastructure.",
     },
     {
-      title: "Artificial Intelligence, Data Learning, and Emerging Computing",
+      title: "Data Learning (AI/ML/DL)",
       description:
         "Artificial intelligence, machine learning, deep learning, data analytics, cloud and edge computing, and intelligent system design.",
     },
     {
-      title: "Computation for Engineering Systems",
+      title: "Data Computing",
       description:
         "Algorithms, modeling, simulation, and computing methods that support electronics, telecommunication, power, and interdisciplinary engineering research.",
     },
@@ -196,16 +217,53 @@ export const siteContent = {
     paperFormat:
       "Full-length papers should follow IEEE double-column formatting and be prepared in English.",
     paperLength:
-      "The final author kit will confirm the page limit and submission checklist for the 2026 edition.",
+      "The final author kit will confirm the page limit, camera-ready refinements, and final compliance checks for the 2026 edition.",
     portalStatus:
-      "The official submission portal and 2026 author kit will be announced on this page as soon as they are released by the organizing committee.",
-    checklist: [
-      "Original unpublished work only",
-      "English-language manuscript",
-      "IEEE double-column paper format",
-      "Submission link will be announced on the website",
-      "Camera-ready instructions will accompany the final author kit",
+      "Use the author guidelines below to prepare your manuscript early. The official submission portal and 2026 author kit will be announced on this page as soon as they are released by the organizing committee.",
+    authorGuidelines: [
+      {
+        title: "Submission readiness",
+        detail:
+          "Prepare original and unpublished work in IEEE double-column format, with title, author names, affiliations, contact details, references, figures, and PDF readability checked before upload.",
+      },
+      {
+        title: "Author experience",
+        detail:
+          "Submit a clean reviewer-ready PDF and keep author metadata consistent between the manuscript and the portal.",
+      },
+      {
+        title: "Registration fees",
+        detail:
+          "Author registration is mandatory for accepted papers. Fee slabs and payment updates are published on the registration page.",
+      },
+      {
+        title: "Language",
+        detail:
+          "All papers must be written in English with clear technical presentation, readable figures, and consistent formatting.",
+      },
+      {
+        title: "Plagiarism notice",
+        detail:
+          "Submissions must be original and may be screened for plagiarism or significant overlap before review or publication.",
+      },
+      {
+        title: "Attendance expectation",
+        detail:
+          "At least one author of each accepted paper is expected to register and present the work during the conference.",
+      },
+      {
+        title: "Submission updates",
+        detail:
+          "The official submission link, camera-ready instructions, copyright details, and metadata requirements will be announced on the website with the final author kit.",
+      },
+      {
+        title: "Publication compliance",
+        detail:
+          "IConSCEPT 2026 currently follows an IEEE publication pathway, so final accepted papers must follow the official camera-ready and copyright instructions released by the conference.",
+      },
     ],
+    authorGuidanceNote:
+      "Use the call-for-papers page for templates and the registration page for fee details. Do not rely on Springer-style or third-party instructions unless the organizing committee officially announces a different publication workflow.",
   },
   publication: {
     overview:
@@ -235,6 +293,76 @@ export const siteContent = {
       "IEEE copyright and metadata instructions will accompany the camera-ready guidelines.",
       "Publication remains subject to IEEE review policies and technical compliance.",
     ],
+  },
+  guidelines: {
+    intro:
+      "Author guidance, publication instructions, and final paper requirements for IConSCEPT 2026 are consolidated on this page.",
+    authorGuidelines: [
+      {
+        title: "Originality",
+        detail:
+          "Only original technical papers that are not published or under review elsewhere should be submitted.",
+      },
+      {
+        title: "Language",
+        detail:
+          "All manuscripts must be written in English with clear technical presentation and readable figures.",
+      },
+      {
+        title: "Plagiarism",
+        detail:
+          "Similarity should remain within 15%, and submissions may be screened for overlap before review or publication.",
+      },
+      {
+        title: "Registration",
+        detail:
+          "At least one author of every accepted paper must complete a full registration for the paper to remain eligible for the conference proceedings.",
+      },
+    ],
+    publicationGuidelines: [
+      {
+        title: "Pages",
+        detail:
+          "Full-length research papers should normally be prepared within the conference page limit, with up to 2 additional pages only if permitted in the final author instructions.",
+      },
+      {
+        title: "Format and font",
+        detail:
+          "Manuscripts must follow the IEEE double-column format and be submitted as a properly readable PDF.",
+        templates: [
+          {
+            label: "Paper Template (MS Word)",
+            href: "/IConSECPT-2026_Final_conference-template-A4.docx",
+          },
+          {
+            label: "Paper Template (LaTeX)",
+            href: "/IEEE-LaTex-IconSECPT-2026.zip",
+          },
+        ],
+      },
+      {
+        title: "Submission portal",
+        detail:
+          "Microsoft CMT submission link coming shortly.",
+      },
+      {
+        title: "How to submit",
+        detail:
+          "Authors should complete the submission metadata carefully and upload the manuscript through Microsoft CMT once the portal is announced.",
+      },
+    ],
+    publicationRequirementsIntro:
+      "For accepted papers to be included in the conference proceedings and considered for inclusion in the IEEE Xplore® Digital Library, the following conditions must be met by the specified deadline:",
+    publicationRequirements: [
+      "Submission of the final version of the paper.",
+      "Transfer of copyright to IEEE.",
+      "At least one author must register for the conference with a full registration.",
+      "The paper must be presented at the conference.",
+    ],
+    publicationRequirementsClosing:
+      "Accepted papers will be submitted for inclusion into IEEE Xplore subject to meeting IEEE Xplore’s scope and quality requirements.",
+    cmtNotice:
+      "The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support. ",
   },
   importantDates2026: [
     { label: "Conference dates", value: "December 17-18, 2026", status: "Confirmed" },
@@ -321,22 +449,25 @@ export const siteContent = {
   contacts: [
     {
       label: "General queries",
+      type: "email",
       value: "iconscept@nitpy.ac.in",
       href: "mailto:iconscept@nitpy.ac.in",
     },
     {
-      label: "Paper queries",
-      value: "paper_iconscept@nitpy.ac.in",
-      href: "mailto:paper_iconscept@nitpy.ac.in",
-    },
-    {
-      label: "Sponsorship and partnerships",
-      value: "nitpy.iconscept@gmail.com",
-      href: "mailto:nitpy.iconscept@gmail.com",
-    },
-    {
       label: "Phone coordination",
-      value: "To be announced",
+      type: "phone",
+      people: [
+        {
+          name: "Vijaya Kumar K",
+          value: "+91 9566453837",
+          href: "tel:+919566453837",
+        },
+        {
+          name: "Priyadharshini R",
+          value: "+91 7604900332",
+          href: "tel:+917604900332",
+        },
+      ],
     },
   ],
   committeePage: {
@@ -368,18 +499,19 @@ Department : NIT Puducherry`,
     sections: [
       createCommitteeSection("Conference Chairs", "Conference Chair", [
         [
+          "Dr. ANIRUDDHA KANHE",
+          `Designation: Associate Professor
+
+Department: Head of Department
+Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/21/",
+        ],
+                [
           "Dr. SURESH BALANETHIRAM",
           `Designation: Assistant Professor
 
 Department: Electronics & Communication Engineering`,
           "https://research.nitpy.ac.in/profile/photo/97/",
-        ],
-        [
-          "Dr. ANIRUDDHA KANHE",
-          `Designation: Associate Professor
-
-Department: Electronics & Communication Engineering`,
-          "https://research.nitpy.ac.in/profile/photo/21/",
         ],
       ], "spotlight"),
       createCommitteeSection("Technical Program Chairs", "Technical Program Chair", [
@@ -392,14 +524,14 @@ Department: Electronics & Communication Engineering`,
         ],
         [
           "Dr. Vinopraba. T",
-          `Designation: Professor
+          `Designation: Professor & Head
 
 Department: Electrical & Electronics Engineering`,
           "https://research.nitpy.ac.in/profile/photo/1002/",
         ],
         [
           "Dr. Venkatesan M",
-          `Designation: Associate Professor
+          `Designation: Associate Professor & Head
 
 Department: Computer Science & Engineering`,
           "https://research.nitpy.ac.in/profile/photo/105/",
@@ -446,18 +578,18 @@ Department: Electronics & Communication Engineering`,
           "https://research.nitpy.ac.in/profile/photo/7/",
         ],
         [
-          "Dr. BOOPATHI RANI R",
-          `Designation: Associate Professor
+          "Thangavel Subbaiyan",
+          `Designation: Professor
 
-Department: Electronics & Communication Engineering`,
-          "https://research.nitpy.ac.in/profile/photo/10/",
+Department: Electrical & Electronics Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/50/",
         ],
         [
-          "Dr. R MURUGAN",
-          `Designation: Associate Professor
+          "G Koperundevi",
+          `Designation: Professor
 
-Department: Electronics & Communication Engineering`,
-          "https://research.nitpy.ac.in/profile/photo/25596602/",
+Department: Electrical & Electronics Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/14/",
         ],
         [
           "Dr. Surendiran B",
@@ -474,25 +606,18 @@ Department: Computer Science & Engineering`,
           "https://research.nitpy.ac.in/profile/photo/16/",
         ],
         [
-          "Dr. Sanjay Bankapur",
-          `Designation: Assistant Professor
+          "Dr. BOOPATHI RANI R",
+          `Designation: Associate Professor
 
-Department: Computer Science & Engineering`,
-          "https://research.nitpy.ac.in/profile/photo/90/",
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/10/",
         ],
         [
-          "G Koperundevi",
-          `Designation: Professor
+          "Dr. R MURUGAN",
+          `Designation: Associate Professor
 
-Department: Electrical & Electronics Engineering`,
-          "https://research.nitpy.ac.in/profile/photo/14/",
-        ],
-        [
-          "Thangavel Subbaiyan",
-          `Designation: Professor
-
-Department: Electrical & Electronics Engineering`,
-          "https://research.nitpy.ac.in/profile/photo/50/",
+Department: Electronics & Communication Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/25596602/",
         ],
         [
           "Venkadesan Arunachalam",
@@ -501,6 +626,14 @@ Department: Electrical & Electronics Engineering`,
 Department: Electrical & Electronics Engineering`,
           "https://research.nitpy.ac.in/profile/photo/26/",
         ],
+        [
+          "Dr. Sanjay Bankapur",
+          `Designation: Assistant Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/90/",
+        ],
+
       ]),
       createCommitteeSection("Publicity Chairs", "Publicity Chair", [
         [
@@ -534,19 +667,20 @@ Department: Electronics & Communication Engineering`,
           "https://research.nitpy.ac.in/profile/photo/15/",
         ],
         [
-          "Dr. Vani V",
-          `Designation: Assistant Professor
-
-Department: Computer Science & Engineering`,
-          "https://research.nitpy.ac.in/profile/photo/112/",
-        ],
-        [
           "Navin Sam K",
           `Designation: Associate Professor
 
 Department: Electrical & Electronics Engineering`,
           "https://research.nitpy.ac.in/profile/photo/48/",
         ],
+        [
+          "Dr. Vani V",
+          `Designation: Assistant Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/112/",
+        ],
+
       ]),
       createCommitteeSection("Registration Chairs", "Registration Chair", [
         [
@@ -557,19 +691,20 @@ Department: Electronics & Communication Engineering`,
           "https://research.nitpy.ac.in/profile/photo/165/",
         ],
         [
-          "Dr. Karthik N",
-          `Designation: Assistant Professor
-
-Department: Computer Science & Engineering`,
-          "https://research.nitpy.ac.in/profile/photo/119/",
-        ],
-        [
           "Gowrishankar S",
           `Designation: Assistant Professor
 
 Department: Electrical & Electronics Engineering`,
           "https://research.nitpy.ac.in/profile/photo/126/",
         ],
+        [
+          "Dr. Karthik N",
+          `Designation: Assistant Professor
+
+Department: Computer Science & Engineering`,
+          "https://research.nitpy.ac.in/profile/photo/119/",
+        ],
+
       ]),
       createCommitteeSection("Hospitality Chairs", "Hospitality Chair", [
         [

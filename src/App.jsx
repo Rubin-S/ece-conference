@@ -1,5 +1,5 @@
-import { Suspense, lazy } from "react";
-import { BrowserRouter, Outlet, Route, Routes, useLocation } from "react-router-dom";
+import { Suspense, lazy, useEffect } from "react";
+import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation } from "react-router-dom";
 import Footer from "./components/layout/Footer";
 import Navbar from "./components/layout/Header";
 import SiteBackground from "./components/layout/SiteBackground";
@@ -13,9 +13,18 @@ const CommitteesPage = lazy(() => import("./pages/Committees"));
 const Registration = lazy(() => import("./pages/Registration"));
 const ImportantDates = lazy(() => import("./pages/ImportantDates"));
 const RegistrationPortal = lazy(() => import("./pages/RegistrationPortal"));
-const SubmissionPage = lazy(() => import("./pages/SubmissionPage"));
-const Publication = lazy(() => import("./pages/Publication"));
+const Gudilines = lazy(() => import("./pages/Gudilines"));
 const SponsorsPage = lazy(() => import("./pages/Sponsors"));
+
+const ScrollToTop = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [location.pathname]);
+
+  return null;
+};
 
 const Layout = () => {
   const location = useLocation();
@@ -46,6 +55,7 @@ const RouteFallback = () => (
 const App = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="relative min-h-screen overflow-x-clip">
         <SiteBackground />
         <div className="relative z-10">
@@ -59,8 +69,7 @@ const App = () => {
                 <Route path="committees" element={<CommitteesPage />} />
                 <Route path="registration" element={<Registration />} />
                 <Route path="registration/form" element={<RegistrationPortal />} />
-                <Route path="submission" element={<SubmissionPage />} />
-                <Route path="publications" element={<Publication />} />
+                <Route path="guidelines" element={<Gudilines />} />
                 <Route path="sponsors" element={<SponsorsPage />} />
                 <Route path="contact-us" element={<ContactUs />} />
                 <Route path="*" element={<Nopage />} />

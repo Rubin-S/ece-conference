@@ -62,7 +62,7 @@ function SpotlightMember({ member }) {
         <p className="inline-flex rounded-full border border-[#d8c3a2] bg-[#f7efe2] px-3 py-1 text-[0.68rem] font-code uppercase tracking-[0.22em] text-[#94682e]">
           {member.role}
         </p>
-        <p className="mt-4 text-[1.08rem] font-semibold leading-tight tracking-[-0.02em] text-[#234f90] md:text-[1.22rem]">
+        <p className="mt-4 capitalize text-[1.08rem] font-semibold leading-tight tracking-[-0.02em] text-[#234f90] md:text-[1.22rem]">
           {member.name}
         </p>
         {hasMeta ? (
@@ -99,7 +99,7 @@ function GalleryMember({ member }) {
 
       <div className="mt-4 flex flex-1 flex-col">
         <div className="min-h-[3.9rem]">
-          <p className="text-[0.92rem] font-semibold leading-tight text-[#31475f] md:text-[0.98rem]">{member.name}</p>
+          <p className="text-[0.92rem] capitalize font-semibold leading-tight text-[#31475f] md:text-[0.98rem]">{member.name}</p>
         </div>
         {hasMeta ? (
           <>

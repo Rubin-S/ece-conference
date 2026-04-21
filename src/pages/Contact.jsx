@@ -1,9 +1,12 @@
+import { Mail, PhoneCall } from "lucide-react";
 import Heading from "../components/common/Heading";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
 import { siteContent } from "../content/siteContent";
 
 export default function Contact() {
+  const primaryContacts = siteContent.contacts.slice(0, 2);
+
   return (
     <main>
       <Section id="contact" className="!pt-6 md:!pt-8" aria-labelledby="contact-heading" reveal={false}>
@@ -12,28 +15,50 @@ export default function Contact() {
             id="contact-heading"
             tag="Contact"
             title="Official communication channels"
-            text="For all conference communication, please use the official email contact listed below."
+            text="For all conference communication, please use the official email and phone contacts listed below."
           />
 
-          <div className="flex justify-center">
-            {siteContent.contacts.slice(0, 1).map((contact, index) => (
+          <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+            {primaryContacts.map((contact, index) => (
               <MotionReveal
                 key={contact.label}
                 as="article"
-                className="surface-card flex w-full max-w-[28rem] flex-col items-center text-center"
+                className="surface-card grid h-full w-full max-w-none grid-cols-[2.5rem,minmax(0,1fr)] gap-x-5 gap-y-3 sm:grid-cols-[3rem,minmax(0,1fr)] sm:gap-x-6"
                 delay={index * 0.05}
               >
-                <p className="site-eyebrow">{contact.label}</p>
-                {contact.href ? (
-                  <a
-                    href={contact.href}
-                    className="mt-5 block text-[1.05rem] leading-7 text-light-pt hover:text-primary-600"
-                  >
-                    {contact.value}
-                  </a>
-                ) : (
-                  <p className="mt-5 text-[1.05rem] leading-7 text-light-st">{contact.value}</p>
-                )}
+                <div className="flex items-start justify-center pt-1 text-light-pt">
+                  {contact.type === "phone" ? (
+                    <PhoneCall className="h-9 w-9" strokeWidth={1.8} aria-hidden="true" />
+                  ) : (
+                    <Mail className="h-9 w-9" strokeWidth={1.8} aria-hidden="true" />
+                  )}
+                </div>
+
+                <div className="min-w-0">
+                  <p className="site-eyebrow !flex">{contact.label}</p>
+                  {contact.type === "phone" ? (
+                    <div className="mt-4 grid gap-2.5 text-[1.05rem] leading-7 text-light-pt">
+                      {contact.people.map((person) => (
+                        <div
+                          key={person.name}
+                          className="grid gap-0.5 sm:grid-cols-[max-content,1fr] sm:items-baseline sm:gap-x-3"
+                        >
+                          <span className="font-medium">{person.name} :</span>
+                          <a href={person.href} className="hover:text-primary-600">
+                            {person.value}
+                          </a>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <a
+                      href={contact.href}
+                      className="mt-4 block text-[1.05rem] leading-7 text-light-pt hover:text-primary-600"
+                    >
+                      {contact.value}
+                    </a>
+                  )}
+                </div>
               </MotionReveal>
             ))}
           </div>

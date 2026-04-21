@@ -46,11 +46,20 @@ export default function Header() {
             className="flex min-w-0 items-center gap-3 xl:max-w-[15rem] 2xl:max-w-[16.5rem]"
             onClick={() => setMobileOpen(false)}
           >
-            <img
-              src={iconsceptLogo}
-              alt="IConSCEPT 2026 logo"
-              className="h-12 w-auto shrink-0 object-contain md:h-[3.15rem]"
-            />
+            <span
+              className={[
+                "flex shrink-0 items-center justify-center rounded-full border px-3 py-2 transition-all duration-200 ease-smooth",
+                isHome
+                  ? "border-[#9fe3ff]/45 bg-[linear-gradient(180deg,rgba(248,252,255,0.96)_0%,rgba(232,242,248,0.9)_100%)] shadow-[0_12px_30px_rgba(6,18,28,0.24)]"
+                  : "border-primary-400/60 bg-[linear-gradient(180deg,#fbfdff_0%,#eef6fb_100%)] shadow-[0_12px_30px_rgba(15,23,42,0.08)]",
+              ].join(" ")}
+            >
+              <img
+                src={iconsceptLogo}
+                alt="IConSCEPT 2026 logo"
+                className="h-12 w-auto object-contain md:h-[3.15rem]"
+              />
+            </span>
           </NavLink>
 
           <nav className="hidden min-w-0 items-center justify-center gap-3 xl:flex 2xl:gap-5">

@@ -414,10 +414,10 @@ export default function Home() {
                     </h2>
                   </div>
                   <Link
-                    to="/submission"
+                    to="/gudilines"
                     className="inline-flex items-center justify-center self-start rounded-full border border-primary-500 bg-primary-500 px-7 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-200 hover:border-primary-600 hover:bg-primary-600 md:self-auto"
                   >
-                    Submit your manuscript
+                    View Gudilines
                   </Link>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
