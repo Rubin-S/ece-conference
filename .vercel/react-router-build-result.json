@@ -1,0 +1,287 @@
+{
+  "buildManifest": {
+    "serverBundles": {
+      "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0": {
+        "id": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+        "file": "build/server/nodejs_eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    },
+    "routeIdToServerBundleId": {
+      "routes/home": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/about": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/call-for-papers": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/important-dates": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/committees": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/registration": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/registration-form": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/guidelines": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/sponsors": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/contact": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0",
+      "routes/not-found": "nodejs_eyJydW50aW1lIjoibm9kZWpzIn0"
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "app/root.tsx",
+        "path": "",
+        "config": {}
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "app/routes/home.tsx",
+        "index": true,
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/about": {
+        "id": "routes/about",
+        "parentId": "root",
+        "file": "app/routes/about.tsx",
+        "path": "about-us",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/call-for-papers": {
+        "id": "routes/call-for-papers",
+        "parentId": "root",
+        "file": "app/routes/call-for-papers.tsx",
+        "path": "call-for-papers",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/important-dates": {
+        "id": "routes/important-dates",
+        "parentId": "root",
+        "file": "app/routes/important-dates.tsx",
+        "path": "important-dates",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/committees": {
+        "id": "routes/committees",
+        "parentId": "root",
+        "file": "app/routes/committees.tsx",
+        "path": "committees",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/registration": {
+        "id": "routes/registration",
+        "parentId": "root",
+        "file": "app/routes/registration.tsx",
+        "path": "registration",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/registration-form": {
+        "id": "routes/registration-form",
+        "parentId": "root",
+        "file": "app/routes/registration-form.tsx",
+        "path": "registration/form",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/guidelines": {
+        "id": "routes/guidelines",
+        "parentId": "root",
+        "file": "app/routes/guidelines.tsx",
+        "path": "guidelines",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/sponsors": {
+        "id": "routes/sponsors",
+        "parentId": "root",
+        "file": "app/routes/sponsors.tsx",
+        "path": "sponsors",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/contact": {
+        "id": "routes/contact",
+        "parentId": "root",
+        "file": "app/routes/contact.tsx",
+        "path": "contact-us",
+        "config": {
+          "runtime": "nodejs"
+        }
+      },
+      "routes/not-found": {
+        "id": "routes/not-found",
+        "parentId": "root",
+        "file": "app/routes/not-found.tsx",
+        "path": "*",
+        "config": {
+          "runtime": "nodejs"
+        }
+      }
+    }
+  },
+  "reactRouterConfig": {
+    "appDirectory": "D:/ECE/ece-conference/app",
+    "basename": "/",
+    "buildDirectory": "D:/ECE/ece-conference/build",
+    "future": {
+      "unstable_optimizeDeps": false,
+      "unstable_passThroughRequests": false,
+      "unstable_subResourceIntegrity": false,
+      "unstable_trailingSlashAwareDataRequests": false,
+      "unstable_previewServerPrerendering": false,
+      "v8_middleware": false,
+      "v8_splitRouteModules": false,
+      "v8_viteEnvironmentApi": false
+    },
+    "routes": {
+      "root": {
+        "id": "root",
+        "file": "root.tsx",
+        "path": ""
+      },
+      "routes/home": {
+        "id": "routes/home",
+        "parentId": "root",
+        "file": "routes/home.tsx",
+        "index": true
+      },
+      "routes/about": {
+        "id": "routes/about",
+        "parentId": "root",
+        "file": "routes/about.tsx",
+        "path": "about-us"
+      },
+      "routes/call-for-papers": {
+        "id": "routes/call-for-papers",
+        "parentId": "root",
+        "file": "routes/call-for-papers.tsx",
+        "path": "call-for-papers"
+      },
+      "routes/important-dates": {
+        "id": "routes/important-dates",
+        "parentId": "root",
+        "file": "routes/important-dates.tsx",
+        "path": "important-dates"
+      },
+      "routes/committees": {
+        "id": "routes/committees",
+        "parentId": "root",
+        "file": "routes/committees.tsx",
+        "path": "committees"
+      },
+      "routes/registration": {
+        "id": "routes/registration",
+        "parentId": "root",
+        "file": "routes/registration.tsx",
+        "path": "registration"
+      },
+      "routes/registration-form": {
+        "id": "routes/registration-form",
+        "parentId": "root",
+        "file": "routes/registration-form.tsx",
+        "path": "registration/form"
+      },
+      "routes/guidelines": {
+        "id": "routes/guidelines",
+        "parentId": "root",
+        "file": "routes/guidelines.tsx",
+        "path": "guidelines"
+      },
+      "routes/sponsors": {
+        "id": "routes/sponsors",
+        "parentId": "root",
+        "file": "routes/sponsors.tsx",
+        "path": "sponsors"
+      },
+      "routes/contact": {
+        "id": "routes/contact",
+        "parentId": "root",
+        "file": "routes/contact.tsx",
+        "path": "contact-us"
+      },
+      "routes/not-found": {
+        "id": "routes/not-found",
+        "parentId": "root",
+        "file": "routes/not-found.tsx",
+        "path": "*"
+      }
+    },
+    "routeDiscovery": {
+      "mode": "lazy",
+      "manifestPath": "/__manifest"
+    },
+    "serverBuildFile": "index.js",
+    "serverModuleFormat": "esm",
+    "ssr": true,
+    "allowedActionOrigins": false,
+    "unstable_routeConfig": [
+      {
+        "id": "root",
+        "path": "",
+        "file": "root.tsx",
+        "children": [
+          {
+            "file": "routes/home.tsx",
+            "index": true
+          },
+          {
+            "file": "routes/about.tsx",
+            "path": "about-us"
+          },
+          {
+            "file": "routes/call-for-papers.tsx",
+            "path": "call-for-papers"
+          },
+          {
+            "file": "routes/important-dates.tsx",
+            "path": "important-dates"
+          },
+          {
+            "file": "routes/committees.tsx",
+            "path": "committees"
+          },
+          {
+            "file": "routes/registration.tsx",
+            "path": "registration"
+          },
+          {
+            "file": "routes/registration-form.tsx",
+            "path": "registration/form"
+          },
+          {
+            "file": "routes/guidelines.tsx",
+            "path": "guidelines"
+          },
+          {
+            "file": "routes/sponsors.tsx",
+            "path": "sponsors"
+          },
+          {
+            "file": "routes/contact.tsx",
+            "path": "contact-us"
+          },
+          {
+            "file": "routes/not-found.tsx",
+            "path": "*"
+          }
+        ]
+      }
+    ]
+  },
+  "viteConfig": {
+    "build": {
+      "assetsDir": "assets"
+    }
+  }
+}
