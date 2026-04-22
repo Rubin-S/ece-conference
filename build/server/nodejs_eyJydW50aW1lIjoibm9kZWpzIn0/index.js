@@ -2770,13 +2770,13 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/root-BeKspYjR.js",
+			"module": "/assets/root-D58gM-lN.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
 				"/assets/MotionReveal-DWupHUFH.js",
 				"/assets/esm-BtW72w9X.js"
 			],
-			"css": ["/assets/root-CSa1xmpK.css"],
+			"css": ["/assets/root-CivW9UIu.css"],
 			"clientActionModule": void 0,
 			"clientLoaderModule": void 0,
 			"clientMiddlewareModule": void 0,
@@ -3042,8 +3042,8 @@ var server_manifest_default = {
 			"hydrateFallbackModule": void 0
 		}
 	},
-	"url": "/assets/manifest-6e4e8a6a.js",
-	"version": "6e4e8a6a",
+	"url": "/assets/manifest-6aa8465b.js",
+	"version": "6aa8465b",
 	"sri": void 0
 };
 //#endregion
