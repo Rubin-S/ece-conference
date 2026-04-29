@@ -2,10 +2,11 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration, useLocation } from "re
 import Navbar from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import SiteBackground from "./components/layout/SiteBackground";
-import "./app.css";
+import appStylesHref from "./app.css?url";
 
 export function links() {
   return [
+    { rel: "stylesheet", href: appStylesHref },
     {
       rel: "stylesheet",
       href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap",

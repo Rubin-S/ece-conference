@@ -285,7 +285,7 @@ var siteContent = {
 		scope: "Prospective authors are invited to submit original and unpublished contributions aligned with the conference themes of signal processing, computation, electronics, power, telecommunication, and related intelligent systems.",
 		paperFormat: "Full-length papers should follow IEEE double-column formatting and be prepared in English.",
 		paperLength: "The final author kit will confirm the page limit, camera-ready refinements, and final compliance checks for the 2026 edition.",
-		portalStatus: "Use the author guidelines below to prepare your manuscript early. The official submission portal and 2026 author kit will be announced on this page as soon as they are released by the organizing committee.",
+		portalStatus: "Use the author guidelines below to prepare your manuscript early. The official Microsoft CMT submission portal is now available for paper uploads.",
 		authorGuidelines: [
 			{
 				title: "Submission readiness",
@@ -313,7 +313,7 @@ var siteContent = {
 			},
 			{
 				title: "Submission updates",
-				detail: "The official submission link, camera-ready instructions, copyright details, and metadata requirements will be announced on the website with the final author kit."
+				detail: "Use the official Microsoft CMT submission portal published on the website for paper upload. Camera-ready instructions, copyright details, and metadata requirements will continue to be updated here."
 			},
 			{
 				title: "Publication compliance",
@@ -387,11 +387,13 @@ var siteContent = {
 			},
 			{
 				title: "Submission portal",
-				detail: "Microsoft CMT submission link coming shortly."
+				detail: "Submit your manuscript through the official Microsoft CMT portal.",
+				href: "https://cmt3.research.microsoft.com/IConSCEPT2026/Submission/Index",
+				linkLabel: "Open Microsoft CMT submission portal"
 			},
 			{
 				title: "How to submit",
-				detail: "Authors should complete the submission metadata carefully and upload the manuscript through Microsoft CMT once the portal is announced."
+				detail: "Authors should complete the submission metadata carefully and upload the manuscript through Microsoft CMT using the official portal link."
 			}
 		],
 		publicationRequirementsIntro: "For accepted papers to be included in the conference proceedings and considered for inclusion in the IEEE Xplore® Digital Library, the following conditions must be met by the specified deadline:",
@@ -1049,6 +1051,9 @@ var SiteBackground = memo(function SiteBackground() {
 	});
 });
 //#endregion
+//#region app/app.css?url
+var app_default = "/assets/app-CivW9UIu.css";
+//#endregion
 //#region app/root.tsx
 var root_exports = /* @__PURE__ */ __exportAll({
 	default: () => root_default,
@@ -1057,6 +1062,10 @@ var root_exports = /* @__PURE__ */ __exportAll({
 });
 function links() {
 	return [
+		{
+			rel: "stylesheet",
+			href: app_default
+		},
 		{
 			rel: "stylesheet",
 			href: "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&display=swap"
@@ -2376,18 +2385,31 @@ function Gudilines() {
 							/* @__PURE__ */ jsx("ul", {
 								className: bulletListClass,
 								children: publicationGuidelines.map((item) => {
-									var _item$templates;
+									var _item$linkLabel, _item$templates;
 									return /* @__PURE__ */ jsxs("li", {
 										className: "flex items-start gap-3",
-										children: [/* @__PURE__ */ jsx("span", { className: "mt-[0.7rem] h-1.5 w-1.5 shrink-0 rounded-full bg-primary-500" }), /* @__PURE__ */ jsxs("div", { children: [/* @__PURE__ */ jsx("p", { children: item.detail }), ((_item$templates = item.templates) === null || _item$templates === void 0 ? void 0 : _item$templates.length) ? /* @__PURE__ */ jsx("div", {
-											className: "mt-4 flex flex-wrap gap-3",
-											children: item.templates.map((template) => /* @__PURE__ */ jsx("a", {
-												href: template.href,
-												download: true,
-												className: "inline-flex items-center justify-center rounded-full border border-primary-300/70 bg-white/90 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-primary-700 transition-colors duration-200 hover:border-primary-500 hover:text-primary-800",
-												children: template.label
-											}, template.href))
-										}) : null] })]
+										children: [/* @__PURE__ */ jsx("span", { className: "mt-[0.7rem] h-1.5 w-1.5 shrink-0 rounded-full bg-primary-500" }), /* @__PURE__ */ jsxs("div", { children: [
+											/* @__PURE__ */ jsx("p", { children: item.detail }),
+											item.href ? /* @__PURE__ */ jsx("div", {
+												className: "mt-4",
+												children: /* @__PURE__ */ jsx("a", {
+													href: item.href,
+													target: "_blank",
+													rel: "noreferrer",
+													className: "inline-flex items-center justify-center rounded-full border border-primary-500 bg-primary-500 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white transition-colors duration-200 hover:border-primary-600 hover:bg-primary-600",
+													children: (_item$linkLabel = item.linkLabel) !== null && _item$linkLabel !== void 0 ? _item$linkLabel : "Open submission portal"
+												})
+											}) : null,
+											((_item$templates = item.templates) === null || _item$templates === void 0 ? void 0 : _item$templates.length) ? /* @__PURE__ */ jsx("div", {
+												className: "mt-4 flex flex-wrap gap-3",
+												children: item.templates.map((template) => /* @__PURE__ */ jsx("a", {
+													href: template.href,
+													download: true,
+													className: "inline-flex items-center justify-center rounded-full border border-primary-300/70 bg-white/90 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-primary-700 transition-colors duration-200 hover:border-primary-500 hover:text-primary-800",
+													children: template.label
+												}, template.href))
+											}) : null
+										] })]
 									}, item.title);
 								})
 							}),
@@ -2770,13 +2792,13 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/root-D58gM-lN.js",
+			"module": "/assets/root-B-r7grMo.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
-				"/assets/MotionReveal-DWupHUFH.js",
+				"/assets/MotionReveal-c-Rku2QZ.js",
 				"/assets/esm-BtW72w9X.js"
 			],
-			"css": ["/assets/root-CivW9UIu.css"],
+			"css": [],
 			"clientActionModule": void 0,
 			"clientLoaderModule": void 0,
 			"clientMiddlewareModule": void 0,
@@ -2795,10 +2817,10 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/home-c3ndSzlB.js",
+			"module": "/assets/home-vKupdELG.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
-				"/assets/MotionReveal-DWupHUFH.js",
+				"/assets/MotionReveal-c-Rku2QZ.js",
 				"/assets/esm-BtW72w9X.js"
 			],
 			"css": [],
@@ -2820,8 +2842,8 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/about-DHVPwiaj.js",
-			"imports": ["/assets/jsx-runtime-VoBP9gd0.js", "/assets/MotionReveal-DWupHUFH.js"],
+			"module": "/assets/about-TmoMMt3b.js",
+			"imports": ["/assets/jsx-runtime-VoBP9gd0.js", "/assets/MotionReveal-c-Rku2QZ.js"],
 			"css": [],
 			"clientActionModule": void 0,
 			"clientLoaderModule": void 0,
@@ -2841,10 +2863,10 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/call-for-papers-1JhsPBc9.js",
+			"module": "/assets/call-for-papers-8ER9RPat.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
-				"/assets/MotionReveal-DWupHUFH.js",
+				"/assets/MotionReveal-c-Rku2QZ.js",
 				"/assets/Heading-Tblznj8a.js"
 			],
 			"css": [],
@@ -2866,10 +2888,10 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/important-dates-DfZp8H4Z.js",
+			"module": "/assets/important-dates-B0Bu-l8Y.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
-				"/assets/MotionReveal-DWupHUFH.js",
+				"/assets/MotionReveal-c-Rku2QZ.js",
 				"/assets/Heading-Tblznj8a.js"
 			],
 			"css": [],
@@ -2891,8 +2913,8 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/committees-BTwzSBWW.js",
-			"imports": ["/assets/jsx-runtime-VoBP9gd0.js", "/assets/MotionReveal-DWupHUFH.js"],
+			"module": "/assets/committees-_IW82vn-.js",
+			"imports": ["/assets/jsx-runtime-VoBP9gd0.js", "/assets/MotionReveal-c-Rku2QZ.js"],
 			"css": [],
 			"clientActionModule": void 0,
 			"clientLoaderModule": void 0,
@@ -2912,10 +2934,10 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/registration-BF7708uN.js",
+			"module": "/assets/registration-o5rTDWxZ.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
-				"/assets/MotionReveal-DWupHUFH.js",
+				"/assets/MotionReveal-c-Rku2QZ.js",
 				"/assets/Heading-Tblznj8a.js"
 			],
 			"css": [],
@@ -2937,10 +2959,10 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/registration-form-DpGQ9pAy.js",
+			"module": "/assets/registration-form-BTS13puP.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
-				"/assets/MotionReveal-DWupHUFH.js",
+				"/assets/MotionReveal-c-Rku2QZ.js",
 				"/assets/Heading-Tblznj8a.js"
 			],
 			"css": [],
@@ -2962,10 +2984,10 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/guidelines-BWW0Nuta.js",
+			"module": "/assets/guidelines-CEgqneFR.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
-				"/assets/MotionReveal-DWupHUFH.js",
+				"/assets/MotionReveal-c-Rku2QZ.js",
 				"/assets/Heading-Tblznj8a.js"
 			],
 			"css": [],
@@ -2987,8 +3009,8 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/sponsors-CP_WQjOo.js",
-			"imports": ["/assets/jsx-runtime-VoBP9gd0.js", "/assets/MotionReveal-DWupHUFH.js"],
+			"module": "/assets/sponsors-Dacur1Xb.js",
+			"imports": ["/assets/jsx-runtime-VoBP9gd0.js", "/assets/MotionReveal-c-Rku2QZ.js"],
 			"css": [],
 			"clientActionModule": void 0,
 			"clientLoaderModule": void 0,
@@ -3008,10 +3030,10 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/contact-Cgv-B4go.js",
+			"module": "/assets/contact-DuihHQZ2.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
-				"/assets/MotionReveal-DWupHUFH.js",
+				"/assets/MotionReveal-c-Rku2QZ.js",
 				"/assets/Heading-Tblznj8a.js"
 			],
 			"css": [],
@@ -3042,8 +3064,8 @@ var server_manifest_default = {
 			"hydrateFallbackModule": void 0
 		}
 	},
-	"url": "/assets/manifest-6aa8465b.js",
-	"version": "6aa8465b",
+	"url": "/assets/manifest-516f9c76.js",
+	"version": "516f9c76",
 	"sri": void 0
 };
 //#endregion

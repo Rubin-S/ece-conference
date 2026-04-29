@@ -71,6 +71,18 @@ export default function Gudilines() {
                     <span className="mt-[0.7rem] h-1.5 w-1.5 shrink-0 rounded-full bg-primary-500" />
                     <div>
                       <p>{item.detail}</p>
+                      {item.href ? (
+                        <div className="mt-4">
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center justify-center rounded-full border border-primary-500 bg-primary-500 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-white transition-colors duration-200 hover:border-primary-600 hover:bg-primary-600"
+                          >
+                            {item.linkLabel ?? "Open submission portal"}
+                          </a>
+                        </div>
+                      ) : null}
                       {item.templates?.length ? (
                         <div className="mt-4 flex flex-wrap gap-3">
                           {item.templates.map((template) => (

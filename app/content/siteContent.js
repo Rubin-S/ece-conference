@@ -219,7 +219,7 @@ export const siteContent = {
     paperLength:
       "The final author kit will confirm the page limit, camera-ready refinements, and final compliance checks for the 2026 edition.",
     portalStatus:
-      "Use the author guidelines below to prepare your manuscript early. The official submission portal and 2026 author kit will be announced on this page as soon as they are released by the organizing committee.",
+      "Use the author guidelines below to prepare your manuscript early. The official Microsoft CMT submission portal is now available for paper uploads.",
     authorGuidelines: [
       {
         title: "Submission readiness",
@@ -254,7 +254,7 @@ export const siteContent = {
       {
         title: "Submission updates",
         detail:
-          "The official submission link, camera-ready instructions, copyright details, and metadata requirements will be announced on the website with the final author kit.",
+          "Use the official Microsoft CMT submission portal published on the website for paper upload. Camera-ready instructions, copyright details, and metadata requirements will continue to be updated here.",
       },
       {
         title: "Publication compliance",
@@ -343,12 +343,14 @@ export const siteContent = {
       {
         title: "Submission portal",
         detail:
-          "Microsoft CMT submission link coming shortly.",
+          "Submit your manuscript through the official Microsoft CMT portal.",
+        href: "https://cmt3.research.microsoft.com/IConSCEPT2026/Submission/Index",
+        linkLabel: "Open Microsoft CMT submission portal",
       },
       {
         title: "How to submit",
         detail:
-          "Authors should complete the submission metadata carefully and upload the manuscript through Microsoft CMT once the portal is announced.",
+          "Authors should complete the submission metadata carefully and upload the manuscript through Microsoft CMT using the official portal link.",
       },
     ],
     publicationRequirementsIntro:
