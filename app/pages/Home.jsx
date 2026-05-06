@@ -32,9 +32,13 @@ const HERO_SUPPORT_HEADING =
 const HERO_SUPPORT_TEXT = "text-[0.9rem] font-medium leading-6 text-[#d7e4eb]";
 
 const HOME_ANNOUNCEMENTS = [
-  "Important notifications can be posted here.",
-  "Submission updates will be published on the official conference website.",
-  "Registration and camera-ready instructions will be announced soon.",
+  {
+    text: "Submission is now open.",
+    href: "https://cmt3.research.microsoft.com/IConSCEPT2026/Submission/Index",
+    linkLabel: "Click here",
+  },
+  { text: "Important notifications can be posted here." },
+  { text: "Registration and camera-ready instructions will be announced soon." },
 ];
 
 const HOME_QUICK_INFO = [
@@ -385,11 +389,26 @@ export default function Home() {
                 >
                   {HOME_ANNOUNCEMENTS.map((announcement) => (
                     <span
-                      key={`${copyIndex}-${announcement}`}
+                      key={`${copyIndex}-${announcement.text}`}
                       className="flex shrink-0 items-center gap-3 whitespace-nowrap text-[0.88rem] font-medium text-light-pt"
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
-                      <span>{announcement}</span>
+                      <span>
+                        {announcement.text}
+                        {announcement.href ? (
+                          <>
+                            {" "}
+                            <a
+                              href={announcement.href}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="font-semibold text-primary-600 underline underline-offset-4 hover:text-secondary-500"
+                            >
+                              {announcement.linkLabel}
+                            </a>
+                          </>
+                        ) : null}
+                      </span>
                     </span>
                   ))}
                 </div>

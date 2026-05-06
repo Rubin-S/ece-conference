@@ -1052,7 +1052,7 @@ var SiteBackground = memo(function SiteBackground() {
 });
 //#endregion
 //#region app/app.css?url
-var app_default = "/assets/app-CivW9UIu.css";
+var app_default = "/assets/app-CXWiCb4M.css";
 //#endregion
 //#region app/root.tsx
 var root_exports = /* @__PURE__ */ __exportAll({
@@ -1191,9 +1191,13 @@ var HERO_SUPPORT_PANEL = "flex h-full flex-col justify-between rounded-[1.3rem] 
 var HERO_SUPPORT_HEADING = "text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-[#8fc6d8]";
 var HERO_SUPPORT_TEXT = "text-[0.9rem] font-medium leading-6 text-[#d7e4eb]";
 var HOME_ANNOUNCEMENTS = [
-	"Important notifications can be posted here.",
-	"Submission updates will be published on the official conference website.",
-	"Registration and camera-ready instructions will be announced soon."
+	{
+		text: "Submission is now open.",
+		href: "https://cmt3.research.microsoft.com/IConSCEPT2026/Submission/Index",
+		linkLabel: "Click here"
+	},
+	{ text: "Important notifications can be posted here." },
+	{ text: "Registration and camera-ready instructions will be announced soon." }
 ];
 var HOME_QUICK_INFO = [
 	{
@@ -1571,8 +1575,14 @@ function Home() {
 							"aria-hidden": copyIndex === 1 ? "true" : void 0,
 							children: HOME_ANNOUNCEMENTS.map((announcement) => /* @__PURE__ */ jsxs("span", {
 								className: "flex shrink-0 items-center gap-3 whitespace-nowrap text-[0.88rem] font-medium text-light-pt",
-								children: [/* @__PURE__ */ jsx("span", { className: "h-1.5 w-1.5 rounded-full bg-primary-500" }), /* @__PURE__ */ jsx("span", { children: announcement })]
-							}, `${copyIndex}-${announcement}`))
+								children: [/* @__PURE__ */ jsx("span", { className: "h-1.5 w-1.5 rounded-full bg-primary-500" }), /* @__PURE__ */ jsxs("span", { children: [announcement.text, announcement.href ? /* @__PURE__ */ jsxs(Fragment, { children: [" ", /* @__PURE__ */ jsx("a", {
+									href: announcement.href,
+									target: "_blank",
+									rel: "noreferrer",
+									className: "font-semibold text-primary-600 underline underline-offset-4 hover:text-secondary-500",
+									children: announcement.linkLabel
+								})] }) : null] })]
+							}, `${copyIndex}-${announcement.text}`))
 						}, copyIndex))
 					})
 				})]
@@ -2792,7 +2802,7 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/root-B-r7grMo.js",
+			"module": "/assets/root-hwdyM7Vz.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
 				"/assets/MotionReveal-c-Rku2QZ.js",
@@ -2817,7 +2827,7 @@ var server_manifest_default = {
 			"hasClientMiddleware": false,
 			"hasDefaultExport": true,
 			"hasErrorBoundary": false,
-			"module": "/assets/home-vKupdELG.js",
+			"module": "/assets/home-CdRpimCF.js",
 			"imports": [
 				"/assets/jsx-runtime-VoBP9gd0.js",
 				"/assets/MotionReveal-c-Rku2QZ.js",
@@ -3064,8 +3074,8 @@ var server_manifest_default = {
 			"hydrateFallbackModule": void 0
 		}
 	},
-	"url": "/assets/manifest-516f9c76.js",
-	"version": "516f9c76",
+	"url": "/assets/manifest-04944c1d.js",
+	"version": "04944c1d",
 	"sri": void 0
 };
 //#endregion
