@@ -369,7 +369,7 @@ export const siteContent = {
   importantDates2026: [
     { label: "Conference dates", value: "December 17-18, 2026", status: "Confirmed" },
     { label: "Call for papers release", value: "To be announced", status: "Awaited" },
-    { label: "Last date for paper submission", value: "21.07.2026", status: "Confirmed" },
+    { label: "Last date for paper submission", value: "30.09.2026", status: "Confirmed" },
     { label: "Notification of acceptance", value: "06.10.2026", status: "Confirmed" },
     { label: "Final (Camera-ready) paper submission", value: "03.11.2026", status: "Confirmed" },
     { label: "Early bird registration deadline", value: "To be announced", status: "Awaited" },
