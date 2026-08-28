@@ -25,7 +25,7 @@ export default function ImportantDates() {
             id="important-dates-heading"
             tag="Important Dates"
             title="Schedule for IConSCEPT 2026"
-            text="The conference dates and currently published submission milestones are listed below. Registration deadlines that are not yet finalized will be announced on this website."
+            text="The conference dates, submission milestones, and registration deadlines currently published for IConSCEPT 2026 are listed below."
           />
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">

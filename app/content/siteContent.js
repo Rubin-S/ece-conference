@@ -138,7 +138,7 @@ export const siteContent = {
     venue: "National Institute of Technology Puducherry, Karaikal, India",
     hostInstitute: "National Institute of Technology Puducherry",
     hostCampus: "Karaikal, India",
-    organizers: "Departments of EEE, ECE, and CSE",
+    organizers: "Departments of ECE, EEE, and CSE",
     technicalSponsor: "IEEE Madras Section",
     publicationTarget:
       "All accepted and presented papers will be submitted to IEEE Xplore for publication.",
@@ -151,14 +151,14 @@ export const siteContent = {
     ],
     profile: [
       { label: "Host institute", detail: "National Institute of Technology Puducherry" },
-      { label: "Organizing departments", detail: "EEE, ECE, and CSE" },
+      { label: "Organizing departments", detail: "ECE, EEE, and CSE" },
       { label: "Technical sponsor", detail: "IEEE Madras Section" },
       { label: "Publication", detail: "Submission to IEEE Xplore" },
     ],
   },
   aboutParagraphs: [
     "The 2026 International Conference on Signal Processing, Computation, Electronics, Power and Telecommunication (IConSCEPT) is the premier fourth edition conference of NIT Puducherry, scheduled to be held in a hybrid mode at the National Institute of Technology Puducherry, Karaikal, India, during December 17-18, 2026.",
-    "Following the successful conduct of the 2023, 2024, and 2025 editions which were published in IEEE Xplore, this edition is collectively organized by the Departments of EEE, ECE, and CSE with the IEEE Madras Section as the technical sponsor.",
+    "Following the successful conduct of the 2023, 2024, and 2025 editions which were published in IEEE Xplore, this edition is collectively organized by the Departments of ECE, EEE, and CSE with the IEEE Madras Section as the technical sponsor.",
     "The conference aims to bring together leading academicians, scientists, engineers, and researchers on a common platform to share and exchange knowledge in broad areas of interest including wireless communication, VLSI and embedded systems, power electronics, renewable energy, robotics, and artificial intelligence. All accepted and presented papers will be submitted to IEEE Xplore for publication, and the organizing committee invites prospective authors to submit original contributions to 2026 IConSCEPT.",
   ],
   highlights: [
@@ -367,14 +367,14 @@ export const siteContent = {
       "The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support. ",
   },
   importantDates2026: [
-    { label: "Conference dates", value: "December 17-18, 2026", status: "Confirmed" },
-    { label: "Call for papers release", value: "To be announced", status: "Awaited" },
     { label: "Last date for paper submission", value: "30.09.2026", status: "Confirmed" },
-    { label: "Notification of acceptance", value: "06.10.2026", status: "Confirmed" },
-    { label: "Final (Camera-ready) paper submission", value: "03.11.2026", status: "Confirmed" },
-    { label: "Early bird registration deadline", value: "To be announced", status: "Awaited" },
-    { label: "Author registration deadline", value: "To be announced", status: "Awaited" },
-    { label: "Non-author registration deadline", value: "To be announced", status: "Awaited" },
+    { label: "Notification of acceptance", value: "23.10.2026", status: "Confirmed" },
+    { label: "Registration opens", value: "23.10.2026", status: "Confirmed" },
+    { label: "Final (Camera-ready) paper submission", value: "16.11.2026", status: "Confirmed" },
+    { label: "Early bird registration deadline", value: "23.11.2026", status: "Confirmed" },
+    { label: "Author registration deadline", value: "30.11.2026", status: "Confirmed" },
+    { label: "Non-author registration deadline", value: "30.11.2026", status: "Confirmed" },
+    { label: "Conference dates", value: "December 17-18, 2026", status: "Confirmed" },
   ],
   registration: {
     notice:
@@ -755,7 +755,7 @@ Department: Computer Science & Engineering`,
       },
       {
         title: "Organizing Departments",
-        value: "Departments of EEE, ECE, and CSE",
+        value: "Departments of ECE, EEE, and CSE",
       },
       {
         title: "Conference Venue",

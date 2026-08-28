@@ -51,7 +51,11 @@ const HOME_IMPORTANT_DATES = siteContent.importantDates2026.filter(({ label }) =
   [
     "Last date for paper submission",
     "Notification of acceptance",
+    "Registration opens",
     "Final (Camera-ready) paper submission",
+    "Early bird registration deadline",
+    "Author registration deadline",
+    "Non-author registration deadline",
   ].includes(label),
 );
 
