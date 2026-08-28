@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router";
-import { BellIcon, CalendarIcon, LocationMarkerIcon, OfficeBuildingIcon } from "@heroicons/react/outline";
+import { BellIcon, CalendarIcon, DownloadIcon, LocationMarkerIcon, OfficeBuildingIcon } from "@heroicons/react/outline";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
 import heroImage from "../assets/images/hero.jpeg";
@@ -31,15 +31,34 @@ const HERO_SUPPORT_HEADING =
 
 const HERO_SUPPORT_TEXT = "text-[0.9rem] font-medium leading-6 text-[#d7e4eb]";
 
+const CONFERENCE_BROCHURE = {
+  href: encodeURI("/iconscept 2026-v2.pdf"),
+  filename: "IConSCEPT-2026-Brochure.pdf",
+};
+
+const BROCHURE_BUTTON_CLASS =
+  "announcement-highlight inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-primary-500 bg-primary-500 px-3.5 py-1.5 text-[0.78rem] font-semibold uppercase tracking-[0.12em] text-white shadow-[0_8px_22px_rgba(22,151,191,0.28)] hover:border-primary-600 hover:bg-primary-600";
+
+function BrochureDownloadLink({ className, children }) {
+  return (
+    <a href={CONFERENCE_BROCHURE.href} download={CONFERENCE_BROCHURE.filename} className={className}>
+      {children}
+    </a>
+  );
+}
+
 const HOME_ANNOUNCEMENTS = [
   {
     text: "Submission is now open.",
     href: "https://cmt3.research.microsoft.com/IConSCEPT2026/Submission/Index",
     linkLabel: "Click here",
   },
-  { text: "Important notifications can be posted here." },
-  { text: "Registration and camera-ready instructions will be announced soon." },
+  {
+    text: "Last date for paper submission has been extended to 30.09.2026.",
+  },
 ];
+
+const HOME_ANNOUNCEMENT_LOOP = Array.from({ length: 4 }, () => HOME_ANNOUNCEMENTS).flat();
 
 const HOME_QUICK_INFO = [
   { icon: OfficeBuildingIcon, text: "NIT Puducherry" },
@@ -378,9 +397,15 @@ export default function Home() {
         className="border-y border-light-divider/80 bg-white"
       >
         <div className="container flex flex-col gap-3 py-3 md:flex-row md:items-center md:gap-5">
-          <div className="flex shrink-0 items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-primary-600">
-            <BellIcon className="h-4 w-4" />
-            <span>Announcements</span>
+          <div className="flex shrink-0 items-center justify-between gap-3 md:justify-start">
+            <div className="flex items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-primary-600">
+              <BellIcon className="h-4 w-4" />
+              <span>Announcements</span>
+            </div>
+            <BrochureDownloadLink className={`${BROCHURE_BUTTON_CLASS} md:hidden`}>
+              <DownloadIcon className="h-4 w-4" aria-hidden="true" />
+              <span>Download brochure</span>
+            </BrochureDownloadLink>
           </div>
 
           <div className="announcement-marquee min-w-0 flex-1 overflow-hidden">
@@ -391,9 +416,9 @@ export default function Home() {
                   className="announcement-marquee-group"
                   aria-hidden={copyIndex === 1 ? "true" : undefined}
                 >
-                  {HOME_ANNOUNCEMENTS.map((announcement) => (
+                  {HOME_ANNOUNCEMENT_LOOP.map((announcement, announcementIndex) => (
                     <span
-                      key={`${copyIndex}-${announcement.text}`}
+                      key={`${copyIndex}-${announcementIndex}-${announcement.text}`}
                       className="flex shrink-0 items-center gap-3 whitespace-nowrap text-[0.88rem] font-medium text-light-pt"
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
@@ -406,7 +431,7 @@ export default function Home() {
                               href={announcement.href}
                               target="_blank"
                               rel="noreferrer"
-                              className="font-semibold text-primary-600 underline underline-offset-4 hover:text-secondary-500"
+                              className="font-semibold text-primary-600 underline underline-offset-4 hover:text-primary-700"
                             >
                               {announcement.linkLabel}
                             </a>
@@ -419,6 +444,11 @@ export default function Home() {
               ))}
             </div>
           </div>
+
+          <BrochureDownloadLink className={`${BROCHURE_BUTTON_CLASS} hidden md:inline-flex`}>
+            <DownloadIcon className="h-4 w-4" aria-hidden="true" />
+            <span>Download brochure</span>
+          </BrochureDownloadLink>
         </div>
       </section>
 
