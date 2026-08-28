@@ -32,7 +32,7 @@ const HERO_SUPPORT_HEADING =
 const HERO_SUPPORT_TEXT = "text-[0.9rem] font-medium leading-6 text-[#d7e4eb]";
 
 const CONFERENCE_BROCHURE = {
-  href: encodeURI("/iconscept 2026-v2.pdf"),
+  href: encodeURI("/iconscept 2026_brochure.pdf"),
   filename: "IConSCEPT-2026-Brochure.pdf",
 };
 
