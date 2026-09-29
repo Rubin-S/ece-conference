@@ -49,12 +49,13 @@ function BrochureDownloadLink({ className, children }) {
 
 const HOME_ANNOUNCEMENTS = [
   {
+    text: "Last date for paper submission has been extended to 07.10.2026.",
+    highlight: true,
+  },
+  {
     text: "Submission is now open.",
     href: "https://cmt3.research.microsoft.com/IConSCEPT2026/Submission/Index",
     linkLabel: "Click here",
-  },
-  {
-    text: "Last date for paper submission has been extended to 30.09.2026.",
   },
 ];
 
@@ -421,9 +422,22 @@ export default function Home() {
                       key={`${copyIndex}-${announcementIndex}-${announcement.text}`}
                       className="flex shrink-0 items-center gap-3 whitespace-nowrap text-[0.88rem] font-medium text-light-pt"
                     >
-                      <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
-                      <span>
-                        {announcement.text}
+                      <span
+                        className={`h-1.5 w-1.5 rounded-full ${
+                          announcement.highlight
+                            ? "bg-primary-500 shadow-[0_0_8px_rgba(40,184,226,0.8)]"
+                            : "bg-primary-500"
+                        }`}
+                      />
+                      <span className="inline-flex items-center gap-2">
+                        {announcement.highlight ? (
+                          <span className="inline-flex items-center rounded-full border border-primary-500/40 bg-primary-500/10 px-2 py-0.5 text-[0.68rem] font-semibold uppercase tracking-wider text-primary-700">
+                            Extended
+                          </span>
+                        ) : null}
+                        <span className={announcement.highlight ? "font-semibold text-primary-900" : ""}>
+                          {announcement.text}
+                        </span>
                         {announcement.href ? (
                           <>
                             {" "}

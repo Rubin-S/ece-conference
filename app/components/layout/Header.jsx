@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import iconsceptLogo from "../../assets/logo/IConSECPT.png";
-import { navLinks, siteContent } from "../../content/siteContent";
+import { navLinks } from "../../content/siteContent";
 
 const desktopNavLink =
   "whitespace-nowrap rounded-full border px-3 py-2 text-[0.67rem] font-medium uppercase tracking-[0.14em] transition-all duration-200 ease-smooth 2xl:text-[0.71rem]";

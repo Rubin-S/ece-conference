@@ -2,10 +2,11 @@ const Heading = ({
   className = "",
   title,
   text,
-  tag: _tag,
   centered = true,
-  ...props
+  ...restProps
 }) => {
+  const { tag, ...props } = restProps;
+  void tag;
   const rootClasses = [
     "mx-auto mb-12 max-w-[48rem] md:mb-16",
     centered ? "md:text-center" : "",

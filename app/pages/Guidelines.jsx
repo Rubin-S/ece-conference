@@ -12,7 +12,7 @@ const wideCardClass =
 
 const bulletListClass = "mt-6 space-y-5 text-sm leading-7 text-light-st";
 
-export default function Gudilines() {
+export default function Guidelines() {
   const {
     intro,
     authorGuidelines,

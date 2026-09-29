@@ -367,7 +367,7 @@ export const siteContent = {
       "The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support. ",
   },
   importantDates2026: [
-    { label: "Last date for paper submission", value: "30.09.2026", status: "Confirmed" },
+    { label: "Last date for paper submission", value: "07.10.2026", status: "Confirmed" },
     { label: "Notification of acceptance", value: "23.10.2026", status: "Confirmed" },
     { label: "Registration opens", value: "23.10.2026", status: "Confirmed" },
     { label: "Final (Camera-ready) paper submission", value: "16.11.2026", status: "Confirmed" },
