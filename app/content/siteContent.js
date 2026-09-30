@@ -2,6 +2,11 @@ import nitpyLogo from "../assets/logo/NITPY.png";
 import committeePlaceholder from "../assets/images/committee-placeholder.svg";
 import ieeeLogoIcon from "../assets/images/ieee_logo_icon.webp";
 import priceSheet from "../../docs/price.jpeg";
+import ganeshPhoto from "../assets/images/speakers/ganesh-neelakanta-iyer.png";
+import imonPhoto from "../assets/images/speakers/imon-mondal.jpg";
+import prasadPhoto from "../assets/images/speakers/prasad-sarangapani.png";
+import speakerPlaceholder from "../assets/images/speakers/speaker-placeholder.svg";
+import nagarajanPhoto from "../assets/images/committee/nagarajan-v.jpg";
 
 export const navLinks = [
   
@@ -23,6 +28,7 @@ const createCommitteeMember = ({
   image = committeePlaceholder,
   alt,
   isPlaceholder = false,
+  profileUrl,
 }) => ({
   role,
   name,
@@ -31,6 +37,7 @@ const createCommitteeMember = ({
   image,
   alt: alt || `${name} portrait`,
   isPlaceholder,
+  profileUrl,
 });
 
 const normalizeCommitteeName = (name) => {
@@ -40,6 +47,10 @@ const normalizeCommitteeName = (name) => {
 
   if (!cleanedName) {
     return cleanedName;
+  }
+
+  if (/IEEE/i.test(cleanedName)) {
+    return cleanedName.replace(/^dr\.?\s*/i, "Dr. ");
   }
 
   const toTitleCaseName = (value) =>
@@ -108,7 +119,7 @@ const parseCommitteeMeta = (meta) => {
   );
 };
 
-const createCommitteeMemberFromCsv = (role, name, meta, image) => {
+const createCommitteeMemberFromCsv = (role, name, meta, image, profileUrl) => {
   const { designation, affiliation } = parseCommitteeMeta(meta);
 
   return createCommitteeMember({
@@ -117,14 +128,53 @@ const createCommitteeMemberFromCsv = (role, name, meta, image) => {
     designation,
     affiliation,
     image,
+    profileUrl,
   });
 };
 
 const createCommitteeSection = (title, role, rows, layout = "gallery") => ({
   title,
   layout,
-  members: rows.map(([name, meta, image]) => createCommitteeMemberFromCsv(role, name, meta, image)),
+  members: rows.map(([name, meta, image, profileUrl]) => createCommitteeMemberFromCsv(role, name, meta, image, profileUrl)),
 });
+
+export { speakerPlaceholder };
+
+export const keynoteSpeakers = [
+  {
+    name: "Dr. Ganesh Neelakanta Iyer",
+    role: "Keynote Speaker",
+    designation: "Senior Lecturer",
+    department: "Department of Computer Science, School of Computing",
+    institution: "National University of Singapore, Singapore",
+    affiliation: "National University of Singapore, Singapore",
+    profileUrl: "https://www.comp.nus.edu.sg/cs/people/gni/",
+    image: ganeshPhoto,
+    alt: "Dr. Ganesh Neelakanta Iyer portrait",
+  },
+  {
+    name: "Dr. Prasad Sarangapani",
+    role: "Keynote Speaker",
+    designation: "Lead Quantum Engineer",
+    department: "",
+    institution: "Rigetti Computing, Sunnyvale, California, United States",
+    affiliation: "Rigetti Computing, Sunnyvale, California, United States",
+    profileUrl: "https://www.linkedin.com/in/prasad-sarangapani-47749713/?isSelfProfile=false",
+    image: prasadPhoto,
+    alt: "Dr. Prasad Sarangapani portrait",
+  },
+  {
+    name: "Dr. Imon Mondal",
+    role: "Keynote Speaker",
+    designation: "Associate Professor",
+    department: "",
+    institution: "IIT Kanpur, India",
+    affiliation: "IIT Kanpur, India",
+    profileUrl: "https://home.iitk.ac.in/~imon/",
+    image: imonPhoto,
+    alt: "Dr. Imon Mondal portrait",
+  },
+];
 
 export const siteContent = {
   brand: {
@@ -156,6 +206,7 @@ export const siteContent = {
       { label: "Publication", detail: "Submission to IEEE Xplore" },
     ],
   },
+  keynoteSpeakers,
   aboutParagraphs: [
     "The 2026 International Conference on Signal Processing, Computation, Electronics, Power and Telecommunication (IConSCEPT) is the premier fourth edition conference of NIT Puducherry, scheduled to be held in a hybrid mode at the National Institute of Technology Puducherry, Karaikal, India, during December 17-18, 2026.",
     "Following the successful conduct of the 2023, 2024, and 2025 editions which were published in IEEE Xplore, this edition is collectively organized by the Departments of ECE, EEE, and CSE with the IEEE Madras Section as the technical sponsor.",
@@ -499,6 +550,17 @@ Department : NIT Puducherry`,
       ),
     ],
     sections: [
+      createCommitteeSection("IEEE Conference Committee Chair", "IEEE Conference Committee Chair", [
+        [
+          "Dr. V Nagarajan (Senior Member, IEEE)",
+          `Designation: Professor
+
+Department: Department of Electronics Engineering
+Pondicherry University`,
+          nagarajanPhoto,
+          "https://www.pondiuni.edu.in/faculy_profiles/nagarajan-v/",
+        ],
+      ], "spotlight"),
       createCommitteeSection("Conference Chairs", "Conference Chair", [
         [
           "Dr. ANIRUDDHA KANHE",

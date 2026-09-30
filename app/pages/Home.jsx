@@ -1,6 +1,12 @@
 import { memo, useEffect, useState } from "react";
 import { Link } from "react-router";
-import { BellIcon, CalendarIcon, DownloadIcon, LocationMarkerIcon, OfficeBuildingIcon } from "@heroicons/react/outline";
+import {
+  BellIcon,
+  CalendarIcon,
+  DownloadIcon,
+  LocationMarkerIcon,
+  OfficeBuildingIcon,
+} from "@heroicons/react/outline";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
 import heroImage from "../assets/images/hero.jpeg";
@@ -51,6 +57,11 @@ const HOME_ANNOUNCEMENTS = [
   {
     text: "Last date for paper submission has been extended to 07.10.2026.",
     highlight: true,
+  },
+  {
+    text: "Keynote Speakers announced for IConSCEPT 2026.",
+    href: "/committees",
+    linkLabel: "View Speakers",
   },
   {
     text: "Submission is now open.",
@@ -443,8 +454,8 @@ export default function Home() {
                             {" "}
                             <a
                               href={announcement.href}
-                              target="_blank"
-                              rel="noreferrer"
+                              target={announcement.href.startsWith("http") ? "_blank" : undefined}
+                              rel={announcement.href.startsWith("http") ? "noreferrer" : undefined}
                               className="font-semibold text-primary-600 underline underline-offset-4 hover:text-primary-700"
                             >
                               {announcement.linkLabel}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ExternalLinkIcon } from "@heroicons/react/outline";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
 import { siteContent } from "../content/siteContent";
@@ -83,6 +84,19 @@ function SpotlightMember({ member }) {
             ) : null}
           </>
         ) : null}
+        {member.profileUrl ? (
+          <div className="mt-4">
+            <a
+              href={member.profileUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#d8c3a2] bg-[#f7efe2] px-3.5 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-[#94682e] transition-colors duration-200 hover:border-[#b89c72] hover:bg-[#ebdcc7]"
+            >
+              <span>Faculty Profile</span>
+              <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+          </div>
+        ) : null}
       </div>
     </article>
   );
@@ -152,9 +166,77 @@ function CommitteeGallery({ section, delay }) {
   );
 }
 
+function KeynoteSpeakerCard({ speaker }) {
+  const fallbackImage = siteContent.committeePage.placeholderImage;
+  const initialImage = speaker.image || fallbackImage;
+  const [imageSrc, setImageSrc] = useState(initialImage);
+
+  return (
+    <article className="flex flex-col rounded-[1.7rem] border border-[#eadfce] bg-[linear-gradient(180deg,rgba(255,255,255,0.96)_0%,rgba(250,246,239,0.94)_100%)] p-5 shadow-[0_22px_45px_-38px_rgba(92,74,42,0.38)] md:p-6">
+      <div className="mx-auto w-full overflow-hidden rounded-[1.3rem] border border-[#e8dcc9] bg-[#f8f2e8] p-1.5">
+        <img
+          src={imageSrc}
+          alt={speaker.alt || `${speaker.name} portrait`}
+          loading="eager"
+          width="320"
+          height="320"
+          className="h-56 w-full rounded-[0.95rem] object-cover object-top sm:h-64"
+          onError={() => {
+            setImageSrc((current) => (current === fallbackImage ? current : fallbackImage));
+          }}
+        />
+      </div>
+
+      <div className="mt-5 flex flex-1 flex-col">
+        <div>
+          <p className="inline-flex rounded-full border border-[#d8c3a2] bg-[#f7efe2] px-3 py-1 text-[0.68rem] font-code uppercase tracking-[0.22em] text-[#94682e]">
+            {speaker.role || "Keynote Speaker"}
+          </p>
+          <h3 className="mt-3.5 text-[1.12rem] font-semibold leading-snug tracking-[-0.01em] text-[#234f90] md:text-[1.2rem]">
+            {speaker.name}
+          </h3>
+        </div>
+
+        <div className="mt-3.5 h-px w-full bg-[#d7c8b2]" />
+
+        <div className="mt-3.5 space-y-1 text-[0.9rem] leading-relaxed">
+          {speaker.designation ? (
+            <p className="font-semibold text-[#4c5968]">{speaker.designation}</p>
+          ) : null}
+          {speaker.department ? (
+            <p className="text-[0.84rem] text-[#5d6a78]">{speaker.department}</p>
+          ) : null}
+          {speaker.institution ? (
+            <p className="font-medium text-[#243242]">{speaker.institution}</p>
+          ) : null}
+        </div>
+
+        {speaker.profileUrl ? (
+          <div className="mt-auto pt-5">
+            <a
+              href={speaker.profileUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-[#d8c3a2] bg-[#f7efe2] px-3.5 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.12em] text-[#94682e] transition-colors duration-200 hover:border-[#b89c72] hover:bg-[#ebdcc7]"
+            >
+              <span>View Profile</span>
+              <ExternalLinkIcon className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
+          </div>
+        ) : null}
+      </div>
+    </article>
+  );
+}
+
 export default function Committees() {
-  const { committeePage } = siteContent;
-  const spotlightSections = committeePage.sections.filter((section) => section.layout === "spotlight");
+  const { committeePage, keynoteSpeakers } = siteContent;
+  const ieeeChairSection = committeePage.sections.find(
+    (section) => section.title === "IEEE Conference Committee Chair"
+  );
+  const otherSpotlightSections = committeePage.sections.filter(
+    (section) => section.layout === "spotlight" && section.title !== "IEEE Conference Committee Chair"
+  );
   const gallerySections = committeePage.sections.filter((section) => section.layout === "gallery");
 
   return (
@@ -172,10 +254,56 @@ export default function Committees() {
           </header>
 
           <div className="mt-8 space-y-12">
+            {keynoteSpeakers && keynoteSpeakers.length > 0 ? (
+              <MotionReveal
+                as="section"
+                id="keynote-speakers"
+                className="overflow-hidden rounded-[2rem] border border-light-divider/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(250,246,239,0.92)_100%)] px-4 py-8 shadow-[0_26px_60px_-48px_rgba(92,74,42,0.38)] md:px-6 lg:px-8"
+                delay={0.06}
+              >
+                <div className="mx-auto max-w-3xl text-center">
+                  <p className="text-[0.68rem] font-code uppercase tracking-[0.24em] text-[#a9793f]">Distinguished Guests</p>
+                  <h2 className="mt-3 text-[1.45rem] font-medium italic leading-none text-[#4c5968] md:text-[1.9rem]">
+                    Keynote Speakers
+                  </h2>
+                  <div className="mx-auto mt-5 h-px w-24 bg-[#dbc9af]" />
+                </div>
+
+                <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                  {keynoteSpeakers.map((speaker) => (
+                    <KeynoteSpeakerCard key={speaker.name} speaker={speaker} />
+                  ))}
+                </div>
+              </MotionReveal>
+            ) : null}
+
+            {ieeeChairSection ? (
+              <MotionReveal
+                as="section"
+                id="ieee-conference-committee-chair"
+                className="overflow-hidden rounded-[2rem] border border-light-divider/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(250,246,239,0.92)_100%)] px-4 py-8 shadow-[0_26px_60px_-48px_rgba(92,74,42,0.38)] md:px-6 lg:px-8"
+                delay={0.1}
+              >
+                <div className="mx-auto max-w-3xl text-center">
+                  <p className="text-[0.68rem] font-code uppercase tracking-[0.24em] text-[#a9793f]">IEEE Leadership</p>
+                  <h2 className="mt-3 text-[1.45rem] font-medium italic leading-none text-[#4c5968] md:text-[1.9rem]">
+                    {ieeeChairSection.title}
+                  </h2>
+                  <div className="mx-auto mt-5 h-px w-24 bg-[#dbc9af]" />
+                </div>
+
+                <div className="mt-8 mx-auto max-w-2xl">
+                  {ieeeChairSection.members.map((member, memberIndex) => (
+                    <SpotlightMember key={`${ieeeChairSection.title}-${member.name}-${memberIndex}`} member={member} />
+                  ))}
+                </div>
+              </MotionReveal>
+            ) : null}
+
             <MotionReveal
               as="section"
               className="overflow-hidden rounded-[2rem] border border-light-divider/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(250,246,239,0.92)_100%)] px-4 py-8 shadow-[0_26px_60px_-48px_rgba(92,74,42,0.38)] md:px-6 lg:px-8"
-              delay={0.06}
+              delay={0.14}
             >
               <div className="mx-auto max-w-3xl text-center">
                 <p className="text-[0.68rem] font-code uppercase tracking-[0.24em] text-[#a9793f]">Leadership</p>
@@ -185,14 +313,14 @@ export default function Committees() {
                 <div className="mx-auto mt-5 h-px w-24 bg-[#dbc9af]" />
               </div>
 
-              <div className="grid gap-x-8 gap-y-12 xl:grid-cols-2">
+              <div className="mt-8 grid gap-x-8 gap-y-12 xl:grid-cols-2">
                 {committeePage.featuredMembers.map((member) => (
                   <SpotlightMember key={member.role} member={member} />
                 ))}
               </div>
             </MotionReveal>
 
-            {spotlightSections.map((section, index) => {
+            {otherSpotlightSections.map((section, index) => {
               const members = section.members.length > 0 ? section.members : [createPlaceholderMember(section.title)];
 
               return (
@@ -200,7 +328,7 @@ export default function Committees() {
                   key={section.title}
                   as="section"
                   className="overflow-hidden rounded-[2rem] border border-light-divider/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(250,246,239,0.92)_100%)] px-4 py-8 shadow-[0_26px_60px_-48px_rgba(92,74,42,0.38)] md:px-6 lg:px-8"
-                  delay={0.12 + index * 0.04}
+                  delay={0.18 + index * 0.04}
                 >
                   <div className="mx-auto max-w-3xl text-center">
                     <h2 className="text-[1.45rem] font-medium italic leading-none text-[#4c5968] md:text-[1.9rem]">
@@ -209,7 +337,7 @@ export default function Committees() {
                     <div className="mx-auto mt-5 h-px w-24 bg-[#dbc9af]" />
                   </div>
 
-                  <div className="grid gap-x-8 gap-y-12 xl:grid-cols-2">
+                  <div className={members.length === 1 ? "mt-8 mx-auto max-w-2xl" : "mt-8 grid gap-x-8 gap-y-12 xl:grid-cols-2"}>
                     {members.map((member, memberIndex) => (
                       <SpotlightMember key={`${section.title}-${member.name}-${memberIndex}`} member={member} />
                     ))}
@@ -220,7 +348,7 @@ export default function Committees() {
           </div>
 
           {gallerySections.map((section, index) => (
-            <CommitteeGallery key={section.title} section={section} delay={0.28 + index * 0.05} />
+            <CommitteeGallery key={section.title} section={section} delay={0.24 + index * 0.04} />
           ))}
         </div>
       </Section>
