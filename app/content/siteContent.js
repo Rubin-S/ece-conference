@@ -167,7 +167,7 @@ export const keynoteSpeakers = [
     name: "Dr. Imon Mondal",
     role: "Keynote Speaker",
     designation: "Associate Professor",
-    department: "",
+    department: "Department of Electrical Engineering",
     institution: "IIT Kanpur, India",
     affiliation: "IIT Kanpur, India",
     profileUrl: "https://home.iitk.ac.in/~imon/",
@@ -497,7 +497,29 @@ export const siteContent = {
       "Payment instructions will be published with the registration portal.",
       "Participants are advised to rely only on information published on the official conference website.",
     ],
+    accommodation: {
+      roomType: "AC room",
+      occupancy: "3 person per room",
+      tariff: "300rs per day",
+      location: "Accommodation within NITPY campus (Moyor Hostel)",
+      hostelName: "Moyor Hostel",
+      note: "Accommodation is available within NITPY campus at Moyor Hostel (AC room, 3 person per room at 300rs per day).",
+    },
     priceSheet,
+  },
+  accommodation: {
+    roomType: "AC room",
+    occupancy: "3 person per room",
+    tariff: "300rs per day",
+    location: "Accommodation within NITPY campus (Moyor Hostel)",
+    hostelName: "Moyor Hostel",
+    note: "Accommodation is available within NITPY campus at Moyor Hostel (AC room, 3 person per room at 300rs per day).",
+    details: [
+      { label: "Room Type", value: "AC room" },
+      { label: "Occupancy", value: "3 person per room" },
+      { label: "Tariff", value: "300rs per day" },
+      { label: "Location", value: "Within NITPY campus (Moyor Hostel)" },
+    ],
   },
   contacts: [
     {

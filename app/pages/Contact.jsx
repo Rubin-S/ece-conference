@@ -79,13 +79,48 @@ export default function Contact() {
               </div>
             </MotionReveal>
 
-            <MotionReveal as="article" className="surface-card" delay={0.08}>
-              <p className="site-eyebrow">Correspondence</p>
-              <p className="mt-5 text-sm leading-7 text-light-st">
-                Updates regarding submission, registration, committees, and brochure release will be published on the
-                official website and communicated through the conference email channels.
-              </p>
-            </MotionReveal>
+            <div className="space-y-6">
+              <MotionReveal as="article" id="accommodation" className="surface-card" delay={0.06}>
+                <div className="flex items-center justify-between gap-2">
+                  <p className="site-eyebrow !text-primary-600">Accommodation</p>
+                  <span className="inline-flex rounded-full border border-primary-500/30 bg-primary-500/10 px-2.5 py-0.5 text-[0.68rem] font-semibold uppercase tracking-wider text-primary-700">
+                    NITPY Campus
+                  </span>
+                </div>
+                <h3 className="mt-3 text-[1.18rem] font-semibold tracking-[-0.02em] text-light-pt">
+                  Hostel Accommodation (Moyor Hostel)
+                </h3>
+                <div className="mt-4 grid grid-cols-2 gap-2.5">
+                  <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
+                    <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Room Type</p>
+                    <p className="mt-1 text-[0.92rem] font-semibold text-light-pt">AC room</p>
+                  </div>
+                  <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
+                    <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Occupancy</p>
+                    <p className="mt-1 text-[0.92rem] font-semibold text-light-pt">3 person per room</p>
+                  </div>
+                  <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
+                    <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Tariff</p>
+                    <p className="mt-1 text-[0.92rem] font-semibold text-primary-600">300rs per day</p>
+                  </div>
+                  <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
+                    <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Location</p>
+                    <p className="mt-1 text-[0.92rem] font-semibold text-light-pt">Moyor Hostel, NITPY</p>
+                  </div>
+                </div>
+                <p className="mt-4 text-xs leading-5 text-light-st">
+                  Accommodation within NITPY campus is available at Moyor Hostel for participants and authors.
+                </p>
+              </MotionReveal>
+
+              <MotionReveal as="article" className="surface-card" delay={0.12}>
+                <p className="site-eyebrow">Correspondence</p>
+                <p className="mt-5 text-sm leading-7 text-light-st">
+                  Updates regarding submission, registration, committees, and brochure release will be published on the
+                  official website and communicated through the conference email channels.
+                </p>
+              </MotionReveal>
+            </div>
           </div>
         </div>
       </Section>

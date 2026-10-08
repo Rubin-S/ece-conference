@@ -59,6 +59,11 @@ const HOME_ANNOUNCEMENTS = [
     highlight: true,
   },
   {
+    text: "Campus accommodation available at NITPY (Moyor Hostel, AC room @ 300rs/day).",
+    href: "/registration#accommodation",
+    linkLabel: "View Details",
+  },
+  {
     text: "Keynote Speakers announced for IConSCEPT 2026.",
     href: "/committees",
     linkLabel: "View Speakers",
