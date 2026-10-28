@@ -1,5 +1,6 @@
 import Heading from "../components/common/Heading";
 import MotionReveal from "../components/common/MotionReveal";
+import ReviewStatusNoticeCard from "../components/common/ReviewStatusNoticeCard";
 import Section from "../components/common/Section";
 import { siteContent } from "../content/siteContent";
 
@@ -7,7 +8,9 @@ function StatusBadge({ status }) {
   const classes =
     status === "Confirmed"
       ? "border-primary-400/40 bg-primary-400/12 text-primary-300"
-      : "border-highlight-500/40 bg-highlight-500/12 text-highlight-300";
+      : status === "Updated" || status === "Extended"
+        ? "border-amber-500/40 bg-amber-500/12 text-amber-700"
+        : "border-highlight-500/40 bg-highlight-500/12 text-highlight-300";
 
   return (
     <span className={`rounded-full border px-3 py-1 text-[0.64rem] font-code uppercase tracking-[0.2em] ${classes}`}>
@@ -27,6 +30,8 @@ export default function ImportantDates() {
             title="Schedule for IConSCEPT 2026"
             text="The conference dates, submission milestones, and registration deadlines currently published for IConSCEPT 2026 are listed below."
           />
+
+          <ReviewStatusNoticeCard className="mb-8" delay={0.03} />
 
           <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {siteContent.importantDates2026.map((item, index) => (

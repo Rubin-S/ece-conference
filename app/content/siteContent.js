@@ -417,12 +417,25 @@ export const siteContent = {
     cmtNotice:
       "The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support. ",
   },
+  reviewStatusNotice: {
+    title: "ICONSCEPT 2026 - Update on Paper Review Status and Acceptance Notification",
+    salutation: "Dear Author,",
+    paragraphs: [
+      "Thank you for submitting your research work to ICONSCEPT 2026.",
+      "Due to an overwhelming response and a high volume of paper submissions, our peer-review process is taking slightly longer than anticipated.",
+      "We would like to inform you that the review decisions (acceptance or rejection) will be communicated, as and when it is completed for your paper, on or before November 2, 2026. Details regarding the registration process will be provided alongside the acceptance notification.",
+      "We sincerely appreciate your patience, understanding, and valuable contribution to ICONSCEPT 2026.",
+    ],
+    signoff: "Best regards,",
+    committee: "Organizing Committee",
+    conference: "ICONSCEPT 2026",
+  },
   importantDates2026: [
     { label: "Last date for paper submission", value: "07.10.2026", status: "Confirmed" },
-    { label: "Notification of acceptance", value: "23.10.2026", status: "Confirmed" },
-    { label: "Registration opens", value: "23.10.2026", status: "Confirmed" },
+    { label: "Notification of acceptance", value: "02.11.2026", status: "Updated" },
+    { label: "Registration opens", value: "With Acceptance Notification", status: "Updated" },
     { label: "Final (Camera-ready) paper submission", value: "16.11.2026", status: "Confirmed" },
-    { label: "Early bird registration deadline", value: "23.11.2026", status: "Confirmed" },
+    { label: "Early bird registration deadline", value: "30.11.2026", status: "Extended" },
     { label: "Author registration deadline", value: "30.11.2026", status: "Confirmed" },
     { label: "Non-author registration deadline", value: "30.11.2026", status: "Confirmed" },
     { label: "Conference dates", value: "December 17-18, 2026", status: "Confirmed" },
@@ -431,7 +444,7 @@ export const siteContent = {
     notice:
       "The registration fee schedule below reflects the fee structure for the 2026 edition.",
     portalText:
-      "The online registration portal and payment instructions will be announced on this website once released by the organizing committee.",
+      "The online registration portal, payment instructions, and registration details will be provided alongside the acceptance notifications on or before November 2, 2026.",
     indian: [
       {
         category: "Student author",

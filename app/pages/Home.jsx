@@ -8,6 +8,7 @@ import {
   OfficeBuildingIcon,
 } from "@heroicons/react/outline";
 import MotionReveal from "../components/common/MotionReveal";
+import ReviewStatusNoticeCard from "../components/common/ReviewStatusNoticeCard";
 import Section from "../components/common/Section";
 import heroImage from "../assets/images/hero.jpeg";
 import ieeeLogoIcon from "../assets/images/ieee_logo_icon.webp";
@@ -55,8 +56,21 @@ function BrochureDownloadLink({ className, children }) {
 
 const HOME_ANNOUNCEMENTS = [
   {
-    text: "Last date for paper submission has been extended to 07.10.2026.",
+    text: "Paper review status update: decisions communicated on or before 02.11.2026.",
     highlight: true,
+    badge: "Update",
+    href: "/important-dates#review-update",
+    linkLabel: "Read Letter",
+  },
+  {
+    text: "Early bird registration deadline has been extended to 30.11.2026.",
+    highlight: true,
+    badge: "Extended",
+    href: "/important-dates",
+    linkLabel: "View Dates",
+  },
+  {
+    text: "Last date for paper submission was 07.10.2026.",
   },
   {
     text: "Campus accommodation available at NITPY (Moyor Hostel, AC room @ 300rs/day).",
@@ -69,9 +83,7 @@ const HOME_ANNOUNCEMENTS = [
     linkLabel: "View Speakers",
   },
   {
-    text: "Submission is now open.",
-    href: "https://cmt3.research.microsoft.com/IConSCEPT2026/Submission/Index",
-    linkLabel: "Click here",
+    text: "Submission is now closed. Review in progress.",
   },
 ];
 
@@ -448,7 +460,7 @@ export default function Home() {
                       <span className="inline-flex items-center gap-2">
                         {announcement.highlight ? (
                           <span className="inline-flex items-center rounded-full border border-primary-500/40 bg-primary-500/10 px-2 py-0.5 text-[0.68rem] font-semibold uppercase tracking-wider text-primary-700">
-                            Extended
+                            {announcement.badge || "Extended"}
                           </span>
                         ) : null}
                         <span className={announcement.highlight ? "font-semibold text-primary-900" : ""}>
@@ -484,6 +496,8 @@ export default function Home() {
 
       <Section customPaddings="pt-10 pb-12 md:pt-12 md:pb-14 lg:pt-14 lg:pb-16">
         <div className="container">
+          <ReviewStatusNoticeCard className="mb-10" delay={0.04} />
+
           <div className="grid gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:gap-10">
             <MotionReveal className="border-t border-light-divider/80 pt-6 md:pt-7">
               <div className="space-y-5">
@@ -500,7 +514,7 @@ export default function Home() {
                     to="/guidelines"
                     className="inline-flex items-center justify-center self-start rounded-full border border-primary-500 bg-primary-500 px-7 py-3 text-[0.78rem] font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-200 hover:border-primary-600 hover:bg-primary-600 md:self-auto"
                   >
-                    View Gudilines
+                    View Guidelines
                   </Link>
                 </div>
                 <div className="grid gap-3 sm:grid-cols-2">
@@ -538,12 +552,19 @@ export default function Home() {
                   Important Dates
                 </p>
                 <div className="mt-4 space-y-3">
-                  {HOME_IMPORTANT_DATES.map(({ label, value }) => (
+                  {HOME_IMPORTANT_DATES.map(({ label, value, status }) => (
                     <div
                       key={label}
                       className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 px-4 py-3"
                     >
-                      <p className="text-[0.82rem] font-medium leading-5 text-light-st">{label}</p>
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-[0.82rem] font-medium leading-5 text-light-st">{label}</p>
+                        {(status === "Updated" || status === "Extended") && (
+                          <span className="rounded-full border border-amber-500/40 bg-amber-500/10 px-2 py-0.5 text-[0.6rem] font-code uppercase tracking-wider text-amber-700">
+                            {status}
+                          </span>
+                        )}
+                      </div>
                       <p className="mt-1 text-[1rem] font-semibold tracking-[-0.02em] text-light-pt">{value}</p>
                     </div>
                   ))}
