@@ -88,7 +88,7 @@ export default function Contact() {
                   </span>
                 </div>
                 <h3 className="mt-3 text-[1.18rem] font-semibold tracking-[-0.02em] text-light-pt">
-                  Hostel Accommodation (Moyor Hostel)
+                  Hostel Accommodation (Moyar Hostel)
                 </h3>
                 <div className="mt-4 grid grid-cols-2 gap-2.5">
                   <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
@@ -97,19 +97,19 @@ export default function Contact() {
                   </div>
                   <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
                     <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Occupancy</p>
-                    <p className="mt-1 text-[0.92rem] font-semibold text-light-pt">3 person per room</p>
+                    <p className="mt-1 text-[0.92rem] font-semibold text-light-pt">Triple Sharing</p>
                   </div>
                   <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
                     <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Tariff</p>
-                    <p className="mt-1 text-[0.92rem] font-semibold text-primary-600">300rs per day</p>
+                    <p className="mt-1 text-[0.92rem] font-semibold text-primary-600">INR 300 per day</p>
                   </div>
                   <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
                     <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Location</p>
-                    <p className="mt-1 text-[0.92rem] font-semibold text-light-pt">Moyor Hostel, NITPY</p>
+                    <p className="mt-1 text-[0.92rem] font-semibold text-light-pt">Moyar Hostel, NITPY</p>
                   </div>
                 </div>
                 <p className="mt-4 text-xs leading-5 text-light-st">
-                  Accommodation within NITPY campus is available at Moyor Hostel for participants and authors.
+                  Accommodation within NITPY campus is available at Moyar Hostel for participants and authors.
                 </p>
               </MotionReveal>
 

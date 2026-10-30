@@ -63,17 +63,10 @@ const HOME_ANNOUNCEMENTS = [
     linkLabel: "Read Letter",
   },
   {
-    text: "Early bird registration deadline has been extended to 30.11.2026.",
-    highlight: true,
-    badge: "Extended",
-    href: "/important-dates",
-    linkLabel: "View Dates",
-  },
-  {
     text: "Last date for paper submission was 07.10.2026.",
   },
   {
-    text: "Campus accommodation available at NITPY (Moyor Hostel, AC room @ 300rs/day).",
+    text: "Campus accommodation available at NITPY (Moyar Hostel, AC room, Triple Sharing @ INR 300/day).",
     href: "/registration#accommodation",
     linkLabel: "View Details",
   },
