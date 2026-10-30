@@ -25,24 +25,29 @@ export default function RegistrationPortal() {
             <MotionReveal as="article" className="surface-panel">
               <p className="site-eyebrow">Payment Instructions</p>
               <p className="mt-5 text-sm leading-7 text-light-st">
-                Payment instructions will be published together with the official registration portal.
+                Pay online through NEFT/RTGS to the official conference account. Please remember to include your Paper ID and Name in the payment remarks.
               </p>
             </MotionReveal>
 
             <MotionReveal as="article" className="surface-card" delay={0.08}>
               <p className="site-eyebrow">Participant Guidance</p>
               <p className="mt-5 text-sm leading-7 text-light-st">
-                Participants may consult the registration page for the tentative fee schedule and official contact channels.
+                Please complete your fee payment and keep your payment receipt (UTR number) ready before filling out the Google Form.
               </p>
             </MotionReveal>
           </div>
 
           <MotionReveal className="mt-8 flex flex-wrap gap-4" delay={0.12}>
-            <Link to="/registration" className="button-primary">
-              Back to Registration
-            </Link>
-            <Link to="/contact-us" className="button-secondary">
-              Contact Organizers
+            <a
+              href={siteContent.registration.registrationLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button-primary"
+            >
+              Open Registration Form
+            </a>
+            <Link to="/registration#payment-instructions" className="button-secondary">
+              Payment &amp; Bank Details
             </Link>
           </MotionReveal>
         </div>

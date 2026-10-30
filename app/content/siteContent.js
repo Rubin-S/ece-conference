@@ -436,15 +436,35 @@ export const siteContent = {
     { label: "Registration opens", value: "With Acceptance Notification", status: "Updated" },
     { label: "Final (Camera-ready) paper submission", value: "12.11.2026", status: "Confirmed" },
     { label: "Early bird registration deadline", value: "13.11.2026", status: "Confirmed" },
-    { label: "Author registration deadline", value: "30.11.2026", status: "Confirmed" },
-    { label: "Non-author registration deadline", value: "30.11.2026", status: "Confirmed" },
+    { label: "Author registration deadline", value: "23.11.2026", status: "Confirmed" },
+    { label: "Non-author registration deadline", value: "23.11.2026", status: "Confirmed" },
     { label: "Conference dates", value: "December 17-18, 2026", status: "Confirmed" },
   ],
   registration: {
     notice:
       "The registration fee schedule below reflects the fee structure for the 2026 edition.",
     portalText:
-      "The online registration portal, payment instructions, and registration details will be provided alongside the acceptance notifications on or before November 2, 2026.",
+      "Conference registration is now open. Follow the payment instructions below to transfer the registration fee via NEFT/RTGS, then complete your registration using the official online form.",
+    registrationLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSekR3Q0mhBFzEZg1mdKN9e5LvxIz_IdXpDRhPSuesdS-XTurQ/viewform?usp=sharing&ouid=106347403567360263070",
+    payment: {
+      title: "Instruction for Payment of Registration Fees",
+      instruction:
+        "Pay Online though NEFT/RTGS (Preferably Bank Account Transfer) in the account given below.",
+      remarkRequirement:
+        "While making online payment, authors are requested to mention their Paper ID and Name in Payment Remark to enable us to trace your payment in the Bank Statement.",
+      bankDetails: [
+        { label: "Name of the Account", value: "NITPY WORKSHOP / CONFERENCE", fullWidth: true },
+        { label: "Account Number", value: "41445247710", code: true, copyable: true },
+        { label: "Account Type", value: "Savings" },
+        { label: "Bank", value: "STATE BANK OF INDIA" },
+        { label: "Branch", value: "NITPY KARAIKAL BRANCH" },
+        { label: "IFS Code", value: "SBIN0070848", code: true, copyable: true },
+        { label: "MICR Code", value: "609002106", code: true, copyable: true },
+        { label: "SWIFT Code", value: "SBININBB228", code: true, copyable: true },
+        { label: "Bank Address", value: "Thiruvettakudy, Karaikal – 609 609, India", fullWidth: true },
+      ],
+    },
     indian: [
       {
         category: "Student author",
@@ -507,7 +527,7 @@ export const siteContent = {
     ],
     notes: [
       "Registration fee includes GST.",
-      "Payment instructions will be published with the registration portal.",
+      "Payment must be made online via NEFT/RTGS to the official NITPY conference account.",
       "Participants are advised to rely only on information published on the official conference website.",
     ],
     accommodation: {
