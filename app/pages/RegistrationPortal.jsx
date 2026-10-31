@@ -25,14 +25,14 @@ export default function RegistrationPortal() {
             <MotionReveal as="article" className="surface-panel">
               <p className="site-eyebrow">Payment Instructions</p>
               <p className="mt-5 text-sm leading-7 text-light-st">
-                Pay online through NEFT/RTGS to the official conference account. Please remember to include your Paper ID and Name in the payment remarks.
+                Pay online through NEFT/RTGS or scan the official SBI UPI QR Code (<strong className="text-primary-800">nitpy@sbi</strong>) to the official conference account. Please remember to include your Paper ID and Name in the payment remarks.
               </p>
             </MotionReveal>
 
             <MotionReveal as="article" className="surface-card" delay={0.08}>
               <p className="site-eyebrow">Participant Guidance</p>
               <p className="mt-5 text-sm leading-7 text-light-st">
-                Please complete your fee payment and keep your payment receipt (UTR number) ready before filling out the Google Form.
+                Please complete your fee payment and keep your payment receipt (UTR number or UPI transaction reference) ready before filling out the Google Form.
               </p>
             </MotionReveal>
           </div>
@@ -47,8 +47,16 @@ export default function RegistrationPortal() {
               Open Registration Form
             </a>
             <Link to="/registration#payment-instructions" className="button-secondary">
-              Payment &amp; Bank Details
+              Bank Details &amp; UPI QR
             </Link>
+            <a
+              href={siteContent.accommodation.bookingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button-secondary"
+            >
+              Book Accommodation
+            </a>
           </MotionReveal>
         </div>
       </Section>

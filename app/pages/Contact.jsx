@@ -1,4 +1,4 @@
-import { Mail, PhoneCall } from "lucide-react";
+import { ExternalLink, Mail, PhoneCall } from "lucide-react";
 import Heading from "../components/common/Heading";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
@@ -111,6 +111,17 @@ export default function Contact() {
                 <p className="mt-4 text-xs leading-5 text-light-st">
                   Accommodation within NITPY campus is available at Moyar Hostel for participants and authors.
                 </p>
+                <div className="mt-5 border-t border-light-divider/70 pt-4">
+                  <a
+                    href={siteContent.accommodation.bookingUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex w-full items-center justify-center gap-2 rounded-xl border border-primary-500/40 bg-primary-500/10 px-4 py-2.5 text-center text-xs font-semibold text-primary-700 shadow-sm transition-all duration-200 ease-smooth hover:border-primary-500 hover:bg-primary-500 hover:text-white"
+                  >
+                    <span>Book NITPY Accommodation</span>
+                    <ExternalLink className="h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
+                  </a>
+                </div>
               </MotionReveal>
 
               <MotionReveal as="article" className="surface-card" delay={0.12}>

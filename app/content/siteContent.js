@@ -7,6 +7,7 @@ import imonPhoto from "../assets/images/speakers/imon-mondal.jpg";
 import prasadPhoto from "../assets/images/speakers/prasad-sarangapani.png";
 import speakerPlaceholder from "../assets/images/speakers/speaker-placeholder.svg";
 import nagarajanPhoto from "../assets/images/committee/nagarajan-v.jpg";
+import sbiQrImage from "../assets/images/nitpy-sbi-qr.png";
 
 export const navLinks = [
   
@@ -444,13 +445,13 @@ export const siteContent = {
     notice:
       "The registration fee schedule below reflects the fee structure for the 2026 edition.",
     portalText:
-      "Conference registration is now open. Follow the payment instructions below to transfer the registration fee via NEFT/RTGS, then complete your registration using the official online form.",
+      "Conference registration is now open. Follow the payment instructions below to transfer the registration fee via NEFT/RTGS or the official SBI UPI QR Code, then complete your registration using the official online form.",
     registrationLink:
       "https://docs.google.com/forms/d/e/1FAIpQLSekR3Q0mhBFzEZg1mdKN9e5LvxIz_IdXpDRhPSuesdS-XTurQ/viewform?usp=sharing&ouid=106347403567360263070",
     payment: {
       title: "Instruction for Payment of Registration Fees",
       instruction:
-        "Pay Online though NEFT/RTGS (Preferably Bank Account Transfer) in the account given below.",
+        "Pay Online through NEFT/RTGS (Bank Account Transfer) or scan the official SBI UPI QR Code given below.",
       remarkRequirement:
         "While making online payment, authors are requested to mention their Paper ID and Name in Payment Remark to enable us to trace your payment in the Bank Statement.",
       bankDetails: [
@@ -464,6 +465,17 @@ export const siteContent = {
         { label: "SWIFT Code", value: "SBININBB228", code: true, copyable: true },
         { label: "Bank Address", value: "Thiruvettakudy, Karaikal – 609 609, India", fullWidth: true },
       ],
+      upi: {
+        title: "Scan & Pay via SBI UPI QR Code",
+        upiId: "nitpy@sbi",
+        accountName: "NATIONAL INSTITUTE OF TECHNOLOGY PUDUCHERRY",
+        bank: "State Bank of India (SBI)",
+        qrImage: sbiQrImage,
+        qrDownload: "/nitpy-sbi-qr.png",
+        qrPdf: "/nitpy_sbi_qr.pdf",
+        instruction:
+          "Scan the QR code using any UPI app (Google Pay, PhonePe, Paytm, BHIM UPI, yono SBI, WhatsApp Pay, etc.).",
+      },
     },
     indian: [
       {
@@ -527,7 +539,7 @@ export const siteContent = {
     ],
     notes: [
       "Registration fee includes GST.",
-      "Payment must be made online via NEFT/RTGS to the official NITPY conference account.",
+      "Payment must be made online via NEFT/RTGS or the official SBI UPI QR Code to the official NITPY conference account.",
       "Participants are advised to rely only on information published on the official conference website.",
     ],
     accommodation: {
@@ -537,6 +549,7 @@ export const siteContent = {
       location: "Accommodation within NITPY campus (Moyar Hostel)",
       hostelName: "Moyar Hostel",
       note: "Accommodation is available within NITPY campus at Moyar Hostel (AC room, Triple Sharing at INR 300 per day).",
+      bookingUrl: "https://nitpy.ac.in/accomodation",
     },
     priceSheet,
   },
@@ -547,11 +560,13 @@ export const siteContent = {
     location: "Accommodation within NITPY campus (Moyar Hostel)",
     hostelName: "Moyar Hostel",
     note: "Accommodation is available within NITPY campus at Moyar Hostel (AC room, Triple Sharing at INR 300 per day).",
+    bookingUrl: "https://nitpy.ac.in/accomodation",
     details: [
       { label: "Room Type", value: "AC room" },
       { label: "Occupancy", value: "Triple Sharing" },
       { label: "Tariff", value: "INR 300 per day" },
       { label: "Location", value: "Within NITPY campus (Moyar Hostel)" },
+      { label: "Booking", value: "Online Booking Portal" },
     ],
   },
   contacts: [

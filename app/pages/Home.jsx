@@ -68,7 +68,7 @@ const HOME_ANNOUNCEMENTS = [
   {
     text: "Campus accommodation available at NITPY (Moyar Hostel, AC room, Triple Sharing @ INR 300/day).",
     href: "/registration#accommodation",
-    linkLabel: "View Details",
+    linkLabel: "View Details & Book",
   },
   {
     text: "Keynote Speakers announced for IConSCEPT 2026.",
