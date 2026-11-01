@@ -46,17 +46,12 @@ export default function RegistrationPortal() {
             >
               Open Registration Form
             </a>
-            <Link to="/registration#payment-instructions" className="button-secondary">
+            <Link to="/author-registration-conf-2026-k9q7v2#payment-instructions" className="button-secondary">
               Bank Details &amp; UPI QR
             </Link>
-            <a
-              href={siteContent.accommodation.bookingUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="button-secondary"
-            >
-              Book Accommodation
-            </a>
+            <Link to="/accommodation" className="button-secondary">
+              Accommodation Details
+            </Link>
           </MotionReveal>
         </div>
       </Section>

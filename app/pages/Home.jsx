@@ -67,7 +67,7 @@ const HOME_ANNOUNCEMENTS = [
   },
   {
     text: "Campus accommodation available at NITPY (Moyar Hostel, AC room, Triple Sharing @ INR 300/day).",
-    href: "/registration#accommodation",
+    href: "/accommodation",
     linkLabel: "View Details & Book",
   },
   {

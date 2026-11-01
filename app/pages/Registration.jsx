@@ -116,56 +116,30 @@ export default function Registration() {
             </div>
 
             <aside className="space-y-6">
-              <MotionReveal as="article" id="accommodation" className="surface-card scroll-mt-28" delay={0.08}>
-                <div className="flex items-center justify-between gap-2">
-                  <p className="site-eyebrow !text-primary-600">Accommodation</p>
-                  <span className="inline-flex rounded-full border border-primary-500/30 bg-primary-500/10 px-2.5 py-0.5 text-[0.68rem] font-semibold uppercase tracking-wider text-primary-700">
-                    NITPY Campus
-                  </span>
-                </div>
-                <h3 className="mt-3 text-[1.18rem] font-semibold tracking-[-0.02em] text-light-pt">
-                  Hostel Accommodation (Moyar Hostel)
-                </h3>
-                <div className="mt-4 grid grid-cols-2 gap-2.5">
-                  <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
-                    <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Room Type</p>
-                    <p className="mt-1 text-[0.92rem] font-semibold text-light-pt">AC room</p>
-                  </div>
-                  <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
-                    <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Occupancy</p>
-                    <p className="mt-1 text-[0.92rem] font-semibold text-light-pt">Triple Sharing</p>
-                  </div>
-                  <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
-                    <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Tariff</p>
-                    <p className="mt-1 text-[0.92rem] font-semibold text-primary-600">INR 300 per day</p>
-                  </div>
-                  <div className="rounded-[1rem] border border-light-divider/80 bg-light-sb/60 p-3">
-                    <p className="text-[0.7rem] font-medium uppercase tracking-wider text-light-muted">Location</p>
-                    <p className="mt-1 text-[0.92rem] font-semibold text-light-pt">Moyar Hostel, NITPY</p>
-                  </div>
-                </div>
-                <p className="mt-4 text-xs leading-5 text-light-st">
-                  Accommodation within NITPY campus is available at Moyar Hostel for conference participants and authors.
-                </p>
-                <div className="mt-5 border-t border-light-divider/70 pt-4">
-                  <a
-                    href={siteContent.accommodation.bookingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex w-full items-center justify-center gap-2 rounded-xl border border-primary-500/40 bg-primary-500/10 px-4 py-2.5 text-center text-xs font-semibold text-primary-700 shadow-sm transition-all duration-200 ease-smooth hover:border-primary-500 hover:bg-primary-500 hover:text-white"
-                  >
-                    <span>Book NITPY Accommodation</span>
-                    <ExternalLink className="h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" aria-hidden="true" />
-                  </a>
-                </div>
-              </MotionReveal>
-
-              <MotionReveal as="article" className="surface-card" delay={0.12}>
+              <MotionReveal as="article" className="surface-card" delay={0.08}>
                 <p className="site-eyebrow">Registration Notes</p>
                 <ul className="mt-5 space-y-3 text-sm leading-6 text-light-st">
                   {registration.notes.map((note) => (
                     <li key={note}>{note}</li>
                   ))}
+                </ul>
+              </MotionReveal>
+
+              <MotionReveal as="article" className="surface-card" delay={0.12}>
+                <p className="site-eyebrow">Registration Guidelines</p>
+                <ul className="mt-5 space-y-3 text-sm leading-6 text-light-st">
+                  <li>
+                    At least one author of each accepted paper must complete author registration for the paper to be included in the conference proceedings.
+                  </li>
+                  <li>
+                    Registration fee covers admission to all technical and keynote sessions, official conference kit, presentation certificate, and conference meals/refreshments.
+                  </li>
+                  <li>
+                    IEEE members must provide their valid IEEE Membership Number during submission to avail the discounted registration rate.
+                  </li>
+                  <li>
+                    Co-authors, researchers, and students who wish to attend technical sessions without presenting may register under the Non-author attendee category.
+                  </li>
                 </ul>
               </MotionReveal>
             </aside>

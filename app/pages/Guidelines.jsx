@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import Heading from "../components/common/Heading";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
@@ -51,11 +50,6 @@ export default function Guidelines() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-6">
-                <Link to="/registration" className="button-secondary">
-                  View registration fees
-                </Link>
-              </div>
             </MotionReveal>
 
             <MotionReveal as="article" className={topCardClass} delay={0.06}>
