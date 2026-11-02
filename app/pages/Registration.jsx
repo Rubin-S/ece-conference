@@ -1,4 +1,3 @@
-import { Link } from "react-router";
 import Heading from "../components/common/Heading";
 import MotionReveal from "../components/common/MotionReveal";
 import Section from "../components/common/Section";
@@ -84,46 +83,6 @@ export default function Registration() {
                 </ul>
               </MotionReveal>
             </aside>
-          </div>
-
-          {/* Public Information on Registration Process */}
-          <div className="mt-12 border-t border-light-divider/80 pt-10">
-            <MotionReveal as="article" className="surface-card !py-0">
-              <div className="rounded-[1.6rem] border border-primary-500/30 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(244,251,254,0.95)_100%)] p-6 shadow-soft sm:p-8">
-                <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-                  <div className="space-y-2">
-                    <p className="site-eyebrow !text-primary-600">Author Registration Process</p>
-                    <h3 className="text-xl font-semibold tracking-[-0.01em] text-light-pt sm:text-2xl">
-                      Registration &amp; Fee Payment Procedure
-                    </h3>
-                    <p className="max-w-2xl text-xs leading-6 text-light-st sm:text-sm">
-                      Paper review decisions will be communicated to authors on or before <strong>November 2, 2026</strong>. The official payment instructions (NEFT/RTGS bank details, SBI UPI QR Code) and the private registration submission form are provided directly to authors of accepted papers alongside the acceptance notification.
-                    </p>
-                    <p className="text-xs text-light-st">
-                      For any questions regarding registration fee slabs or author eligibility, please reach out to the organizing team at{" "}
-                      <a href="mailto:iconscept@nitpy.ac.in" className="font-semibold text-primary-700 hover:text-primary-800">
-                        iconscept@nitpy.ac.in
-                      </a>.
-                    </p>
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-3">
-                    <Link
-                      to="/important-dates"
-                      className="button-secondary text-xs !py-2.5 !px-5"
-                    >
-                      Important Dates
-                    </Link>
-                    <Link
-                      to="/contact-us"
-                      className="button-primary text-xs !py-2.5 !px-5"
-                    >
-                      Contact Us
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            </MotionReveal>
           </div>
         </div>
       </Section>
