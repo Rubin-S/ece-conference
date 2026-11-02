@@ -185,7 +185,6 @@ export const siteContent = {
     fullName:
       "2026 International Conference on Signal Processing, Computation, Electronics, Power and Telecommunication",
     edition: "Fourth Edition",
-    mode: "Hybrid Mode",
     dates: "December 17-18, 2026",
     venue: "National Institute of Technology Puducherry, Karaikal, India",
     hostInstitute: "National Institute of Technology Puducherry",
@@ -197,7 +196,6 @@ export const siteContent = {
     logo: nitpyLogo,
     heroFacts: [
       { label: "Edition", detail: "Fourth Edition" },
-      { label: "Mode", detail: "Hybrid Mode" },
       { label: "Dates", detail: "December 17-18, 2026" },
       { label: "Venue", detail: "Karaikal, India" },
     ],
@@ -210,7 +208,7 @@ export const siteContent = {
   },
   keynoteSpeakers,
   aboutParagraphs: [
-    "The 2026 International Conference on Signal Processing, Computation, Electronics, Power and Telecommunication (IConSCEPT) is the premier fourth edition conference of NIT Puducherry, scheduled to be held in a hybrid mode at the National Institute of Technology Puducherry, Karaikal, India, during December 17-18, 2026.",
+    "The 2026 International Conference on Signal Processing, Computation, Electronics, Power and Telecommunication (IConSCEPT) is the premier fourth edition conference of NIT Puducherry, scheduled to be held at the National Institute of Technology Puducherry, Karaikal, India, during December 17-18, 2026.",
     "Following the successful conduct of the 2023, 2024, and 2025 editions which were published in IEEE Xplore, this edition is collectively organized by the Departments of ECE, EEE, and CSE with the IEEE Madras Section as the technical sponsor.",
     "The conference aims to bring together leading academicians, scientists, engineers, and researchers on a common platform to share and exchange knowledge in broad areas of interest including wireless communication, VLSI and embedded systems, power electronics, renewable energy, robotics, and artificial intelligence. All accepted and presented papers will be submitted to IEEE Xplore for publication, and the organizing committee invites prospective authors to submit original contributions to 2026 IConSCEPT.",
   ],
