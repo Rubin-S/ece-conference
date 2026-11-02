@@ -74,8 +74,14 @@ const NoPage = () => {
           Call for Papers
         </Link>
         <Link
-          to="/accommodation"
+          to="/registration"
           className="rounded border border-primary-500 px-6 py-2 font-medium text-primary-500 transition-colors hover:bg-primary-50"
+        >
+          Registration
+        </Link>
+        <Link
+          to="/accommodation"
+          className="rounded border border-light-border px-6 py-2 font-medium text-light-pt transition-colors hover:bg-light-altBg"
         >
           Accommodation
         </Link>

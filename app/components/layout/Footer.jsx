@@ -7,7 +7,7 @@ const quickLinks = [
   { id: "home", label: "Home", to: "/" },
   ...navLinks
     .filter((link) =>
-      ["/about-us", "/call-for-papers", "/important-dates", "/accommodation", "/contact-us"].includes(link.url)
+      ["/about-us", "/call-for-papers", "/important-dates", "/registration", "/accommodation", "/contact-us"].includes(link.url)
     )
     .map((link) => ({
       id: link.id,

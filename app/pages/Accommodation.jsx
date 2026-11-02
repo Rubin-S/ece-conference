@@ -384,6 +384,12 @@ export default function Accommodation() {
                     >
                       Contact Team
                     </Link>
+                    <Link
+                      to="/registration"
+                      className="button-secondary text-xs !py-2.5 !px-5"
+                    >
+                      Registration Fees
+                    </Link>
                   </div>
                 </div>
               </div>

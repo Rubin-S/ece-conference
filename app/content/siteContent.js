@@ -14,6 +14,7 @@ export const navLinks = [
   { id: "cfp", title: "Call for Papers", url: "/call-for-papers" },
   { id: "dates", title: "Important Dates", url: "/important-dates" },
   { id: "guidelines", title: "Guidelines", url: "/guidelines" },
+  { id: "registration", title: "Registration", url: "/registration" },
   { id: "accommodation", title: "Accommodation", url: "/accommodation" },
   { id: "committees", title: "Committees", url: "/committees" },
   { id: "sponsors", title: "Sponsors", url: "/sponsors" },
