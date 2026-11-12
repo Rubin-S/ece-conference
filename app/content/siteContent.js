@@ -434,7 +434,7 @@ export const siteContent = {
     { label: "Last date for paper submission", value: "07.10.2026", status: "Confirmed" },
     { label: "Notification of acceptance", value: "02.11.2026", status: "Updated" },
     { label: "Registration opens", value: "With Acceptance Notification", status: "Updated" },
-    { label: "Final (Camera-ready) paper submission", value: "12.11.2026", status: "Confirmed" },
+    { label: "Final (Camera-ready) paper submission", value: "To be announced", status: "Updated" },
     { label: "Early bird registration deadline", value: "To be announced", status: "Updated" },
     { label: "Author registration deadline", value: "To be announced", status: "Updated" },
     { label: "Non-author registration deadline", value: "To be announced", status: "Updated" },
